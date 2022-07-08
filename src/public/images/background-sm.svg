@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Basic//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd">
+
+
+<svg viewBox="0 0 100 37" xmlns="http://www.w3.org/2000/svg" style="position:absolute; z-index: -100;" class="header">
+    <defs>
+        <linearGradient id="gradientOrangeToPink" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="50%" style="stop-color:#e449a1;stop-opacity:1" ></stop>
+            <stop offset="100%" style="stop-color:#ed956e;stop-opacity:1" ></stop>
+        </linearGradient>
+
+
+        <linearGradient id="transparentGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#eff4f700;stop-opacity:1" ></stop>
+            <stop offset="100%" style="stop-color:#eff4f709;stop-opacity:1" ></stop>
+        </linearGradient>
+    </defs>
+
+    <g>
+        <rect x="0" y="0" width="195" height="47" rx="15" ry="15" fill="url(#gradientOrangeToPink)" transform="translate(-95 -23) skewX(4) skewY(4)"></rect>
+        <rect x="0" y="0" width="122" height="43" rx="15" ry="15" fill="#2a385c" transform="translate(-20 -17) skewX(4) skewY(4)"></rect>
+    </g>
+</svg>
