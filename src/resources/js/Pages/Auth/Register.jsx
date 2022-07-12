@@ -36,7 +36,7 @@ export default function Register() {
 
             <ValidationErrors errors={errors} />
 
-
+            
             <form onSubmit={submit}>
                 <div>
                     <Label forInput="name" value="Name" />
