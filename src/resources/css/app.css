@@ -1,3 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* This style applies to mobile and up */
+.hero-row {
+    color: white;
+    background-color: #2a385c;
+}
+
+.hero-row {
+    background-color: #fff;
+    background-image: url('/images/background-sm.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: bottom;
+    background-position-x: right;
+}
+
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {
+    .hero-row {
+        background-color: #fff;
+        background-image: url('/images/background.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+
+    .auth-background {
+        background-image: url('/images/auth-background.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: bottom;
+    }
+
+
+
+}
+
+@media (min-width: 1200px) {}

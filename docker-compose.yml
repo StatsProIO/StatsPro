@@ -18,7 +18,7 @@ services:
           dockerfile: web.dockerfile
       working_dir: /var/www
       volumes:
-          - ./:/var/www
+          - ./src:/var/www
       depends_on:
           - "app"
       ports:

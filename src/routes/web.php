@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\TestPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/test-page', [TestPageController::class, 'get']);
+
+
+
 
 require __DIR__.'/auth.php';
