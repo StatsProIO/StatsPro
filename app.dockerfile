@@ -16,10 +16,11 @@ RUN pecl install imagick \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-
-# Uncomment this line for deploying to a remote environment
-# COPY --chown=www-data src /var/www/
-
 RUN npm cache clean -f
 RUN npm install -g n
 RUN n stable
+
+# Uncomment this line for deploying to a remote environment
+COPY --chown=www-data src /var/www/
+
+RUN ls /var/www/

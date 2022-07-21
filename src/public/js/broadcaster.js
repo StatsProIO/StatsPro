@@ -1,9 +1,9 @@
 var scriptEl = document.currentScript;
-var endpoint = "http://localhost/api/collect";
+var endpoint = "/api/collect";
 
 
 var payload = {}
-payload.name = 'pageview'
+payload.event_name = 'pageview'
 payload.location_href = location.href
 payload.location_host = window.location.host
 payload.location_pathname = window.location.pathname
