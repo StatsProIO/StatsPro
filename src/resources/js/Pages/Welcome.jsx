@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
 import Button from '@mui/material/Button';
 import Guest from '@/Layouts/Guest';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Paper, Typography } from '@mui/material';
 import Container from '@/Layouts/Container';
 
 
@@ -15,14 +15,14 @@ export default function Welcome(props) {
                 <Grid item sm={12} lg={6}>
 
                     <Typography variant="h2" component="div" sx={{ fontWeight: 500, textAlign: 'center' }} gutterBottom>
-                        Privacy-friendly Google Analytics alternative without compromises
+                        GDPR Compliant Google Analytics alternative without compromises
                     </Typography>
 
 
                     {/* You're not seeing 40% of your customers */}
 
                     <Typography variant="h6" gutterBottom component="div" align='center' >
-                        Midnight Metrics is the only analytics platform that tracks dark traffic
+                        Get full analytics on your website <b>without</b> a cookie banner.
                     </Typography>
 
                     {/* <!--<div className="input-group mb-3">--> */}
@@ -40,12 +40,27 @@ export default function Welcome(props) {
 
 
 
+            <Grid container alignItems="center" justifyContent="center">
+                <Grid item sm={12} lg={6}>
+                    <Box sx={{ textAlign: 'center', pt: 6, pb: 6 }}>
+                        <Typography variant="h3">Get Started in 5 seconds</Typography>
+                        <Typography variant="h6">Drop this on your website</Typography>
+                        <Paper sx={{ backgroundColor: '#eee', p: 2 }}>
+                            &lt;script&gt; data-host="https://midnightmetrics.com" data-dnt="false" src="https://midnightmetrics.com/js/script.js" id="ZwSg9rf6GA" async defer>&lt;/script&gt;
+                        </Paper>
+                    </Box>
+                </Grid>
+            </Grid>
+
+
+
             <Box sx={{ textAlign: 'center', pt: 6, pb: 6 }}>
                 <Typography variant="h3">What is Dark Traffic?</Typography>
                 <Typography variant="h6">Users with ad blockers won't be seen by traditional analytics tools<br />
                     Midnight Metrics reveals this dark traffic so you can see all of your users
                 </Typography>
             </Box>
+
 
 
 

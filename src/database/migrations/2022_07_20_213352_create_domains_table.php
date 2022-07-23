@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id')->references('users', 'id');
+            $table->unsignedInteger('user_id')->references('id')->on('users');
             $table->string('domain_name');
             $table->timestamps();
         });

@@ -8,7 +8,7 @@
     
     
 
-    <script src="js/broadcaster.js" data-domain="my-domain"></script>
+    <script src="js/broadcaster.js" data-domain="my_domain"></script>
 
   </head>
   <body>

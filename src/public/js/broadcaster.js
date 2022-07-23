@@ -2,6 +2,8 @@ var scriptEl = document.currentScript;
 var endpoint = "/api/collect";
 
 
+//TODO: respect navigator.doNotTrack? 
+
 var payload = {}
 payload.event_name = 'pageview'
 payload.location_href = location.href
@@ -14,7 +16,7 @@ payload.lang = window.navigator.language || ''
 
 //TODO: use this to map to a country: https://codepen.io/diego-fortes/pen/YzEPxYw
 payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-payload.client_time = new Date().getTime();
+payload.client_time = new Date().toISOString();
 
 
 var dimensionAttributes = scriptEl.getAttributeNames().filter(function (name) {

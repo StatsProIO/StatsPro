@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Authenticated from '@/Layouts/Authenticated';
 import { Head } from '@inertiajs/inertia-react';
 
@@ -15,22 +15,66 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Grid, Menu, MenuItem, Paper, Typography } from '@mui/material';
-import Button from '@/components/Button';
+import { FormControl, Grid, InputLabel, Menu, MenuItem, Paper, Select, Typography } from '@mui/material';
+import { Button } from '@mui/material';
+
+import { ArcElement } from 'chart.js';
+
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+} from 'chart.js';
+
+import { BarElement } from 'chart.js';
+
+import { TopSourcesChart } from '@/components/TopSourcesChart';
+import { PageviewsMiniChart } from '@/components/PageviewsMiniChart';
+import { DashboardInfoCard } from '@/components/DashboardInfoCard';
+import { TopPages } from '@/components/TopPages';
+import { PageviewsChart } from '@/components/PageviewsChart';
+import { DevicesChart } from '@/components/DevicesChart';
+import { LocationChart } from '@/components/LocationChart';
+import useQueryString from '@/customHooks/useQueryString';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    BarElement,
+    ArcElement
+);
+
 
 export default function Dashboard(props) {
     const drawerWidth = 240;
 
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const [range, setRange] = useQueryString("range", 'today');
+    const [domain, setDomain] = useQueryString("domain");
 
+
+    useEffect(() => {
+        //make an API request for range/domain
+
+        axios.get(`/api/events?range=${range}&domain=${domain}`)
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+    }, [range, domain])
 
 
     return (
@@ -42,23 +86,24 @@ export default function Dashboard(props) {
 
             {/* <Head title="Dashboard" /> */}
 
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', backgroundColor: '#f7f9fc' }} >
                 <Drawer
                     variant="permanent"
                     sx={{
+
                         width: drawerWidth,
                         flexShrink: 0,
-                        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+                        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', backgroundColor: '#243044', color: '#fff', },
                     }}
                 >
                     <Toolbar />
-                    <Box sx={{ overflow: 'auto' }}>
+                    <Box sx={{ overflow: 'auto', }}>
                         <List>
                             {['Dashboard', 'Manage Sites'].map((text, index) => (
                                 <ListItem key={text} disablePadding>
                                     <ListItemButton>
                                         <ListItemIcon>
-                                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                            {index % 2 === 0 ? <InboxIcon sx={{ color: '#fff' }} /> : <MailIcon sx={{ color: '#fff' }} />}
                                         </ListItemIcon>
                                         <ListItemText primary={text} />
                                     </ListItemButton>
@@ -71,18 +116,21 @@ export default function Dashboard(props) {
                                 <ListItem key={text} disablePadding>
                                     <ListItemButton>
                                         <ListItemIcon>
-                                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                            {index % 2 === 0 ? <InboxIcon sx={{ color: '#fff' }} /> : <MailIcon sx={{ color: '#fff' }} />}
                                         </ListItemIcon>
                                         <ListItemText primary={text} />
                                     </ListItemButton>
                                 </ListItem>
                             ))}
                         </List>
-                        <Paper sx={{ p: 3, m: 2 }}>
+                        <Paper sx={{ p: 3, m: 2, backgroundColor: '#364967', color: '#fff' }}>
                             <Typography variant="h5">Need help?</Typography>
 
                             <Typography variant='body1' >We're always available help you out.</Typography>
-                            <Button>Contact Us</Button>
+                            <Box textAlign='center'>
+                                <Button variant="contained" sx={{ my: 2, }}>Contact Us</Button>
+                            </Box>
+
                         </Paper>
                     </Box>
                 </Drawer>
@@ -91,95 +139,83 @@ export default function Dashboard(props) {
 
 
                     <Grid container>
-                        <Grid item lg={6}>
-                            <Typography variant="h3">Dashboard</Typography>
+                        <Grid item lg={8}>
+                            <Typography variant="h4"><b>Dashboard</b></Typography>
+                            <Typography variant="h6">Welcome back!</Typography>
                         </Grid>
-                        <Grid item lg={6}></Grid>
+                        <Grid item lg={2} sx={{ px: 2 }}>
+
+                            <FormControl fullWidth variant="filled">
+                                <InputLabel id="demo-simple-select-label">Domain</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={10}
+                                    label="Domain"
+                                >
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item lg={2}>
+
+                            <FormControl fullWidth variant="filled">
+                                <InputLabel id="time-range-label">Time Range</InputLabel>
+                                <Select
+                                    labelId="time-range-label"
+                                    value={range}
+                                    label="Time Range"
+                                    onChange={(event) => { setRange(event.target.value) }}
+                                >
+                                    <MenuItem value='today'>Today</MenuItem>
+                                    <MenuItem value='7d'>Last 7 days</MenuItem>
+                                    <MenuItem value='30d'>Last 30 days</MenuItem>
+                                    <MenuItem value='month-to-date'>Month to Date </MenuItem>
+                                    <MenuItem value='last-month'>Last Month</MenuItem>
+                                    <MenuItem value='year-to-date'>Year to Date</MenuItem>
+                                    <MenuItem value='12m'>Last 12 Months</MenuItem>
+                                    <MenuItem value='all-time'>All Time</MenuItem>
+                                </Select>
+                            </FormControl>
+
+                        </Grid>
                     </Grid>
-                    <Typography variant="h6">Welcome back, dude!</Typography>
 
-                    <hr />
 
-                    <Button
-                        id="site-selector-menu-button"
-                        aria-controls={open ? 'basic-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                    >
-                        Site 1
-                    </Button>
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button',
-                        }}
-                    >
-                        <MenuItem onClick={handleClose}>Site 1</MenuItem>
-                        <MenuItem onClick={handleClose}>Site 2</MenuItem>
-                        <MenuItem onClick={handleClose}>Site 3</MenuItem>
-                    </Menu>
 
-                    <Button
-                        id="date-selector-menu-button"
-                        aria-controls={open ? 'basic-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onClick={handleClick}
-                    >
-                        Today
-                    </Button>
-                    <Menu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button',
-                        }}
-                    >
-                        <MenuItem onClick={handleClose}>Last 7 days</MenuItem>
-                        <MenuItem onClick={handleClose}>Last 30 days</MenuItem>
-                        <MenuItem onClick={handleClose}>Last years</MenuItem>
-                    </Menu>
+
+
 
                     <Grid container>
-                        <Grid container lg={6} >
-                            <Grid item lg={6}>
-                                <Paper sx={{ p: 3, m: 2 }}>
-                                    <Typography variant="h6">Unique Visitors</Typography>
-                                    <Typography variant="h4" sx={{ py: 2 }}>1,249</Typography>
-                                    <Typography variant="body1">+13 since last week</Typography>
-                                </Paper>
-                            </Grid>
-                            <Grid item lg={6}>
-                                <Paper sx={{ p: 3, m: 2 }}>
-                                    <Typography variant="h6">Pageviews</Typography>
-                                    <Typography variant="h4" sx={{ py: 2 }}>492</Typography>
-                                    <Typography variant="body1">-2% since last week</Typography>
-                                </Paper>
-                            </Grid>
-                            <Grid item lg={6}>
-                                <Paper sx={{ p: 3, m: 2 }}>
-                                    <Typography variant="h6">Bounce Rate</Typography>
-                                    <Typography variant="h4" sx={{ py: 2 }}>45%</Typography>
-                                    <Typography variant="body1">-2% since last week</Typography>
-                                </Paper>
-                            </Grid>
-                            <Grid item lg={6}>
-                                <Paper sx={{ p: 3, m: 2 }}>
-                                    <Typography variant="h6">Visit Duration</Typography>
-                                    <Typography variant="h4" sx={{ py: 2 }}>2m 45s</Typography>
-                                    <Typography variant="body1">-2% since last week</Typography>
-                                </Paper>
-                            </Grid>
+                        <Grid item lg={3}>
+                            <DashboardInfoCard title='Unique Visitors' value='1,493' subtitleValue='+13%' subtitleText=' since last week' />
                         </Grid>
-                        <Grid item lg={6}>
+                        <Grid item lg={3}>
+                            <DashboardInfoCard title='Pageviews' value='492' subtitleValue='-2%' subtitleText=' since last week' />
+                        </Grid>
+                        <Grid item lg={3}>
+                            <DashboardInfoCard title='Bounce Rate' value='45%' subtitleValue='-2%' subtitleText=' since last week' />
+                        </Grid>
+                        <Grid item lg={3}>
+                            <DashboardInfoCard title='Visit Duration' value='2m 45s' subtitleValue='-2%' subtitleText=' since last week' />
+                        </Grid>
+                    </Grid>
+
+                    <Grid container>
+                        <Grid item lg={8}>
                             <Paper sx={{ p: 3, m: 2 }}>
                                 Pageviews
+                                <PageviewsChart />
+                            </Paper>
+                        </Grid>
+                        <Grid item lg={4}>
+                            <Paper sx={{ p: 3, m: 2, backgroundColor: '#1b73e8', color: '#fff' }}>
+                                <Typography variant="h6">Real Time</Typography>
+                                <Typography variant="body1">Active users in last 5 minutes</Typography>
+                                <Typography variant="h3" sx={{ py: 2, }}>12</Typography>
+                                <PageviewsMiniChart />
                             </Paper>
                         </Grid>
                     </Grid>
@@ -188,22 +224,28 @@ export default function Dashboard(props) {
                     <Grid container>
                         <Grid item lg={6}>
                             <Paper sx={{ p: 3, m: 2 }}>
-                                <Typography variant="h6">Souces</Typography>
+                                <Typography variant="h6">Top Souces</Typography>
+                                <TopSourcesChart />
                             </Paper>
                         </Grid>
                         <Grid item lg={6}>
                             <Paper sx={{ p: 3, m: 2 }}>
                                 <Typography variant="h6">Top Pages</Typography>
+                                <TopPages />
                             </Paper>
                         </Grid>
-                        <Grid item lg={6}>
+                        <Grid item lg={5}>
                             <Paper sx={{ p: 3, m: 2 }}>
                                 <Typography variant="h6">Devices</Typography>
+                                <Box sx={{ px: 10 }}>
+                                    <DevicesChart />
+                                </Box>
                             </Paper>
                         </Grid>
-                        <Grid item lg={6}>
+                        <Grid item lg={7}>
                             <Paper sx={{ p: 3, m: 2 }}>
                                 <Typography variant="h6">Locations</Typography>
+                                <LocationChart />
                             </Paper>
                         </Grid>
                     </Grid>

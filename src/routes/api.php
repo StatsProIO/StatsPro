@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CollectorController;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\DomainsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/collect', [CollectorController::class, 'post']);
+Route::post('/collect', [EventsController::class, 'postEvent']);
+
+Route::middleware('auth:sanctum')->post('/domain', [DomainsController::class, 'postDomain']);
+
+//TODO: this needs to be authenticated
+Route::get('/events', [EventsController::class, 'getEvents']);
+
+

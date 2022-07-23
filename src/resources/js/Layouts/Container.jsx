@@ -8,20 +8,38 @@ import { ThemeProvider } from '@emotion/react';
 export default function Container({ children }) {
 
     const theme = createTheme({
-        typography: {
-            fontFamily: [
-                'IBM Plex Sans'
-            ].join(','),
+        palette: {
+            type: 'light',
+            primary: {
+                main: '#4782da',
+            },
+            secondary: {
+                main: '#7d6cfb',
+            },
         },
-        components: {
+        typography: {
+            fontFamily: 'IBM Plex Sans',
+        },
+        shape: {
+            borderRadius: 3,
+        },
+        overrides: {
             MuiAppBar: {
-                styleOverrides: {
-                    colorPrimary: {
-                        backgroundColor: "red"
-                    }
-                }
-            }
-        }
+                colorInherit: {
+                    backgroundColor: '#2a395b',
+                    color: '#fff',
+                },
+            },
+        },
+        props: {
+            MuiAppBar: {
+                color: 'inherit',
+            },
+            MuiButtonBase: {
+                disableRipple: true,
+            },
+        },
+        shadows: ["rgb(50 50 93 / 2%) 0px 2px 5px -1px, rgb(0 0 0 / 5%) 0px 1px 3px -1px"]
     });
 
 

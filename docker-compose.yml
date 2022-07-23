@@ -5,41 +5,15 @@ services:
   app:
       build:
           context: .
-          dockerfile: app.dockerfile
       working_dir: /var/www
-      ports: 
-        - 3000:3000 #for vite
-      # comment this out when deploying to remote docker
-      #volumes:
-      #  - ./src:/var/www
+
   # Web Server
   web:
       build:
           context: .
-          dockerfile: web.dockerfile
       working_dir: /var/www
       
-      # comment this out when deploying to remote docker
-      #volumes:
-      #    - ./src:/var/www
       depends_on:
           - "app"
       ports:
           - 80:80
-      labels:
-        - "traefik.enable=true" # Enable Traefik to route traffic to this container
-        - "traefik.http.routers.test.rule=HostRegexp(`a5ru2m.stackhero-network.com`)" # Defined host
-        - "traefik.http.routers.test.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
-  db:
-      image: postgres:14.4-alpine
-      restart: always
-      environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
-      ports:
-        - '5432:5432'
-      volumes: 
-        - db:/var/lib/postgresql/data
-volumes:
-  db:
-    driver: local

@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  
+  # Application
+  app:
+      build:
+          dockerfile: app.prod.dockerfile
+      
+  # Web Server
+  web:
+      build:
+          dockerfile: web.prod.dockerfile
+      labels:
+        - "traefik.enable=true" # Enable Traefik to route traffic to this container
+        - "traefik.http.routers.test.rule=HostRegexp(`a5ru2m.stackhero-network.com`)" # Defined host
+        - "traefik.http.routers.test.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver

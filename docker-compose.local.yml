@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  
+  # Application
+  app:
+      build:
+          dockerfile: app.local.dockerfile
+      ports: 
+        - 3000:3000 #for vite
+      volumes:
+        - ./src:/var/www
+  # Web Server
+  web:
+      build:
+          dockerfile: web.local.dockerfile
+      volumes:
+          - ./src:/var/www
+  db:
+      image: postgres:14.4-alpine
+      restart: always
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+      ports:
+        - '5432:5432'
+      volumes: 
+        - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

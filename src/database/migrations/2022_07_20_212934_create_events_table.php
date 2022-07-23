@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('domain_id')->references('domains', 'id');
+            $table->integer('domain_id')->unsigned()->references('id')->on('domains');
             $table->string('event_name');
             $table->string('ip_address')->nullable(); //will be removed after initial testing
             $table->string('user_agent')->nullable(); //will be removed after initial testing
@@ -29,14 +29,14 @@ return new class extends Migration
             $table->integer('inner_width')->nullable();
             $table->string('language')->nullable();
             $table->string('country')->nullable();
+            $table->string('region')->nullable();
             $table->string('browser')->nullable();
             $table->string('device')->nullable();
+            $table->string('os')->nullable();
             $table->string('time_zone')->nullable();
-            $table->string('client_time')->nullable();
+            $table->datetime('client_time')->nullable();
             $table->datetime('enter_time');
             $table->datetime('exit_time')->nullable();
-            
-
 
             $table->timestamps();
         });

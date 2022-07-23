@@ -13,7 +13,7 @@
         "@tailwindcss/forms": "^0.5.2",
         "@vitejs/plugin-react": "^1.3.2",
         "autoprefixer": "^10.4.2",
-        "axios": "^0.25",
+        "axios": "^0.25.0",
         "laravel-vite-plugin": "^0.2.1",
         "lodash": "^4.17.19",
         "postcss": "^8.4.6",
@@ -26,6 +26,12 @@
         "@emotion/react": "^11.9.3",
         "@emotion/styled": "^11.9.3",
         "@mui/icons-material": "^5.8.4",
-        "@mui/material": "^5.8.7"
+        "@mui/material": "^5.8.7",
+        "chart.js": "^3.8.0",
+        "d3-scale": "^4.0.2",
+        "query-string": "^7.1.1",
+        "react-chartjs-2": "^4.3.1",
+        "react-simple-maps": "^2.3.0",
+        "react-tooltip": "^4.2.21"
     }
 }
