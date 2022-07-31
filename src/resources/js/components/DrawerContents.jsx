@@ -46,10 +46,22 @@ export default function DrawerContents() {
         <>
             <Toolbar />
             <Box sx={{ overflow: 'auto', }}>
-                <List>
+                <List sx={{
+                    // selected and (selected + hover) states
+                    '&& .Mui-selected, && .Mui-selected:hover': {
+                        bgcolor: 'rgb(42,98,254)'
+                    },
+                    // hover states
+                    '& .MuiListItemButton-root:hover': {
+                        bgcolor: '#dedede',
+                        '&, & .MuiListItemIcon-root': {
+                            color: 'black',
+                        },
+                    },
+                }}>
                     {items.map((item) => (
                         <ListItem key={item.text} disablePadding onClick={handleClick(item.url)}>
-                            <ListItemButton>
+                            <ListItemButton selected={window.location.pathname === item.url}>
                                 <ListItemIcon>
                                     {item.icon}
                                 </ListItemIcon>
