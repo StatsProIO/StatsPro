@@ -47,6 +47,7 @@ request.send(JSON.stringify(payload));
 request.onreadystatechange = function () {
     if (request.readyState === 4) {
         console.log("Done");
+        //TODO: broadcast to some external source
         // options && options.callback && options.callback()
     }
 }

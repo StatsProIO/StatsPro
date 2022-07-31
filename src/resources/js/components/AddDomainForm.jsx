@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react';
-import Checkbox from '@/Components/Checkbox';
-import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import Label from '@/Components/Label';
 import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/inertia-react';
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { useEffect } from 'react';
 
 export default function AddDomainForm() {
   const { data, setData, post, processing, errors, reset } = useForm({
