@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Authenticated from '@/Layouts/Authenticated';
-import { Head } from '@inertiajs/inertia-react';
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,41 +14,17 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
+import { Grid, Paper, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 
-import { FormControl, Grid, InputLabel, Menu, MenuItem, Paper, Select, Typography } from '@mui/material';
-import Charts from '@/components/Charts';
-import FirstEventWait from '@/components/FirstEventWait';
 import useQueryString from '@/customHooks/useQueryString';
+import IntegrationCode from '@/components/IntegrationCode';
+import { Inertia } from '@inertiajs/inertia';
+import ScriptAndInstructions from '@/components/ScriptAndInstructions';
 
-
-export default function Dashboard(props) {
+export default function DomainScript(props) {
     const drawerWidth = 240;
 
-    const [eventStatus, setEventStatus] = useState(false);
-    const [domain, setDomain] = useQueryString("domain", '');
-
-    useEffect(() => {
-
-        //if the domain is not set in the query params, find the first domain and set the query params
-        if (domain === '') {
-            console.log("Domain is empty, setting to " + props.firstDomain);
-            setDomain(props.firstDomain)
-        } else {
-            axios.get(`/api/event-status/${domain}`)
-                .then(function (response) {
-                    setEventStatus(response.data);
-                })
-                .catch(function (error) {
-                    // TODO: handle error
-                    console.log(error);
-                })
-                .then(function () {
-                    // always executed
-                });
-        }
-    }, [domain]);
 
     return (
 
@@ -111,11 +86,39 @@ export default function Dashboard(props) {
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <Toolbar />
 
+                    <Grid container>
+                        <Grid item lg={8}>
+                            <Typography variant="h4" sx={{ py: 1 }}>Add Script</Typography>
+                        </Grid>
+                    </Grid>
 
-                    {eventStatus === 'NO_DATA' && <FirstEventWait />}
-                    {eventStatus === 'SUCCESS' && <Charts domain={domain} setDomain={setDomain} />}
 
-                    {/* TODO: the case if there are no domains */}
+
+
+                    <Grid container justifyContent="center">
+                        <Grid item md={5}>
+                            <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
+                                <Typography sx={{ py: 2 }} variant="h5"><b>Add this script to your website ({props.domain.domain_name})</b></Typography>
+
+                                <ScriptAndInstructions />
+
+
+                                <Button variant="contained" onClick={() => { Inertia.visit('/dashboard?domain=' + props.domain.domain_name); }} fullWidth size='large'>Start Collecting Data</Button>
+                            </Box>
+                        </Grid>
+                    </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 </Box>

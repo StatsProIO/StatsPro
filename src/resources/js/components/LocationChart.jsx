@@ -8,31 +8,14 @@ import ReactTooltip from "react-tooltip";
 const geoUrl = "/features.json";
 
 const colorScale = scaleLinear()
-  .domain([0.29, 0.68])
-  .range(["#1b73e8e6", "#eee"]);
+  .domain([0, 100])
+  .range(["#6992ff", "#2a63fe"]);
 
 
-export function LocationChart() {
+export function LocationChart({ inputData }) {
 
-  const [data, setData] = useState([]);
+
   const [content, setContent] = useState("");
-
-
-  useEffect(() => {
-    setData([
-      {
-        ISO3: "USA",
-        "2017": ".33",
-        "pageviews": 10
-      },
-      {
-        ISO3: "AFG",
-        "2017": ".4",
-        "pageviews": 12
-      }
-    ]);
-
-  }, []);
 
 
   return <>
@@ -40,12 +23,12 @@ export function LocationChart() {
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map((geo) => {
-            const d = data.find((s) => s.ISO3 === geo.id);
+            const d = inputData.find((s) => s.country === geo.id);
             return (
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                fill={d ? colorScale(d["2017"]) : "#eee"}
+                fill={d ? colorScale(d["count"]) : "#eee"}
                 style={{
                   default: { outline: "none" },
                   hover: { outline: "none" },
@@ -53,7 +36,7 @@ export function LocationChart() {
                 }}
                 onMouseEnter={() => {
                   console.log("Mouse enter" + geo.properties.name);
-                  setContent(`${geo.properties.name} - ${d["pageviews"]}`);
+                  setContent(`${geo.properties.name} - ${d["count"]}`);
                 }}
                 onMouseLeave={() => {
                   setContent("");

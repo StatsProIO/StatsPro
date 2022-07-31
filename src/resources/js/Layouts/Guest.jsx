@@ -6,17 +6,10 @@ import Container from './Container';
 export default function Guest({ children }) {
     return (
         <Container>
-            <div className="">
-                <div>
-                    <Link href="/">
-                        {/* <ApplicationLogo className="" /> */}
-                    </Link>
-                </div>
-
-                <div className="">
-                    {children}
-                </div>
-            </div>
+            <Link href="/">
+                {/* <ApplicationLogo className="" /> */}
+            </Link>
+            {children}
         </Container>
     );
 }

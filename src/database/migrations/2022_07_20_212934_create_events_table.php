@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('host');
             $table->string('path')->nullable();
             $table->string('referrer')->nullable();
+            $table->string('source')->nullable();
             $table->integer('inner_width')->nullable();
             $table->string('language')->nullable();
             $table->string('country')->nullable();

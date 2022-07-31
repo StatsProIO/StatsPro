@@ -23,6 +23,7 @@ class EventFactory extends Factory
 
         $domainIds = Domain::all()->pluck('id')->toArray();
 
+        $referrer = $this->faker->url();
         return [
             'domain_id' => $this->faker->randomElement($domainIds),
             'event_name' =>  'pageview',
@@ -34,17 +35,18 @@ class EventFactory extends Factory
             'location_href' => $this->faker->url(),
             'host' => $this->faker->domainName(),
             'path' => implode('/', $this->faker->words(4)),
-            'referrer' => $this->faker->url(),
+            'referrer' => $referrer,
+            'source' => parse_url($referrer)['host'],
             'inner_width' => $this->faker->randomNumber(),
             'language' => $this->faker->languageCode() . '-' . $this->faker->countryCode(),
-            'country' => $this->faker->countryCode(),
+            'country' => $this->faker->randomElement(['USA', 'AUS', 'CAN', 'SWZ']),
             'region' => $this->faker->city(),
             'browser' => $this->faker->word(),
             'device' => $this->faker->word(),
             'os' => $this->faker->word(),
             'time_zone' => $this->faker->timezone(),
-            'client_time' => $this->faker->iso8601(),
-            'enter_time' => $this->faker->iso8601(),
+            'client_time' => $this->faker->dateTimeBetween('-1 days', '+0 days'),
+            'enter_time' => $this->faker->dateTimeBetween('-1 days', '+0 days'),
             'exit_time' => null
         ];
     }

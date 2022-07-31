@@ -22,10 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/collect', [EventsController::class, 'postEvent']);
+Route::get('/2Vj2pBn.jpg', [EventsController::class, 'getTrackerPixel']);
 
-Route::middleware('auth:sanctum')->post('/domain', [DomainsController::class, 'postDomain']);
 
 //TODO: this needs to be authenticated
 Route::get('/events', [EventsController::class, 'getEvents']);
 
+//TODO: this needs to be authenticated
+Route::get('/event-status/{domainName}', [EventsController::class, 'getEventStatus']);
+
+Route::middleware('auth:sanctum')->post('/domain', [DomainsController::class, 'postDomain'])->name('domain');
 

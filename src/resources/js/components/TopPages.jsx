@@ -10,7 +10,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
-var darkBlue = '#4782da';
+var darkBlue = '#2a63fe';
 
 function hexToRGB(hex, alpha) {
     var r = parseInt(hex.slice(1, 3), 16),
@@ -62,9 +62,6 @@ export function TopPages() {
         const chart = chartRef.current;
 
         if (chart) {
-            console.log('ChartJS', chart);
-
-
             var gradientDarkBlue = createLinearGradient(chart.ctx, darkBlue);
 
             setData({

@@ -38,14 +38,13 @@ const NavBar = () => {
 
     const openDashboard = () => {
         Inertia.get('/dashboard')
-
     }
 
     return (
-        <AppBar position="fixed" sx={{ bgcolor: "#2a395b", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <AppBar position="fixed" sx={{ bgcolor: "#243044", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <Avatar variant={"rounded"} src="/images/logo.png" style={{ width: 40, height: 25, }} sx={{ mx: 1 }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -54,14 +53,11 @@ const NavBar = () => {
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Marble Metrics
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Authenticated from '@/Layouts/Authenticated';
-import { Head } from '@inertiajs/inertia-react';
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,41 +14,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
+import { Grid, Paper, Typography } from '@mui/material';
 import { Button } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 
-import { FormControl, Grid, InputLabel, Menu, MenuItem, Paper, Select, Typography } from '@mui/material';
-import Charts from '@/components/Charts';
-import FirstEventWait from '@/components/FirstEventWait';
-import useQueryString from '@/customHooks/useQueryString';
+import { Inertia } from '@inertiajs/inertia';
 
 
-export default function Dashboard(props) {
+export default function ManageDomains(props) {
     const drawerWidth = 240;
-
-    const [eventStatus, setEventStatus] = useState(false);
-    const [domain, setDomain] = useQueryString("domain", '');
-
-    useEffect(() => {
-
-        //if the domain is not set in the query params, find the first domain and set the query params
-        if (domain === '') {
-            console.log("Domain is empty, setting to " + props.firstDomain);
-            setDomain(props.firstDomain)
-        } else {
-            axios.get(`/api/event-status/${domain}`)
-                .then(function (response) {
-                    setEventStatus(response.data);
-                })
-                .catch(function (error) {
-                    // TODO: handle error
-                    console.log(error);
-                })
-                .then(function () {
-                    // always executed
-                });
-        }
-    }, [domain]);
 
     return (
 
@@ -111,15 +84,46 @@ export default function Dashboard(props) {
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <Toolbar />
 
+                    <Grid container>
+                        <Grid item lg={10}>
+                            <Typography variant="h4" sx={{ py: 1 }}>Manage Domains</Typography>
+                        </Grid>
+                        <Grid item lg={2}>
+                            <Button variant="contained" onClick={() => { Inertia.visit('/add-domain'); }} fullWidth>+ Add Domain</Button>
+                        </Grid>
+                    </Grid>
 
-                    {eventStatus === 'NO_DATA' && <FirstEventWait />}
-                    {eventStatus === 'SUCCESS' && <Charts domain={domain} setDomain={setDomain} />}
+                    {props.domains.length === 0 && (
+                        <Grid container justifyContent='center'>
+                            <Grid item lg={6}>
+                                <Typography variant="h5" sx={{ py: 1 }} textAlign='center' color="text.secondary">No domains added yet!</Typography>
+                            </Grid>
+                        </Grid>
+                    )}
 
-                    {/* TODO: the case if there are no domains */}
-
+                    <Grid container spacing={2}>
+                        {props.domains.map((domain) => {
+                            return (
+                                <Grid item md={4}>
+                                    <Box sx={{ p: 2 }} style={{ backgroundColor: '#fff' }}>
+                                        <Grid container spacing={2}>
+                                            <Grid item md={10}>
+                                                <Typography key={domain.id}>{domain.domain_name}</Typography>
+                                            </Grid>
+                                            <Grid item md={2} >
+                                                <Button variant="text" size="large" >
+                                                    <SettingsIcon />
+                                                </Button>
+                                            </Grid>
+                                        </Grid>
+                                    </Box>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
 
                 </Box>
-            </Box>
+            </Box >
 
 
         </Authenticated >

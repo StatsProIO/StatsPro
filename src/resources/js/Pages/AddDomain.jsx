@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import Authenticated from '@/Layouts/Authenticated';
-import { Head } from '@inertiajs/inertia-react';
+
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,41 +15,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
+import { Grid, Paper, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 
-import { FormControl, Grid, InputLabel, Menu, MenuItem, Paper, Select, Typography } from '@mui/material';
-import Charts from '@/components/Charts';
-import FirstEventWait from '@/components/FirstEventWait';
-import useQueryString from '@/customHooks/useQueryString';
+import AddDomainForm from '@/components/AddDomainForm';
 
-
-export default function Dashboard(props) {
+export default function ManageDomains(props) {
     const drawerWidth = 240;
 
-    const [eventStatus, setEventStatus] = useState(false);
-    const [domain, setDomain] = useQueryString("domain", '');
-
-    useEffect(() => {
-
-        //if the domain is not set in the query params, find the first domain and set the query params
-        if (domain === '') {
-            console.log("Domain is empty, setting to " + props.firstDomain);
-            setDomain(props.firstDomain)
-        } else {
-            axios.get(`/api/event-status/${domain}`)
-                .then(function (response) {
-                    setEventStatus(response.data);
-                })
-                .catch(function (error) {
-                    // TODO: handle error
-                    console.log(error);
-                })
-                .then(function () {
-                    // always executed
-                });
-        }
-    }, [domain]);
 
     return (
 
@@ -111,15 +84,16 @@ export default function Dashboard(props) {
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                     <Toolbar />
 
+                    <Grid container>
+                        <Grid item lg={8}>
+                            <Typography variant="h4" sx={{ py: 1 }}>Add Domain</Typography>
+                        </Grid>
 
-                    {eventStatus === 'NO_DATA' && <FirstEventWait />}
-                    {eventStatus === 'SUCCESS' && <Charts domain={domain} setDomain={setDomain} />}
+                    </Grid>
 
-                    {/* TODO: the case if there are no domains */}
-
-
+                    <AddDomainForm />
                 </Box>
-            </Box>
+            </Box >
 
 
         </Authenticated >

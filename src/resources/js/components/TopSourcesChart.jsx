@@ -43,49 +43,33 @@ export const options = {
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data = {
-  labels,
-  datasets: [
 
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => 22),
 
-      backgroundColor: '#1b73e857',
-      borderRadius: 10,
-      borderWidth: 0
-    },
 
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => 5),
+export function TopSourcesChart({ inputData }) {
 
-      backgroundColor: '#1b73e857',
-      borderRadius: 10,
-      borderWidth: 0
-    },
+  var data = { datasets: [] };
 
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => 95),
+  if (inputData.length > 0) {
+    inputData.forEach((sourceData) => {
 
-      backgroundColor: '#1b73e857',
-      borderRadius: 10,
-      borderWidth: 0
-    },
+      data.datasets.push({
 
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => 12),
+        label: sourceData.dates,
+        data: sourceData.counts,
 
-      backgroundColor: '#1b73e857',
-      borderRadius: 10,
-      borderWidth: 0
-    },
 
-  ],
-};
+        backgroundColor: '#2a63fe57',
+        borderRadius: 10,
+        borderWidth: 0
+      });
+    });
 
-export function TopSourcesChart() {
-  return <Bar options={options} data={data} />;
+
+    data.labels = ['2022-07-23', '2022-07-21']
+
+    return <Bar options={options} data={data} />;
+  }
+
+  return <></>;
 }

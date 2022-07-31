@@ -6,6 +6,7 @@ import {
   BarElement
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { Typography } from '@mui/material';
 
 ChartJS.register(
   CategoryScale,
@@ -34,7 +35,11 @@ function buildData(inputData) {
 }
 
 
-export function DevicesChart({ inputData }) {
+export function NoDomains({ inputData }) {
 
-  return <Doughnut data={buildData(inputData)} />
+  return <>
+    <Typography>
+      Add your first domain!
+      </Typography>
+    </>
 }

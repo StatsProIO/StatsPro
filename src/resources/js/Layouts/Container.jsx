@@ -8,25 +8,25 @@ import { ThemeProvider } from '@emotion/react';
 export default function Container({ children }) {
 
     const theme = createTheme({
+
         palette: {
             type: 'light',
             primary: {
-                main: '#4782da',
+                main: 'rgb(42,98,254)',
             },
             secondary: {
                 main: '#7d6cfb',
             },
         },
         typography: {
-            fontFamily: 'IBM Plex Sans',
+            fontFamily: 'Inter, sans- serif',
         },
         shape: {
-            borderRadius: 3,
+            borderRadius: 8,
         },
         overrides: {
             MuiAppBar: {
                 colorInherit: {
-                    backgroundColor: '#2a395b',
                     color: '#fff',
                 },
             },

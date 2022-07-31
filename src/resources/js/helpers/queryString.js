@@ -7,6 +7,9 @@ export const setQueryStringWithoutPageReload = qsValue => {
         window.location.pathname +
         qsValue;
 
+
+    console.log("Setting url to " + newurl);
+
     window.history.pushState({ path: newurl }, "", newurl);
 };
 

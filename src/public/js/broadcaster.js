@@ -1,5 +1,7 @@
 var scriptEl = document.currentScript;
-var endpoint = "/api/collect";
+
+var parsedScriptUrl = (new URL(document.currentScript.src))
+var endpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/collect";
 
 
 //TODO: respect navigator.doNotTrack? 

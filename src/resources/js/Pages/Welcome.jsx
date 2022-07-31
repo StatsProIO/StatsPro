@@ -2,14 +2,17 @@ import React from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
 import Button from '@mui/material/Button';
 import Guest from '@/Layouts/Guest';
-import { Box, Grid, Paper, Typography } from '@mui/material';
+import { Box, Grid, Paper, Toolbar, Typography } from '@mui/material';
 import Container from '@/Layouts/Container';
+import IntegrationCode from '@/components/IntegrationCode';
 
 
 export default function Welcome(props) {
     return (
         <Guest>
             <Head title="Welcome" />
+
+            <Toolbar />
 
             <Grid container spacing={0} className="hero-row" sx={{ pt: 5 }}>
                 <Grid item sm={12} lg={6}>
@@ -45,9 +48,9 @@ export default function Welcome(props) {
                     <Box sx={{ textAlign: 'center', pt: 6, pb: 6 }}>
                         <Typography variant="h3">Get Started in 5 seconds</Typography>
                         <Typography variant="h6">Drop this on your website</Typography>
-                        <Paper sx={{ backgroundColor: '#eee', p: 2 }}>
-                            &lt;script&gt; data-host="https://midnightmetrics.com" data-dnt="false" src="https://midnightmetrics.com/js/script.js" id="ZwSg9rf6GA" async defer>&lt;/script&gt;
-                        </Paper>
+                        
+                        <IntegrationCode/>
+                        
                     </Box>
                 </Grid>
             </Grid>
@@ -55,7 +58,9 @@ export default function Welcome(props) {
 
 
             <Box sx={{ textAlign: 'center', pt: 6, pb: 6 }}>
-                <Typography variant="h3">What is Dark Traffic?</Typography>
+                <Typography variant="h3">Analytics like you've never seen before</Typography>
+                <Typography variant="h6">With CNAME integration, you will be able to see traffic on your website that's been missing from Google Analytics.</Typography>
+                <Typography variant="h6">Setup only takes a few minutes and we've got a guide</Typography>
                 <Typography variant="h6">Users with ad blockers won't be seen by traditional analytics tools<br />
                     Midnight Metrics reveals this dark traffic so you can see all of your users
                 </Typography>
