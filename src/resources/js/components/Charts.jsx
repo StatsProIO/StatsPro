@@ -35,7 +35,7 @@ ChartJS.register(
 export default function Charts({ domain, setDomain }) {
 
     const [domains, setDomains] = useState([]);
-    const [range, setRange] = useQueryString("range", 'today');
+    const [range, setRange] = useQueryString("range", '24h');
 
     const [pageviews, setPageviews] = useState([]);
     const [topSources, setTopSources] = useState([]);
@@ -104,7 +104,7 @@ export default function Charts({ domain, setDomain }) {
                             label="Time Range"
                             onChange={(event) => { setRange(event.target.value) }}
                         >
-                            <MenuItem value='today'>Today</MenuItem>
+                            <MenuItem value='24h'>Last 24 hours</MenuItem>
                             <MenuItem value='7d'>Last 7 days</MenuItem>
                             <MenuItem value='30d'>Last 30 days</MenuItem>
                             <MenuItem value='month-to-date'>Month to Date </MenuItem>

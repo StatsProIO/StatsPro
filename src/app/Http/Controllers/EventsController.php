@@ -110,32 +110,81 @@ class EventsController extends Controller
             ->header ("Expires", "0");
     }
 
+    function rangeToInterval(string $range) {
+        switch ($range) {
+            case '24h':
+                return [
+                    Carbon::now()->subHours(24)->toDateString(),
+                    Carbon::now()->toDateString()
+                ];
+                break;
+            case '7d':
+                return [
+                    Carbon::now()->subDays(7)->toDateString(),
+                    Carbon::now()->toDateString()
+                ];
+                break;
+            case '30d':
+                return [
+                    Carbon::now()->subDays(30)->toDateString(),
+                    Carbon::now()->toDateString()
+                ];
+                break;
+            case 'last-month':
+                return [
+                    Carbon::now()->startOfMonth()->subMonthsNoOverflow(1)->toDateString(),
+                    Carbon::now()->subMonthsNoOverflow(1)->endOfMonth()->toDateString()
+                ];
+                break;
+            case 'year-to-date':
+                return [
+                    Carbon::now()->firstOfYear()->toDateString(),
+                    Carbon::now()->toDateString()
+                ];
+                break;
+            case '12m':
+                return [
+                    Carbon::now()->subMonthsNoOverflow(12)->toDateString(),
+                    Carbon::now()->toDateString()
+                ];
+                break;
+            case 'all-time':
+                return [
+                    Carbon::create(2022, 1, 1, 0, 0, 0)->toDateString(),
+                    Carbon::now()->toDateString()
+                ];
+                break;
+        }
+    }
+
     public function getEvents (Request $request) {
 
         $range = $request->has('range') ? $request->input('range') : 'today';
+        $interval = $this->rangeToInterval($range);
 
         //TODO: need to validate that the domain belongs to the user
         //TODO: change firstdomain to the users first domain
         $domainString = $request->has('domain') ? $request->input('domain') : 'firstdomain.com';
 
         $domain = Domain::firstWhere('domain_name', $domainString);
-
-
-
-
         
         $pageviews = DB::select( DB::raw("SELECT enter_time::date as date, count(*)
                                         FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time > current_date - interval '14 days'
+                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
                                         GROUP BY enter_time::date" ), 
                                 array('domain' => $domain->id)
                             );
+
+        $realTimeInterval = [
+                    Carbon::now()->subMinutes(5)->toDateString(),
+                    Carbon::now()->toDateString()
+                ];
                             
                             
         //find the pageviews from the last 5 minutes, deduplicate pageviews by the same visitor
         $realTime = DB::select( DB::raw("SELECT distinct on (visitor_hash) visitor_hash, location_href, enter_time
                                         FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time > current_date - interval '7 days'
+                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time > '$realTimeInterval[0]' AND enter_time < '$realTimeInterval[1]'
                                         ORDER BY visitor_hash, enter_time desc"), 
                                 array('domain' => $domain->id)
                             );
@@ -143,7 +192,7 @@ class EventsController extends Controller
                                         FROM (
                                             SELECT enter_time::date as date, source, count(*) as count
                                             FROM events 
-                                            WHERE domain_id = :domain AND event_name='pageview' AND enter_time > current_date - interval '7 days'
+                                            WHERE domain_id = :domain AND event_name='pageview'  AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
                                             GROUP BY enter_time::date, source
                                         ) as a
                                         GROUP BY source
@@ -177,7 +226,7 @@ class EventsController extends Controller
                                         FROM (
                                             SELECT enter_time::date as date, path, count(*) as count
                                             FROM events 
-                                            WHERE domain_id = :domain AND event_name='pageview' AND enter_time > current_date - interval '7 days'
+                                            WHERE domain_id = :domain AND event_name='pageview'  AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
                                             GROUP BY enter_time::date, path
                                         ) as a
                                         GROUP BY path
@@ -189,7 +238,7 @@ class EventsController extends Controller
 
         $devices = DB::select( DB::raw("SELECT device, count(*)
                                         FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time > current_date - interval '7 days'
+                                        WHERE domain_id = :domain AND event_name='pageview'  AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
                                         GROUP BY device
                                         LIMIT 5" ), 
                                 array('domain' => $domain->id)
@@ -197,7 +246,7 @@ class EventsController extends Controller
 
         $locations = DB::select( DB::raw("SELECT country, count(*)
                                 FROM events 
-                                WHERE domain_id = :domain AND event_name='pageview' AND enter_time > current_date - interval '7 days'
+                                WHERE domain_id = :domain AND event_name='pageview'  AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
                                 GROUP BY country" ), 
                         array('domain' => $domain->id)
                     );
