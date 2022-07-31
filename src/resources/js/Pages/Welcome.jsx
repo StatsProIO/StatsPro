@@ -9,7 +9,7 @@ import IntegrationCode from '@/components/IntegrationCode';
 
 export default function Welcome(props) {
     return (
-        <Guest>
+        <Guest auth={props.auth}>
             <Head title="Welcome" />
 
             <Grid container spacing={0} className="hero-row" sx={{ pt: 5 }}>

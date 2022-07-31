@@ -47,7 +47,6 @@ export default function DrawerContents() {
             <Toolbar />
             <Box sx={{ overflow: 'auto', }}>
                 <List disablePadding sx={{
-                    pt: '5px',
                     // selected and (selected + hover) states
                     '&& .Mui-selected, && .Mui-selected:hover': {
                         bgcolor: 'rgb(42,98,254)',
