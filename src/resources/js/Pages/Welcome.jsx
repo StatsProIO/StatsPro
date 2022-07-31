@@ -12,8 +12,6 @@ export default function Welcome(props) {
         <Guest>
             <Head title="Welcome" />
 
-            <Toolbar />
-
             <Grid container spacing={0} className="hero-row" sx={{ pt: 5 }}>
                 <Grid item sm={12} lg={6}>
 
@@ -48,9 +46,9 @@ export default function Welcome(props) {
                     <Box sx={{ textAlign: 'center', pt: 6, pb: 6 }}>
                         <Typography variant="h3">Get Started in 5 seconds</Typography>
                         <Typography variant="h6">Drop this on your website</Typography>
-                        
-                        <IntegrationCode/>
-                        
+
+                        <IntegrationCode />
+
                     </Box>
                 </Grid>
             </Grid>

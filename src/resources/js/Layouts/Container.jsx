@@ -1,6 +1,6 @@
 import React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Container as MuiContainer, createTheme } from '@mui/material';
+import { Container as MuiContainer, createTheme, Toolbar } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import { ThemeProvider } from '@emotion/react';
 
@@ -44,10 +44,12 @@ export default function Container({ children }) {
 
 
 
+
     return (
         <>
             <CssBaseline />
             <NavBar />
+            <Toolbar />
             <ThemeProvider theme={theme}>
                 {children}
             </ThemeProvider>
