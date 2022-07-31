@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useState, useRef } from 'react';
 import { FormControl, Grid, InputLabel, Menu, MenuItem, Select } from '@mui/material';
@@ -147,8 +147,16 @@ export default function Charts({ domain, setDomain }) {
                 </Grid>
                 <Grid item lg={4}>
                     <Paper className="blueShadow" sx={{ p: 3, m: 2, backgroundColor: 'rgb(42,98,254)', color: '#fff' }}>
-                        <div class="small-white-pulse"></div>
-                        <Typography variant="h6">Real Time</Typography>
+                        <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            spacing={2}
+                        >
+                            <Typography variant="h6">Real Time</Typography>
+                            <div class="small-white-pulse"></div>
+                        </Stack>
+
                         <Typography variant="body1"><b>Active users in last 5 minutes</b></Typography>
                         <Typography variant="h3" sx={{ py: 2, }}>{realtime.length}</Typography>
 
