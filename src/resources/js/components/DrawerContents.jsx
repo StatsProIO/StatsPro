@@ -46,16 +46,19 @@ export default function DrawerContents() {
         <>
             <Toolbar />
             <Box sx={{ overflow: 'auto', }}>
-                <List sx={{
+                <List disablePadding sx={{
+                    pt: '5px',
                     // selected and (selected + hover) states
                     '&& .Mui-selected, && .Mui-selected:hover': {
-                        bgcolor: 'rgb(42,98,254)'
+                        bgcolor: 'rgb(42,98,254)',
+                        background: 'linear-gradient(270deg, rgba(0,156,255,1) 0%, rgba(13,95,254,1) 100%);'
                     },
                     // hover states
                     '& .MuiListItemButton-root:hover': {
                         bgcolor: '#dedede',
+                        background: 'linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 76%, rgba(209,209,209,1) 100%)',
                         '&, & .MuiListItemIcon-root': {
-                            color: 'black',
+                            color: 'text.secondary',
                         },
                     },
                 }}>
