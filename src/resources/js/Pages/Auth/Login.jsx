@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react';
-import Button from '@/Components/Button';
-import Checkbox from '@/Components/Checkbox';
+
+import Checkbox from '@mui/material/Checkbox';
 import Guest from '@/Layouts/Guest';
 import Input from '@/Components/Input';
 import Label from '@/Components/Label';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { Box, FormControlLabel, Grid, InputAdornment, TextField, Typography, Button, Stack, Paper } from '@mui/material';
+import PasswordIcon from '@mui/icons-material/Password';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import SaveIcon from '@mui/icons-material/Save';
+import LoadingButton from '@mui/lab/LoadingButton';
+
+
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -34,61 +41,89 @@ export default function Login({ status, canResetPassword }) {
         <Guest>
             <Head title="Log in" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+
+
+            {status && <Alert severity="success">{status}</Alert>}
 
             <ValidationErrors errors={errors} />
 
-            <form onSubmit={submit}>
-                <div>
-                    <Label forInput="email" value="Email" />
+            <Grid container justifyContent="center" sx={{ mt: 4 }}>
+                <Grid item md={5}>
+                    <Paper sx={{ p: 2, my: 1, mx: 2 }} elevation={0}>
+                        <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
+                            <Typography sx={{ py: 2 }} variant="h5"><b>Login</b></Typography>
 
-                    <Input
-                        type="text"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                    />
-                </div>
+                            <form onSubmit={submit}>
 
-                <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                                <TextField
+                                    label="Email"
+                                    variant="standard"
+                                    type="text"
+                                    name="email"
+                                    value={data.email}
+                                    autoComplete="username"
+                                    autoFocus
+                                    fullWidth
+                                    size="large"
+                                    onChange={onHandleChange}
+                                />
 
-                    <Input
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        handleChange={onHandleChange}
-                    />
-                </div>
+                                <TextField
+                                    label="Password"
+                                    variant="standard"
+                                    type="password"
+                                    name="password"
+                                    value={data.password}
+                                    autoComplete="current-password"
+                                    fullWidth
+                                    size="large"
+                                    onChange={onHandleChange}
+                                    sx={{ mt: 4 }}
+                                />
 
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
 
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
+                                <FormControlLabel sx={{ mt: 2 }} control={<Checkbox value={data.remember} onChange={onHandleChange} />} label="Remember" />
 
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
 
-                    <Button className="ml-4" processing={processing}>
-                        Log in
-                    </Button>
-                </div>
-            </form>
-        </Guest>
+                                <LoadingButton
+                                    loading={processing}
+                                    fullWidth
+                                    size='large'
+                                    loadingPosition="start"
+
+                                    variant="contained"
+                                    type='submit'
+                                    sx={{ my: 3 }}
+                                >
+                                    Log in
+                                </LoadingButton>
+
+                            </form>
+
+                            {canResetPassword && (
+                                <Typography variant="subtitle2" pt={3} textAlign="right">
+                                    <Link href={route('password.request')}>
+                                        Forgot your password?
+                                    </Link>
+                                </Typography>
+                            )}
+
+                        </Box>
+                    </Paper>
+                </Grid>
+            </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+        </Guest >
     );
 }

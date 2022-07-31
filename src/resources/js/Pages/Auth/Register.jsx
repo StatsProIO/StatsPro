@@ -5,6 +5,8 @@ import Input from '@/Components/Input';
 import Label from '@/Components/Label';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { Box, Grid, Paper, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -36,74 +38,95 @@ export default function Register() {
 
             <ValidationErrors errors={errors} />
 
-            
-            <form onSubmit={submit}>
-                <div>
-                    <Label forInput="name" value="Name" />
+            <Grid container justifyContent="center" sx={{ mt: 4 }}>
+                <Grid item md={5}>
+                    <Paper sx={{ p: 2, my: 1, mx: 2 }} elevation={0}>
+                        <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
+                            <Typography sx={{ py: 2 }} variant="h5"><b>Register</b></Typography>
 
-                    <Input
-                        type="text"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                        required
-                    />
-                </div>
 
-                <div className="mt-4">
-                    <Label forInput="email" value="Email" />
+                            <form onSubmit={submit}>
+                                <TextField
+                                    label="Name"
+                                    variant="standard"
+                                    type="text"
+                                    name="name"
+                                    value={data.name}
+                                    autoComplete="name"
+                                    autoFocus
+                                    fullWidth
+                                    size="large"
+                                    onChange={onHandleChange}
+                                    required
+                                />
 
-                    <Input
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        handleChange={onHandleChange}
-                        required
-                    />
-                </div>
+                                <TextField
+                                    label="Email"
+                                    variant="standard"
+                                    type="text"
+                                    name="email"
+                                    value={data.email}
+                                    autoComplete="username"
+                                    fullWidth
+                                    size="large"
+                                    onChange={onHandleChange}
+                                    sx={{ mt: 4 }}
+                                    required
+                                />
 
-                <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                                <TextField
+                                    label="Password"
+                                    variant="standard"
+                                    type="password"
+                                    name="password"
+                                    value={data.password}
+                                    autoComplete="new-password"
+                                    fullWidth
+                                    size="large"
+                                    onChange={onHandleChange}
+                                    sx={{ mt: 4 }}
+                                    required
+                                />
 
-                    <Input
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        handleChange={onHandleChange}
-                        required
-                    />
-                </div>
+                                <TextField
+                                    label="Confirm Password"
+                                    variant="standard"
+                                    type="password"
+                                    name="password_confirmation"
+                                    value={data.password_confirmation}
+                                    autoComplete="new-password"
+                                    fullWidth
+                                    size="large"
+                                    onChange={onHandleChange}
+                                    sx={{ mt: 4 }}
+                                    required
+                                />
 
-                <div className="mt-4">
-                    <Label forInput="password_confirmation" value="Confirm Password" />
+                                <LoadingButton
+                                    loading={processing}
+                                    fullWidth
+                                    size='large'
+                                    loadingPosition="start"
+                                    variant="contained"
+                                    type='submit'
+                                    sx={{ my: 3 }}
+                                >
+                                    Register
+                                </LoadingButton>
 
-                    <Input
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        handleChange={onHandleChange}
-                        required
-                    />
-                </div>
 
-                <div className="flex items-center justify-end mt-4">
-                    <Link href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
-                        Already registered?
-                    </Link>
 
-                    <Button className="ml-4" processing={processing}>
-                        Register
-                    </Button>
-                </div>
-            </form>
+                                <Typography variant="subtitle2" pt={3} textAlign="right">
+                                    <Link href={route('login')}>
+                                        Already registered?
+                                    </Link>
+                                </Typography>
+
+                            </form>
+                        </Box>
+                    </Paper>
+                </Grid>
+            </Grid>
         </Guest>
     );
 }

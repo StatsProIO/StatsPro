@@ -36,7 +36,7 @@ export default function Authenticated({ auth, header, children }) {
 
             </Dropdown>
 
-            <Box sx={{ display: 'flex', backgroundColor: '#f7f9fc' }} >
+            <Box sx={{ display: 'flex' }} >
                 <Drawer
                     variant="temporary"
                     open={mobileOpen}

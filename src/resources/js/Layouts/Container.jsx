@@ -1,6 +1,6 @@
 import React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Container as MuiContainer, createTheme, Toolbar } from '@mui/material';
+import { Box, Container as MuiContainer, createTheme, Toolbar } from '@mui/material';
 import NavBar from '@/components/NavBar';
 import { ThemeProvider } from '@emotion/react';
 
