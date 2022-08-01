@@ -37,6 +37,7 @@ export default function Charts({ domain, setDomain }) {
     const [domains, setDomains] = useState([]);
     const [range, setRange] = useQueryString("range", '24h');
 
+    const [timeBuckets, setTimeBuckets] = useState([]);
     const [pageviews, setPageviews] = useState([]);
     const [topSources, setTopSources] = useState([]);
     const [topPages, setTopPages] = useState([]);
@@ -54,6 +55,7 @@ export default function Charts({ domain, setDomain }) {
                 console.log("domains", response.data.domains);
                 // handle success
                 setDomains(response.data.domains);
+                setTimeBuckets(response.data.time_buckets);
                 setPageviews(response.data.pageviews);
                 setTopSources(response.data.top_sources);
                 setTopPages(response.data.top_pages);
@@ -69,9 +71,6 @@ export default function Charts({ domain, setDomain }) {
                 // always executed
             });
     }, [range, domain])
-
-
-
 
     return (
         <>
@@ -172,7 +171,7 @@ export default function Charts({ domain, setDomain }) {
                 <Grid item lg={6}>
                     <Paper sx={{ p: 3, m: 2 }}>
                         <Typography variant="h6">Top Souces</Typography>
-                        <TopSourcesChart inputData={topSources} />
+                        <TopSourcesChart inputData={topSources} timeBuckets={timeBuckets} />
                     </Paper>
                 </Grid>
                 <Grid item lg={6}>

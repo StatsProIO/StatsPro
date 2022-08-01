@@ -192,12 +192,12 @@ class EventsController extends Controller
                 "), 
             array('domain' => $domain->id)
             );
-            
+
         $pageviewsCountByDate = [];
         foreach($pageviews as $pageview) {
             $pageviewsCountByDate[$pageview->date] = $pageview->count;
         }
-        $pageviewBuckets = [];
+        $timeBuckets = [];
         $currentBucket = new Carbon($timeRangeInfo['interval']['start']);
 
         if($timeRangeInfo['bucketSizeHours'] === 1) {
@@ -205,11 +205,11 @@ class EventsController extends Controller
             $currentBucket->second = 0;
         }
         while($currentBucket <= new Carbon($timeRangeInfo['interval']['end'] )) {
-            $pageviewBuckets[$timeRangeInfo['bucketSizeHours'] === 1 ? $currentBucket->toDateTimeString() : $currentBucket->toDateString()] = 0;
+            $timeBuckets[$timeRangeInfo['bucketSizeHours'] === 1 ? $currentBucket->toDateTimeString() : $currentBucket->toDateString()] = 0;
             $currentBucket->addHour($timeRangeInfo['bucketSizeHours']);
         }
 
-        $pageviews = array_merge($pageviewBuckets, $pageviewsCountByDate);
+        $pageviews = array_merge($timeBuckets, $pageviewsCountByDate);
         uksort($pageviews,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
 
         //TODO: loop over each bucket to determine if there are any missing buckets and add a 0 value
@@ -227,10 +227,12 @@ class EventsController extends Controller
                             );
         $topSourcesQueryResult = DB::select( DB::raw("SELECT source, array_to_json(array_agg(jsonb_build_object(date, count) ORDER BY date asc)) as counts_by_day
                                         FROM (
-                                            SELECT enter_time::date as date, source, count(*) as count
+                                            SELECT {$timeRangeInfo['groupBy']} as date, source, count(*) as count
                                             FROM events 
                                             WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                                            GROUP BY enter_time::date, source
+                                            GROUP BY {$timeRangeInfo['groupBy']}, source
+                                            ORDER BY count DESC
+                                            LIMIT 50
                                         ) as a
                                         GROUP BY source
                                         "), 
@@ -241,23 +243,20 @@ class EventsController extends Controller
 
         foreach($topSourcesQueryResult as $topSourceQueryResult) {
             $topSourceQueryResult->counts_by_day = json_decode($topSourceQueryResult->counts_by_day);
-
-            $dates = [];
-            $counts = [];
-
-            foreach($topSourceQueryResult->counts_by_day as $index => $countByDay) {
-
+            $values = [];
+            foreach($topSourceQueryResult->counts_by_day as $countByDay) {
                 foreach ($countByDay as $date => $count) {
-                    array_push($dates, $date);
-                    array_push($counts, $count);
-                }
-
-                
+                    $values[$date] = $count;
+                }                
             }
-            
-            $topSources[] = ["dates" => $dates, "counts" => $counts, "source" => $topSourceQueryResult->source];
+            $topSources[$topSourceQueryResult->source] = $values;
         }
 
+        foreach($topSources as $sourceName => $topSource) {
+            $mergedValues = array_merge($timeBuckets, $topSource);
+            uksort($mergedValues,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
+            $topSources[$sourceName] = $mergedValues;
+        }
      
         $topPages = DB::select( DB::raw("SELECT path, array_agg(jsonb_build_object(date, count) ORDER BY date asc)
                                         FROM (
@@ -270,8 +269,6 @@ class EventsController extends Controller
                                         "), 
                                 array('domain' => $domain->id)
                             );
-
-
 
         $devices = DB::select( DB::raw("SELECT device, count(*)
                                         FROM events 
@@ -291,6 +288,7 @@ class EventsController extends Controller
 
         return [
             'domains' => Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name'),
+            'time_buckets' => $timeBuckets,
             'pageviews' => $pageviews,
             'realtime' => $realTime,
             'top_sources' => $topSources,

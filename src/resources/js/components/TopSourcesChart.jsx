@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { scaleLinear } from "d3-scale";
 import { Bar } from 'react-chartjs-2';
 
 
@@ -34,42 +35,38 @@ export const options = {
     },
   },
   scales: {
+    y: {
+      stacked: true
+    },
     x: {
       stacked: true,
-      barThickness: 1
     },
   }
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const colorScale = scaleLinear()
+  .domain([0, 10])
+  .range(["#e7edff", "#003bde"]);
 
+export function TopSourcesChart({ inputData, timeBuckets }) {
+  var data = { labels: [], datasets: [] };
+  var labels = Object.keys(timeBuckets);
 
+  Object.keys(inputData).forEach((sourceName) => {
 
+    console.log(inputData[sourceName]);
+    console.log(Object.values(inputData[sourceName]));
 
-export function TopSourcesChart({ inputData }) {
-
-  var data = { datasets: [] };
-
-  if (inputData.length > 0) {
-    inputData.forEach((sourceData) => {
-
-      data.datasets.push({
-
-        label: sourceData.dates,
-        data: sourceData.counts,
-
-
-        backgroundColor: '#2a63fe57',
-        borderRadius: 10,
-        borderWidth: 0
-      });
+    data.datasets.push({
+      label: sourceName,
+      data: Object.values(inputData[sourceName]),
+      backgroundColor: colorScale(Object.values(inputData[sourceName]).reduce((a, b) => a + b, 0)),
+      borderRadius: 10,
+      borderWidth: 0
     });
+  });
 
+  data.labels = labels
 
-    data.labels = ['2022-07-23', '2022-07-21']
-
-    return <Bar options={options} data={data} />;
-  }
-
-  return <></>;
+  return <Bar options={options} data={data} />;
 }
