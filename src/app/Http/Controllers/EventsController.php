@@ -110,57 +110,73 @@ class EventsController extends Controller
             ->header ("Expires", "0");
     }
 
-    function rangeToInterval(string $range) {
+    function rangeStringToQueryInfo(string $range) {
         switch ($range) {
             case '24h':
                 return [
-                    Carbon::now()->subHours(24)->toDateString(),
-                    Carbon::now()->toDateString()
+                    'interval' => ['start' => Carbon::now()->subHours(24)->toDateTimeString(), 'end' => Carbon::now()->toDateTimeString()],
+                    'groupBy' => "date_trunc('hour', enter_time)",
+                    'bucketSizeHours' => 1
                 ];
                 break;
             case '7d':
                 return [
-                    Carbon::now()->subDays(7)->toDateString(),
-                    Carbon::now()->toDateString()
+                    'interval' => ['start' => Carbon::now()->subDays(7)->toDateString(), 'end' => Carbon::now()->toDateString()],
+                    'groupBy' => "enter_time::date",
+                    'bucketSizeHours' => 24
                 ];
                 break;
             case '30d':
                 return [
-                    Carbon::now()->subDays(30)->toDateString(),
-                    Carbon::now()->toDateString()
+                    'interval' => ['start' => Carbon::now()->subDays(30)->toDateString(), 'end' => Carbon::now()->toDateString()],
+                    'groupBy' => "enter_time::date",
+                    'bucketSizeHours' => 24
+                ];
+                break;
+            case 'month-to-date':
+                return [
+                    'interval' => ['start' => Carbon::now()->startOfMonth()->toDateString(), 'end' => Carbon::now()->toDateString()],
+                    'groupBy' => "enter_time::date",
+                    'bucketSizeHours' => 24
                 ];
                 break;
             case 'last-month':
                 return [
-                    Carbon::now()->startOfMonth()->subMonthsNoOverflow(1)->toDateString(),
-                    Carbon::now()->subMonthsNoOverflow(1)->endOfMonth()->toDateString()
+                    'interval' => ['start' => Carbon::now()->startOfMonth()->subMonthsNoOverflow(1)->toDateString(), 'end' =>Carbon::now()->subMonthsNoOverflow(1)->endOfMonth()->toDateString()],
+                    'groupBy' => "enter_time::date",
+                    'bucketSizeHours' => 24
                 ];
                 break;
             case 'year-to-date':
                 return [
-                    Carbon::now()->firstOfYear()->toDateString(),
-                    Carbon::now()->toDateString()
+                    'interval' => ['start' => Carbon::now()->firstOfYear()->toDateString(), 'end' =>Carbon::now()->toDateString()],
+                    'groupBy' => "enter_time::date",
+                    'bucketSizeHours' => 24
                 ];
                 break;
             case '12m':
                 return [
-                    Carbon::now()->subMonthsNoOverflow(12)->toDateString(),
-                    Carbon::now()->toDateString()
+                    'interval' => ['start' => Carbon::now()->subMonthsNoOverflow(12)->toDateString(), 'end' =>Carbon::now()->toDateString()],
+                    'groupBy' => "enter_time::date",
+                    'bucketSizeHours' => 24
                 ];
                 break;
             case 'all-time':
                 return [
-                    Carbon::create(2022, 1, 1, 0, 0, 0)->toDateString(),
-                    Carbon::now()->toDateString()
+                    'interval' => ['start' => Carbon::create(2022, 1, 1, 0, 0, 0)->toDateString(), 'end' =>Carbon::now()->toDateString()],
+                    'groupBy' => "enter_time::date",
+                    'bucketSizeHours' => 24
                 ];
                 break;
         }
     }
 
+    
+
     public function getEvents (Request $request) {
 
-        $range = $request->has('range') ? $request->input('range') : 'today';
-        $interval = $this->rangeToInterval($range);
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = $this->rangeStringToQueryInfo($range);
 
         //TODO: need to validate that the domain belongs to the user
         //TODO: change firstdomain to the users first domain
@@ -168,23 +184,44 @@ class EventsController extends Controller
 
         $domain = Domain::firstWhere('domain_name', $domainString);
         
-        $pageviews = DB::select( DB::raw("SELECT enter_time::date as date, count(*)
-                                        FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
-                                        GROUP BY enter_time::date" ), 
-                                array('domain' => $domain->id)
-                            );
+        $pageviews = DB::select(
+            DB::raw("SELECT {$timeRangeInfo['groupBy']} as date, count(*)
+                FROM events 
+                WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
+                GROUP BY {$timeRangeInfo['groupBy']}
+                "), 
+            array('domain' => $domain->id)
+            );
+            
+        $pageviewsCountByDate = [];
+        foreach($pageviews as $pageview) {
+            $pageviewsCountByDate[$pageview->date] = $pageview->count;
+        }
+        $pageviewBuckets = [];
+        $currentBucket = new Carbon($timeRangeInfo['interval']['start']);
+
+        if($timeRangeInfo['bucketSizeHours'] === 1) {
+            $currentBucket->minute = 0;
+            $currentBucket->second = 0;
+        }
+        while($currentBucket <= new Carbon($timeRangeInfo['interval']['end'] )) {
+            $pageviewBuckets[$timeRangeInfo['bucketSizeHours'] === 1 ? $currentBucket->toDateTimeString() : $currentBucket->toDateString()] = 0;
+            $currentBucket->addHour($timeRangeInfo['bucketSizeHours']);
+        }
+
+        $pageviews = array_merge($pageviewBuckets, $pageviewsCountByDate);
+        uksort($pageviews,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
+
+        //TODO: loop over each bucket to determine if there are any missing buckets and add a 0 value
 
         $realTimeInterval = [
                     Carbon::now()->subMinutes(5)->toDateString(),
                     Carbon::now()->toDateString()
                 ];
-                            
-                            
         //find the pageviews from the last 5 minutes, deduplicate pageviews by the same visitor
         $realTime = DB::select( DB::raw("SELECT distinct on (visitor_hash) visitor_hash, location_href, enter_time
                                         FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time > '$realTimeInterval[0]' AND enter_time < '$realTimeInterval[1]'
+                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '$realTimeInterval[0]' AND enter_time <= '$realTimeInterval[1]'
                                         ORDER BY visitor_hash, enter_time desc"), 
                                 array('domain' => $domain->id)
                             );
@@ -192,7 +229,7 @@ class EventsController extends Controller
                                         FROM (
                                             SELECT enter_time::date as date, source, count(*) as count
                                             FROM events 
-                                            WHERE domain_id = :domain AND event_name='pageview'  AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
+                                            WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
                                             GROUP BY enter_time::date, source
                                         ) as a
                                         GROUP BY source
@@ -226,7 +263,7 @@ class EventsController extends Controller
                                         FROM (
                                             SELECT enter_time::date as date, path, count(*) as count
                                             FROM events 
-                                            WHERE domain_id = :domain AND event_name='pageview'  AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
+                                            WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
                                             GROUP BY enter_time::date, path
                                         ) as a
                                         GROUP BY path
@@ -238,7 +275,7 @@ class EventsController extends Controller
 
         $devices = DB::select( DB::raw("SELECT device, count(*)
                                         FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview'  AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
+                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
                                         GROUP BY device
                                         LIMIT 5" ), 
                                 array('domain' => $domain->id)
@@ -246,7 +283,7 @@ class EventsController extends Controller
 
         $locations = DB::select( DB::raw("SELECT country, count(*)
                                 FROM events 
-                                WHERE domain_id = :domain AND event_name='pageview'  AND enter_time > '$interval[0]' AND enter_time < '$interval[1]'
+                                WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
                                 GROUP BY country" ), 
                         array('domain' => $domain->id)
                     );

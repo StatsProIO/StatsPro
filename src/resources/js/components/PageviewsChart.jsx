@@ -53,10 +53,10 @@ export function PageviewsChart({ inputData }) {
       var gradientDarkBlue = createLinearGradient(chart.ctx, darkBlue);
 
       setData({
-        labels: inputData.map(dataPoint => dataPoint.date),
+        labels: Object.keys(inputData),
         datasets: [
           {
-            data: inputData.map((dataPoint) => { return dataPoint.count; }),
+            data: Object.values(inputData),
             fill: true,
             backgroundColor: gradientDarkBlue,
             borderWidth: 3,
