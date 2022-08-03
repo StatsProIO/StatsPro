@@ -140,7 +140,7 @@ export default function Charts({ domain, setDomain }) {
             <Grid container>
                 <Grid item lg={8}>
                     <Paper sx={{ p: 3, m: 2 }}>
-                        Pageviews
+                        <Typography variant="h6">Pageviews</Typography>
                         <PageviewsChart inputData={pageviews} />
                     </Paper>
                 </Grid>

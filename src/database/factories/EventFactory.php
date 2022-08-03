@@ -46,7 +46,7 @@ class EventFactory extends Factory
             'os' => $this->faker->word(),
             'time_zone' => $this->faker->timezone(),
             'client_time' => $this->faker->dateTimeBetween('-1 days', '+0 days'),
-            'enter_time' => $this->faker->dateTimeBetween('-365 days', '+0 days'),
+            'enter_time' => $this->faker->dateTimeBetween('-1 days', '+0 days'),
             'exit_time' => null
         ];
     }

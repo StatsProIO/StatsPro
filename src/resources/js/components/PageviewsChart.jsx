@@ -66,7 +66,7 @@ export function PageviewsChart({ inputData }) {
             pointBackgroundColor: darkBlue,
             pointHoverBackgroundColor: darkBlue,
             pointHoverBorderColor: darkBlue,
-            pointRadius: 0
+            pointRadius: 1
           }
         ],
       });

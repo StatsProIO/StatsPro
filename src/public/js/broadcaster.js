@@ -51,3 +51,5 @@ request.onreadystatechange = function () {
         // options && options.callback && options.callback()
     }
 }
+
+//TODO: retry on errors and report the number of tries it took

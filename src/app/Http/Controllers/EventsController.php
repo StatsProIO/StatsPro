@@ -34,15 +34,14 @@ class EventsController extends Controller
 
 
         $systemInfo = Helper::systemInfo($userAgent);
-        
 
         $event = new Event;
         $event->domain_id = $domain->id;
         $event->event_name = $request->event_name;
         $event->ip_address = $clientIp;
         $event->user_agent = $userAgent;
-        $event->visitor_hash = $visitorHash;
-        $event->request_hash = $requestHash;
+        $event->visitor_hash = '';
+        $event->request_hash = '';
         $event->is_unique = false; //TODO
         $event->location_href = $request->location_href;
         $event->host = $request->location_host;
@@ -225,47 +224,23 @@ class EventsController extends Controller
                                         ORDER BY visitor_hash, enter_time desc"), 
                                 array('domain' => $domain->id)
                             );
-        $topSourcesQueryResult = DB::select( DB::raw("SELECT source, array_to_json(array_agg(jsonb_build_object(date, count) ORDER BY date asc)) as counts_by_day
-                                        FROM (
-                                            SELECT {$timeRangeInfo['groupBy']} as date, source, count(*) as count
-                                            FROM events 
-                                            WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                                            GROUP BY {$timeRangeInfo['groupBy']}, source
-                                            ORDER BY count DESC
-                                            LIMIT 50
-                                        ) as a
+        $topSources = DB::select( DB::raw("SELECT source as label, count(*) as count
+                                        FROM events 
+                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
                                         GROUP BY source
+                                        ORDER BY count DESC
+                                        LIMIT 8
                                         "), 
                                 array('domain' => $domain->id)
                             );
-
-        $topSources = [];
-
-        foreach($topSourcesQueryResult as $topSourceQueryResult) {
-            $topSourceQueryResult->counts_by_day = json_decode($topSourceQueryResult->counts_by_day);
-            $values = [];
-            foreach($topSourceQueryResult->counts_by_day as $countByDay) {
-                foreach ($countByDay as $date => $count) {
-                    $values[$date] = $count;
-                }                
-            }
-            $topSources[$topSourceQueryResult->source] = $values;
-        }
-
-        foreach($topSources as $sourceName => $topSource) {
-            $mergedValues = array_merge($timeBuckets, $topSource);
-            uksort($mergedValues,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
-            $topSources[$sourceName] = $mergedValues;
-        }
+        
      
-        $topPages = DB::select( DB::raw("SELECT path, array_agg(jsonb_build_object(date, count) ORDER BY date asc)
-                                        FROM (
-                                            SELECT enter_time::date as date, path, count(*) as count
-                                            FROM events 
-                                            WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                                            GROUP BY enter_time::date, path
-                                        ) as a
+        $topPages = DB::select( DB::raw("SELECT path as label, count(*) as count
+                                        FROM events 
+                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
                                         GROUP BY path
+                                        ORDER BY count DESC
+                                        LIMIT 8
                                         "), 
                                 array('domain' => $domain->id)
                             );
