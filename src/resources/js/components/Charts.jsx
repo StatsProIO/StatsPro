@@ -161,7 +161,7 @@ export default function Charts({ domain, setDomain }) {
             </Grid>
 
 
-            <Grid container>
+            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
                 <Grid item xs={12} lg={6}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top Souces</Typography>
