@@ -5,7 +5,7 @@ import {
   LinearScale,
   BarElement
 } from 'chart.js';
-import { Bar, Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 
 ChartJS.register(
@@ -35,9 +35,9 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      display: false,
+      display: true,
     },
-  },
+  }
 };
 
 export function PageviewsChart({ inputData }) {
@@ -56,6 +56,7 @@ export function PageviewsChart({ inputData }) {
         labels: Object.keys(inputData),
         datasets: [
           {
+            label: 'Pageviews',
             data: Object.values(inputData),
             fill: true,
             backgroundColor: gradientDarkBlue,

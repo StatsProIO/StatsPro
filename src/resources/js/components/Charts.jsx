@@ -74,12 +74,12 @@ export default function Charts({ domain, setDomain }) {
 
     return (
         <>
-            <Grid container>
-                <Grid item lg={8}>
+            <Grid container rowSpacing={{ xs: 1, sm: 2, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
+                <Grid item lg={8} md={6} xs={12}>
                     <Typography variant="h4"><b>Dashboard</b></Typography>
                     <Typography variant="h6">Welcome back!</Typography>
                 </Grid>
-                <Grid item lg={2} sx={{ px: 2 }}>
+                <Grid item lg={2} md={3} xs={6}>
 
                     <FormControl fullWidth variant="filled">
                         <InputLabel id="domain-label">Domain</InputLabel>
@@ -93,7 +93,7 @@ export default function Charts({ domain, setDomain }) {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item lg={2}>
+                <Grid item lg={2} md={3} xs={6}>
 
                     <FormControl fullWidth variant="filled">
                         <InputLabel id="time-range-label">Time Range</InputLabel>
@@ -113,39 +113,33 @@ export default function Charts({ domain, setDomain }) {
                             <MenuItem value='all-time'>All Time</MenuItem>
                         </Select>
                     </FormControl>
-
                 </Grid>
             </Grid>
 
-
-
-
-
-
-            <Grid container>
-                <Grid item lg={3}>
+            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
+                <Grid item xs={6} lg={3} >
                     <DashboardInfoCard title='Unique Visitors' value='1,493' subtitleValue='+13%' subtitleText=' since last week' />
                 </Grid>
-                <Grid item lg={3}>
+                <Grid item xs={6} lg={3}>
                     <DashboardInfoCard title='Pageviews' value='492' subtitleValue='-2%' subtitleText=' since last week' />
                 </Grid>
-                <Grid item lg={3}>
+                <Grid item xs={6} lg={3}>
                     <DashboardInfoCard title='Bounce Rate' value='45%' subtitleValue='-2%' subtitleText=' since last week' />
                 </Grid>
-                <Grid item lg={3}>
+                <Grid item xs={6} lg={3}>
                     <DashboardInfoCard title='Visit Duration' value='2m 45s' subtitleValue='-2%' subtitleText=' since last week' />
                 </Grid>
             </Grid>
 
-            <Grid container>
-                <Grid item lg={8}>
-                    <Paper sx={{ p: 3, m: 2 }}>
+            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
+                <Grid item xs={12} lg={8}>
+                    <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Pageviews</Typography>
                         <PageviewsChart inputData={pageviews} />
                     </Paper>
                 </Grid>
-                <Grid item lg={4}>
-                    <Paper className="blueShadow" sx={{ p: 3, m: 2, backgroundColor: 'rgb(42,98,254)', color: '#fff' }}>
+                <Grid item xs={12} lg={4}>
+                    <Paper className="blueShadow" sx={{ p: 3, backgroundColor: 'rgb(42,98,254)', color: '#fff' }}>
                         <Stack
                             direction="row"
                             justifyContent="space-between"
@@ -161,35 +155,35 @@ export default function Charts({ domain, setDomain }) {
 
                         <Typography variant="body1"><b>Live feed</b></Typography>
                         {realtime.map(realtimeItem => { return <Typography variant="body1">{realtimeItem.location_href}</Typography> })}
-                        <PageviewsMiniChart />
+                        {/* <PageviewsMiniChart /> */}
                     </Paper>
                 </Grid>
             </Grid>
 
 
             <Grid container>
-                <Grid item lg={6}>
-                    <Paper sx={{ p: 3, m: 2 }}>
+                <Grid item xs={12} lg={6}>
+                    <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top Souces</Typography>
                         <TopSourcesChart inputData={topSources} timeBuckets={timeBuckets} />
                     </Paper>
                 </Grid>
-                <Grid item lg={6}>
-                    <Paper sx={{ p: 3, m: 2 }}>
+                <Grid item xs={12} lg={6}>
+                    <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top Pages</Typography>
                         <TopPages inputData={topPages} />
                     </Paper>
                 </Grid>
-                <Grid item lg={5}>
-                    <Paper sx={{ p: 3, m: 2 }}>
+                <Grid item xs={12} lg={5}>
+                    <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Devices</Typography>
-                        <Box sx={{ px: 10 }}>
+                        <Box>
                             <DevicesChart inputData={devices} />
                         </Box>
                     </Paper>
                 </Grid>
-                <Grid item lg={7}>
-                    <Paper sx={{ p: 3, m: 2 }}>
+                <Grid item xs={12} lg={7}>
+                    <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Locations</Typography>
                         <LocationChart inputData={locations} />
                     </Paper>

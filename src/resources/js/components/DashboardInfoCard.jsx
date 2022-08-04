@@ -7,7 +7,7 @@ import React from 'react';
 export function DashboardInfoCard({ title, value, subtitleValue, subtitleText }) {
 
     return <>
-        <Paper sx={{ p: 2, my: 1, mx: 2 }} elevation={0}>
+        <Paper elevation={0} sx={{ p: 2 }}>
             <Typography variant="body2">{title}</Typography>
             <Typography variant="h5" sx={{ py: 1 }}>{value}</Typography>
             <Box sx={{ backgroundColor: 'rgba(76, 175, 80, 0.1)', color: 'rgb(76, 175, 80)', fontWeight: 'bold', p: 1, borderRadius: '5px', display: 'inline' }}>
