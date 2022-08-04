@@ -104,3 +104,17 @@
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
 }
+
+.flashBackground {
+    animation: flash-background 2s;
+}
+
+@keyframes flash-background {
+    0% {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    100% {
+        background-color: rgba(255, 255, 255, 0);
+    }
+}

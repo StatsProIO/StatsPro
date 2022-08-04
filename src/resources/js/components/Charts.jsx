@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useState, useRef } from 'react';
 import { FormControl, Grid, InputLabel, Menu, MenuItem, Select } from '@mui/material';
 import { TopSourcesChart } from '@/components/TopSourcesChart';
-import { PageviewsMiniChart } from '@/components/PageviewsMiniChart';
 import { DashboardInfoCard } from '@/components/DashboardInfoCard';
 import { TopPages } from '@/components/TopPages';
 import { PageviewsChart } from '@/components/PageviewsChart';
@@ -20,6 +19,7 @@ import {
     Filler,
     BarElement
 } from 'chart.js';
+import { RealTimeChart } from './RealTimeChart';
 
 
 ChartJS.register(
@@ -139,42 +139,24 @@ export default function Charts({ domain, setDomain }) {
                     </Paper>
                 </Grid>
                 <Grid item xs={12} lg={4}>
-                    <Paper className="blueShadow" sx={{ p: 3, backgroundColor: 'rgb(42,98,254)', color: '#fff' }}>
-                        <Stack
-                            direction="row"
-                            justifyContent="space-between"
-                            alignItems="center"
-                            spacing={2}
-                        >
-                            <Typography variant="h6">Real Time</Typography>
-                            <div class="small-white-pulse"></div>
-                        </Stack>
-
-                        <Typography variant="body1"><b>Active users in last 5 minutes</b></Typography>
-                        <Typography variant="h3" sx={{ py: 2, }}>{realtime.length}</Typography>
-
-                        <Typography variant="body1"><b>Live feed</b></Typography>
-                        {realtime.map(realtimeItem => { return <Typography variant="body1">{realtimeItem.location_href}</Typography> })}
-                        {/* <PageviewsMiniChart /> */}
-                    </Paper>
+                    <RealTimeChart inputData={realtime} />
                 </Grid>
             </Grid>
 
-
             <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
-                <Grid item xs={12} lg={6}>
+                <Grid item xs={12} md={6}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top Souces</Typography>
                         <TopSourcesChart inputData={topSources} timeBuckets={timeBuckets} />
                     </Paper>
                 </Grid>
-                <Grid item xs={12} lg={6}>
+                <Grid item xs={12} md={6}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top Pages</Typography>
                         <TopPages inputData={topPages} />
                     </Paper>
                 </Grid>
-                <Grid item xs={12} lg={5}>
+                <Grid item xs={12} md={5}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Devices</Typography>
                         <Box>
@@ -182,7 +164,7 @@ export default function Charts({ domain, setDomain }) {
                         </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={12} lg={7}>
+                <Grid item xs={12} md={7}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Locations</Typography>
                         <LocationChart inputData={locations} />

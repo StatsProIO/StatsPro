@@ -211,14 +211,12 @@ class EventsController extends Controller
         $pageviews = array_merge($timeBuckets, $pageviewsCountByDate);
         uksort($pageviews,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
 
-        //TODO: loop over each bucket to determine if there are any missing buckets and add a 0 value
-
         $realTimeInterval = [
-                    Carbon::now()->subMinutes(5)->toDateString(),
-                    Carbon::now()->toDateString()
+                    Carbon::now()->subMinutes(5)->toDateTimeString(),
+                    Carbon::now()->toDateTimeString()
                 ];
         //find the pageviews from the last 5 minutes, deduplicate pageviews by the same visitor
-        $realTime = DB::select( DB::raw("SELECT distinct on (visitor_hash) visitor_hash, location_href, enter_time
+        $realTime = DB::select( DB::raw("SELECT distinct on (visitor_hash) visitor_hash, path, enter_time
                                         FROM events 
                                         WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '$realTimeInterval[0]' AND enter_time <= '$realTimeInterval[1]'
                                         ORDER BY visitor_hash, enter_time desc"), 
