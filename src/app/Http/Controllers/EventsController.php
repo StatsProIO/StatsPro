@@ -247,6 +247,7 @@ class EventsController extends Controller
                                         FROM events 
                                         WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
                                         GROUP BY device
+                                        ORDER BY count DESC
                                         LIMIT 5" ), 
                                 array('domain' => $domain->id)
                             );

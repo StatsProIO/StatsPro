@@ -1,25 +1,32 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement
+  BarElement,
+  Legend,
+  Tooltip
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement
+  BarElement,
+  Legend,
+  Tooltip
 );
 
+const options = {
+  cutout: '60%'
+}
 
 function buildData(inputData) {
   return {
-    labels: inputData.map((inputItem) => { return inputItem.device }),
+    labels: inputData.map(inputItem => inputItem.device),
     datasets: [
       {
-        data: inputData.map((inputItem) => { return inputItem.count }),
+        data: inputData.map(inputItem => inputItem.count),
         backgroundColor: [
           '#2a63fee6',
           '#2a63feb0',
@@ -27,7 +34,7 @@ function buildData(inputData) {
           '#2A63FE70',
           '#2A63FE59'
         ],
-        borderWidth: 0,
+        borderWidth: 5,
       },
     ],
   };
@@ -35,6 +42,5 @@ function buildData(inputData) {
 
 
 export function DevicesChart({ inputData }) {
-
-  return <Doughnut data={buildData(inputData)} />
+  return <Doughnut options={options} data={buildData(inputData)} />
 }
