@@ -8,13 +8,12 @@ use Helper;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Auth;
 use Sinergi\BrowserDetector\Browser;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
-
-
-
 
 class EventsController extends Controller
 {
@@ -64,30 +63,12 @@ class EventsController extends Controller
         return $event;
     }
 
-    public function getVisitorId(Request $request) {
+    public function postTimeOnPage(Request $request) {
+        DB::table('events')
+            ->where('id',$request->id) 
+            ->increment('time_on_page_seconds', 15);
 
-        if($request->headers->has('If-None-Match')) {
-            $uuid = \Ramsey\Uuid\Uuid::fromString(str_replace('"', '', $request->header('If-None-Match')));
-            $uuidCreatedAt = new Carbon($uuid->getDateTime());
-            $expirationDate = $uuidCreatedAt->addMinutes(24*60*60);
-
-            $now = new Carbon();
-            if($now->greaterThan($expirationDate)) {   
-                return $this->newVisitorIdResponse();
-            } else {
-                return response('', 304);
-            } 
-        } else {
-            return $this->newVisitorIdResponse();
-        }
-    }
-
-    function newVisitorIdResponse() {
-        $sessionUuid = Uuid::uuid1()->toString();
-        return response(['value' => $sessionUuid], 200)
-                  ->header('ETag', "\"$sessionUuid\"")
-                  ->header('Content-Type', 'application/json')
-                  ->header('Cache-Control', 'private, max-age=' . 24*60*60);
+        return 'SUCCESS';
     }
 
     public function getTrackerPixel(Request $request) {
@@ -251,10 +232,10 @@ class EventsController extends Controller
                     Carbon::now()->toDateTimeString()
                 ];
         //find the pageviews from the last 5 minutes, deduplicate pageviews by the same visitor
-        $realTime = DB::select( DB::raw("SELECT distinct on (visitor_hash) visitor_hash, path, enter_time
+        $realTime = DB::select( DB::raw("SELECT path, enter_time
                                         FROM events 
                                         WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '$realTimeInterval[0]' AND enter_time <= '$realTimeInterval[1]'
-                                        ORDER BY visitor_hash, enter_time desc"), 
+                                        ORDER BY enter_time desc"), 
                                 array('domain' => $domain->id)
                             );
         $topSources = DB::select( DB::raw("SELECT source as label, count(*) as count
@@ -266,7 +247,6 @@ class EventsController extends Controller
                                         "), 
                                 array('domain' => $domain->id)
                             );
-        
      
         $topPages = DB::select( DB::raw("SELECT path as label, count(*) as count
                                         FROM events 
@@ -311,7 +291,29 @@ class EventsController extends Controller
                     "), 
                 array('domain' => $domain->id)
                 );
+        $visitorsCount = $visitorsCount[0]->count;
 
+        $visitDuration = DB::select(
+                DB::raw("SELECT AVG(time_on_page_seconds) as average_visit_duration
+                    FROM events 
+                    WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
+                    "), 
+                array('domain' => $domain->id)
+                );
+
+        $bounceCount = DB::select(
+                DB::raw("SELECT count(*) as count
+                    FROM events 
+                    WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
+                    AND time_on_page_seconds = 0
+                    AND referrer is null
+                    "), 
+                array('domain' => $domain->id)
+                );
+        $bounceCount = $bounceCount[0]->count;
+
+        $bounceRate = $visitorsCount === 0 ? 0 : $bounceCount/$visitorsCount;
+        
         return [
             'domains' => Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name'),
             'time_buckets' => $timeBuckets,
@@ -321,10 +323,10 @@ class EventsController extends Controller
             'top_pages' => $topPages,
             'devices' => $devices,
             'locations' => $locations,
-            'unique_visitors_count' => $visitorsCount[0]->count,
+            'unique_visitors_count' => $visitorsCount,
             'pageviews_count' => $pageviewsCount[0]->count,
-            'bounce_rate' => '539%',
-            'visit_duration' => '4m 49s'
+            'bounce_rate' => ($bounceRate * 100) . '%',
+            'visit_duration' => CarbonInterval::seconds(floatval($visitDuration[0]->average_visit_duration))->cascade()->forHumans([CarbonInterface::DIFF_ABSOLUTE], true)
         ];
     }
 

@@ -2,6 +2,8 @@ var scriptEl = document.currentScript;
 
 var parsedScriptUrl = (new URL(document.currentScript.src))
 var endpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/collect";
+var timeOnPageEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/event/time-on-page";
+
 
 
 //TODO: respect navigator.doNotTrack? 
@@ -38,18 +40,65 @@ payload.p = props
 payload.h = 1
 
 
-var request = new XMLHttpRequest();
-request.open('POST', endpoint, true);
-request.setRequestHeader('Content-Type', 'application/json');
+//TODO: broadcast to some external source
+// options && options.callback && options.callback()
 
-request.send(JSON.stringify(payload));
 
-request.onreadystatechange = function () {
-    if (request.readyState === 4) {
-        console.log("Done");
-        //TODO: broadcast to some external source
-        // options && options.callback && options.callback()
+
+function sendRequest(url, body, next) {
+    var request = new XMLHttpRequest();
+    request.open('POST', url, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+
+    request.send(JSON.stringify(body));
+
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status >= 200 && request.status < 400) {
+                console.log("Done");
+
+                let json = null;
+                try {
+                    json = JSON.parse(request.responseText);
+                } catch (e) {
+                    throw new Error('Failed to parse response from server', e);
+                }
+
+                if (typeof next === 'function') {
+                    return next(json)
+                }
+            }
+            //TODO: broadcast to some external source
+            // options && options.callback && options.callback()
+        }
     }
 }
+
+
+
+function scheduleReoccringRequests(initialRequestJsonResponse) {
+
+    const eventId = initialRequestJsonResponse.id;
+
+    const interval = setInterval(() => {
+        if (isInBackground() === true) {
+            return
+        }
+
+        sendRequest(timeOnPageEndpoint, { id: eventId });
+    }, 15000);
+
+    if (typeof next === 'function') {
+        return next(recordId)
+    }
+
+}
+
+const isInBackground = function () {
+    return document.visibilityState === 'hidden'
+}
+
+
+sendRequest(endpoint, payload, scheduleReoccringRequests);
 
 //TODO: retry on errors and report the number of tries it took

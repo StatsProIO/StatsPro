@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
     
-    <script data-domain="roastmygame.com" src="https://***REMOVED***/js/broadcaster.js" async></script> 
+    <script data-domain="mydomain.com" src="/js/broadcaster.js" async></script> 
 
   </head>
   <body>

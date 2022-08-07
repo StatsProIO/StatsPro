@@ -21,7 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::get('/get-visitor-id', [EventsController::class, 'getVisitorId']);
+
 Route::post('/collect', [EventsController::class, 'postEvent']);
+Route::post('/event/time-on-page', [EventsController::class, 'postTimeOnPage']);
+
+
 Route::get('/2Vj2pBn.jpg', [EventsController::class, 'getTrackerPixel']);
 
 

@@ -44,6 +44,10 @@ export default function Charts({ domain, setDomain }) {
     const [devices, setDevices] = useState([]);
     const [locations, setLocations] = useState([]);
     const [realtime, setRealtime] = useState([]);
+    const [uniqueVisitorsCount, setUniqueVisitorsCount] = useState(0);
+    const [pageviewsCount, setPageviewsCount] = useState(0);
+    const [bounceRate, setBounceRate] = useState(0);
+    const [visitDuration, setVisitDuration] = useState('0m 0s');
 
 
     useEffect(() => {
@@ -52,7 +56,6 @@ export default function Charts({ domain, setDomain }) {
         axios.get(`/api/events?range=${range}&domain=${domain}`)
             .then(function (response) {
 
-                console.log("domains", response.data.domains);
                 // handle success
                 setDomains(response.data.domains);
                 setTimeBuckets(response.data.time_buckets);
@@ -62,6 +65,10 @@ export default function Charts({ domain, setDomain }) {
                 setDevices(response.data.devices);
                 setLocations(response.data.locations);
                 setRealtime(response.data.realtime);
+                setUniqueVisitorsCount(response.data.unique_visitors_count);
+                setPageviewsCount(response.data.pageviews_count);
+                setBounceRate(response.data.bounce_rate);
+                setVisitDuration(response.data.visit_duration);
             })
             .catch(function (error) {
                 // TODO: handle error
@@ -118,16 +125,16 @@ export default function Charts({ domain, setDomain }) {
 
             <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
                 <Grid item xs={6} lg={3} >
-                    <DashboardInfoCard title='Unique Visitors' value='1,493' subtitleValue='+13%' subtitleText=' since last week' />
+                    <DashboardInfoCard title='Unique Visitors' value={uniqueVisitorsCount} subtitleValue='+13%' subtitleText=' since last week' />
                 </Grid>
                 <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Pageviews' value='492' subtitleValue='-2%' subtitleText=' since last week' />
+                    <DashboardInfoCard title='Pageviews' value={pageviewsCount} subtitleValue='-2%' subtitleText=' since last week' />
                 </Grid>
                 <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Bounce Rate' value='45%' subtitleValue='-2%' subtitleText=' since last week' />
+                    <DashboardInfoCard title='Bounce Rate' value={bounceRate} subtitleValue='-2%' subtitleText=' since last week' />
                 </Grid>
                 <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Visit Duration' value='2m 45s' subtitleValue='-2%' subtitleText=' since last week' />
+                    <DashboardInfoCard title='Visit Duration' value={visitDuration} subtitleValue='-2%' subtitleText=' since last week' />
                 </Grid>
             </Grid>
 

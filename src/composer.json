@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
         "league/iso3166": "^4.0",
+        "ramsey/uuid": "^4.4",
         "sinergi/browser-detector": "^6.1",
         "tightenco/ziggy": "^1.0"
     },

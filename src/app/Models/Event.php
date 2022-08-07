@@ -12,7 +12,7 @@ class Event extends Model
         'event_name',
         'ip_address',
         'user_agent',
-        'visitor_hash',
+        'visitor_id',
         'request_hash',
         'is_unique',
         'location_href',
