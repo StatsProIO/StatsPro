@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Sinergi\BrowserDetector\Browser;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 
 
 
@@ -40,8 +41,8 @@ class EventsController extends Controller
         $event->event_name = $request->event_name;
         $event->ip_address = $clientIp;
         $event->user_agent = $userAgent;
-        $event->visitor_hash = '';
         $event->request_hash = '';
+        $event->visitor_id = '';
         $event->is_unique = false; //TODO
         $event->location_href = $request->location_href;
         $event->host = $request->location_host;
@@ -61,7 +62,32 @@ class EventsController extends Controller
         $event->save();
 
         return $event;
-       
+    }
+
+    public function getVisitorId(Request $request) {
+
+        if($request->headers->has('If-None-Match')) {
+            $uuid = \Ramsey\Uuid\Uuid::fromString(str_replace('"', '', $request->header('If-None-Match')));
+            $uuidCreatedAt = new Carbon($uuid->getDateTime());
+            $expirationDate = $uuidCreatedAt->addMinutes(24*60*60);
+
+            $now = new Carbon();
+            if($now->greaterThan($expirationDate)) {   
+                return $this->newVisitorIdResponse();
+            } else {
+                return response('', 304);
+            } 
+        } else {
+            return $this->newVisitorIdResponse();
+        }
+    }
+
+    function newVisitorIdResponse() {
+        $sessionUuid = Uuid::uuid1()->toString();
+        return response(['value' => $sessionUuid], 200)
+                  ->header('ETag', "\"$sessionUuid\"")
+                  ->header('Content-Type', 'application/json')
+                  ->header('Cache-Control', 'private, max-age=' . 24*60*60);
     }
 
     public function getTrackerPixel(Request $request) {
@@ -211,6 +237,15 @@ class EventsController extends Controller
         $pageviews = array_merge($timeBuckets, $pageviewsCountByDate);
         uksort($pageviews,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
 
+        $visitors =  DB::select(
+            DB::raw("SELECT {$timeRangeInfo['groupBy']} as date, count(*)
+                FROM events 
+                WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
+                GROUP BY {$timeRangeInfo['groupBy']}
+                "), 
+            array('domain' => $domain->id)
+            );
+
         $realTimeInterval = [
                     Carbon::now()->subMinutes(5)->toDateTimeString(),
                     Carbon::now()->toDateTimeString()
@@ -260,6 +295,23 @@ class EventsController extends Controller
                     );
 
 
+        $pageviewsCount = DB::select(
+                DB::raw("SELECT count(*) as count
+                    FROM events 
+                    WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
+                    "), 
+                array('domain' => $domain->id)
+                );
+
+        $visitorsCount = DB::select(
+                DB::raw("SELECT count(*) as count
+                    FROM events 
+                    WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
+                    AND referrer is null
+                    "), 
+                array('domain' => $domain->id)
+                );
+
         return [
             'domains' => Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name'),
             'time_buckets' => $timeBuckets,
@@ -268,7 +320,11 @@ class EventsController extends Controller
             'top_sources' => $topSources,
             'top_pages' => $topPages,
             'devices' => $devices,
-            'locations' => $locations
+            'locations' => $locations,
+            'unique_visitors_count' => $visitorsCount[0]->count,
+            'pageviews_count' => $pageviewsCount[0]->count,
+            'bounce_rate' => '539%',
+            'visit_duration' => '4m 49s'
         ];
     }
 
