@@ -39,6 +39,7 @@ export default function Charts({ domain, setDomain }) {
 
     const [timeBuckets, setTimeBuckets] = useState([]);
     const [pageviews, setPageviews] = useState([]);
+    const [visitors, setVisitors] = useState([]);
     const [topSources, setTopSources] = useState([]);
     const [topPages, setTopPages] = useState([]);
     const [devices, setDevices] = useState([]);
@@ -60,6 +61,7 @@ export default function Charts({ domain, setDomain }) {
                 setDomains(response.data.domains);
                 setTimeBuckets(response.data.time_buckets);
                 setPageviews(response.data.pageviews);
+                setVisitors(response.data.visitors);
                 setTopSources(response.data.top_sources);
                 setTopPages(response.data.top_pages);
                 setDevices(response.data.devices);
@@ -142,7 +144,7 @@ export default function Charts({ domain, setDomain }) {
                 <Grid item xs={12} lg={8}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Pageviews</Typography>
-                        <PageviewsChart inputData={pageviews} />
+                        <PageviewsChart inputData={pageviews} inputVisitors={visitors} />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} lg={4}>

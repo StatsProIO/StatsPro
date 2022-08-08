@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Sinergi\BrowserDetector\Browser;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
+use App\Repositories\EventRepository;
 
 class EventsController extends Controller
 {
@@ -29,9 +30,6 @@ class EventsController extends Controller
         $domain = Domain::where('domain_name', $request->domain)->first();
         //TODO: determine if this is a subsequest request for the same visitor_hash in the last 30 minutes
             //TODO: if yes, update the previous request with an exit time
-            
-        //TODO: insert the event
-
 
         $systemInfo = Helper::systemInfo($userAgent);
 
@@ -117,6 +115,7 @@ class EventsController extends Controller
     }
 
     function rangeStringToQueryInfo(string $range) {
+        //TODO: make this into an object
         switch ($range) {
             case '24h':
                 return [
@@ -177,32 +176,7 @@ class EventsController extends Controller
         }
     }
 
-    
-
-    public function getEvents (Request $request) {
-
-        $range = $request->has('range') ? $request->input('range') : '24h';
-        $timeRangeInfo = $this->rangeStringToQueryInfo($range);
-
-        //TODO: need to validate that the domain belongs to the user
-        //TODO: change firstdomain to the users first domain
-        $domainString = $request->has('domain') ? $request->input('domain') : 'firstdomain.com';
-
-        $domain = Domain::firstWhere('domain_name', $domainString);
-        
-        $pageviews = DB::select(
-            DB::raw("SELECT {$timeRangeInfo['groupBy']} as date, count(*)
-                FROM events 
-                WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                GROUP BY {$timeRangeInfo['groupBy']}
-                "), 
-            array('domain' => $domain->id)
-            );
-
-        $pageviewsCountByDate = [];
-        foreach($pageviews as $pageview) {
-            $pageviewsCountByDate[$pageview->date] = $pageview->count;
-        }
+    public function getTimeBuckets($timeRangeInfo) {
         $timeBuckets = [];
         $currentBucket = new Carbon($timeRangeInfo['interval']['start']);
 
@@ -215,118 +189,41 @@ class EventsController extends Controller
             $currentBucket->addHour($timeRangeInfo['bucketSizeHours']);
         }
 
-        $pageviews = array_merge($timeBuckets, $pageviewsCountByDate);
-        uksort($pageviews,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
+        return $timeBuckets;
+    }
 
-        $visitors =  DB::select(
-            DB::raw("SELECT {$timeRangeInfo['groupBy']} as date, count(*)
-                FROM events 
-                WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                GROUP BY {$timeRangeInfo['groupBy']}
-                "), 
-            array('domain' => $domain->id)
-            );
+    public function getEvents (Request $request) {
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = $this->rangeStringToQueryInfo($range);
 
-        $realTimeInterval = [
-                    Carbon::now()->subMinutes(5)->toDateTimeString(),
-                    Carbon::now()->toDateTimeString()
-                ];
-        //find the pageviews from the last 5 minutes, deduplicate pageviews by the same visitor
-        $realTime = DB::select( DB::raw("SELECT path, enter_time
-                                        FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '$realTimeInterval[0]' AND enter_time <= '$realTimeInterval[1]'
-                                        ORDER BY enter_time desc"), 
-                                array('domain' => $domain->id)
-                            );
-        $topSources = DB::select( DB::raw("SELECT source as label, count(*) as count
-                                        FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                                        GROUP BY source
-                                        ORDER BY count DESC
-                                        LIMIT 8
-                                        "), 
-                                array('domain' => $domain->id)
-                            );
-     
-        $topPages = DB::select( DB::raw("SELECT path as label, count(*) as count
-                                        FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                                        GROUP BY path
-                                        ORDER BY count DESC
-                                        LIMIT 8
-                                        "), 
-                                array('domain' => $domain->id)
-                            );
+        //TODO: need to validate that the domain belongs to the user
+        if($request->has('domain')) {
+            $domain = Domain::firstWhere('domain_name', $request->input('domain'));
+        } else {
+            $domain = Domain::firstWhere('user_id', Auth::user()->id);
+        }
 
-        $devices = DB::select( DB::raw("SELECT device, count(*)
-                                        FROM events 
-                                        WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                                        GROUP BY device
-                                        ORDER BY count DESC
-                                        LIMIT 5" ), 
-                                array('domain' => $domain->id)
-                            );
+        $timeBuckets = $this->getTimeBuckets($timeRangeInfo);
 
-        $locations = DB::select( DB::raw("SELECT country, count(*)
-                                FROM events 
-                                WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                                GROUP BY country" ), 
-                        array('domain' => $domain->id)
-                    );
-
-
-        $pageviewsCount = DB::select(
-                DB::raw("SELECT count(*) as count
-                    FROM events 
-                    WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                    "), 
-                array('domain' => $domain->id)
-                );
-
-        $visitorsCount = DB::select(
-                DB::raw("SELECT count(*) as count
-                    FROM events 
-                    WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                    AND referrer is null
-                    "), 
-                array('domain' => $domain->id)
-                );
-        $visitorsCount = $visitorsCount[0]->count;
-
-        $visitDuration = DB::select(
-                DB::raw("SELECT AVG(time_on_page_seconds) as average_visit_duration
-                    FROM events 
-                    WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                    "), 
-                array('domain' => $domain->id)
-                );
-
-        $bounceCount = DB::select(
-                DB::raw("SELECT count(*) as count
-                    FROM events 
-                    WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '{$timeRangeInfo['interval']['start']}' AND enter_time <= '{$timeRangeInfo['interval']['end']}'
-                    AND time_on_page_seconds = 0
-                    AND referrer is null
-                    "), 
-                array('domain' => $domain->id)
-                );
-        $bounceCount = $bounceCount[0]->count;
+        $bounceCount = EventRepository::getBounceCount($timeRangeInfo, $domain);
+        $visitorsCount = EventRepository::getVisitorsCount($timeRangeInfo, $domain);
 
         $bounceRate = $visitorsCount === 0 ? 0 : $bounceCount/$visitorsCount;
         
         return [
             'domains' => Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name'),
             'time_buckets' => $timeBuckets,
-            'pageviews' => $pageviews,
-            'realtime' => $realTime,
-            'top_sources' => $topSources,
-            'top_pages' => $topPages,
-            'devices' => $devices,
-            'locations' => $locations,
+            'pageviews' => EventRepository::getPageviews($timeRangeInfo, $domain, $timeBuckets),
+            'visitors' => EventRepository::getVisitors($timeRangeInfo, $domain, $timeBuckets),
+            'realtime' => EventRepository::getRealTime($domain),
+            'top_sources' => EventRepository::getTopSources($timeRangeInfo, $domain),
+            'top_pages' => EventRepository::getTopPages($timeRangeInfo, $domain),
+            'devices' => EventRepository::getDevices($timeRangeInfo, $domain),
+            'locations' => EventRepository::getLocations($timeRangeInfo, $domain),
             'unique_visitors_count' => $visitorsCount,
-            'pageviews_count' => $pageviewsCount[0]->count,
+            'pageviews_count' => EventRepository::getPageviewsCount($timeRangeInfo, $domain),
             'bounce_rate' => ($bounceRate * 100) . '%',
-            'visit_duration' => CarbonInterval::seconds(floatval($visitDuration[0]->average_visit_duration))->cascade()->forHumans([CarbonInterface::DIFF_ABSOLUTE], true)
+            'visit_duration' => EventRepository::getVisitDuration($timeRangeInfo, $domain)
         ];
     }
 

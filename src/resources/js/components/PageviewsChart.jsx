@@ -15,6 +15,7 @@ ChartJS.register(
 );
 
 var darkBlue = '#2a63fe';
+var purple = '#6917ff'
 
 function createLinearGradient(element, color) {
   var gradient = element.createLinearGradient(0, 0, 0, 400);
@@ -33,6 +34,15 @@ function hexToRGB(hex, alpha) {
 
 export const options = {
   responsive: true,
+  animations: {
+    tension: {
+      duration: 1000,
+      easing: 'linear',
+      from: 1,
+      to: 0,
+      loop: true
+    }
+  },
   plugins: {
     legend: {
       display: true,
@@ -40,7 +50,7 @@ export const options = {
   }
 };
 
-export function PageviewsChart({ inputData }) {
+export function PageviewsChart({ inputData, inputVisitors }) {
   const chartRef = useRef(null);
 
   const [data, setData] = useState({ datasets: [] });
@@ -51,6 +61,7 @@ export function PageviewsChart({ inputData }) {
     if (chart) {
 
       var gradientDarkBlue = createLinearGradient(chart.ctx, darkBlue);
+      var gradientPurple = createLinearGradient(chart.ctx, purple);
 
       setData({
         labels: Object.keys(inputData),
@@ -68,13 +79,27 @@ export function PageviewsChart({ inputData }) {
             pointHoverBackgroundColor: darkBlue,
             pointHoverBorderColor: darkBlue,
             pointRadius: 1
+          },
+          {
+            label: 'Visitors',
+            data: Object.values(inputVisitors),
+            fill: true,
+            backgroundColor: gradientPurple,
+            borderWidth: 3,
+            cubicInterpolationMode: 'monotone',
+            borderColor: purple,
+            pointBorderColor: purple,
+            pointBackgroundColor: purple,
+            pointHoverBackgroundColor: purple,
+            pointHoverBorderColor: purple,
+            pointRadius: 1
           }
         ],
       });
 
 
     }
-  }, [inputData, chartRef]);
+  }, [inputData, inputVisitors, chartRef]);
 
 
   return <Line options={options} data={data} ref={chartRef} />
