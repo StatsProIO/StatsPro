@@ -64,7 +64,7 @@ class EventRepository
                     Carbon::now()->subMinutes(5)->toDateTimeString(),
                     Carbon::now()->toDateTimeString()
                 ];
-        return DB::select( DB::raw("SELECT path, enter_time
+        return DB::select( DB::raw("SELECT id, path, enter_time
                                         FROM events 
                                         WHERE domain_id = :domain AND event_name='pageview' AND enter_time >= '$realTimeInterval[0]' AND enter_time <= '$realTimeInterval[1]'
                                         ORDER BY enter_time desc"), 

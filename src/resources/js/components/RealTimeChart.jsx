@@ -1,7 +1,21 @@
 import { Paper, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export function RealTimeChart({ inputData }) {
+export function RealTimeChart({ domain }) {
+
+  const [realtime, setRealtime] = useState([]);
+
+  const getData = async () => {
+    const res = await fetch("/api/events/real-time?domain=" + domain);
+    const data = await res.json();
+
+    setRealtime(data);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(getData, 2000);
+    return () => clearInterval(timer);
+  }, []);
 
   return <>
     <Paper className="blueShadow" sx={{ p: 3, backgroundColor: 'rgb(42,98,254)', color: '#fff' }}>
@@ -16,9 +30,9 @@ export function RealTimeChart({ inputData }) {
       </Stack>
 
       <Typography variant="body1" color="rgb(255 255 255 / 60%)">Active users in last 5 minutes</Typography>
-      <Typography variant="h3" sx={{ py: 2, }}>{inputData.length}</Typography>
+      <Typography variant="h3" sx={{ py: 2, }}>{realtime.length}</Typography>
 
-      {inputData.slice(0, 10).map(realtimeItem => { return <Typography key={realtimeItem.path} className="flashBackground" variant="body1" style={{ maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', borderLeft: 'solid', borderWidth: '0px', marginTop: '4px', paddingLeft: '5px' }}>{realtimeItem.path}</Typography> })}
+      {realtime.slice(0, 10).map(realtimeItem => { return <Typography key={realtimeItem.id} className="flashBackground" variant="body1" style={{ maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', borderLeft: 'solid', borderWidth: '0px', marginTop: '4px', paddingLeft: '5px' }}>{realtimeItem.path}</Typography> })}
     </Paper>
   </>
 }

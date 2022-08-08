@@ -227,6 +227,16 @@ class EventsController extends Controller
         ];
     }
 
+    public function getEventsRealTime(Request $request) {
+        if($request->has('domain')) {
+            $domain = Domain::firstWhere('domain_name', $request->input('domain'));
+        } else {
+            $domain = Domain::firstWhere('user_id', Auth::user()->id);
+        }
+
+        return EventRepository::getRealTime($domain);
+    }
+
     public function getEventStatus($domainName) {
         //TODO: need to validate that the domain belongs to the user
         //TODO: change firstdomain to the users first domain

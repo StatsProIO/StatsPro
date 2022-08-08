@@ -33,6 +33,8 @@ Route::get('/2Vj2pBn.jpg', [EventsController::class, 'getTrackerPixel']);
 //TODO: this needs to be authenticated
 Route::get('/events', [EventsController::class, 'getEvents']);
 
+Route::get('/events/real-time', [EventsController::class, 'getEventsRealTime']);
+
 //TODO: this needs to be authenticated
 Route::get('/event-status/{domainName}', [EventsController::class, 'getEventStatus']);
 

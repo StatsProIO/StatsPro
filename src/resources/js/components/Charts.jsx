@@ -44,7 +44,7 @@ export default function Charts({ domain, setDomain }) {
     const [topPages, setTopPages] = useState([]);
     const [devices, setDevices] = useState([]);
     const [locations, setLocations] = useState([]);
-    const [realtime, setRealtime] = useState([]);
+
     const [uniqueVisitorsCount, setUniqueVisitorsCount] = useState(0);
     const [pageviewsCount, setPageviewsCount] = useState(0);
     const [bounceRate, setBounceRate] = useState(0);
@@ -66,7 +66,7 @@ export default function Charts({ domain, setDomain }) {
                 setTopPages(response.data.top_pages);
                 setDevices(response.data.devices);
                 setLocations(response.data.locations);
-                setRealtime(response.data.realtime);
+
                 setUniqueVisitorsCount(response.data.unique_visitors_count);
                 setPageviewsCount(response.data.pageviews_count);
                 setBounceRate(response.data.bounce_rate);
@@ -148,7 +148,7 @@ export default function Charts({ domain, setDomain }) {
                     </Paper>
                 </Grid>
                 <Grid item xs={12} lg={4}>
-                    <RealTimeChart inputData={realtime} />
+                    <RealTimeChart domain={domain} />
                 </Grid>
             </Grid>
 
