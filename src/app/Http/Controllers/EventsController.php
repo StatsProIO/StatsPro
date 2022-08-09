@@ -15,6 +15,8 @@ use Sinergi\BrowserDetector\Browser;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use App\Repositories\EventRepository;
+use App\Utility\TimeRangeInfo;
+use App\Utility\TimeRange;
 
 class EventsController extends Controller
 {
@@ -114,79 +116,19 @@ class EventsController extends Controller
             ->header ("Expires", "0");
     }
 
-    function rangeStringToQueryInfo(string $range) {
-        //TODO: make this into an object
-        switch ($range) {
-            case '24h':
-                return [
-                    'interval' => ['start' => Carbon::now()->subHours(24)->toDateTimeString(), 'end' => Carbon::now()->toDateTimeString()],
-                    'groupBy' => "date_trunc('hour', enter_time)",
-                    'bucketSizeHours' => 1
-                ];
-                break;
-            case '7d':
-                return [
-                    'interval' => ['start' => Carbon::now()->subDays(7)->toDateString(), 'end' => Carbon::now()->toDateString()],
-                    'groupBy' => "enter_time::date",
-                    'bucketSizeHours' => 24
-                ];
-                break;
-            case '30d':
-                return [
-                    'interval' => ['start' => Carbon::now()->subDays(30)->toDateString(), 'end' => Carbon::now()->toDateString()],
-                    'groupBy' => "enter_time::date",
-                    'bucketSizeHours' => 24
-                ];
-                break;
-            case 'month-to-date':
-                return [
-                    'interval' => ['start' => Carbon::now()->startOfMonth()->toDateString(), 'end' => Carbon::now()->toDateString()],
-                    'groupBy' => "enter_time::date",
-                    'bucketSizeHours' => 24
-                ];
-                break;
-            case 'last-month':
-                return [
-                    'interval' => ['start' => Carbon::now()->startOfMonth()->subMonthsNoOverflow(1)->toDateString(), 'end' =>Carbon::now()->subMonthsNoOverflow(1)->endOfMonth()->toDateString()],
-                    'groupBy' => "enter_time::date",
-                    'bucketSizeHours' => 24
-                ];
-                break;
-            case 'year-to-date':
-                return [
-                    'interval' => ['start' => Carbon::now()->firstOfYear()->toDateString(), 'end' =>Carbon::now()->toDateString()],
-                    'groupBy' => "enter_time::date",
-                    'bucketSizeHours' => 24
-                ];
-                break;
-            case '12m':
-                return [
-                    'interval' => ['start' => Carbon::now()->subMonthsNoOverflow(12)->toDateString(), 'end' =>Carbon::now()->toDateString()],
-                    'groupBy' => "enter_time::date",
-                    'bucketSizeHours' => 24
-                ];
-                break;
-            case 'all-time':
-                return [
-                    'interval' => ['start' => Carbon::create(2022, 1, 1, 0, 0, 0)->toDateString(), 'end' =>Carbon::now()->toDateString()],
-                    'groupBy' => "enter_time::date",
-                    'bucketSizeHours' => 24
-                ];
-                break;
-        }
-    }
+    
 
-    public function getTimeBuckets($timeRangeInfo) {
+    public function getTimeBuckets(TimeRangeInfo $timeRangeInfo) {
         $timeBuckets = [];
-        $currentBucket = new Carbon($timeRangeInfo['interval']['start']);
+        $currentBucket = new Carbon($timeRangeInfo->getInterval()->getStart());
 
-        if($timeRangeInfo['bucketSizeHours'] === 1) {
+        if($timeRangeInfo->getBucketSizeHours() === 1) {
             $currentBucket->minute = 0;
             $currentBucket->second = 0;
         }
-        while($currentBucket <= new Carbon($timeRangeInfo['interval']['end'] )) {
-            $timeBuckets[$timeRangeInfo['bucketSizeHours'] === 1 ? $currentBucket->toDateTimeString() : $currentBucket->toDateString()] = 0;
-            $currentBucket->addHour($timeRangeInfo['bucketSizeHours']);
+        while($currentBucket <= new Carbon($timeRangeInfo->getInterval()->getEnd() )) {
+            $timeBuckets[$timeRangeInfo->getBucketSizeHours() === 1 ? $currentBucket->toDateTimeString() : $currentBucket->toDateString()] = 0;
+            $currentBucket->addHour($timeRangeInfo->getBucketSizeHours());
         }
 
         return $timeBuckets;
@@ -194,7 +136,7 @@ class EventsController extends Controller
 
     public function getEvents (Request $request) {
         $range = $request->has('range') ? $request->input('range') : '24h';
-        $timeRangeInfo = $this->rangeStringToQueryInfo($range);
+        $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
 
         //TODO: need to validate that the domain belongs to the user
         if($request->has('domain')) {
@@ -205,8 +147,8 @@ class EventsController extends Controller
 
         $timeBuckets = $this->getTimeBuckets($timeRangeInfo);
 
-        $bounceCount = EventRepository::getBounceCount($timeRangeInfo, $domain);
-        $visitorsCount = EventRepository::getVisitorsCount($timeRangeInfo, $domain);
+        $bounceCount = EventRepository::getBounceCount($timeRangeInfo->getInterval(), $domain);
+        $visitorsCount = EventRepository::getVisitorsCount($timeRangeInfo->getInterval(), $domain);
 
         $bounceRate = $visitorsCount === 0 ? 0 : $bounceCount/$visitorsCount;
         
@@ -216,14 +158,15 @@ class EventsController extends Controller
             'pageviews' => EventRepository::getPageviews($timeRangeInfo, $domain, $timeBuckets),
             'visitors' => EventRepository::getVisitors($timeRangeInfo, $domain, $timeBuckets),
             'realtime' => EventRepository::getRealTime($domain),
-            'top_sources' => EventRepository::getTopSources($timeRangeInfo, $domain),
-            'top_pages' => EventRepository::getTopPages($timeRangeInfo, $domain),
-            'devices' => EventRepository::getDevices($timeRangeInfo, $domain),
-            'locations' => EventRepository::getLocations($timeRangeInfo, $domain),
+            'top_sources' => EventRepository::getTopSources($timeRangeInfo->getInterval(), $domain),
+            'top_pages' => EventRepository::getTopPages($timeRangeInfo->getInterval(), $domain),
+            'devices' => EventRepository::getDevices($timeRangeInfo->getInterval(), $domain),
+            'locations' => EventRepository::getLocations($timeRangeInfo->getInterval(), $domain),
             'unique_visitors_count' => $visitorsCount,
-            'pageviews_count' => EventRepository::getPageviewsCount($timeRangeInfo, $domain),
+            'previous_visitors_count' => EventRepository::getVisitorsCount($timeRangeInfo->getComparisonInterval(), $domain),
+            'pageviews_count' => EventRepository::getPageviewsCount($timeRangeInfo->getInterval(), $domain),
             'bounce_rate' => ($bounceRate * 100) . '%',
-            'visit_duration' => EventRepository::getVisitDuration($timeRangeInfo, $domain)
+            'visit_duration' => EventRepository::getVisitDuration($timeRangeInfo->getInterval(), $domain)
         ];
     }
 
