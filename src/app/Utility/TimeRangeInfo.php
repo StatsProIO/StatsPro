@@ -55,58 +55,58 @@ class TimeRangeInfo
                 );
             case '7d':
                 return new TimeRangeInfo(
-                    new Interval(Carbon::now()->subDays(7)->toDateString(), Carbon::now()->toDateString()),
-                    new Interval(Carbon::now()->subDays(14)->toDateString(), Carbon::now()->subDays(7)->toDateString()),
+                    new Interval(Carbon::now()->subDays(7)->toDateTimeString(), Carbon::now()->toDateTimeString()),
+                    new Interval(Carbon::now()->subDays(14)->toDateTimeString(), Carbon::now()->subDays(7)->toDateTimeString()),
                     'vs previous 7d',
                     'enter_time::date',
                     24
                 );
             case '30d':
                 return new TimeRangeInfo(
-                    new Interval(Carbon::now()->subDays(30)->toDateString(), Carbon::now()->toDateString()),
-                    new Interval(Carbon::now()->subDays(60)->toDateString(), Carbon::now()->subDays(30)->toDateString()),
+                    new Interval(Carbon::now()->subDays(30)->toDateTimeString(), Carbon::now()->toDateTimeString()),
+                    new Interval(Carbon::now()->subDays(60)->toDateTimeString(), Carbon::now()->subDays(30)->toDateTimeString()),
                     'vs previous 30d',
                     'enter_time::date',
                     24
                 );
             case 'month-to-date':
                 return new TimeRangeInfo(
-                    new Interval(Carbon::now()->startOfMonth()->toDateString(), Carbon::now()->toDateString()),
-                    new Interval(Carbon::now()->subMonthsNoOverflow(1)->startOfMonth()->toDateString(), Carbon::now()->subMonthsNoOverflow(1)->toDateString()),
+                    new Interval(Carbon::now()->startOfMonth()->toDateTimeString(), Carbon::now()->toDateTimeString()),
+                    new Interval(Carbon::now()->subMonthsNoOverflow(1)->startOfMonth()->toDateTimeString(), Carbon::now()->subMonthsNoOverflow(1)->toDateTimeString()),
                     'vs same time last month',
                     'enter_time::date',
                     24
                 );
             case 'last-month':
                 return new TimeRangeInfo(
-                    new Interval(Carbon::now()->startOfMonth()->subMonthsNoOverflow(1)->toDateString(), Carbon::now()->subMonthsNoOverflow(1)->endOfMonth()->toDateString()),
-                    new Interval(Carbon::now()->startOfMonth()->subMonthsNoOverflow(2)->toDateString(), Carbon::now()->startOfMonth()->subMonthsNoOverflow(2)->endOfMonth()->toDateString()),
+                    new Interval(Carbon::now()->startOfMonth()->subMonthsNoOverflow(1)->toDateTimeString(), Carbon::now()->subMonthsNoOverflow(1)->endOfMonth()->toDateTimeString()),
+                    new Interval(Carbon::now()->startOfMonth()->subMonthsNoOverflow(2)->toDateTimeString(), Carbon::now()->startOfMonth()->subMonthsNoOverflow(2)->endOfMonth()->toDateTimeString()),
                     'vs the previous month',
                     'enter_time::date',
                     24
                 );
             case 'year-to-date':
                 return new TimeRangeInfo(
-                    new Interval(Carbon::now()->firstOfYear()->toDateString(), Carbon::now()->toDateString()),
-                    new Interval(Carbon::now()->firstOfYear()->subYear(1)->toDateString(), Carbon::now()->subYear(1)->toDateString()),
+                    new Interval(Carbon::now()->firstOfYear()->toDateTimeString(), Carbon::now()->toDateTimeString()),
+                    new Interval(Carbon::now()->firstOfYear()->subYear(1)->toDateTimeString(), Carbon::now()->subYear(1)->toDateTimeString()),
                     'vs same time last year',
                     'enter_time::date',
                     24
                 );
             case '12m':
                 return new TimeRangeInfo(
-                    new Interval(Carbon::now()->subMonthsNoOverflow(12)->toDateString(), Carbon::now()->toDateString()),
-                    new Interval(Carbon::now()->subMonthsNoOverflow(24)->toDateString(), Carbon::now()->subMonthsNoOverflow(12)->toDateString()),
+                    new Interval(Carbon::now()->subMonthsNoOverflow(12)->toDateTimeString(), Carbon::now()->toDateTimeString()),
+                    new Interval(Carbon::now()->subMonthsNoOverflow(24)->toDateTimeString(), Carbon::now()->subMonthsNoOverflow(12)->toDateTimeString()),
                     'vs the previous 12 months',
                     'enter_time::date',
                     24
                 );
             case 'all-time':
                 return new TimeRangeInfo(
-                    new Interval(Carbon::create(2022, 1, 1, 0, 0, 0)->toDateString(), Carbon::now()->toDateString()),
-                    new Interval(Carbon::create(2022, 1, 1, 0, 0, 0)->toDateString(), Carbon::now()->toDateString()),
-                    'enter_time::date',
+                    new Interval(Carbon::create(2022, 1, 1, 0, 0, 0)->toDateTimeString(), Carbon::now()->toDateTimeString()),
+                    new Interval(Carbon::create(2022, 1, 1, 0, 0, 0)->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     '',
+                    'enter_time::date',
                     24
                 );
                 

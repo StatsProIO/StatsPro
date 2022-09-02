@@ -46,9 +46,15 @@ export default function Charts({ domain, setDomain }) {
     const [locations, setLocations] = useState([]);
 
     const [uniqueVisitorsCount, setUniqueVisitorsCount] = useState(0);
+``    const [uniqueVisitorsCountDifferenceRate, setUniqueVisitorsCountDifferenceRate] = useState(0);
     const [pageviewsCount, setPageviewsCount] = useState(0);
+    const [pageviewsCountDifferenceRate, setPageviewsCountDifferenceRate] = useState(0);
     const [bounceRate, setBounceRate] = useState(0);
+    const [bounceRateDifferenceRate, setBounceRateDifferenceRate] = useState(0);
     const [visitDuration, setVisitDuration] = useState('0m 0s');
+    const [visitDurationDifferenceRate, setVisitDurationDifferenceRate] = useState(0);
+
+    const [comparisonIntervalDescriptionSuffix, setComparisonIntervalDescriptionSuffix] = useState('');
 
 
     useEffect(() => {
@@ -68,9 +74,14 @@ export default function Charts({ domain, setDomain }) {
                 setLocations(response.data.locations);
 
                 setUniqueVisitorsCount(response.data.unique_visitors_count);
+                setUniqueVisitorsCountDifferenceRate(response.data.unique_visitors_count_difference_rate)
                 setPageviewsCount(response.data.pageviews_count);
+                setPageviewsCountDifferenceRate(response.data.pageviews_count_difference_rate);
                 setBounceRate(response.data.bounce_rate);
+                setBounceRateDifferenceRate(response.data.bounce_rate_difference_rate);
                 setVisitDuration(response.data.visit_duration);
+                setVisitDurationDifferenceRate(response.data.visit_duration_difference_rate);
+                setComparisonIntervalDescriptionSuffix(response.data.comparison_interval_description_suffix);
             })
             .catch(function (error) {
                 // TODO: handle error
@@ -86,7 +97,7 @@ export default function Charts({ domain, setDomain }) {
             <Grid container rowSpacing={{ xs: 1, sm: 2, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
                 <Grid item lg={8} md={6} xs={12}>
                     <Typography variant="h4"><b>Dashboard</b></Typography>
-                    <Typography variant="h6">Welcome back!</Typography>
+                    <Typography variant="h6" color="text.secondary">Welcome back!</Typography>
                 </Grid>
                 <Grid item lg={2} md={3} xs={6}>
 
@@ -127,16 +138,16 @@ export default function Charts({ domain, setDomain }) {
 
             <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
                 <Grid item xs={6} lg={3} >
-                    <DashboardInfoCard title='Unique Visitors' value={uniqueVisitorsCount} subtitleValue='+13%' subtitleText=' since last week' />
+                    <DashboardInfoCard title='Unique Visitors' value={uniqueVisitorsCount} subtitleValue={uniqueVisitorsCountDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
                 </Grid>
                 <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Pageviews' value={pageviewsCount} subtitleValue='-2%' subtitleText=' since last week' />
+                    <DashboardInfoCard title='Pageviews' value={pageviewsCount} subtitleValue={pageviewsCountDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
                 </Grid>
                 <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Bounce Rate' value={bounceRate} subtitleValue='-2%' subtitleText=' since last week' />
+                    <DashboardInfoCard title='Bounce Rate' value={bounceRate} subtitleValue={bounceRateDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
                 </Grid>
                 <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Visit Duration' value={visitDuration} subtitleValue='-2%' subtitleText=' since last week' />
+                    <DashboardInfoCard title='Visit Duration' value={visitDuration} subtitleValue={visitDurationDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
                 </Grid>
             </Grid>
 

@@ -29,7 +29,7 @@ const pages = [
         variant: "contained",
         color: "primary",
         onClick: function () {
-            Inertia.get('/registr')
+            Inertia.get('/register')
         }
     }];
 

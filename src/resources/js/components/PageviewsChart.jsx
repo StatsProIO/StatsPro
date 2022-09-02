@@ -17,10 +17,10 @@ ChartJS.register(
 var darkBlue = '#2a63fe';
 var purple = '#6917ff'
 
-function createLinearGradient(element, color) {
-  var gradient = element.createLinearGradient(0, 0, 0, 400);
+function createLinearGradient(element, color, size) {
+  var gradient = element.createLinearGradient(0, 0, 0, size);
   gradient.addColorStop(0, hexToRGB(color, .6));
-  gradient.addColorStop(.7, hexToRGB(color, .2));
+  gradient.addColorStop(.7, hexToRGB(color, .4));
   gradient.addColorStop(1, hexToRGB(color, 0));
   return gradient;
 }
@@ -60,8 +60,8 @@ export function PageviewsChart({ inputData, inputVisitors }) {
 
     if (chart) {
 
-      var gradientDarkBlue = createLinearGradient(chart.ctx, darkBlue);
-      var gradientPurple = createLinearGradient(chart.ctx, purple);
+      var gradientDarkBlue = createLinearGradient(chart.ctx, darkBlue, 400);
+      var gradientPurple = createLinearGradient(chart.ctx, purple, 400);
 
       setData({
         labels: Object.keys(inputData),

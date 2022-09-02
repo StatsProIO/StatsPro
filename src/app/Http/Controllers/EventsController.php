@@ -148,9 +148,19 @@ class EventsController extends Controller
         $timeBuckets = $this->getTimeBuckets($timeRangeInfo);
 
         $bounceCount = EventRepository::getBounceCount($timeRangeInfo->getInterval(), $domain);
-        $visitorsCount = EventRepository::getVisitorsCount($timeRangeInfo->getInterval(), $domain);
+        $comparisonBounceCount = EventRepository::getBounceCount($timeRangeInfo->getComparisonInterval(), $domain);
 
-        $bounceRate = $visitorsCount === 0 ? 0 : $bounceCount/$visitorsCount;
+        $visitorsCount = EventRepository::getVisitorsCount($timeRangeInfo->getInterval(), $domain);
+        $comparisonVisitorsCount = EventRepository::getVisitorsCount($timeRangeInfo->getComparisonInterval(), $domain);
+
+        $bounceRate = $visitorsCount === 0 ? 0 : ($bounceCount/$visitorsCount)*100;
+        $comparisonBounceRate = $comparisonVisitorsCount === 0 ? 0 : ($comparisonBounceCount/$comparisonVisitorsCount)*100;
+
+        $pageviewCount = EventRepository::getPageviewsCount($timeRangeInfo->getInterval(), $domain);
+        $comparisonPageviewsCount = EventRepository::getPageviewsCount($timeRangeInfo->getComparisonInterval(), $domain);
+
+        $visitDuration = EventRepository::getVisitDuration($timeRangeInfo->getInterval(), $domain);
+        $comparisonVisitDuration = EventRepository::getVisitDuration($timeRangeInfo->getComparisonInterval(), $domain);
         
         return [
             'domains' => Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name'),
@@ -163,10 +173,15 @@ class EventsController extends Controller
             'devices' => EventRepository::getDevices($timeRangeInfo->getInterval(), $domain),
             'locations' => EventRepository::getLocations($timeRangeInfo->getInterval(), $domain),
             'unique_visitors_count' => $visitorsCount,
-            'previous_visitors_count' => EventRepository::getVisitorsCount($timeRangeInfo->getComparisonInterval(), $domain),
-            'pageviews_count' => EventRepository::getPageviewsCount($timeRangeInfo->getInterval(), $domain),
-            'bounce_rate' => ($bounceRate * 100) . '%',
-            'visit_duration' => EventRepository::getVisitDuration($timeRangeInfo->getInterval(), $domain)
+            'unique_visitors_count_difference_rate' => $comparisonVisitorsCount == 0 ? 100 : (($visitorsCount - $comparisonVisitorsCount)/$comparisonVisitorsCount),
+            'pageviews_count' => $pageviewCount,
+            'pageviews_count_difference_rate' => $comparisonPageviewsCount == 0 ? 100 : (($pageviewCount - $comparisonPageviewsCount)/$comparisonPageviewsCount),
+            'bounce_rate' => round($bounceRate, 1) . '%',
+            'bounce_rate_difference_rate' => $comparisonBounceRate == 0 ? 100 : (($bounceRate - $comparisonBounceRate)/$comparisonBounceRate),
+            'visit_duration' => CarbonInterval::seconds($visitDuration)->cascade()->forHumans([CarbonInterface::DIFF_ABSOLUTE], true),
+            'visit_duration_difference_rate' => $comparisonVisitDuration == 0 ? 100 : (($visitDuration - $comparisonVisitDuration)/$comparisonVisitDuration),
+            'comparison_visit_duration' => EventRepository::getVisitDuration($timeRangeInfo->getComparisonInterval(), $domain),
+            'comparison_interval_description_suffix' => $timeRangeInfo->getComparisonIntervalDescriptionSuffix()
         ];
     }
 

@@ -146,7 +146,7 @@ class EventRepository
                 array('domain' => $domain->id)
                 );
 
-        return CarbonInterval::seconds(floatval($visitDuration[0]->average_visit_duration))->cascade()->forHumans([CarbonInterface::DIFF_ABSOLUTE], true);
+        return floatval($visitDuration[0]->average_visit_duration);
     }
 
     public static function getBounceCount(Interval $interval, Domain $domain) { 
