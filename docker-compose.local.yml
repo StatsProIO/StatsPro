@@ -25,6 +25,15 @@ services:
         - '5432:5432'
       volumes: 
         - db:/var/lib/postgresql/data
+  stripe:
+      image: stripe/stripe-cli
+      environment:
+        - STRIPE_API_KEY=${STRIPE_API_KEY}
+      command: 'listen --forward-to http://web/stripe/webhook'
+      volumes:
+        - stripe:/var/lib/stripe
 volumes:
   db:
+    driver: local
+  stripe:
     driver: local

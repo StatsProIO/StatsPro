@@ -214,4 +214,11 @@ return [
 
     ])->toArray(),
 
+
+    'vite_stripe_entrepreneur_product_id' => env('VITE_STRIPE_ENTREPRENEUR_PRODUCT_ID', ''),
+
+    'vite_stripe_professional_product_id' => env('VITE_STRIPE_PROFESSIONAL_PRODUCT_ID', ''),
+
+    'vite_stripe_professional_plus_product_id' => env('VITE_STRIPE_PROFESSIONAL_PLUS_PRODUCT_ID', '')
+
 ];

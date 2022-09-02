@@ -1,7 +1,7 @@
-import { List, ListItem, ListItemButton, Paper, Toolbar, Typography } from '@mui/material';
+import { Button, List, ListItem, ListItemButton, Paper, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-import Button from './Button';
+
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -9,6 +9,7 @@ import DnsIcon from '@mui/icons-material/Dns';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
+import PaymentsIcon from '@mui/icons-material/Payments';
 import { Inertia } from '@inertiajs/inertia'
 
 
@@ -26,6 +27,10 @@ export default function DrawerContents() {
             text: "Profile",
             url: '/profile',
             icon: <AccountCircleIcon sx={{ color: '#fff' }} />
+        }, {
+            text: "Subscriptions",
+            url: '/subscriptions',
+            icon: <PaymentsIcon sx={{ color: '#fff' }} />
         }, {
             text: "Settings",
             url: '/settings',

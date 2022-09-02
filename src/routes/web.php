@@ -4,7 +4,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\TestPageController;
+use App\Http\Controllers\SubscriptionController;
 use App\Models\Domain;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,8 +58,23 @@ Route::get('/domain/{domain_name}/script', function ($domainName) {
 
 Route::get('/test-page', [TestPageController::class, 'get']);
 
+Route::get('/subscriptions', [SubscriptionController::class, 'getSubscriptionsPage'])
+    ->middleware(['auth', 'verified'])
+    ->name('subscriptions');
 
+Route::get('/subscription-checkout', [SubscriptionController::class, 'getSubscriptionCheckoutPage'])
+    ->middleware(['auth', 'verified']);
 
+Route::get('/subscription-success', [SubscriptionController::class, 'getSubscriptionSuccessPage'])
+    ->middleware(['auth', 'verified'])
+    ->name('subscription-success');
+
+Route::get('/billing-portal', [SubscriptionController::class, 'getSubscriptionBillingPortalPage'])
+    ->middleware(['auth', 'verified']);
+
+Route::get('/subscription-cancel', [SubscriptionController::class, 'getSubscriptionCancelPage'])
+    ->middleware(['auth', 'verified'])
+    ->name('subscription-cancel');
 
 
 require __DIR__.'/auth.php';
