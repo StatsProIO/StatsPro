@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@/Components/Button';
+import { Button } from '@mui/material';
 import Guest from '@/Layouts/Guest';
 import Input from '@/Components/Input';
 import ValidationErrors from '@/Components/ValidationErrors';
