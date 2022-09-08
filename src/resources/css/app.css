@@ -13,16 +13,38 @@
     background-position-x: right;
 }
 
+.home {
+    background-color: #fff;
+}
+
+.dark-blue {
+    background-color: #1a335d;
+}
+
+.bright-blue-background {
+    background-color: #0080ff;
+}
+
+.font-white {
+    color: #fff;
+}
+
+.gray-background {
+    background-color: #e5e5e5;
+}
+
+.light-gray-background {
+    background-color: #f0f0f0;
+}
 
 @media (min-width: 768px) {}
 
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
     .hero-row {
         background-color: #fff;
-        background-image: url('/images/background.svg');
+        background-image: url('/images/background-5.svg');
         background-repeat: no-repeat;
         background-size: cover;
-        background-position-y: 0;
         background-position-x: 0;
     }
 
@@ -32,9 +54,6 @@
         background-size: cover;
         background-position-y: bottom;
     }
-
-
-
 }
 
 @media (min-width: 1200px) {}

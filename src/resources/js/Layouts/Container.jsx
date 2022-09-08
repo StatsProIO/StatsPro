@@ -4,6 +4,7 @@ import { Box, Container as MuiContainer, createTheme, Toolbar } from '@mui/mater
 import NavBar from '@/components/NavBar';
 import { ThemeProvider } from '@emotion/react';
 import Drawers from '@/components/Drawers';
+import Footer from "@/components/Footer";
 
 
 export default function Container({ children, showDrawer, showNavLinks, auth }) {
@@ -20,7 +21,7 @@ export default function Container({ children, showDrawer, showNavLinks, auth }) 
             },
         },
         typography: {
-            fontFamily: 'Inter, sans- serif',
+            fontFamily: 'Barlow, sans-serif',
         },
         shape: {
             borderRadius: 8,
@@ -61,6 +62,7 @@ export default function Container({ children, showDrawer, showNavLinks, auth }) 
                         children
                 }
             </ThemeProvider>
+            <Footer/>
         </>
     );
 }

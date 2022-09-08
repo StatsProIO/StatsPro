@@ -46,7 +46,7 @@ export default function Charts({ domain, setDomain }) {
     const [locations, setLocations] = useState([]);
 
     const [uniqueVisitorsCount, setUniqueVisitorsCount] = useState(0);
-``    const [uniqueVisitorsCountDifferenceRate, setUniqueVisitorsCountDifferenceRate] = useState(0);
+    const [uniqueVisitorsCountDifferenceRate, setUniqueVisitorsCountDifferenceRate] = useState(0);
     const [pageviewsCount, setPageviewsCount] = useState(0);
     const [pageviewsCountDifferenceRate, setPageviewsCountDifferenceRate] = useState(0);
     const [bounceRate, setBounceRate] = useState(0);

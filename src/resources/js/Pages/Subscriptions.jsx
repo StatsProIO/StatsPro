@@ -63,7 +63,7 @@ export default function Subscriptions(props) {
             </Grid>
 
 
-            <SubscriptionOptions currentProductSubscription={currentProductSubscription} />
+            <SubscriptionOptions authUser={props.auth.user} showLabels={true} currentProductSubscription={currentProductSubscription} />
 
         </Authenticated>
     );

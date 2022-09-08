@@ -6,8 +6,8 @@
 <svg viewBox="0 0 100 37" xmlns="http://www.w3.org/2000/svg" style="position:absolute; z-index: -100;" class="header">
     <defs>
         <linearGradient id="gradientOrangeToPink" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="50%" style="stop-color:#e449a1;stop-opacity:1" ></stop>
-            <stop offset="100%" style="stop-color:#ed956e;stop-opacity:1" ></stop>
+            <stop offset="50%" style="stop-color:#7200ff;stop-opacity:1" ></stop>
+            <stop offset="100%" style="stop-color:#1c5aff;stop-opacity:1" ></stop>
         </linearGradient>
 
 
