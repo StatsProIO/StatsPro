@@ -14,18 +14,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $user = \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'user1@gmail.com',
-        // ]);
+//         $user = \App\Models\User::factory()->create([
+//             'name' => 'Test User',
+//             'email' => 'user1@gmail.com',
+//         ]);
+//
+//          \App\Models\Domain::factory()->create([
+//             'user_id' => $user->id,
+//             'domain_name' => 'mydomain.com',
+//         ]);
 
-        //  \App\Models\Domain::factory()->create([
-        //     'user_id' => $user->id,
-        //     'domain_name' => 'mydomain.com',
-        // ]);
-
-        // \App\Models\User::factory(10)->create();
-        // \App\Models\Domain::factory(10)->create();
-        \App\Models\Event::factory(1000)->create();
+         \App\Models\User::factory(10)->create();
+         \App\Models\Domain::factory(10)->create();
+        \App\Models\Event::factory(200)->create();
     }
 }

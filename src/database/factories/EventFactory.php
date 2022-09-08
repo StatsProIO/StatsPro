@@ -29,7 +29,7 @@ class EventFactory extends Factory
             'event_name' =>  'pageview',
             'ip_address' => $this->faker->ipv4(),
             'user_agent' => $this->faker->userAgent(),
-            'visitor_hash' => $this->faker->sha256(),
+            'visitor_id' => $this->faker->sha256(),
             'request_hash' => $this->faker->sha256(),
             'is_unique' => $this->faker->boolean(),
             'location_href' => $this->faker->url(),
