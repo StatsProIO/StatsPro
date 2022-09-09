@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 100 37" style="position:absolute; z-index: -100;" class="header" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradientOrangeToPink" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0.5" style="stop-color:#6e19ff;stop-opacity:1"/>
+      <stop offset="1" style="stop-color:#1261ff;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <rect width="88.83" height="68.125" rx="15" ry="5" fill="url(#gradientOrangeToPink)" transform="matrix(0.986946, 0.16105, -1.158189, 0.824233, 42.37867, -31.957518)" style=""/>
+    <rect width="89.788" height="67.088" rx="15" ry="5" fill="#2a385c" transform="matrix(0.988061, 0.154062, -1.168552, 0.829878, 46.645386, -33.998272)" style=""/>
+  </g>
+</svg>

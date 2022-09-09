@@ -32,7 +32,7 @@ const Footer = () => {
 
             <Grid container justifyContent="center" alignItems="center" textAlign="center" sx={{pt: 6}}>
                 <Grid align="center">
-                    <Avatar variant={"rounded"} src="/images/logo.png" style={{ width: 35, height: 20, }} />
+                    <Avatar variant={"rounded"} src="/images/logo.svg" style={{ width: 100, height: 'auto', }} />
                     <Typography variant="h6" noWrap component="a" href="/"
                         sx={{
                             color: 'inherit',

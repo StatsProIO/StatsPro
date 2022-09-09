@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="373.511 118.827 99.998 98.739" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <linearGradient id="gradient-2" bx:pinned="true">
+      <title>my gradient</title>
+      <stop offset="0" style="stop-color: rgb(0, 191, 255);"/>
+      <stop offset="1" style="stop-color: rgb(96, 38, 255);"/>
+    </linearGradient>
+    <linearGradient id="gradient-2-6" gradientUnits="userSpaceOnUse" x1="605.272" y1="209.788" x2="605.272" y2="274.876" xlink:href="#gradient-2"/>
+    <linearGradient id="gradient-2-7" gradientUnits="userSpaceOnUse" x1="605.272" y1="209.788" x2="605.272" y2="274.876" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" xlink:href="#gradient-2"/>
+    <linearGradient id="gradient-2-8" gradientUnits="userSpaceOnUse" x1="605.272" y1="209.788" x2="605.272" y2="274.876" gradientTransform="matrix(0.6231, 0.42156, -0.476532, 0.533854, 328.100519, -185.212706)" xlink:href="#gradient-2"/>
+    <linearGradient id="gradient-0" bx:pinned="true">
+      <stop offset="0" style="stop-color: rgb(255, 255, 255);"/>
+      <stop offset="0.385" style="stop-color: rgba(255, 255, 255, 0);"/>
+    </linearGradient>
+    <linearGradient id="gradient-0-0" gradientUnits="userSpaceOnUse" x1="607.537" y1="209.677" x2="607.537" y2="274.731" gradientTransform="matrix(1, 0, 0, 1, 0, 0)" xlink:href="#gradient-0"/>
+  </defs>
+  <rect style="fill: url(#gradient-2-6);" transform="matrix(0.78463, 0.619964, -0.632132, 0.775016, 81.026962, -400.486908)" x="596.285" y="209.788" width="17.974" height="65.088" rx="9.07" ry="9.07"/>
+  <rect style="fill: url(#gradient-2-7);" transform="matrix(0.78463, 0.619964, -0.632132, 0.775016, 108.894867, -400.264282)" x="596.285" y="209.788" width="17.974" height="65.088" rx="9.07" ry="9.07" bx:origin="0.470787 0.500869"/>
+  <rect style="fill: url(#gradient-2-8);" transform="matrix(0.94519, -0.326521, 0.311859, 0.950255, -186.041656, 160.636276)" x="596.287" y="181.942" width="17.974" height="56.449" ry="9.07" rx="9.07" bx:origin="0.491 0.109"/>
+  <rect style="fill: url(#gradient-0-0); fill-opacity: 0.52;" transform="matrix(0.784738, 0.619827, -0.631997, 0.775126, 107.000969, -401.738556)" x="598.516" y="209.677" width="18.042" height="65.054" rx="9.07" ry="9.07" bx:origin="0.576785 0.598947"/>
+</svg>

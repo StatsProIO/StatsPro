@@ -36,9 +36,9 @@ const rows = [
 export default function Welcome(props) {
     return (
         <Guest auth={props.auth}>
-            <Head title="Marble Metrics" />
+
             <div className="home">
-                <Grid container spacing={0} className="hero-row" sx={{ pt: 5 }} justifyContent="center" >
+                <Grid container spacing={0} className="hero-row" sx={{ pt: 5, px: 1 }} justifyContent="center" >
                     <Grid item xl={5} lg={7} md={7} sm={11} xs={12} >
                         <Typography variant="h2" component="div" sx={{ fontWeight: 600, textAlign: 'center' }} gutterBottom>
                             GDPR-compliant Google Analytics alternative without compromises
