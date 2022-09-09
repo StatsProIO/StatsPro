@@ -2,3 +2,4 @@
 .env.backup
 /.idea
 /.vscode
+.DS_Store
