@@ -29,7 +29,7 @@ const rows = [
     createData('No cookie banner required', true, false, true, true, true),
     createData('Does not use fingerprinting', true,false, false, false, true),
     createData('Does not collect users IP addresses', true,false, false, false, true),
-    createData('Open Source', true,true, false, true, false),
+    createData('Open Source', true,false, false, true, false),
     createData('Can be self hosted', true,true, false, true, false),
 ];
 

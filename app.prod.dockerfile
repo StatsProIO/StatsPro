@@ -1,6 +1,7 @@
 FROM php:8.1-fpm
 
 ENV APP_ENV=production
+ENV APP_DEBUG=false
 ENV DB_HOST=***REMOVED***
 ENV DB_USERNAME=admin
 ENV DB_PASSWORD=***REMOVED*** 
@@ -23,3 +24,9 @@ RUN npm install -g n
 RUN n stable
 
 COPY --chown=www-data src /var/www/
+
+WORKDIR /var/www/
+RUN composer install --optimize-autoloader --no-dev
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
