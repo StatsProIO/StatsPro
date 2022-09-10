@@ -1,0 +1,28 @@
+on: push
+name: Build Prod
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: php:8.1-fpm
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        working-directory: ./src
+        with:
+          node-version: '16.17.0'
+      - name: Install composer dependencies
+        uses: php-actions/composer@v6.0.0
+        working-directory: ./src
+        with:
+          command: install
+          dev: no
+          args: --no-dev
+      - name: Install node dependencies
+        working-directory: ./src
+        run: |
+          npm install;
+      - name: Build vite
+        run: |
+          npm run build;
