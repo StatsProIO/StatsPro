@@ -20,5 +20,6 @@ jobs:
         run: |
           npm install;
       - name: Build vite
+        working-directory: ./src
         run: |
           npm run build;
