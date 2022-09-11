@@ -11,6 +11,12 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.17.0'
+      - name: list directory
+        run: |
+          ls
+          pwd
+      - name: Check the content of the output log
+        run: cat /home/runner/work/MarbleMetrics/MarbleMetrics/output.log
       - name: Install composer dependencies
         uses: php-actions/composer@v6
         with:
