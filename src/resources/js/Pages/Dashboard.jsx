@@ -1,5 +1,5 @@
-import Charts from '@/components/Charts';
-import FirstEventWait from '@/components/FirstEventWait';
+import Charts from '@/Components/Charts';
+import FirstEventWait from '@/Components/FirstEventWait';
 import useQueryString from '@/customHooks/useQueryString';
 import Authenticated from '@/Layouts/Authenticated';
 import { useEffect, useState } from 'react';

@@ -1,6 +1,6 @@
 import { Inertia } from '@inertiajs/inertia';
 import { Button, Grid, Typography, Box } from '@mui/material';
-import ScriptAndInstructions from '@/components/ScriptAndInstructions';
+import ScriptAndInstructions from '@/Components/ScriptAndInstructions';
 import Authenticated from '@/Layouts/Authenticated';
 
 export default function DomainScript(props) {
