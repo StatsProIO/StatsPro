@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: '16.17.0'
       - name: Install composer dependencies
-        uses: php-actions/composer@v6.0.0
+        uses: php-actions/composer@v6
         with:
           command: install
           dev: no
