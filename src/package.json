@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build -d -l debug",
+        "build": "vite build",
         "build-broadcaster": "vite build --config vite-broadcaster.config.js"
     },
     "devDependencies": {
