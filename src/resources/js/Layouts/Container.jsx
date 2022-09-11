@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box, Container as MuiContainer, createTheme, Toolbar } from '@mui/material';
-import NavBar from '@/components/NavBar';
+import NavBar from '@/Components/NavBar';
 import { ThemeProvider } from '@emotion/react';
-import Drawers from '@/components/Drawers';
-import Footer from "@/components/Footer";
+import Drawers from '@/Components/Drawers';
+import Footer from "@/Components/Footer";
 
 
 export default function Container({ children, showDrawer, showNavLinks, auth }) {
