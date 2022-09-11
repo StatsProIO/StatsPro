@@ -1,6 +1,4 @@
-import Charts from '@/components/Charts';
-import FirstEventWait from '@/components/FirstEventWait';
-import { SubscriptionOptions } from '@/components/SubscriptionOptions';
+import { SubscriptionOptions } from '@/Components/SubscriptionOptions';
 import useQueryString from '@/customHooks/useQueryString';
 import Authenticated from '@/Layouts/Authenticated';
 import { usePage } from '@inertiajs/inertia-react';

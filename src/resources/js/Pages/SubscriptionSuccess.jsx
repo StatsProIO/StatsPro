@@ -1,7 +1,3 @@
-import Charts from '@/components/Charts';
-import FirstEventWait from '@/components/FirstEventWait';
-import { SubscriptionOptions } from '@/components/SubscriptionOptions';
-import useQueryString from '@/customHooks/useQueryString';
 import Authenticated from '@/Layouts/Authenticated';
 import { usePage } from '@inertiajs/inertia-react';
 import { Alert, AlertTitle, Box, Button, Grid, Typography } from '@mui/material';
