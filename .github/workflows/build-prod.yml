@@ -15,9 +15,11 @@ jobs:
         run: |
           ls
           pwd
-          touch ${{ github.workspace }}/output.log
+          echo ${{ github.workspace }}
       - name: Check the content of the output log
-        run: cat ${{ github.workspace }}/output.log
+        run: |
+          mkdir -p ${{ github.workspace }}
+          touch ${{ github.workspace }}/output.log
       - name: Install composer dependencies
         uses: php-actions/composer@v6
         with:
