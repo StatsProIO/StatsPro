@@ -25,7 +25,7 @@ jobs:
         with:
           command: install
           dev: no
-          args: --working-dir ${{ github.workspace }}/src
+          args: --verbose --working-dir ${{ github.workspace }}/src
       - name: Install node dependencies
         working-directory: ./src
         run: |
