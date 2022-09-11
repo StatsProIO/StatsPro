@@ -2,12 +2,12 @@ import { Box, Paper, Stack, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useState, useRef } from 'react';
 import { FormControl, Grid, InputLabel, Menu, MenuItem, Select } from '@mui/material';
-import { TopSourcesChart } from '@/components/TopSourcesChart';
-import { DashboardInfoCard } from '@/components/DashboardInfoCard';
-import { TopPages } from '@/components/TopPages';
-import { PageviewsChart } from '@/components/PageviewsChart';
-import { DevicesChart } from '@/components/DevicesChart';
-import { LocationChart } from '@/components/LocationChart';
+import { TopSourcesChart } from '@/Components/TopSourcesChart';
+import { DashboardInfoCard } from '@/Components/DashboardInfoCard';
+import { TopPages } from '@/Components/TopPages';
+import { PageviewsChart } from '@/Components/PageviewsChart';
+import { DevicesChart } from '@/Components/DevicesChart';
+import { LocationChart } from '@/Components/LocationChart';
 import useQueryString from '@/customHooks/useQueryString';
 import {
     ArcElement,
