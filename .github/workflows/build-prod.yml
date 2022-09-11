@@ -25,7 +25,7 @@ jobs:
         with:
           command: install
           dev: no
-          args: --no-dev --working-dir ./src
+          args: --working-dir ./src
       - name: Install node dependencies
         working-directory: ./src
         run: |
