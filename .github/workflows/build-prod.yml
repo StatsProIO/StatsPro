@@ -13,11 +13,10 @@ jobs:
           node-version: '16.17.0'
       - name: Install composer dependencies
         uses: php-actions/composer@v6.0.0
-        working-directory: ./src
         with:
           command: install
           dev: no
-          args: --no-dev
+          args: --no-dev --working-dir ./src
       - name: Install node dependencies
         working-directory: ./src
         run: |
