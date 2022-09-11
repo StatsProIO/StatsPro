@@ -14,7 +14,7 @@ jobs:
       - name: Install composer dependencies
         uses: ramsey/composer-install@v2
         with:
-          composer-options: "--verbose --working-dir ${{ github.workspace }}/src"
+          working-directory: "src"
       - name: Install node dependencies
         working-directory: ./src
         run: |
