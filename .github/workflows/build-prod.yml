@@ -22,4 +22,5 @@ jobs:
       - name: Build vite
         run: |
           cd ./src
+          ls resrouces/js/Components
           npm run build
