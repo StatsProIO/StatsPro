@@ -2,7 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/resources/js/*"]
+            "@/*": ["resources/js/*"]
         }
     },
     "exclude": ["node_modules", "public"]
