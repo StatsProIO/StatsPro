@@ -1,7 +1,7 @@
 import { Grid, Typography, Box, Toolbar } from '@mui/material';
 
 import Authenticated from '@/Layouts/Authenticated';
-import AddDomainForm from '@/components/AddDomainForm';
+import AddDomainForm from '@/Components/AddDomainForm';
 
 export default function ManageDomains(props) {
 
