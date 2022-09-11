@@ -11,21 +11,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.17.0'
-      - name: list directory
-        run: |
-          ls
-          pwd
-          echo ${{ github.workspace }}
-      - name: Check the content of the output log
-        run: |
-          mkdir -p ${{ github.workspace }}
-          touch ${{ github.workspace }}/output.log
       - name: Install composer dependencies
-        uses: php-actions/composer@v6
+        uses: ramsey/composer-install@v2
         with:
-          command: install
-          dev: no
-          args: --verbose --working-dir ${{ github.workspace }}/src
+          composer-options: "--verbose --working-dir ${{ github.workspace }}/src"
       - name: Install node dependencies
         working-directory: ./src
         run: |
