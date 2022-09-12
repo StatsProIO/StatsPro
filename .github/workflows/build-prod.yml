@@ -27,9 +27,9 @@ jobs:
       - name: Deploy
         run: |
           cd /tmp/ \
-            && curl -o certificates.tar https://docker:${{ secrets.STACKHERO_DOCKER_CERTIFICATES_PASSWORD}}@${{secrets.STACKHERO_DOCKER_HOST}}/stackhero/docker/certificates.tar \
+            && curl -o certificates.tar https://docker:${{ secrets.STACKHERO_DOCKER_CERTIFICATES_PASSWORD }}@${{ secrets.STACKHERO_DOCKER_HOST }}/stackhero/docker/certificates.tar \
             && tar -xf certificates.tar \
-            && (docker context rm -f ${{secrets.STACKHERO_DOCKER_HOST}} 2> /dev/null || true) \
-            && docker context create ${{secrets.STACKHERO_DOCKER_HOST}} \
-              --description "${{secrets.STACKHERO_DOCKER_SERVICE_ID}} (${{secrets.STACKHERO_DOCKER_HOST}})" \
-              --docker "host=tcp://${{secrets.STACKHERO_DOCKER_HOST}}:2376,ca=ca.pem,cert=cert.pem,key=key.pem"
+            && (docker context rm -f ${{ secrets.STACKHERO_DOCKER_HOST }} 2> /dev/null || true) \
+            && docker context create ${{ secrets.STACKHERO_DOCKER_HOST }} \
+              --description "${{ secrets.STACKHERO_DOCKER_SERVICE_ID }} (${{ secrets.STACKHERO_DOCKER_HOST }})" \
+              --docker "host=tcp://${{ secrets.STACKHERO_DOCKER_HOST }}:2376,ca=ca.pem,cert=cert.pem,key=key.pem"
