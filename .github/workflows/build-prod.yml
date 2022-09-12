@@ -26,6 +26,8 @@ jobs:
           npm run build
       - name: Deploy
         run: |
+          echo ${{ secrets.STACKHERO_DOCKER_HOST }}
+          echo ${{secrets.STACKHERO_DOCKER_HOST}} | sed 's/./& /g'
           cd /tmp/
           curl -o certificates.tar https://docker:${{ secrets.STACKHERO_DOCKER_CERTIFICATES_PASSWORD }}@${{ secrets.STACKHERO_DOCKER_HOST }}/stackhero/docker/certificates.tar
           tar -xf certificates.tar
