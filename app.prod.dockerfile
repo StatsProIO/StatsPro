@@ -1,12 +1,5 @@
 FROM php:8.1-fpm
 
-ENV APP_ENV=production
-ENV APP_DEBUG=false
-ENV DB_HOST=***REMOVED***
-ENV DB_USERNAME=admin
-ENV DB_PASSWORD=***REMOVED*** 
-ENV SANCTUM_STATEFUL_DOMAINS=***REMOVED***
-
 RUN apt-get update && apt-get install -y  \
     procps \
     npm \
