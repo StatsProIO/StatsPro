@@ -6,6 +6,10 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v3
+      - name: setup dot env
+        run: |
+          echo ${{ secrets.DOT_ENV }} > src/.env
+          cat src/.env
       - uses: actions/setup-node@v3
         with:
           node-version: '16.17.0'
@@ -35,3 +39,4 @@ jobs:
           cd ${{ github.workspace }}
           docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
           docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+          docker image prune -f
