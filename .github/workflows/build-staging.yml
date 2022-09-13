@@ -1,5 +1,5 @@
 on: push
-name: Build Prod
+name: Build Staging
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -63,4 +63,4 @@ jobs:
           docker-compose exec app php artisan migrate:status
 
           #run migrations
-          docker-compose exec app php artisan migrate
+          docker-compose exec -T app php artisan migrate
