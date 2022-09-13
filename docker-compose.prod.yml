@@ -12,5 +12,5 @@ services:
           dockerfile: web.prod.dockerfile
       labels:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
-        - "traefik.http.routers.test.rule=HostRegexp(`***REMOVED***`)" # Defined host
+        - "traefik.http.routers.test.rule=HostRegexp(`STACKHERO_DOCKER_HOST`)" # Defined host
         - "traefik.http.routers.test.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
