@@ -57,3 +57,10 @@ jobs:
 
           #clean up
           docker image prune -f
+      - name: Run migrations
+        run: |
+          #check for migrations
+          docker-compose exec app php artisan migrate:status
+
+          #run migrations
+          docker-compose exec app php artisan migrate
