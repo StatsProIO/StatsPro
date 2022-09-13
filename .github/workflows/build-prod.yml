@@ -13,7 +13,7 @@ jobs:
           cat src/.env
       - name: setup dockercompose
         run: |
-          sed -i "s/STACKHERO_DOCKER_HOST }}/${{ secrets.STACKHERO_DOCKER_HOST }}/g" docker-compose.prod.yml
+          sed -i "s/STACKHERO_DOCKER_HOST/${{ secrets.STACKHERO_DOCKER_HOST }}/g" docker-compose.prod.yml
           cat docker-compose.prod.yml
       - name: view the secrets context
         shell: bash
