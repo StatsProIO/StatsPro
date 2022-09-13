@@ -8,7 +8,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: setup dot env
         run: |
-          echo '${{ toJson(secrets) }}' | jq '.' | sed 's/^  "//g' | sed 's/": "/="/g' | sed 's/,$//g'| grep 'DOT_ENV_' | sed 's/DOT_ENV_//g'  > src/.env
+          mv src/.env.example src/.env
+          echo '${{ secrets.DOT_ENV }}' > src/.env
           cat src/.env
       - name: view the secrets context
         shell: bash
