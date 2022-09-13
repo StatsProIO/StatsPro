@@ -68,7 +68,7 @@ jobs:
 
           # reload nginx
           # start routing requests to the new container (as well as the old)
-          docker-compose exec web /usr/sbin/nginx -s reload
+          docker-compose exec -T web /usr/sbin/nginx -s reload
 
           docker stop $old_container_id
           docker rm $old_container_id
