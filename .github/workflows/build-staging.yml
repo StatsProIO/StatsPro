@@ -42,7 +42,10 @@ jobs:
           npm run build
       - name: Build broadcaster
         run: |
+          set -x
           cd ./src
+          cat vite-broadcaster.config.js
+          pwd
           npm run build-broadcaster
       - name: Deploy
         run: |
