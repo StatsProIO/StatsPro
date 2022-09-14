@@ -61,6 +61,7 @@ jobs:
           docker image prune -f
       - name: Run migrations
         run: |
+          set -x
           #check for migrations
           docker-compose exec -T app php artisan migrate:status
 
