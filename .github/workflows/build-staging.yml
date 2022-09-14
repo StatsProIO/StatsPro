@@ -40,11 +40,6 @@ jobs:
           cd ./src
           ls resources/js/Components
           npm run build
-      - name: Build broadcaster
-        run: |
-          set -x
-          cd ./src
-          npm run build-broadcaster
       - name: Deploy
         run: |
           set -x
