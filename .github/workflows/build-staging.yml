@@ -52,41 +52,10 @@ jobs:
           cd ${{ github.workspace }}
           docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
 
-          # do a deploy (should only be done when there are no containers)
+          # do a deploy
           docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
           docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
           docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-
-          #zero downtime deployment
-          service_name=app
-          old_container_id=$(docker ps -f name=$service_name -q | tail -n1)
-          # bring a new container online, running new code
-          # (nginx continues routing to the old container only)
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps --scale $service_name=2 --no-recreate $service_name
-
-          # wait for new container to be available
-          new_container_id=$(docker ps -f name=$service_name -q | head -n1)
-          new_container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $new_container_id)
-
-          #TODO
-          # curl --silent --include --retry-connrefused --retry 30 --retry-delay 1 --fail http://$new_container_ip:9000/ || exit 1
-
-          # reload nginx
-          # start routing requests to the new container (as well as the old)
-          docker-compose exec -T web /usr/sbin/nginx -s reload
-
-          docker stop $old_container_id
-          docker rm $old_container_id
-
-          docker-compose up -d --no-deps --scale $service_name=1 --no-recreate $service_name
-
-          # reload nginx
-          # stop routing requests to the old container
-          docker-compose exec -T web /usr/sbin/nginx -s reload
-
-          #start up the other containers
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-
 
           #clean up
           docker image prune -f
