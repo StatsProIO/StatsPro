@@ -52,6 +52,9 @@ jobs:
           cd ${{ github.workspace }}
           docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
 
+          # do a deploy (should only be done when there are no containers)
+          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
           #zero downtime deployment
           service_name=app
           old_container_id=$(docker ps -f name=$service_name -q | tail -n1)
