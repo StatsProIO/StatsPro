@@ -63,7 +63,7 @@ jobs:
         run: |
           set -x
           #create database migrations table
-          php artisan migrate:install || true
+          docker-compose exec -T app php artisan migrate:install || true
 
           #check for migrations
           docker-compose exec -T app php artisan migrate:status
