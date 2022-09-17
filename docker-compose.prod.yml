@@ -10,7 +10,10 @@ services:
   web:
       build:
           dockerfile: web.prod.dockerfile
+      hostname: web
+      container_name: web
+      restart: unless-stopped
       labels:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
-        - "traefik.http.routers.test.rule=HostRegexp(`marblemetrics.com`)" # Defined host
-        - "traefik.http.routers.test.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
+        - "traefik.http.routers.web.rule=Host(`marblemetrics.com`)" # Defined host
+        - "traefik.http.routers.web.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
