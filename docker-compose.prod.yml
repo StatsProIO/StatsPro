@@ -13,6 +13,9 @@ services:
       hostname: web
       container_name: web
       restart: unless-stopped
+      ports:
+        - 80:80
+        - 443:443
       labels:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
         - "traefik.http.routers.web.rule=Host(`marblemetrics.com`)" # Defined host
