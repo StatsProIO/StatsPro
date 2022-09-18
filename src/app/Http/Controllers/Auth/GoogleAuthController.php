@@ -37,7 +37,7 @@ class GoogleAuthController extends Controller
             'trial_ends_at' => now()->addYears(10),
         ]);
 
-        dd($user);
+        dd(\App\Models\User::all(), $user);
 
         Auth::login($user);
         return redirect('/dashboard');
