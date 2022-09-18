@@ -22,6 +22,8 @@ class GoogleAuthController extends Controller
     {
         $googleUser = Socialite::driver('google')->user();
 
+        Log::error($googleUser);
+
         $user = \App\Models\User::updateOrCreate([
             'google_id' => $googleUser->id,
         ], [
@@ -33,7 +35,7 @@ class GoogleAuthController extends Controller
             'trial_ends_at' => now()->addYears(10),
         ]);
 
-        Log::info($user);
+        dd($user);
 
         Auth::login($user);
         return redirect('/dashboard');
