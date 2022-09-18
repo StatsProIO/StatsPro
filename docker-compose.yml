@@ -8,7 +8,7 @@ services:
       working_dir: /var/www
 
   # Web Server
-  web:
+  webnginx:
       build:
           context: .
       working_dir: /var/www

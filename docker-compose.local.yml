@@ -10,7 +10,7 @@ services:
       volumes:
         - ./src:/var/www
   # Web Server
-  web:
+  webnginx:
       build:
           dockerfile: web.local.dockerfile
       volumes:
