@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Log;
 
 
 class GoogleAuthController extends Controller
@@ -28,8 +29,11 @@ class GoogleAuthController extends Controller
             'email' => $googleUser->email,
             'email_verified_at' => Carbon::now(),
             'google_id' => $googleUser->id,
-            'password' => encrypt(substr(md5(rand()), 0, 10))
+            'password' => encrypt(substr(md5(rand()), 0, 10)),
+            'trial_ends_at' => now()->addYears(10),
         ]);
+
+        Log::info($user);
 
         Auth::login($user);
         return redirect('/dashboard');
