@@ -46,7 +46,8 @@ These steps have been tested on Mac OS X 12.5.
     ```bash
     make rebuild-local
     ```
-2. Now you'll need to SSH into the app container to install all Javascript and PHP dependencies and run our Vite server. This will compile and serve up our frontend resources.
+2. Manually connect to the database with username `postgres` and password `postgres` create a `marble_metrics` database.
+3. Now you'll need to SSH into the app container to install all Javascript and PHP dependencies and run our Vite server. This will compile and serve up our frontend resources.
     ```bash
     docker-composer exec app /bin/bash
     cd src
@@ -55,8 +56,8 @@ These steps have been tested on Mac OS X 12.5.
     npm run dev
     ```
    
-3. Now you should be able to visit `localhost` to see Marble Metrics running.
-4. Next, we'll run migrations on the database to get all the tables setup. While SSHed into the container, run
+4. Now you should be able to visit `localhost` to see Marble Metrics running.
+5. Next, we'll run migrations on the database to get all the tables setup. While SSHed into the container, run
     ```bash
     php artisan migrate
     ```
@@ -69,7 +70,7 @@ Marble Metrics is deployed to Stackhero using Github Actions.
 
 1. Create a new Docker service within Stackhero. Keep the host, service ID, and certificates password handy as we'll be using them in a later step.
 
-2. Create a new Postgres service within Stackhero. Keep the host, username, and password handy as well be using them in a later step.
+2. Create a new Postgres service within Stackhero. Keep the host, username, and password handy as well be using them in a later step. Manually connect to the database and create a `marble_metrics` database.
 
 3. Setup Github Actions environment variables
     * STACKHERO_DOCKER_HOST - set this to the value provided by Stackhero
@@ -88,6 +89,9 @@ Marble Metrics is deployed to Stackhero using Github Actions.
     DB_DATABASE=marble_metrics
     DB_USERNAME=<your postgres username>
     DB_PASSWORD=<your postgres password>
+   
+   GOOGLE_CLIENT_ID=<optional, google client id for Signin With Google>
+   GOOGLE_CLIENT_SECRET=<optional, google client secret for Signin With Google>
     ```
     Replace the values in triangle brackets with the appropriate values.
    
