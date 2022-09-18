@@ -62,7 +62,7 @@ export default function Container({ children, showDrawer, showNavLinks, auth }) 
                         children
                 }
             </ThemeProvider>
-            <Footer/>
+
         </>
     );
 }

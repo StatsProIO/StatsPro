@@ -19,6 +19,7 @@ services:
       image: postgres:14.4-alpine
       restart: always
       environment:
+        - POSTGRES_DB=marble_metrics
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=postgres
       ports:

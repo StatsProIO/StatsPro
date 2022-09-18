@@ -54,7 +54,12 @@ These steps have been tested on Mac OS X 12.5.
     npm install
     npm run dev
     ```
+   
 3. Now you should be able to visit `localhost` to see Marble Metrics running.
+4. Next, we'll run migrations on the database to get all the tables setup. While SSHed into the container, run
+    ```bash
+    php artisan migrate
+    ```
 
 ### Running In The Cloud
 Marble Metrics is hosted on Stackhero, a European company which has servers in Europe. This guide assumes you will be running on Stackhero. Marble Metrics should run the same on other docker cloud providers but there may be some work to get it all configured. If you don't want to deal with running Marble Metrics on your own, [we can handle it for you](https://marblemetrics.com).
