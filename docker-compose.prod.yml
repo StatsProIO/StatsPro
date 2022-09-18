@@ -7,16 +7,16 @@ services:
           dockerfile: app.prod.dockerfile
       
   # Web Server
-  web:
+  webnginx:
       build:
           dockerfile: web.prod.dockerfile
-      hostname: web
-      container_name: web
+      hostname: webnginx
+      container_name: webnginx
       restart: unless-stopped
       ports:
         - 80:80
         - 443:443
       labels:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
-        - "traefik.http.routers.web.rule=Host(`hyd20p.stackhero-network.com`)" # Defined host
-        - "traefik.http.routers.web.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
+        - "traefik.http.routers.webnginx.rule=Host(`hyd20p.stackhero-network.com`)" # Defined host
+        - "traefik.http.routers.webnginx.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
