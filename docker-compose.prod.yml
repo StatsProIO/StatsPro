@@ -18,5 +18,5 @@ services:
       labels:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
         - "traefik.http.routers.webnginx.rule=Host(`marblemetrics.com`)" # Defined host
-        - "traefik.http.routers.webnginx.priority=1"
+        - "traefik.http.routers.webnginx.priority=100"
         - "traefik.http.routers.webnginx.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
