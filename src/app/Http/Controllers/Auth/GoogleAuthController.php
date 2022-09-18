@@ -22,10 +22,6 @@ class GoogleAuthController extends Controller
     {
         $googleUser = Socialite::driver('google')->user();
 
-        Log::error($googleUser->id);
-        Log::error($googleUser->name);
-        Log::error($googleUser->email);
-
         $user = \App\Models\User::updateOrCreate([
             'google_id' => $googleUser->id,
         ], [
@@ -36,8 +32,6 @@ class GoogleAuthController extends Controller
             'password' => encrypt(substr(md5(rand()), 0, 10)),
             'trial_ends_at' => now()->addYears(10),
         ]);
-
-        dd(\App\Models\User::all(), $user);
 
         Auth::login($user);
         return redirect('/dashboard');
