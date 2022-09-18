@@ -24,6 +24,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.17.0'
+          cache: 'npm'
+          cache-dependency-path: src/package-lock.json
       - uses: "shivammathur/setup-php@v2"
         with:
           php-version: "latest"
