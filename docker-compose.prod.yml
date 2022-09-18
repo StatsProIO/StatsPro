@@ -17,5 +17,6 @@ services:
         - 80:80
       labels:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
-        - "traefik.http.routers.webnginx.rule=Host(`hyd20p.stackhero-network.com`) && PathPrefix(`/`)" # Defined host
+        - "traefik.http.routers.webnginx.rule=Host(`marblemetrics.com`)" # Defined host
+        - "traefik.http.routers.webnginx.priority=1"
         - "traefik.http.routers.webnginx.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
