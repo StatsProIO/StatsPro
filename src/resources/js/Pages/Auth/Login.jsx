@@ -2,16 +2,11 @@ import React, { useEffect } from 'react';
 
 import Checkbox from '@mui/material/Checkbox';
 import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import Label from '@/Components/Label';
 import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
-import { Box, FormControlLabel, Grid, InputAdornment, TextField, Typography, Button, Stack, Paper } from '@mui/material';
-import PasswordIcon from '@mui/icons-material/Password';
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import SaveIcon from '@mui/icons-material/Save';
+import { Box, FormControlLabel, Grid, TextField, Typography, Paper } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-
+import LoginWithGoogle from "@/Components/LoginWithGoogle";
 
 
 export default function Login({ status, canResetPassword }) {
@@ -53,6 +48,8 @@ export default function Login({ status, canResetPassword }) {
                         <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
                             <Typography sx={{ py: 2 }} variant="h5"><b>Login</b></Typography>
 
+                            <LoginWithGoogle/>
+
                             <form onSubmit={submit}>
 
                                 <TextField
@@ -62,7 +59,6 @@ export default function Login({ status, canResetPassword }) {
                                     name="email"
                                     value={data.email}
                                     autoComplete="username"
-                                    autoFocus
                                     fullWidth
                                     size="large"
                                     onChange={onHandleChange}
@@ -112,17 +108,6 @@ export default function Login({ status, canResetPassword }) {
                     </Paper>
                 </Grid>
             </Grid>
-
-
-
-
-
-
-
-
-
-
-
 
         </Guest >
     );

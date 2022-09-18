@@ -4,6 +4,7 @@ import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import { Box, Grid, Paper, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import LoginWithGoogle from "@/Components/LoginWithGoogle";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -41,6 +42,7 @@ export default function Register() {
                         <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
                             <Typography sx={{ py: 2 }} variant="h5"><b>Register</b></Typography>
 
+                            <LoginWithGoogle/>
 
                             <form onSubmit={submit}>
                                 <TextField
@@ -50,7 +52,6 @@ export default function Register() {
                                     name="name"
                                     value={data.name}
                                     autoComplete="name"
-                                    autoFocus
                                     fullWidth
                                     size="large"
                                     onChange={onHandleChange}

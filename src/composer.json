@@ -11,6 +11,7 @@
         "laravel/cashier": "^13.15",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "league/iso3166": "^4.0",
         "ramsey/uuid": "^4.4",
