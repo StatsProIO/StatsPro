@@ -21,7 +21,7 @@ You can run Marble Metrics on your own servers (by following the instructions be
 
 Learn more about why you should choose Marble Metrics over other analytics providers on our [website here](https://marblemetrics.com).
 
-### Architecture
+### 🏛 Architecture
 
 #### Broadcaster
 The Broadcaster is the javascript file which is installed on your website to collect pageview data when users visit your site. It is designed to be as lightweight and un-intrusive as possible.
@@ -34,7 +34,7 @@ One of the most important parts of the backend is The Collector. The Collector r
 #### Frontend
 The frontend of the application is written in React, allowing a clean separation between the backend and frontend application.
 
-### Running Locally
+### 🏠 Running Locally
 The steps below outline how you can run Marble Metrics on your own machine. If you don't want to deal with running Marble Metrics on your own, [we can handle it for you](https://marblemetrics.com).
 
 These steps have been tested on Mac OS X 12.5.
@@ -66,7 +66,7 @@ These steps have been tested on Mac OS X 12.5.
     php artisan migrate
     ```
 
-### Running In The Cloud
+### ☁️ Running In The Cloud
 Marble Metrics is hosted on Stackhero, a European company which has servers in Europe. This guide assumes you will be running on Stackhero. Marble Metrics should run the same on other docker cloud providers but there may be some work to get it all configured. If you don't want to deal with running Marble Metrics on your own, [we can handle it for you](https://marblemetrics.com).
 
 #### 
