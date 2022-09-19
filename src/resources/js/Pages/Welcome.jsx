@@ -73,7 +73,16 @@ export default function Welcome(props) {
 
                 <Grid container alignItems="center" justifyContent="center" sx={{ pb: 6, px: 1  }}>
                     <Grid item sm={8} lg={6}>
-                        <img src="../images/sample-dashboard.png" width="100%" style={{borderRadius: '10px'}} />
+
+
+                        <picture>
+                            <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
+                            <img src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"}/>
+                        </picture>
+
+
+
+
                     </Grid>
                 </Grid>
 
@@ -161,7 +170,7 @@ export default function Welcome(props) {
                             </Typography>
                         </Grid>
                         <Grid item sm={6} lg={2}>
-                            <img src="../images/featuredA_optimized.svg" width="100%" />
+                            <img src="../images/featuredA_optimized.svg" width="100%" loading="lazy" decoding="async" />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -176,7 +185,7 @@ export default function Welcome(props) {
                             </Typography>
                         </Grid>
                         <Grid item sm={6} lg={2}>
-                            <img src="../images/featuredB_optimized.svg" width="100%" />
+                            <img src="../images/featuredB_optimized.svg" width="100%" loading="lazy" decoding="async" />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -191,7 +200,7 @@ export default function Welcome(props) {
                             </Typography>
                         </Grid>
                         <Grid item sm={6} lg={2}>
-                            <img src="../images/featuredC_optimized.svg" width="100%" />
+                            <img src="../images/featuredC_optimized.svg" width="100%" loading="lazy" decoding="async" />
                         </Grid>
                     </Grid>
                 </Grid>
