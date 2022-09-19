@@ -21,7 +21,7 @@ export default function Container({ children, showDrawer, showNavLinks, auth }) 
             },
         },
         typography: {
-            fontFamily: 'Barlow, sans-serif',
+            fontFamily: 'Barlow, Helvetica, sans-serif',
         },
         shape: {
             borderRadius: 8,
