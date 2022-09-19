@@ -24,9 +24,6 @@ export function SubscriptionOption({ authUser, showLabels, title, price, product
         Inertia.visit('/subscriptions');
     }
 
-    console.log(authUser === true);
-    console.log(!authUser === true);
-
     return <>
         <Paper elevation={1} sx={{ m: 2}} style={{boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
             <Box sx={{ borderRadius: '5px', p: 3 }}>
