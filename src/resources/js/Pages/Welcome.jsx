@@ -74,14 +74,10 @@ export default function Welcome(props) {
                 <Grid container alignItems="center" justifyContent="center" sx={{ pb: 6, px: 1  }}>
                     <Grid item sm={8} lg={6}>
 
-
                         <picture>
                             <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
                             <img src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"}/>
                         </picture>
-
-
-
 
                     </Grid>
                 </Grid>
