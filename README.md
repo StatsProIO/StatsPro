@@ -9,6 +9,7 @@
 [![Build Staging](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml)
 ![](https://badgen.net/github/commits/marblemetrics/marblemetrics)
 ![](https://badgen.net/github/license/marblemetrics/marblemetrics)
+
 [Marble Metrics](https://marblemetrics.com) is an simple, open-source, easily deployable, and privacy friendly web analytics software. Marble Metrics has many of the features that you would expect from other analytics software without invading your users privacy and without selling data to 3rd parties for advertisements. 
 
 **Marble Metrics does not use cookies and is fully compliant with GDPR, PECR, CCPA.**
