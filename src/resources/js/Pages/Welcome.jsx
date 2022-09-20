@@ -63,7 +63,7 @@ export default function Welcome(props) {
                         </Typography>
 
                         <form >
-                            <TextField size="large" label={email.length === 0 ? 'Email' : ''} variant="outlined" sx={{  backgroundColor: '#fff', borderRadius: '8px', width: '30ch', fontSize: '1.1em'}}  InputLabelProps={{
+                            <TextField size="large" label={email.length === 0 ? 'Email' : ''} variant="outlined" sx={{  backgroundColor: '#fff', borderRadius: '8px', width: '30ch', fontSize: '1.1em'}} type="email" InputLabelProps={{
                                 shrink: false
                             }} onChange={onChange}/>
                             <Button variant="contained" size="large" endIcon={<ArrowForwardIosIcon/>} onClick={submitSignUpForm}
