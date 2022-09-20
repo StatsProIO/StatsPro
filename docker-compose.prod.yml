@@ -17,7 +17,7 @@ services:
         - 80:80
       networks:
         static-network:
-          ipv4_address: 172.19.0.5
+          ipv4_address: 172.22.0.5
       labels:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
         - "traefik.http.routers.webnginx.rule=Host(`STACKHERO_DOCKER_HOST`)" # Defined host
@@ -27,4 +27,4 @@ networks:
   static-network:
     ipam:
       config:
-        - subnet: 172.19.0.0/12
+        - subnet: 172.22.0.0/12
