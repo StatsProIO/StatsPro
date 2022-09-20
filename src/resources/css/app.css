@@ -6,7 +6,7 @@
 
 .hero-row {
     background-color: #fff;
-    background-image: url('/images/background-sm.svg');
+    background-image: url('/images/background-xs.svg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: bottom;
@@ -37,7 +37,16 @@
     background-color: #f0f0f0;
 }
 
-@media (min-width: 768px) {}
+@media (min-width: 600px) {
+    .hero-row {
+        background-color: #fff;
+        background-image: url('/images/background-sm.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: bottom;
+        background-position-x: right;
+    }
+}
 
 @media (min-width: 1200px) {
     .hero-row {

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
 import Button from '@mui/material/Button';
 import Guest from '@/Layouts/Guest';
-import { Box, Grid, Paper, Toolbar, Typography } from '@mui/material';
+import {Box, Grid, Paper, TextField, Toolbar, Typography} from '@mui/material';
 import Container from '@/Layouts/Container';
 import IntegrationCode from '@/Components/IntegrationCode';
 import {SubscriptionOptions} from "@/Components/SubscriptionOptions";
@@ -17,6 +17,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import {Inertia} from "@inertiajs/inertia";
+
+
 
 
 function createData(name, marbleMetrics, googleAnalytics, fathom, plausible, simpleAnalytics) {
@@ -33,20 +36,41 @@ const rows = [
     createData('Can be self hosted', true,true, false, true, false),
 ];
 
+
+
 export default function Welcome(props) {
+    const [email, setEmail] = useState('');
+
+    function onChange(e) {
+        setEmail(e.target.value);
+    }
+
+    function submitSignUpForm() {
+        Inertia.get('/register?email=' + email);
+    }
+
     return (
         <Guest auth={props.auth}>
 
             <div className="home">
                 <Grid container spacing={0} className="hero-row" sx={{ pt: 5, px: 1 }} justifyContent="center" >
-                    <Grid item xl={5} lg={7} md={7} sm={11} xs={12} >
+                    <Grid item xl={5} lg={7} md={7} sm={11} xs={12} textAlign='center' >
                         <Typography variant="h2" component="div" sx={{ fontWeight: 600, textAlign: 'center' }} gutterBottom style={{fontFamily: 'Helvetica', fontSize: '55px', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
                             GDPR-compliant analytics without compromises
                         </Typography>
-                        <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 10}}>
+                        <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 4}}>
                             Get powerful analytics on your website <b>without</b> a cookie banner. Fully compliant with GDPR, CCPA and PECR. Hosted fully in the EU.
                         </Typography>
 
+                        <form >
+                            <TextField size="large" label={email.length === 0 ? 'Email' : ''} variant="outlined" sx={{  backgroundColor: '#fff', borderRadius: '8px', width: '30ch', fontSize: '1.1em'}}  InputLabelProps={{
+                                shrink: false
+                            }} onChange={onChange}/>
+                            <Button variant="contained" size="large" endIcon={<ArrowForwardIosIcon/>} onClick={submitSignUpForm}
+                                sx={{px: 3, py: 2, mx: 2}} >Sign Up</Button>
+                        </form>
+
+                        <Typography variant="subtitle2" color="#aaa" align="center" sx={{pb: 8}}>No credit card required.</Typography>
                     </Grid>
                     <Grid item xl={5} lg={4} md={4} sm={12} alignItems="center" justifyContent="center" sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' } }}>
                         <img src="images/header.svg" style={{ width: '100%', height: '100%' }} />

@@ -5,11 +5,13 @@ import { Head, Link, useForm } from '@inertiajs/inertia-react';
 import { Box, Grid, Paper, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import LoginWithGoogle from "@/Components/LoginWithGoogle";
+import useQueryString from "@/customHooks/useQueryString";
 
 export default function Register() {
+    const [email, setEmail] = useQueryString('email', '');
+
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
+        email: email,
         password: '',
         password_confirmation: '',
     });
@@ -46,19 +48,6 @@ export default function Register() {
 
                             <form onSubmit={submit}>
                                 <TextField
-                                    label="Name"
-                                    variant="standard"
-                                    type="text"
-                                    name="name"
-                                    value={data.name}
-                                    autoComplete="name"
-                                    fullWidth
-                                    size="large"
-                                    onChange={onHandleChange}
-                                    required
-                                />
-
-                                <TextField
                                     label="Email"
                                     variant="standard"
                                     type="text"
@@ -68,7 +57,6 @@ export default function Register() {
                                     fullWidth
                                     size="large"
                                     onChange={onHandleChange}
-                                    sx={{ mt: 4 }}
                                     required
                                 />
 
