@@ -15,16 +15,7 @@ services:
       restart: unless-stopped
       ports:
         - 80:80
-      networks:
-        static-network:
-          ipv4_address: 172.16.0.5
       labels:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
         - "traefik.http.routers.webnginx.rule=Host(`STACKHERO_DOCKER_HOST`)" # Defined host
         - "traefik.http.routers.webnginx.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
-
-networks:
-  static-network:
-    ipam:
-      config:
-        - subnet: 172.16.0.0/12
