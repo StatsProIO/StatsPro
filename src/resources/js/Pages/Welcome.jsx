@@ -106,7 +106,7 @@ export default function Welcome(props) {
                     </Grid>
                 </Grid>
 
-                <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', py: 10, px: 1  }}>
+                <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', py: 10, px: 1 }}>
                     <Grid container spacing={3} lg={10}  md={11} justifyContent="center" alignItems="center" >
                         <Grid item sm={4}>
 
@@ -240,7 +240,7 @@ export default function Welcome(props) {
                             </Typography>
                             <Typography variant="h6" color="#aaa">Setup in just a few minutes, no credit card required.</Typography>
 
-                            <Button variant="contained" size="large" style={{fontSize: '1.3em'}} endIcon={<ArrowForwardIosIcon/>}
+                            <Button onClick={() => Inertia.get('register')} variant="contained" size="large" style={{fontSize: '1.3em'}} endIcon={<ArrowForwardIosIcon/>}
                                            sx={{px: 5, py: 2, my: 4}} fontWeight="bold"><b>Get Started For Free</b></Button>
                         </Box>
                     </Grid>

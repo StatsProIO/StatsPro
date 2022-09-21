@@ -103,7 +103,8 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
                     {!(auth === undefined || auth.user === null) && <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Your Dashboard">
                             <IconButton onClick={handleAvartarMenuClick} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" />
+                                <Avatar alt={auth.email} />
+                                <Typography color={"white"} sx={{mx: 1, display: {xs: 'none', sm: 'block'}}}>{auth.user.email}</Typography>
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -111,9 +112,6 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
                             anchorEl={anchorEl}
                             open={open}
                             onClose={handleAvatarMenuClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}
                         >
                             <MenuItem onClick={handleClickDashboard}>Dashboard</MenuItem>
                             <MenuItem onClick={handleClickLogout}>Logout</MenuItem>
