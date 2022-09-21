@@ -80,5 +80,36 @@ Route::get('/subscription-cancel', [SubscriptionController::class, 'getSubscript
     ->middleware(['auth', 'verified'])
     ->name('subscription-cancel');
 
+Route::get('/docs', function () {
+     return Inertia::render('Docs');
+})->name('docs');
+
+Route::get('/docs/about', function () {
+     return Inertia::render('DocsAbout');
+})->name('about');
+
+Route::get('/docs/adding-a-domain', function () {
+     return Inertia::render('DocsAddingADomain');
+})->name('DocsAddingADomain');
+
+Route::get('/docs/faq', function () {
+     return Inertia::render('DocsFrequentlyAskedQuestions');
+})->name('DocsFrequentlyAskedQuestions');
+
+Route::get('/docs/getting-started', function () {
+     return Inertia::render('DocsGettingStarted');
+})->name('DocsGettingStarted');
+
+Route::get('/docs/installing', function () {
+     return Inertia::render('DocsInstalling');
+})->name('DocsInstalling');
+
+Route::get('/terms-and-privacy', function () {
+     return Inertia::render('TermsAndPrivacy');
+})->name('TermsAndPrivacy');
+
+Route::get('/contact', function () {
+     return Inertia::render('Contact');
+})->name('Contact');
 
 require __DIR__.'/auth.php';

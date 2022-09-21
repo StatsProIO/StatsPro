@@ -10,22 +10,27 @@ const Footer = () => {
         <Box className="gray-background" sx={{py: 6}}>
             <Grid container justifyContent="center" spacing={3}>
                 <Grid item xs={4} md={3}>
-                    <Stack spacing={3} justifyContent="center">
+                    <Stack spacing={1} justifyContent="center">
+                        <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>General</Typography>
                         <Link href="/" underline="hover" color="inherit" align={"center"}>Home</Link>
                         <Link href="/contact" underline="hover" color="inherit" align={"center"}>Contact</Link>
                     </Stack>
 
                 </Grid>
                 <Grid item xs={4} md={3}>
-                    <Stack spacing={3}>
+                    <Stack spacing={1}>
+                        <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Resources</Typography>
                         <Link href="/docs" underline="hover" color="inherit" align={"center"}>Docs</Link>
-                        <Link href="/blog" underline="hover" color="inherit" align={"center"}>Blog</Link>
+
+                        <Link href="/docs/about" underline="hover" color="inherit" align={"center"}>About</Link>
+                        <Link href="/terms-and-privacy" underline="hover" color="inherit" align={"center"}>Terms & Privacy</Link>
                     </Stack>
                 </Grid>
                 <Grid item xs={4} md={3}>
-                    <Stack spacing={3}>
-                        <Link href="/about" underline="hover" color="inherit" align={"center"}>About</Link>
-                        <Link href="/terms-and-privacy" underline="hover" color="inherit" align={"center"}>Terms & Privacy</Link>
+                    <Stack spacing={1}>
+                        <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Community</Typography>
+                        <Link href="https://github.com/MarbleMetrics/MarbleMetrics" underline="hover" color="inherit" align={"center"}>Github</Link>
+                        <Link href="https://twitter.com/MarbleMetrics" underline="hover" color="inherit" align={"center"}>Twitter</Link>
                     </Stack>
                 </Grid>
             </Grid>
