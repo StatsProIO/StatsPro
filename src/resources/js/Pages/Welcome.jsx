@@ -55,20 +55,24 @@ export default function Welcome(props) {
             <div className="home">
                 <Grid container spacing={0} className="hero-row" sx={{ pt: 5, px: 1 }} justifyContent="center" >
                     <Grid item xl={5} lg={7} md={7} sm={11} xs={12} textAlign='center' >
-                        <Typography variant="h2" component="div" sx={{ fontWeight: 600, textAlign: 'center' }} gutterBottom style={{fontFamily: 'Helvetica', fontSize: '55px', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
+                        <Typography variant="h2" component="div" sx={{ fontWeight: 600, textAlign: 'center', fontSize: {xs: '45px', sm : '50px', md: '55px'} }} gutterBottom style={{fontFamily: 'Helvetica', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
                             GDPR-compliant analytics without compromises
                         </Typography>
                         <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 4}}>
-                            Get powerful analytics on your website <b>without</b> a cookie banner. Fully compliant with GDPR, CCPA and PECR. Hosted fully in the EU.
+                            Get powerful analytics on your website <b>without</b> a cookie banner. Fully compliant with GDPR, CCPA and PECR. Fully hosted in the EU.
                         </Typography>
 
-                        <form >
-                            <TextField size="large" label={email.length === 0 ? 'Email' : ''} variant="outlined" sx={{  backgroundColor: '#fff', borderRadius: '8px', width: '30ch', fontSize: '1.1em'}} type="email" InputLabelProps={{
-                                shrink: false
-                            }} onChange={onChange}/>
-                            <Button variant="contained" size="large" endIcon={<ArrowForwardIosIcon/>} onClick={submitSignUpForm}
-                                sx={{px: 3, py: 2, mx: 2}} >Sign Up</Button>
-                        </form>
+                        <Grid container spacing={1} justifyContent='center'>
+                            <Grid item lg={6} sm={6} xs={8}>
+                                <TextField size="large" fullWidth label={email.length === 0 ? 'Email' : ''} variant="outlined" sx={{  backgroundColor: '#fff', borderRadius: '8px', mt: 1}} type="email" InputLabelProps={{
+                                    shrink: false
+                                }} onChange={onChange}/>
+                            </Grid>
+                            <Grid item lg={3} sm={3} xs={4}>
+                                <Button variant="contained" fullWidth size="large" endIcon={<ArrowForwardIosIcon/>} onClick={submitSignUpForm}
+                                        sx={{px: 2, py: 2, mt: 1}} >Sign Up</Button>
+                            </Grid>
+                        </Grid>
 
                         <Typography variant="subtitle2" color="#aaa" align="center" sx={{pb: 8}}>No credit card required.</Typography>
                     </Grid>
