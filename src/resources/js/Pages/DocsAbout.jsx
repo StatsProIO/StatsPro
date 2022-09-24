@@ -8,7 +8,6 @@ export default function DocsAbout() {
     return (
         <DocsLayout title={'About'}>
             <Typography variant={'h4'} sx={{py: 1}}>What is Marble Metrics?</Typography>
-
             <Typography sx={{py: 1}}>Marble Metrics is an open-source, privacy-friendly analytics platform. Marble Metrics provides functionality similar to Google Analytics while being compliant with GDPR, CCPA, and PECR.</Typography>
             <Typography sx={{py: 1}}>Marble Metrics is able to provide the important metrics that you're used to seeing in other analytics platforms without requiring a cookie consent.</Typography>
             <Typography sx={{py: 1}}>Marble Metrics can be self-hosted on your own servers or hosted by the Marble Metrics team in the cloud.</Typography>

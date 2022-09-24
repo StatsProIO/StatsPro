@@ -21,63 +21,53 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Home');
 });
 
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome');
+})->middleware(['auth',])->name('welcome');
+
 Route::get('/dashboard', function () {
-    //TODO: make sure the user has atleast 1 domain, otherwise redirect to manage-sites
     $domain = Domain::where('user_id', Auth::user()->id)->oldest()->first();
-
-
-    if($domain == null) {
-        return Redirect::route('manage-domains');
-    }
-
     return Inertia::render('Dashboard', ['firstDomain' => $domain->domain_name ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'require_one_domain'])->name('dashboard');
 
-
-//TODO: return only the domains that
 Route::get('/manage-domains', function () {
     return Inertia::render('ManageDomains', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
-})->middleware(['auth', 'verified'])->name('manage-domains');
+})->middleware(['auth', 'verified', 'require_one_domain'])->name('manage-domains');
 
 Route::get('/add-domain', function () {
     return Inertia::render('AddDomain');
-})->middleware(['auth', 'verified'])->name('add-domain');
+})->middleware(['auth', 'verified', 'require_one_domain'])->name('add-domain');
 
 Route::get('/profile', function () {
     return Inertia::render('Profile', ['subscription_status' => App\Services\SubscriptionService::getSubscriptionStatus()]);
-})->middleware(['auth', 'verified'])->name('profile');
+})->middleware(['auth', 'verified', 'require_one_domain'])->name('profile');
 
 //TODO: make sure that the domain is owned by this user
 Route::get('/domain/{domain_name}/script', function ($domainName) {
     return Inertia::render('DomainScript', ['domain' => Domain::where('domain_name', $domainName)->first()]);
-})->middleware(['auth', 'verified'])->name('web.domain');
+})->middleware(['auth', 'verified', 'require_one_domain'])->name('web.domain');
 
 Route::get('/test-page', [TestPageController::class, 'get']);
 
 Route::get('/subscriptions', [SubscriptionController::class, 'getSubscriptionsPage'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'require_one_domain'])
     ->name('subscriptions');
 
 Route::get('/subscription-checkout', [SubscriptionController::class, 'getSubscriptionCheckoutPage'])
-    ->middleware(['auth', 'verified']);
+    ->middleware(['auth', 'verified', 'require_one_domain']);
 
 Route::get('/subscription-success', [SubscriptionController::class, 'getSubscriptionSuccessPage'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'require_one_domain'])
     ->name('subscription-success');
 
 Route::get('/billing-portal', [SubscriptionController::class, 'getSubscriptionBillingPortalPage'])
-    ->middleware(['auth', 'verified']);
+    ->middleware(['auth', 'verified', 'require_one_domain']);
 
 Route::get('/subscription-cancel', [SubscriptionController::class, 'getSubscriptionCancelPage'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'require_one_domain'])
     ->name('subscription-cancel');
 
 Route::get('/docs', function () {
@@ -99,10 +89,6 @@ Route::get('/docs/faq', function () {
 Route::get('/docs/getting-started', function () {
      return Inertia::render('DocsGettingStarted');
 })->name('DocsGettingStarted');
-
-Route::get('/docs/installing', function () {
-     return Inertia::render('DocsInstalling');
-})->name('DocsInstalling');
 
 Route::get('/terms-and-privacy', function () {
      return Inertia::render('TermsAndPrivacy');

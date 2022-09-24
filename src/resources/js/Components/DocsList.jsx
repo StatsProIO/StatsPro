@@ -14,10 +14,6 @@ export default function DocsList() {
             name: 'Getting Started'
         },
         {
-            url: '/docs/installing',
-            name: 'Installing'
-        },
-        {
             url: '/docs/faq',
             name: 'FAQ'
         },

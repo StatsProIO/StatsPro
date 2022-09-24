@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import {Box, Link, Typography} from '@mui/material';
 import React from 'react';
 import IntegrationCode from './IntegrationCode';
 
@@ -7,8 +7,9 @@ export default function ScriptAndInstructions() {
         <>
             <IntegrationCode />
 
-            <Typography sx={{ pt: 4 }}>Need help adding the integration?</Typography>
-            <Typography sx={{ pb: 4 }}>Check out our handy guides for Wordpress, Shopify, React, and more.</Typography>
+            <Box sx={{my: 3}}>
+                <Link variant={'subtitle1'} href={'/contact'}>Need Help? Contact us</Link>
+            </Box>
         </>
     );
 }

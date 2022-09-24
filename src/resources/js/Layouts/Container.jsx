@@ -19,6 +19,9 @@ export default function Container({ children, showDrawer, showNavLinks, auth }) 
             secondary: {
                 main: '#7d6cfb',
             },
+            success: {
+                main: '#27ae60'
+            }
         },
         typography: {
             fontFamily: 'Barlow, Helvetica, sans-serif',

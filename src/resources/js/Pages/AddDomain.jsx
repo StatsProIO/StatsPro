@@ -1,7 +1,9 @@
-import { Grid, Typography, Box, Toolbar } from '@mui/material';
+import {Box, Grid, Typography} from '@mui/material';
 
 import Authenticated from '@/Layouts/Authenticated';
 import AddDomainForm from '@/Components/AddDomainForm';
+import React from "react";
+import {Head} from "@inertiajs/inertia-react";
 
 export default function ManageDomains(props) {
 
@@ -10,15 +12,22 @@ export default function ManageDomains(props) {
             auth={props.auth}
             errors={props.errors}
         >
-            {/* <Head title="Dashboard" /> */}
+             <Head title="Add Domains" />
 
+            <Grid container justifyContent={'center'}>
+                <Grid item xl={5} lg={5} md={5} sm={7} xs={12}>
 
-            <Grid container>
-                <Grid item lg={8}>
-                    <Typography variant="h4" sx={{ py: 1 }}>Add Domain</Typography>
+                    <Grid container justifyContent="center">
+                        <Grid item xs={12} justifyContent={'center'}>
+                            <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }} >
+
+                                <Typography variant="h4"><b>Add Domain</b></Typography>
+                                <AddDomainForm />
+                            </Box>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
-            <AddDomainForm />
 
         </Authenticated>
     );
