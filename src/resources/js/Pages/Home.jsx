@@ -96,7 +96,7 @@ export default function Home(props) {
                 <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', pt: 6, pb: 6, px: 1 }}>
                     <Grid item sm={12} md={12} lg={12}>
                         <Typography variant="h3" sx={{py: 3}}><b>Get started in 5 seconds!</b></Typography>
-                        <Typography variant="h6">Drop this code on your website</Typography>
+                        <Typography variant="h6">Drop this code on your website and <a href={'/register'}>register with your domain</a>.</Typography>
                     </Grid>
                     <Grid item xs={12} md={10} lg={5}>
                         <IntegrationCode />
