@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\DomainsController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\ContactsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -35,3 +36,6 @@ Route::middleware('auth:sanctum')->get('/event-status/{domainName}', [EventsCont
 Route::middleware('auth:sanctum')->post('/domain', [DomainsController::class, 'postDomain'])->name('domain');
 
 Route::middleware('auth:sanctum')->get('/subscription-status', [SubscriptionController::class, 'getSubscriptionStatus']);
+
+
+Route::post('/contact', [ContactsController::class, 'postContact'])->name('contact');
