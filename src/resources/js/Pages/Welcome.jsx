@@ -25,7 +25,7 @@ export default function Welcome(props) {
                         <Grid item xs={12} justifyContent={'center'}>
                             <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }} >
                                 <Typography variant="h3"  textAlign='center'><b>Welcome!</b></Typography>
-                                <Typography variant="h6" sx={{pb: 2, color: '#b7b7b7' }} textAlign='center'>One last question!</Typography>
+                                <Typography variant="h6" sx={{pb: 2, color: '#b7b7b7' }} textAlign='center'>Lets get started!</Typography>
 
                                 <Typography variant="h5" ><b>Your Domain</b></Typography>
                                 <AddDomainForm />
@@ -37,19 +37,19 @@ export default function Welcome(props) {
                 <Grid item xl={2} lg={3} md={4} sm={4} xs={12} sx={{backgroundColor: '#ececec', p: 4, justifyContent: 'center'}}> {/*Right side of the form*/}
                     <Stack direction="row" alignItems="center" gap={1}>
                         <CheckCircleIcon />
-                        <Typography variant="body1" sx={{ py: 2, fontWeight: 'bold' }} textAlign='center'>Register</Typography>
+                        <Typography variant="body1" sx={{ py: 2, fontWeight: 'bold' }} textAlign='center'>1. Register</Typography>
                     </Stack>
                     <Stack direction="row" alignItems="center" gap={1}>
                         <RadioButtonCheckedIcon color={ 'primary'} />
-                        <Typography variant="body1" sx={{ py: 2, color: 'primary.main', fontWeight: 'bold' }} textAlign='center'>Add Domain</Typography>
+                        <Typography variant="body1" sx={{ py: 2, color: 'primary.main', fontWeight: 'bold' }} textAlign='center'>2. Add Domain</Typography>
                     </Stack>
                     <Stack direction="row" alignItems="center" gap={1}>
                         <RadioButtonUncheckedIcon />
-                        <Typography variant="body1" sx={{ py: 2, fontWeight: 'bold' }} textAlign='center'>Add Script</Typography>
+                        <Typography variant="body1" sx={{ py: 2, fontWeight: 'bold' }} textAlign='center'>3. Add Script</Typography>
                     </Stack>
                     <Stack direction="row" alignItems="center" gap={1}>
                         <RadioButtonUncheckedIcon />
-                        <Typography variant="body1" sx={{ py: 2, fontWeight: 'bold' }} textAlign='center'>Verify Results</Typography>
+                        <Typography variant="body1" sx={{ py: 2, fontWeight: 'bold' }} textAlign='center'>4. Verify Results</Typography>
                     </Stack>
                 </Grid>
             </Grid>
