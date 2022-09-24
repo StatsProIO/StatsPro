@@ -27,9 +27,6 @@ export default function DocsGettingStarted() {
 
             <img width='60%' src='/images/getting-started-step-5.webp'></img>
 
-
-
-
         </DocsLayout>
     );
 }
