@@ -14,12 +14,12 @@ export default function DomainScript(props) {
 
             <Grid container>
                 <Grid item lg={8}>
-                    <Typography variant="h4" sx={{ py: 1 }}>Add Script</Typography>
+                    <Typography variant="h4" sx={{py: 1}}><b>Add Script</b></Typography>
                 </Grid>
             </Grid>
 
             <Grid container justifyContent="center">
-                <Grid item md={5}>
+                <Grid item sm={10} md={10} lg={6}>
                     <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
                         <Typography sx={{ py: 2 }} variant="h5"><b>Add this script to your website ({props.domain.domain_name})</b></Typography>
                         <ScriptAndInstructions />

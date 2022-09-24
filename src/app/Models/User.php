@@ -49,4 +49,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'trial_ends_at' => 'datetime'
     ];
+
+    public function domains()
+        {
+            return $this->hasMany(Domain::class);
+        }
 }

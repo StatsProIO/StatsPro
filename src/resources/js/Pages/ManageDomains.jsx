@@ -2,6 +2,7 @@ import { Button, Grid, Typography, Box } from '@mui/material';
 import { Inertia } from '@inertiajs/inertia';
 import Authenticated from '@/Layouts/Authenticated';
 import SettingsIcon from '@mui/icons-material/Settings';
+import * as React from "react";
 
 export default function ManageDomains(props) {
     return (
@@ -14,7 +15,7 @@ export default function ManageDomains(props) {
 
             <Grid container>
                 <Grid item lg={10}>
-                    <Typography variant="h4" sx={{ py: 1 }}>Manage Domains</Typography>
+                    <Typography variant="h4"><b>Manage Domains</b></Typography>
                 </Grid>
                 <Grid item lg={2}>
                     <Button variant="contained" onClick={() => { Inertia.visit('/add-domain'); }} fullWidth>+ Add Domain</Button>
@@ -37,11 +38,6 @@ export default function ManageDomains(props) {
                                 <Grid container spacing={2}>
                                     <Grid item md={10}>
                                         <Typography key={domain.id}>{domain.domain_name}</Typography>
-                                    </Grid>
-                                    <Grid item md={2} >
-                                        <Button variant="text" size="large" >
-                                            <SettingsIcon />
-                                        </Button>
                                     </Grid>
                                 </Grid>
                             </Box>
