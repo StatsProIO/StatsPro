@@ -51,9 +51,11 @@ export default function Contact() {
                 <form onSubmit={submit}>
                     <TextField
                         fullWidth
+                        required
+
                         label="Email"
                         variant="outlined"
-                        type="text"
+                        type="email"
                         name="email"
                         value={data.email}
                         onChange={onHandleChange}
@@ -62,6 +64,7 @@ export default function Contact() {
 
                     <TextField
                         multiline
+                        required
                         minRows={8}
                         fullWidth
                         label="Message"
