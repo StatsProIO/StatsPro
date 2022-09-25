@@ -29,7 +29,7 @@ Route::get('/welcome', function () {
 })->middleware(['auth',])->name('welcome');
 
 
-Route::middleware(['auth', 'verified', 'require_one_domain'])->group(function () {
+Route::middleware(['auth', 'require_one_domain'])->group(function () {
     Route::get('/dashboard/{domain?}', function ($domain = null) {
         if($domain === null) {
             $firstDomain = Domain::where('user_id', Auth::user()->id)->oldest()->first();

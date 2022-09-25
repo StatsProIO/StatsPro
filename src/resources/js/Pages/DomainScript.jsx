@@ -2,6 +2,7 @@ import {Inertia} from '@inertiajs/inertia';
 import {Box, Button, Grid, Typography} from '@mui/material';
 import ScriptAndInstructions from '@/Components/ScriptAndInstructions';
 import Authenticated from '@/Layouts/Authenticated';
+import {Head} from "@inertiajs/inertia-react";
 
 export default function DomainScript(props) {
     return (
