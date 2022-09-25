@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Log;
+use App\Mail\Welcome;
+use Illuminate\Support\Facades\Mail;
 
 
 class GoogleAuthController extends Controller
@@ -22,16 +24,19 @@ class GoogleAuthController extends Controller
     {
         $googleUser = Socialite::driver('google')->user();
 
-        $user = \App\Models\User::updateOrCreate([
-            'google_id' => $googleUser->id,
-        ], [
-            'name' => $googleUser->name,
-            'email' => $googleUser->email,
-            'email_verified_at' => Carbon::now(),
-            'google_id' => $googleUser->id,
-            'password' => encrypt(substr(md5(rand()), 0, 10)),
-            'trial_ends_at' => now()->addYears(10),
-        ]);
+        $user = \App\Models\User::where('google_id', $googleUser->id)->first();
+
+        if($user === null) {
+            $user = new \App\Models\User();
+            $user->email = $googleUser->email;
+            $user->email_verified_at = Carbon::now();
+            $user->google_id = $googleUser->id;
+            $user->password = encrypt(substr(md5(rand()), 0, 10));
+            $user->trial_ends_at = now()->addYears(10);
+            $user->save();
+
+            Mail::to($user)->send(new Welcome());
+        }
 
         Auth::login($user);
         return redirect('/dashboard');
