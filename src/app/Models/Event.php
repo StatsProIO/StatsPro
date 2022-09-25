@@ -12,7 +12,6 @@ class Event extends Model
         'event_name',
         'ip_address',
         'user_agent',
-        'is_unique',
         'location_href',
         'host',
         'path',

@@ -4,10 +4,6 @@ var parsedScriptUrl = (new URL(document.currentScript.src))
 var endpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/collect";
 var timeOnPageEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/event/time-on-page";
 
-
-
-//TODO: respect navigator.doNotTrack?
-
 var payload = {}
 payload.event_name = 'pageview'
 payload.location_href = location.href
@@ -17,11 +13,8 @@ payload.domain = scriptEl.getAttribute('data-domain')
 payload.referrer = document.referrer || null
 payload.inner_width = window.innerWidth
 payload.lang = window.navigator.language || ''
-
-//TODO: use this to map to a country: https://codepen.io/diego-fortes/pen/YzEPxYw
 payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 payload.client_time = new Date().toISOString();
-
 
 var dimensionAttributes = scriptEl.getAttributeNames().filter(function (name) {
     return name.substring(0, 6) === 'event-'
@@ -36,14 +29,7 @@ dimensionAttributes.forEach(function (attribute) {
 })
 
 payload.p = props
-
 payload.h = 1
-
-
-//TODO: broadcast to some external source
-// options && options.callback && options.callback()
-
-
 
 function sendRequest(url, body, next) {
     var request = new XMLHttpRequest();
@@ -66,37 +52,28 @@ function sendRequest(url, body, next) {
                     return next(json)
                 }
             }
-            //TODO: broadcast to some external source
+            //TODO: broadcast to some external source on error and report the number of tries it took
             // options && options.callback && options.callback()
         }
     }
 }
 
-
-
 function scheduleReoccringRequests(initialRequestJsonResponse) {
-
     const eventId = initialRequestJsonResponse.id;
-
     const interval = setInterval(() => {
         if (isInBackground() === true) {
-            return
+            return;
         }
-
         sendRequest(timeOnPageEndpoint, { id: eventId });
     }, 15000);
 
     if (typeof next === 'function') {
         return next(recordId)
     }
-
 }
 
 const isInBackground = function () {
     return document.visibilityState === 'hidden'
 }
 
-
 sendRequest(endpoint, payload, scheduleReoccringRequests);
-
-//TODO: retry on errors and report the number of tries it took

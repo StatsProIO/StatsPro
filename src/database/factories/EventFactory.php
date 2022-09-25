@@ -29,7 +29,6 @@ class EventFactory extends Factory
             'event_name' =>  'pageview',
             'ip_address' => $this->faker->ipv4(),
             'user_agent' => $this->faker->userAgent(),
-            'is_unique' => $this->faker->boolean(),
             'location_href' => $this->faker->url(),
             'host' => $this->faker->domainName(),
             'path' => implode('/', $this->faker->words(4)),

@@ -32,8 +32,6 @@ class EventsController extends Controller
                 $source = $parsedUrl['host'];
             }
         }
-        //TODO: determine if this is a subsequest request for the same visitor_hash in the last 30 minutes
-            //TODO: if yes, update the previous request with an exit time
 
         $systemInfo = Helper::systemInfo($userAgent);
 
@@ -41,7 +39,6 @@ class EventsController extends Controller
         $event->domain_id = $domain->id;
         $event->event_name = $request->event_name;
         $event->user_agent = $userAgent;
-        $event->is_unique = false; //TODO
         $event->location_href = $request->location_href;
         $event->host = $request->location_host;
         $event->path = $request->location_pathname;
@@ -76,16 +73,11 @@ class EventsController extends Controller
 
         $userAgent = $request->server('HTTP_USER_AGENT');
 
-        //TODO: include a salt
-        $visitorHash = \Hash::make(hash('sha256', json_encode([$clientIp, $userAgent, $request->location_host ])));
-        $requestHash = \Hash::make(hash('sha256', json_encode([$clientIp, $userAgent, $request->location_host, $request->location_pathname ])));
-
         $event = new Event;
         $event->domain_id = $domain->id;
         $event->event_name = 'pixel_pageview';
         $event->ip_address = $clientIp;
         $event->user_agent = $userAgent;
-        $event->is_unique = false; //TODO
         $event->location_href =  $request->server('HTTP_REFERER') ?? '';
         $event->host = '';
         $event->path = '';
