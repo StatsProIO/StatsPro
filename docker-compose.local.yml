@@ -18,6 +18,7 @@ services:
   db:
       image: postgres:14.4-alpine
       restart: always
+      command: ["postgres", "-c", "log_statement=all"]
       environment:
         - POSTGRES_DB=marble_metrics
         - POSTGRES_USER=postgres
