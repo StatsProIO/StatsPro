@@ -23,7 +23,8 @@ const Footer = () => {
                         <Link href="/docs" underline="hover" color="inherit" align={"center"}>Docs</Link>
 
                         <Link href="/docs/about" underline="hover" color="inherit" align={"center"}>About</Link>
-                        <Link href="/terms-and-privacy" underline="hover" color="inherit" align={"center"}>Terms & Privacy</Link>
+                        <Link href="/terms" underline="hover" color="inherit" align={"center"}>Terms</Link>
+                        <Link href="/privacy-policy" underline="hover" color="inherit" align={"center"}>Privacy Policy</Link>
                     </Stack>
                 </Grid>
                 <Grid item xs={4} md={3}>
