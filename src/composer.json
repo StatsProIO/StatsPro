@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.7",
         "league/iso3166": "^4.0",
         "ramsey/uuid": "^4.4",
+        "sendinblue/api-v3-sdk": "8.x.x",
         "sinergi/browser-detector": "^6.1",
         "tightenco/ziggy": "^1.0",
         "whichbrowser/parser": "^2.1"
