@@ -82,7 +82,7 @@ export default function DrawerContents() {
 
                     <Typography variant='body1' >We're always available help you out.</Typography>
                     <Box textAlign='center'>
-                        <Button variant="contained" sx={{ my: 2, }}>Contact Us</Button>
+                        <Button onClick={() => Inertia.get('/contact')} variant="contained" sx={{ my: 2, }}>Contact Us</Button>
                     </Box>
 
                 </Paper>

@@ -65,7 +65,7 @@ class EventsController extends Controller
 
     public function postTimeOnPage(Request $request) {
         DB::table('events')
-            ->where('id',$request->id) 
+            ->where('id',$request->id)
             ->increment('time_on_page_seconds', 15);
 
         return 'SUCCESS';
@@ -116,7 +116,7 @@ class EventsController extends Controller
             ->header ("Expires", "0");
     }
 
-    
+
 
     public function getTimeBuckets(TimeRangeInfo $timeRangeInfo) {
         $timeBuckets = [];
@@ -138,9 +138,8 @@ class EventsController extends Controller
         $range = $request->has('range') ? $request->input('range') : '24h';
         $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
 
-        //TODO: need to validate that the domain belongs to the user
         if($request->has('domain')) {
-            $domain = Domain::firstWhere('domain_name', $request->input('domain'));
+            $domain = Domain::where('domain_name', $request->input('domain'))->where('user_id', Auth::user()->id)->firstOrFail();
         } else {
             $domain = Domain::firstWhere('user_id', Auth::user()->id);
         }
@@ -161,7 +160,7 @@ class EventsController extends Controller
 
         $visitDuration = EventRepository::getVisitDuration($timeRangeInfo->getInterval(), $domain);
         $comparisonVisitDuration = EventRepository::getVisitDuration($timeRangeInfo->getComparisonInterval(), $domain);
-        
+
         return [
             'domains' => Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name'),
             'time_buckets' => $timeBuckets,
@@ -187,7 +186,7 @@ class EventsController extends Controller
 
     public function getEventsRealTime(Request $request) {
         if($request->has('domain')) {
-            $domain = Domain::firstWhere('domain_name', $request->input('domain'));
+            $domain = Domain::where('domain_name', $request->input('domain'))->where('user_id', Auth::user()->id)->firstOrFail();
         } else {
             $domain = Domain::firstWhere('user_id', Auth::user()->id);
         }
@@ -196,14 +195,8 @@ class EventsController extends Controller
     }
 
     public function getEventStatus($domainName) {
-        //TODO: need to validate that the domain belongs to the user
-        //TODO: change firstdomain to the users first domain
-        
-        $domain = Domain::where('domain_name', $domainName)->first();
-        
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
         $event = Event::where('domain_id', $domain->id)->limit(1)->get();
-
-        
 
         if(count($event) > 0) {
             return "SUCCESS";

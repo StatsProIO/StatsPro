@@ -28,79 +28,54 @@ Route::get('/welcome', function () {
     return Inertia::render('Welcome');
 })->middleware(['auth',])->name('welcome');
 
-Route::get('/dashboard', function () {
-    $domain = Domain::where('user_id', Auth::user()->id)->oldest()->first();
-    return Inertia::render('Dashboard', ['firstDomain' => $domain->domain_name ]);
-})->middleware(['auth', 'verified', 'require_one_domain'])->name('dashboard');
 
-Route::get('/manage-domains', function () {
-    return Inertia::render('ManageDomains', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
-})->middleware(['auth', 'verified', 'require_one_domain'])->name('manage-domains');
+Route::middleware(['auth', 'verified', 'require_one_domain'])->group(function () {
+    Route::get('/dashboard', function (Request $request) {
+        $domain = Domain::where('user_id', Auth::user()->id)->oldest()->first();
 
-Route::get('/add-domain', function () {
-    return Inertia::render('AddDomain');
-})->middleware(['auth', 'verified', 'require_one_domain'])->name('add-domain');
+        if(!$request->has('domain')) {  //TODO: move this into the URL
+            return redirect('/dashboard?domain='. $domain->domain_name);
+        }
 
-Route::get('/profile', function () {
-    return Inertia::render('Profile', ['subscription_status' => App\Services\SubscriptionService::getSubscriptionStatus()]);
-})->middleware(['auth', 'verified', 'require_one_domain'])->name('profile');
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
-//TODO: make sure that the domain is owned by this user
-Route::get('/domain/{domain_name}/script', function ($domainName) {
-    return Inertia::render('DomainScript', ['domain' => Domain::where('domain_name', $domainName)->first()]);
-})->middleware(['auth', 'verified', 'require_one_domain'])->name('web.domain');
+    Route::get('/manage-domains', function () {
+        return Inertia::render('ManageDomains', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
+    })->name('manage-domains');
+
+    Route::get('/add-domain', function () {
+        return Inertia::render('AddDomain');
+    })->name('add-domain');
+
+    Route::get('/profile', function () {
+        return Inertia::render('Profile', ['subscription_status' => App\Services\SubscriptionService::getSubscriptionStatus()]);
+    })->name('profile');
+
+    Route::get('/domain/{domain_name}/script', function ($domainName) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+        return Inertia::render('DomainScript', ['domain' => $domain]);
+    })->name('web.domain');
+
+    Route::controller(SubscriptionController::class)->group(function () {
+        Route::get('/subscriptions', 'getSubscriptionsPage')->name('subscriptions');
+        Route::get('/subscription-checkout', 'getSubscriptionCheckoutPage');
+        Route::get('/subscription-success', 'getSubscriptionSuccessPage')->name('subscription-success');
+        Route::get('/billing-portal', 'getSubscriptionBillingPortalPage');
+        Route::get('/subscription-cancel', 'getSubscriptionCancelPage')->name('subscription-cancel');
+    });
+});
 
 Route::get('/test-page', [TestPageController::class, 'get']);
 
-Route::get('/subscriptions', [SubscriptionController::class, 'getSubscriptionsPage'])
-    ->middleware(['auth', 'verified', 'require_one_domain'])
-    ->name('subscriptions');
-
-Route::get('/subscription-checkout', [SubscriptionController::class, 'getSubscriptionCheckoutPage'])
-    ->middleware(['auth', 'verified', 'require_one_domain']);
-
-Route::get('/subscription-success', [SubscriptionController::class, 'getSubscriptionSuccessPage'])
-    ->middleware(['auth', 'verified', 'require_one_domain'])
-    ->name('subscription-success');
-
-Route::get('/billing-portal', [SubscriptionController::class, 'getSubscriptionBillingPortalPage'])
-    ->middleware(['auth', 'verified', 'require_one_domain']);
-
-Route::get('/subscription-cancel', [SubscriptionController::class, 'getSubscriptionCancelPage'])
-    ->middleware(['auth', 'verified', 'require_one_domain'])
-    ->name('subscription-cancel');
-
-Route::get('/docs', function () {
-     return Inertia::render('Docs');
-})->name('docs');
-
-Route::get('/docs/about', function () {
-     return Inertia::render('DocsAbout');
-})->name('about');
-
-Route::get('/docs/adding-a-domain', function () {
-     return Inertia::render('DocsAddingADomain');
-})->name('DocsAddingADomain');
-
-Route::get('/docs/faq', function () {
-     return Inertia::render('DocsFrequentlyAskedQuestions');
-})->name('DocsFrequentlyAskedQuestions');
-
-Route::get('/docs/getting-started', function () {
-     return Inertia::render('DocsGettingStarted');
-})->name('DocsGettingStarted');
-
-Route::get('/terms', function () {
-     return Inertia::render('terms');
-})->name('Terms');
-
-Route::get('/privacy-policy', function () {
-     return Inertia::render('PrivacyPolicy');
-})->name('PrivacyPolicy');
-
-
-Route::get('/contact', function () {
-     return Inertia::render('Contact');
-})->name('Contact');
+//static pages
+Route::get('/docs', function () { return Inertia::render('Docs');})->name('docs');
+Route::get('/docs/about', function () { return Inertia::render('DocsAbout');})->name('about');
+Route::get('/docs/adding-a-domain', function () { return Inertia::render('DocsAddingADomain'); })->name('DocsAddingADomain');
+Route::get('/docs/faq', function () { return Inertia::render('DocsFrequentlyAskedQuestions'); })->name('DocsFrequentlyAskedQuestions');
+Route::get('/docs/getting-started', function () { return Inertia::render('DocsGettingStarted'); })->name('DocsGettingStarted');
+Route::get('/terms', function () { return Inertia::render('terms'); })->name('Terms');
+Route::get('/privacy-policy', function () { return Inertia::render('PrivacyPolicy'); })->name('PrivacyPolicy');
+Route::get('/contact', function () { return Inertia::render('Contact'); })->name('Contact');
 
 require __DIR__.'/auth.php';
