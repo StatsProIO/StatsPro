@@ -10,4 +10,9 @@ class TestPageController extends Controller
     {
         return view('test-page');
     }
+
+     public function getNested()
+        {
+            return view('test-page-nested');
+        }
 }

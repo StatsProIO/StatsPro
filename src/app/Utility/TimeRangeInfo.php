@@ -50,7 +50,7 @@ class TimeRangeInfo
                     new Interval(Carbon::now()->subHours(24)->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     new Interval(Carbon::now()->subHours(48)->toDateTimeString(), Carbon::now()->subHours(24)->toDateTimeString()),
                     'vs previous 24h',
-                    "date_trunc('hour', enter_time)",
+                    "date_trunc('hour', created_at)",
                     1
                 );
             case '7d':
@@ -58,7 +58,7 @@ class TimeRangeInfo
                     new Interval(Carbon::now()->subDays(7)->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     new Interval(Carbon::now()->subDays(14)->toDateTimeString(), Carbon::now()->subDays(7)->toDateTimeString()),
                     'vs previous 7d',
-                    'enter_time::date',
+                    'created_at::date',
                     24
                 );
             case '30d':
@@ -66,7 +66,7 @@ class TimeRangeInfo
                     new Interval(Carbon::now()->subDays(30)->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     new Interval(Carbon::now()->subDays(60)->toDateTimeString(), Carbon::now()->subDays(30)->toDateTimeString()),
                     'vs previous 30d',
-                    'enter_time::date',
+                    'created_at::date',
                     24
                 );
             case 'month-to-date':
@@ -74,7 +74,7 @@ class TimeRangeInfo
                     new Interval(Carbon::now()->startOfMonth()->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     new Interval(Carbon::now()->subMonthsNoOverflow(1)->startOfMonth()->toDateTimeString(), Carbon::now()->subMonthsNoOverflow(1)->toDateTimeString()),
                     'vs same time last month',
-                    'enter_time::date',
+                    'created_at::date',
                     24
                 );
             case 'last-month':
@@ -82,7 +82,7 @@ class TimeRangeInfo
                     new Interval(Carbon::now()->startOfMonth()->subMonthsNoOverflow(1)->toDateTimeString(), Carbon::now()->subMonthsNoOverflow(1)->endOfMonth()->toDateTimeString()),
                     new Interval(Carbon::now()->startOfMonth()->subMonthsNoOverflow(2)->toDateTimeString(), Carbon::now()->startOfMonth()->subMonthsNoOverflow(2)->endOfMonth()->toDateTimeString()),
                     'vs the previous month',
-                    'enter_time::date',
+                    'created_at::date',
                     24
                 );
             case 'year-to-date':
@@ -90,7 +90,7 @@ class TimeRangeInfo
                     new Interval(Carbon::now()->firstOfYear()->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     new Interval(Carbon::now()->firstOfYear()->subYear(1)->toDateTimeString(), Carbon::now()->subYear(1)->toDateTimeString()),
                     'vs same time last year',
-                    'enter_time::date',
+                    'created_at::date',
                     24
                 );
             case '12m':
@@ -98,7 +98,7 @@ class TimeRangeInfo
                     new Interval(Carbon::now()->subMonthsNoOverflow(12)->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     new Interval(Carbon::now()->subMonthsNoOverflow(24)->toDateTimeString(), Carbon::now()->subMonthsNoOverflow(12)->toDateTimeString()),
                     'vs the previous 12 months',
-                    'enter_time::date',
+                    'created_at::date',
                     24
                 );
             case 'all-time':
@@ -106,10 +106,10 @@ class TimeRangeInfo
                     new Interval(Carbon::create(2022, 1, 1, 0, 0, 0)->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     new Interval(Carbon::create(2022, 1, 1, 0, 0, 0)->toDateTimeString(), Carbon::now()->toDateTimeString()),
                     '',
-                    'enter_time::date',
+                    'created_at::date',
                     24
                 );
-                
+
         }
     }
 

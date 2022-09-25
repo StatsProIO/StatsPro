@@ -29,8 +29,6 @@ class EventFactory extends Factory
             'event_name' =>  'pageview',
             'ip_address' => $this->faker->ipv4(),
             'user_agent' => $this->faker->userAgent(),
-            'visitor_id' => $this->faker->sha256(),
-            'request_hash' => $this->faker->sha256(),
             'is_unique' => $this->faker->boolean(),
             'location_href' => $this->faker->url(),
             'host' => $this->faker->domainName(),
@@ -45,9 +43,7 @@ class EventFactory extends Factory
             'device' => $this->faker->word(),
             'os' => $this->faker->word(),
             'time_zone' => $this->faker->timezone(),
-            'client_time' => $this->faker->dateTimeBetween('-1 days', '+0 days'),
-            'enter_time' => $this->faker->dateTimeBetween('-1 days', '+0 days'),
-            'exit_time' => null
+            'client_time' => $this->faker->dateTimeBetween('-1 days', '+0 days')
         ];
     }
 }

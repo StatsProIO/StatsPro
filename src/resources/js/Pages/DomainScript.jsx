@@ -22,7 +22,7 @@ export default function DomainScript(props) {
                 <Grid item sm={10} md={10} lg={6}>
                     <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
                         <Typography sx={{ py: 2 }} variant="h5"><b>Add this script to your website ({props.domain.domain_name})</b></Typography>
-                        <ScriptAndInstructions />
+                        <ScriptAndInstructions domain={props.domain.domain_name}/>
                         <Button variant="contained" onClick={() => { Inertia.visit('/dashboard?domain=' + props.domain.domain_name); }} fullWidth size='large'>Start Collecting Data</Button>
                     </Box>
                 </Grid>

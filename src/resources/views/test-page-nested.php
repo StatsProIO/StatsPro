@@ -11,8 +11,8 @@
   </head>
   <body>
     <main>
-        <h1>Test Page</h1>
-        <a href="/test-page/nested">Go to nested page</a>
+        <h1>Nested Test Page</h1>
+        <a href="/test-page">Go to parent page</a>
     </main>
   </body>
 </html>
