@@ -1,5 +1,6 @@
 import {Paper, Stack, Typography} from '@mui/material';
 import React, {useEffect, useState} from 'react';
+import {Inertia} from "@inertiajs/inertia";
 
 export function RealTimeChart({ domain }) {
 
@@ -8,12 +9,15 @@ export function RealTimeChart({ domain }) {
   let componentIsMounted;
 
   const getData = async () => {
-    const res = await fetch("/api/events/real-time/" + domain);
-    const data = await res.json();
-
-    if(componentIsMounted) { //don't update the state if the promise comes back and the component is not mounted anymore
-        setRealtime(data);
-    }
+      axios.get(`/api/events/real-time/${domain}` )
+          .then(function (response) {
+              if (componentIsMounted) { //don't update the state if the promise comes back and the component is not mounted anymore
+                  setRealtime(response.data);
+              }
+          })
+          .catch(function (error) {
+              axios.post(`/api/error`, {component: 'RealTimeChart', message: error});
+          });
   };
 
   useEffect(() => {

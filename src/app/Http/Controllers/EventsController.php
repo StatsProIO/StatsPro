@@ -63,7 +63,7 @@ class EventsController extends Controller
             ->where('id',$request->id)
             ->increment('time_on_page_seconds', 15, ['updated_at' => Carbon::now()]);
 
-        return 'SUCCESS';
+        return ['status' => 'SUCCESS'];
     }
 
     public function getTrackerPixel(Request $request) {
