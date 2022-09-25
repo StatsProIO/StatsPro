@@ -61,7 +61,7 @@ export default function Charts({ domain }) {
     useEffect(() => {
         //make an API request for range/domain
 
-        axios.get(`/api/events?range=${range}&domain=${domain}`)
+        axios.get(`/api/events/${domain}?range=${range}`)
             .then(function (response) {
 
                 // handle success
