@@ -10,7 +10,7 @@ export default function DomainScript(props) {
             errors={props.errors}
         >
 
-            {/* <Head title="Dashboard" /> */}
+            <Head title="Domain Script" />
 
             <Grid container>
                 <Grid item lg={8}>

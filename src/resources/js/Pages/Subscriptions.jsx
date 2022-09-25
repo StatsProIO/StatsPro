@@ -1,10 +1,11 @@
 import {SubscriptionOptions} from '@/Components/SubscriptionOptions';
 import Authenticated from '@/Layouts/Authenticated';
-import {usePage} from '@inertiajs/inertia-react';
+import {Head, usePage} from '@inertiajs/inertia-react';
 import {Alert, AlertTitle, Button, Grid, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
 import {Inertia} from '@inertiajs/inertia';
 import {subscriptionPlans} from "@/helpers/subscriptions";
+import * as React from "react";
 
 export default function Subscriptions(props) {
 
@@ -37,6 +38,8 @@ export default function Subscriptions(props) {
             auth={props.auth}
             errors={props.errors}
         >
+
+            <Head title="Subscriptions" />
 
             <Grid container rowSpacing={{ xs: 1, sm: 2, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
                 <Grid item lg={12} md={12} xs={12}>

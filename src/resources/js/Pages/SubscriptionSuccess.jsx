@@ -1,10 +1,11 @@
 import Authenticated from '@/Layouts/Authenticated';
-import {usePage} from '@inertiajs/inertia-react';
+import {Head, usePage} from '@inertiajs/inertia-react';
 import {Box, Button, Grid, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {Inertia} from '@inertiajs/inertia'
+import * as React from "react";
 
 
 export default function SubscriptionSuccess(props) {
@@ -42,6 +43,7 @@ export default function SubscriptionSuccess(props) {
             auth={props.auth}
             errors={props.errors}
         >
+            <Head title="Subscription Success" />
 
             <Grid container justifyContent="center">
                 <Grid item lg={6} >

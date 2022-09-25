@@ -34,9 +34,7 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <Guest>
-            <Head title="Log in" />
-
-
+            <Head title="Login" />
 
             {status && <Alert severity="success">{status}</Alert>}
 

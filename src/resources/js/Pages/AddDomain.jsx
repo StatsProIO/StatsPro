@@ -13,7 +13,7 @@ export default function ManageDomains(props) {
             auth={props.auth}
             errors={props.errors}
         >
-             <Head title="Add Domains" />
+             <Head title="Add Domain" />
 
             <ValidationErrors errors={props?.flash?.message ? [props?.flash?.message] : []} />
             <Grid container justifyContent={'center'}>
