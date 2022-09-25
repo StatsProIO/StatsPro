@@ -1,8 +1,7 @@
 import React from 'react';
-import { scaleLinear } from "d3-scale";
 import HorizontalBarChart from './HorizontalBarChart';
 
-export function TopSourcesChart({ inputData, timeBuckets }) {
+export function TopSourcesChart({ inputData }) {
 
 
   //TODO: this should really be the total number of pageviews, its currently limited to the ones being shown in the Top Pages chart

@@ -1,6 +1,4 @@
 import React from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/inertia-react';
 import Container from './Container';
 import Footer from "@/Components/Footer";
 

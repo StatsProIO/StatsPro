@@ -1,16 +1,15 @@
-import { Inertia } from '@inertiajs/inertia';
-import { Button, Grid, Paper, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import {Inertia} from '@inertiajs/inertia';
+import {Paper, Typography} from '@mui/material';
+import {Box} from '@mui/system';
+import React, {useState} from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import Stack from '@mui/material/Stack';
-import { LoadingButton } from '@mui/lab';
+import {LoadingButton} from '@mui/lab';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
-
-export function SubscriptionOption({ authUser, showLabels, title, price, productId, description, maxEvents, maximumSites, isRecommended, stripePriceId, showSubscribeButton, isCurrentSubscription, isFree }) {
+export function SubscriptionOption({ authUser, showLabels, title, price, description, maxEvents, maximumSites, isRecommended, stripePriceId, showSubscribeButton, isCurrentSubscription, isFree }) {
 
     const [isLoading, setIsLoading] = useState(false);
 

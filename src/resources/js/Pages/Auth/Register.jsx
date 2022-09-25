@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Guest from '@/Layouts/Guest';
 import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
-import { Box, Grid, Paper, TextField, Typography } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import {Head, Link, useForm} from '@inertiajs/inertia-react';
+import {Box, Grid, Paper, TextField, Typography} from '@mui/material';
+import {LoadingButton} from '@mui/lab';
 import LoginWithGoogle from "@/Components/LoginWithGoogle";
 import useQueryString from "@/customHooks/useQueryString";
 

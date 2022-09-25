@@ -1,12 +1,9 @@
-import { SubscriptionOptions } from '@/Components/SubscriptionOptions';
-import useQueryString from '@/customHooks/useQueryString';
+import {SubscriptionOptions} from '@/Components/SubscriptionOptions';
 import Authenticated from '@/Layouts/Authenticated';
-import { usePage } from '@inertiajs/inertia-react';
-import {Alert, AlertTitle, Box, Button, Grid, Typography} from '@mui/material';
-import { useEffect, useState } from 'react';
-import CircularProgress from "@mui/material/CircularProgress";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Inertia } from '@inertiajs/inertia';
+import {usePage} from '@inertiajs/inertia-react';
+import {Alert, AlertTitle, Button, Grid, Typography} from '@mui/material';
+import {useEffect, useState} from 'react';
+import {Inertia} from '@inertiajs/inertia';
 import {subscriptionPlans} from "@/helpers/subscriptions";
 
 export default function Subscriptions(props) {

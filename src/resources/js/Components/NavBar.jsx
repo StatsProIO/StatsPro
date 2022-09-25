@@ -10,8 +10,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 
-import { Inertia } from '@inertiajs/inertia'
-import { Menu, MenuItem } from '@mui/material';
+import {Inertia} from '@inertiajs/inertia'
+import {Menu, MenuItem} from '@mui/material';
 
 const pages = [
     {

@@ -1,5 +1,5 @@
-import { Inertia } from '@inertiajs/inertia';
-import { Button, Grid, Typography, Box } from '@mui/material';
+import {Inertia} from '@inertiajs/inertia';
+import {Box, Button, Grid, Typography} from '@mui/material';
 import ScriptAndInstructions from '@/Components/ScriptAndInstructions';
 import Authenticated from '@/Layouts/Authenticated';
 

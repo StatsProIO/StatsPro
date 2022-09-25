@@ -1,5 +1,5 @@
-import { Button, List, ListItem, ListItemButton, Paper, Toolbar, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import {Button, List, ListItem, ListItemButton, Paper, Toolbar, Typography} from '@mui/material';
+import {Box} from '@mui/system';
 import React from 'react';
 
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -10,7 +10,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
 import PaymentsIcon from '@mui/icons-material/Payments';
-import { Inertia } from '@inertiajs/inertia'
+import {Inertia} from '@inertiajs/inertia'
 
 
 export default function DrawerContents() {

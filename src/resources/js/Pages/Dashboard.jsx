@@ -1,8 +1,7 @@
 import Charts from '@/Components/Charts';
 import FirstEventWait from '@/Components/FirstEventWait';
-import useQueryString from '@/customHooks/useQueryString';
 import Authenticated from '@/Layouts/Authenticated';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 export default function Dashboard(props) {
     const [eventStatus, setEventStatus] = useState(false);

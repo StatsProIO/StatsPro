@@ -1,25 +1,23 @@
-import { Box, Paper, Stack, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
-import { useState, useRef } from 'react';
-import { FormControl, Grid, InputLabel, Menu, MenuItem, Select } from '@mui/material';
-import { TopSourcesChart } from '@/Components/TopSourcesChart';
-import { DashboardInfoCard } from '@/Components/DashboardInfoCard';
-import { TopPages } from '@/Components/TopPages';
-import { PageviewsChart } from '@/Components/PageviewsChart';
-import { DevicesChart } from '@/Components/DevicesChart';
-import { LocationChart } from '@/Components/LocationChart';
+import {Box, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from '@mui/material';
+import React, {useEffect, useState} from 'react';
+import {TopSourcesChart} from '@/Components/TopSourcesChart';
+import {DashboardInfoCard} from '@/Components/DashboardInfoCard';
+import {TopPages} from '@/Components/TopPages';
+import {PageviewsChart} from '@/Components/PageviewsChart';
+import {DevicesChart} from '@/Components/DevicesChart';
+import {LocationChart} from '@/Components/LocationChart';
 import useQueryString from '@/customHooks/useQueryString';
 import {
     ArcElement,
-    Chart as ChartJS,
+    BarElement,
     CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
+    Chart as ChartJS,
     Filler,
-    BarElement
+    LinearScale,
+    LineElement,
+    PointElement
 } from 'chart.js';
-import { RealTimeChart } from './RealTimeChart';
+import {RealTimeChart} from './RealTimeChart';
 import {Inertia} from "@inertiajs/inertia";
 
 
