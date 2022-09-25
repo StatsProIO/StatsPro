@@ -6,6 +6,7 @@ use App\Http\Controllers\EventsController;
 use App\Http\Controllers\DomainsController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\ErrorController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -36,3 +37,5 @@ Route::post('/collect', [EventsController::class, 'postEvent']);
 Route::post('/event/time-on-page', [EventsController::class, 'postTimeOnPage']);
 Route::get('/2Vj2pBn.jpg', [EventsController::class, 'getTrackerPixel']);
 Route::post('/contact', [ContactsController::class, 'postContact'])->name('contact');
+Route::post('/error', [ErrorController::class, 'add'])->name('error');
+

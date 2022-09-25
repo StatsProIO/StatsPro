@@ -3,6 +3,7 @@ var scriptEl = document.currentScript;
 var parsedScriptUrl = (new URL(document.currentScript.src))
 var endpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/collect";
 var timeOnPageEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/event/time-on-page";
+var errorEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/error";
 
 var payload = {}
 payload.event_name = 'pageview'
@@ -45,16 +46,20 @@ function sendRequest(url, body, next) {
                 try {
                     json = JSON.parse(request.responseText);
                 } catch (e) {
-                    throw new Error('Failed to parse response from server', e);
+                    recordError('Failed to parse response from server: ' + e.toString());
                 }
 
                 if (typeof next === 'function') {
                     return next(json)
                 }
+            } else {
+                recordError('Response status is ' + request.status);
             }
-            //TODO: broadcast to some external source on error and report the number of tries it took
-            // options && options.callback && options.callback()
         }
+    }
+
+    request.onerror = function (e) {
+        recordError('Error performing request: ' + JSON.stringify(e));
     }
 }
 
@@ -74,6 +79,13 @@ function scheduleReoccringRequests(initialRequestJsonResponse) {
 
 const isInBackground = function () {
     return document.visibilityState === 'hidden'
+}
+
+function recordError(error) {
+    var errorRequest = new XMLHttpRequest();
+    errorRequest.open('POST', errorEndpoint, true);
+    errorRequest.setRequestHeader('Content-Type', 'application/json');
+    errorRequest.send(JSON.stringify(error));
 }
 
 sendRequest(endpoint, payload, scheduleReoccringRequests);
