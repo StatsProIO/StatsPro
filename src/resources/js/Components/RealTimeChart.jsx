@@ -1,5 +1,5 @@
-import { Paper, Stack, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import {Paper, Stack, Typography} from '@mui/material';
+import React, {useEffect, useState} from 'react';
 
 export function RealTimeChart({ domain }) {
 

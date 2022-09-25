@@ -1,4 +1,4 @@
-import {Box, Link, Typography} from '@mui/material';
+import {Box, Link} from '@mui/material';
 import React from 'react';
 import IntegrationCode from './IntegrationCode';
 

@@ -2,8 +2,6 @@ import { Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 
-
-
 export function DashboardInfoCard({ title, value, subtitleValue, subtitleText }) {
 
     return <>

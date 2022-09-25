@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
 import Checkbox from '@mui/material/Checkbox';
 import Guest from '@/Layouts/Guest';
 import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
-import { Box, FormControlLabel, Grid, TextField, Typography, Paper } from '@mui/material';
+import {Head, Link, useForm} from '@inertiajs/inertia-react';
+import {Box, FormControlLabel, Grid, Paper, TextField, Typography} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import LoginWithGoogle from "@/Components/LoginWithGoogle";
 

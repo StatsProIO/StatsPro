@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import { scaleLinear } from "d3-scale";
+import React, {useState} from 'react';
+import {ComposableMap, Geographies, Geography} from "react-simple-maps";
+import {scaleLinear} from "d3-scale";
 import ReactTooltip from "react-tooltip";
-
 
 
 const geoUrl = "/features.json";

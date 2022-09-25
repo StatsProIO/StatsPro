@@ -1,9 +1,9 @@
-import { Box } from '@mui/material';
+import {Box} from '@mui/material';
 import Container from './Container';
 import Footer from "@/Components/Footer";
 import React from "react";
 
-export default function Authenticated({ auth, header, children, showDrawer=true }) {
+export default function Authenticated({ auth, children, showDrawer=true }) {
     return (
         <Container showDrawer={showDrawer} showNavLinks={false} auth={auth}>
             <Box component="main" sx={{ flexGrow: 1 }}>

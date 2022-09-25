@@ -1,6 +1,5 @@
 import React from 'react';
 import {Typography} from '@mui/material';
-import General from "@/Layouts/General";
 import DocsLayout from "@/Layouts/DocsLayout";
 
 

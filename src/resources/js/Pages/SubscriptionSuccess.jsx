@@ -1,15 +1,13 @@
 import Authenticated from '@/Layouts/Authenticated';
-import { usePage } from '@inertiajs/inertia-react';
-import { Alert, AlertTitle, Box, Button, Grid, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import {usePage} from '@inertiajs/inertia-react';
+import {Box, Button, Grid, Typography} from '@mui/material';
+import {useEffect, useState} from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { Inertia } from '@inertiajs/inertia'
-
+import {Inertia} from '@inertiajs/inertia'
 
 
 export default function SubscriptionSuccess(props) {
-    const { flash } = usePage().props
     let componentIsMounted;
     const [isRefreshing, setIsRefreshing] = useState(true);
 

@@ -1,6 +1,6 @@
-import { Grid, Typography } from '@mui/material';
+import {Grid, Typography} from '@mui/material';
 import React from 'react';
-import { SubscriptionOption } from './SubscriptionOption';
+import {SubscriptionOption} from './SubscriptionOption';
 import {subscriptionPlans} from "@/helpers/subscriptions";
 
 export function SubscriptionOptions({authUser, currentProductSubscription, showLabels}) {

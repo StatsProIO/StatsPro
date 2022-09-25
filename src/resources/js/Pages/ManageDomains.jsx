@@ -1,7 +1,6 @@
-import { Button, Grid, Typography, Box } from '@mui/material';
-import { Inertia } from '@inertiajs/inertia';
+import {Box, Button, Grid, Typography} from '@mui/material';
+import {Inertia} from '@inertiajs/inertia';
 import Authenticated from '@/Layouts/Authenticated';
-import SettingsIcon from '@mui/icons-material/Settings';
 import * as React from "react";
 import {Head} from "@inertiajs/inertia-react";
 

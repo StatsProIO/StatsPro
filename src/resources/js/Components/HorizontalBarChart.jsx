@@ -1,6 +1,6 @@
-import { Box, Grid, Typography } from "@mui/material";
-import { scaleLinear } from "d3-scale";
-import { Fragment } from "react";
+import {Box, Grid, Typography} from "@mui/material";
+import {scaleLinear} from "d3-scale";
+import {Fragment} from "react";
 
 
 export default function HorizontalBarChart({ valueTitle, data, totalValue, colorMin, colorMax }) {

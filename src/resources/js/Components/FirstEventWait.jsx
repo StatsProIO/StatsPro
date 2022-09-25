@@ -1,8 +1,7 @@
-import { Grid, Paper, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import React, { useEffect } from 'react';
-import IntegrationCode from './IntegrationCode';
-import { Inertia } from '@inertiajs/inertia'
+import {Grid, Typography} from '@mui/material';
+import {Box} from '@mui/system';
+import React, {useEffect} from 'react';
+import {Inertia} from '@inertiajs/inertia'
 import ScriptAndInstructions from './ScriptAndInstructions';
 
 
