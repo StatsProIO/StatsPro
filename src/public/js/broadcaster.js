@@ -71,10 +71,6 @@ function scheduleReoccringRequests(initialRequestJsonResponse) {
         }
         sendRequest(timeOnPageEndpoint, { id: eventId });
     }, 15000);
-
-    if (typeof next === 'function') {
-        return next(recordId)
-    }
 }
 
 const isInBackground = function () {

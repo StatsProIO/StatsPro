@@ -27,8 +27,7 @@ export default function Subscriptions(props) {
 
             })
             .catch(function (error) {
-                // TODO: handle error
-                console.log(error);
+                axios.post(`/api/error`, {component: 'Subscriptions', message: error});
             });
 
     });

@@ -18,7 +18,7 @@ export default function FirstEventWait({domain}) {
                     }
                 })
                 .catch(function (error) {
-                    //TODO: tell someone?
+                    axios.post(`/api/error`, {component: 'FirstEventWait', message: error});
                 });
         }, 3000)
 

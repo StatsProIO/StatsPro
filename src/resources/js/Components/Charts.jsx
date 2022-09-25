@@ -83,8 +83,7 @@ export default function Charts({ domain }) {
                 setComparisonIntervalDescriptionSuffix(response.data.comparison_interval_description_suffix);
             })
             .catch(function (error) {
-                // TODO: handle error
-                console.log(error);
+                axios.post(`/api/error`, {component: 'Charts', message: error});
             })
             .then(function () {
                 // always executed
