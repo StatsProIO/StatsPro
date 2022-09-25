@@ -90,9 +90,14 @@ Route::get('/docs/getting-started', function () {
      return Inertia::render('DocsGettingStarted');
 })->name('DocsGettingStarted');
 
-Route::get('/terms-and-privacy', function () {
-     return Inertia::render('TermsAndPrivacy');
-})->name('TermsAndPrivacy');
+Route::get('/terms', function () {
+     return Inertia::render('terms');
+})->name('Terms');
+
+Route::get('/privacy-policy', function () {
+     return Inertia::render('PrivacyPolicy');
+})->name('PrivacyPolicy');
+
 
 Route::get('/contact', function () {
      return Inertia::render('Contact');
