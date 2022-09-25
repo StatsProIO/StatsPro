@@ -3,10 +3,12 @@ import Guest from '@/Layouts/Guest';
 import {Grid, Typography} from '@mui/material';
 import ConvincingBanner from "@/Components/ConvincingBanner";
 import DocsList from "@/Components/DocsList";
+import {Head} from "@inertiajs/inertia-react";
 
 export default function DocsLayout({auth, title, children}) {
     return (
         <Guest auth={auth}>
+            <Head title={title} />
             <Grid container spacing={2} justifyContent={"center"} sx={{ py: 5, px: 1 }}>
                 <Grid item lg={2} md={3} sm={4} xs={12} order={{xs: 2, sm: 1}}>
                     <DocsList/>
