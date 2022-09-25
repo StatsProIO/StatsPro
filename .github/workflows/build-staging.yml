@@ -55,8 +55,8 @@ jobs:
           docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
 
           # do a deploy
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
           docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
+          docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
           docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
           #clean up

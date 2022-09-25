@@ -51,7 +51,7 @@ export default function Home(props) {
                 <Grid container spacing={0} className="hero-row" sx={{ pt: 5, px: 1 }} justifyContent="center" >
                     <Grid item xl={5} lg={7} md={7} sm={11} xs={12} textAlign='center' >
                         <Typography variant="h2" component="div" sx={{ fontWeight: 600, textAlign: 'center', fontSize: {xs: '45px', sm : '50px', md: '55px'} }} gutterBottom style={{fontFamily: 'Helvetica', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
-                            GDPR-compliant analytics without compromises
+                            GDPR-compliant analytics without compromises!
                         </Typography>
                         <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 4}}>
                             Get powerful analytics on your website <b>without</b> a cookie banner. Fully compliant with GDPR, CCPA and PECR. Fully hosted in the EU.
