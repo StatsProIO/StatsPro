@@ -9,7 +9,6 @@ import {subscriptionPlans} from "@/helpers/subscriptions";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 export default function Profile(props) {
-    console.log(props);
     return (
         <Authenticated
             auth={props.auth}

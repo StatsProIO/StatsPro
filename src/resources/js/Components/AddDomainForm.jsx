@@ -3,6 +3,7 @@ import {useForm} from '@inertiajs/inertia-react';
 import {Box, Button, Link, TextField} from '@mui/material';
 import React, {useEffect} from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import {LoadingButton} from "@mui/lab";
 
 export default function AddDomainForm() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -40,7 +41,7 @@ export default function AddDomainForm() {
             onChange={onHandleChange}
             sx={{mt: 2}}
             />
-            <Button fullWidth variant="contained" type="submit" size="large" sx={{ my: 2 }} startIcon={<AddIcon />}>Add Domain</Button>
+            <LoadingButton loading={processing} fullWidth variant="contained" type="submit" size="large" sx={{ my: 2 }} startIcon={<AddIcon />}>Add Domain</LoadingButton>
         </form>
         <Box sx={{mt: 3}}>
             <Link variant={'subtitle1'} href={'/contact'}>Need Help?</Link>

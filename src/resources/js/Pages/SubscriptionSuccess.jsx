@@ -9,16 +9,12 @@ import { Inertia } from '@inertiajs/inertia'
 
 
 export default function SubscriptionSuccess(props) {
-
     const { flash } = usePage().props
 
-    var interval;
     const [isRefreshing, setIsRefreshing] = useState(true);
 
     useEffect(() => {
-        interval = setInterval(() => {
-            //TODO: call refresh
-
+        let interval = setInterval(() => {
             axios.get(`/api/subscription-status`)
                 .then(function (response) {
 
@@ -28,7 +24,6 @@ export default function SubscriptionSuccess(props) {
                     }
                 })
                 .catch(function (error) {
-                    // TODO: handle error
                     console.log(error);
                 });
         }, 4000)

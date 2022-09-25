@@ -14,23 +14,23 @@ class DomainsController extends Controller
         $domainName = strpos($domainName, 'http') !== 0 ? "https://$domainName" : $domainName;
 
         if (filter_var($domainName, FILTER_VALIDATE_URL ) === FALSE) {
-            return redirect()->intended('/add-domain')->with('message', 'Not a valid URL.');
+            return redirect()->back()->with('message', 'Not a valid URL.');
         }
 
         $domainNameHost = parse_url($domainName, PHP_URL_HOST);
 
         if($domainNameHost === null || $domainNameHost === '') {
-            return redirect()->intended('/add-domain')->with('message', 'Invalid URL. Missing host.');
+            return redirect()->back()->with('message', 'Invalid URL. Missing host.');
         }
 
         //make sure there is at least 1 period in the domain
         if(preg_match('/.*\..*/', $domainNameHost) === 0) {
-            return redirect()->intended('/add-domain')->with('message', 'Invalid URL. Missing top-level domain (.com, .gov, etc).');
+            return redirect()->back()->with('message', 'Invalid URL. Missing top-level domain (.com, .gov, etc).');
         }
 
         $existingDomains = Domain::where('domain_name', $domainNameHost)->count();
         if ($existingDomains > 0) {
-            return redirect()->intended('/add-domain')->with('message', 'Domain ' . $domainNameHost . ' has already been registered.');
+            return redirect()->back()->with('message', 'Domain ' . $domainNameHost . ' has already been registered.');
         }
 
         $domain = new Domain;
