@@ -33,7 +33,7 @@ class EventsController extends Controller
             }
         }
 
-        $parsedUserAgent = new WhichBrowser\Parser($userAgent);
+        $parsedUserAgent = new \WhichBrowser\Parser($userAgent);
 
         $event = new Event;
         $event->domain_id = $domain->id;
@@ -49,8 +49,8 @@ class EventsController extends Controller
         $event->country = Helper::getCountry($request->client_time_zone);
         $event->region = Helper::getRegion($request->client_time_zone);
         $event->browser = (new Browser())->getName();
-        $event->device = $parsedUserAgent->device->type . '(' . $parsedUserAgent->device->getManufacturer() ?? 'unknown' . ')';
-        $event->os = $parsedUserAgent->os->name . '(' . $parsedUserAgent->os->version->alias ?? 'unknown' . ')';
+        $event->device = $parsedUserAgent->device->type . ' (' . ($parsedUserAgent->device->getManufacturer() ?? 'Manufacturer Unknown') . ')';
+        $event->os = $parsedUserAgent->os->name . ' (' . ($parsedUserAgent->os->version->alias ?? 'Version Unknown') . ')';
         $event->time_zone = $request->client_time_zone;
         $event->client_time = $request->client_time;
         $event->save();
