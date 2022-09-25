@@ -9,24 +9,14 @@ export default function Dashboard(props) {
     const [domain, setDomain] = useQueryString("domain", '');
 
     useEffect(() => {
+        axios.get(`/api/event-status/${domain}`)
+            .then(function (response) {
+                setEventStatus(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-        //if the domain is not set in the query params, find the first domain and set the query params
-        if (domain === '') {
-            console.log("Domain is empty, setting to " + props.firstDomain);
-            setDomain(props.firstDomain)
-        } else {
-            axios.get(`/api/event-status/${domain}`)
-                .then(function (response) {
-                    setEventStatus(response.data);
-                })
-                .catch(function (error) {
-                    // TODO: handle error
-                    console.log(error);
-                })
-                .then(function () {
-                    // always executed
-                });
-        }
     }, [domain]);
 
     return (
@@ -37,7 +27,7 @@ export default function Dashboard(props) {
 
             {/* <Head title="Dashboard" /> */}
 
-            {eventStatus === 'NO_DATA' && <FirstEventWait />}
+            {eventStatus === 'NO_DATA' && <FirstEventWait domain={domain}/>}
             {eventStatus === 'SUCCESS' && <Charts domain={domain} setDomain={setDomain} />}
 
             {/* TODO: the case if there are no domains */}

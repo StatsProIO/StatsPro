@@ -19,23 +19,20 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//TODO: verify all these are actually authenticated
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/events', [EventsController::class, 'getEvents']);
+    Route::get('/events/real-time', [EventsController::class, 'getEventsRealTime']);
+    Route::get('/event-status/{domainName}', [EventsController::class, 'getEventStatus']);
+
+    Route::get('/subscription-status', [SubscriptionController::class, 'getSubscriptionStatus']);
+
+    Route::get('/user', function (Request $request) { return $request->user(); });
+
+    Route::post('/domain', [DomainsController::class, 'postDomain'])->name('domain');
 });
 
 
-Route::get('/get-visitor-id', [EventsController::class, 'getVisitorId']);
 Route::post('/collect', [EventsController::class, 'postEvent']);
 Route::post('/event/time-on-page', [EventsController::class, 'postTimeOnPage']);
 Route::get('/2Vj2pBn.jpg', [EventsController::class, 'getTrackerPixel']);
-
-Route::middleware('auth:sanctum')->get('/events', [EventsController::class, 'getEvents']);
-Route::middleware('auth:sanctum')->get('/events/real-time', [EventsController::class, 'getEventsRealTime']);
-Route::middleware('auth:sanctum')->get('/event-status/{domainName}', [EventsController::class, 'getEventStatus']);
-Route::middleware('auth:sanctum')->post('/domain', [DomainsController::class, 'postDomain'])->name('domain');
-
-Route::middleware('auth:sanctum')->get('/subscription-status', [SubscriptionController::class, 'getSubscriptionStatus']);
-
-
 Route::post('/contact', [ContactsController::class, 'postContact'])->name('contact');
