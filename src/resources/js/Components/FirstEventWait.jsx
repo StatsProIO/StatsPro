@@ -7,11 +7,14 @@ import ScriptAndInstructions from './ScriptAndInstructions';
 
 
 export default function FirstEventWait({domain}) {
+    let componentIsMounted;
+
     useEffect(() => {
+        componentIsMounted = true;
         let interval = setInterval(() => {
             axios.get(`/api/event-status/${domain}`)
                 .then(function (response) {
-                    if (response.data === "SUCCESS") {
+                    if (componentIsMounted && response.data === "SUCCESS") {
                         Inertia.visit('/dashboard');
                     }
                 })
@@ -20,7 +23,10 @@ export default function FirstEventWait({domain}) {
                 });
         }, 3000)
 
-        return () => { clearInterval(interval); }
+        return () => {
+            componentIsMounted = false
+            clearInterval(interval);
+        }
     }, [])
 
     return (

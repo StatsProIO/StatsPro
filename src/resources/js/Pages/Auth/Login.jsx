@@ -85,8 +85,6 @@ export default function Login({ status, canResetPassword }) {
                                     loading={processing}
                                     fullWidth
                                     size='large'
-                                    loadingPosition="start"
-
                                     variant="contained"
                                     type='submit'
                                     sx={{ my: 3 }}

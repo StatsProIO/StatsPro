@@ -10,15 +10,16 @@ import { Inertia } from '@inertiajs/inertia'
 
 export default function SubscriptionSuccess(props) {
     const { flash } = usePage().props
-
+    let componentIsMounted;
     const [isRefreshing, setIsRefreshing] = useState(true);
 
     useEffect(() => {
+        componentIsMounted = true;
         let interval = setInterval(() => {
             axios.get(`/api/subscription-status`)
                 .then(function (response) {
 
-                    if (response.data?.isSubscribed === true) {
+                    if (componentIsMounted && response.data?.isSubscribed === true) {
                         clearInterval(interval);
                         setIsRefreshing(false);
                     }
@@ -28,7 +29,10 @@ export default function SubscriptionSuccess(props) {
                 });
         }, 4000)
 
-        return () => { clearInterval(interval); }
+        return () => {
+            componentIsMounted = false;
+            clearInterval(interval);
+        }
     }, [])
 
     function onClickGoToDashboardButton() {

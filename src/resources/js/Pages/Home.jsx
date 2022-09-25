@@ -103,29 +103,27 @@ export default function Home(props) {
                     </Grid>
                 </Grid>
 
-                <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', py: 10, px: 1 }}>
-                    <Grid container spacing={3} lg={10}  md={11} justifyContent="center"  alignItems="stretch" >
-                        <Grid item sm={4} >
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2', height: '100%' }}>
-                                <img src="../images/Global Business.png" style={{maxWidth: '30%'}} height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h4"><b>European hosted analytics</b></Typography>
-                                <Typography variant="h6" color="text.secondary">Unlike other privacy-focused analytics services, Marble Metrics keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit.</Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item sm={4}>
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
-                                <img src="../images/Business Protection.png" style={{maxWidth: '30%'}} height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h4"><b>Your data is never sold</b></Typography>
-                                <Typography variant="h6" color="text.secondary">We charge larger customers to use our service. This allows us to keep our service Free for small projects and ensures that we have no conflict of interest between privacy and profits.</Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item sm={4}>
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
-                                <img src="../images/Strategy.png" style={{maxWidth: '30%'}} height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h4"><b>All the features you need</b></Typography>
-                                <Typography variant="h6" color="text.secondary">Marble Metrics comes standard with all of the features that you're used to seeing from your analytics platform: real-time, page views, time on page, bounce rate, and more.</Typography>
-                            </Paper>
-                        </Grid>
+                <Grid container spacing={3} justifyContent="center" alignItems="stretch" sx={{ textAlign: 'center', py: 10, px: 1 }}>
+                    <Grid item sm={4} lg={3} >
+                        <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2', height: '100%' }}>
+                            <img src="../images/Global Business.png" height={'100px'} loading="lazy" decoding="async" />
+                            <Typography variant="h4"><b>European hosted analytics</b></Typography>
+                            <Typography variant="h6" color="text.secondary">Unlike other privacy-focused analytics services, Marble Metrics keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit.</Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item sm={4} lg={3}>
+                        <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
+                            <img src="../images/Business Protection.png" height={'100px'} loading="lazy" decoding="async" />
+                            <Typography variant="h4"><b>Your data is never sold</b></Typography>
+                            <Typography variant="h6" color="text.secondary">We charge larger customers to use our service. This allows us to keep our service Free for small projects and ensures that we have no conflict of interest between privacy and profits.</Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item sm={4} lg={3}>
+                        <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
+                            <img src="../images/Strategy.png" height={'100px'} loading="lazy" decoding="async" />
+                            <Typography variant="h4"><b>All the features you need</b></Typography>
+                            <Typography variant="h6" color="text.secondary">Marble Metrics comes standard with all of the features that you're used to seeing from your analytics platform: real-time, page views, time on page, bounce rate, and more.</Typography>
+                        </Paper>
                     </Grid>
                 </Grid>
 
@@ -175,40 +173,30 @@ export default function Home(props) {
                 </Grid>
 
 
-                <Grid container alignItems="center" justifyContent="center" sx={{ pt: 9, px: 1 }}>
-                    <Grid container lg={12} xl={10} justifyContent="center" alignItems="center" textAlign={'center'}>
-                        <Grid item sm={6} lg={6}>
-                            <Typography variant="h4"><b>Your data is secured and belongs to only you</b></Typography>
-                            <Typography variant="h6" color="text.secondary">
-                                All of the analytics data collected on your websites belongs to you, it is never used for any other purpose other than to show in your Dashboard. We store all data securely in the EU and no analytics information can be traced to identify an individual user.
-                            </Typography>
-                        </Grid>
-
+                <Grid container alignItems="center" justifyContent="center" sx={{ pt: 9, px: 1 }} textAlign={'center'}>
+                    <Grid item xs={12} md={9} lg={6}>
+                        <Typography variant="h4"><b>Your data is secured and belongs to only you</b></Typography>
+                        <Typography variant="h6" color="text.secondary">
+                            All of the analytics data collected on your websites belongs to you, it is never used for any other purpose other than to show in your Dashboard. We store all data securely in the EU and no analytics information can be traced to identify an individual user.
+                        </Typography>
                     </Grid>
                 </Grid>
 
-
-                <Grid container alignItems="center" justifyContent="center" sx={{ pt: 5, px: 1  }}>
-                    <Grid container lg={12} xl={10} justifyContent="center" alignItems="center" textAlign={'center'}>
-                        <Grid item sm={6} lg={6}>
-                            <Typography variant="h4"><b>Personally Identifiable Information (PII) is never stored</b></Typography>
-                            <Typography variant="h6" color="text.secondary">
-                                Marble Metrics never stores or uses PII. Some other privacy-focused analytics services will attempt to fingerprint your users using IP addresses and other information. Our analytics solution specifically does not fingerprint users because PECR forbids fingerprinting.
-                            </Typography>
-                        </Grid>
-
+                <Grid container alignItems="center" justifyContent="center" sx={{ pt: 5, px: 1  }} textAlign={'center'}>
+                    <Grid item xs={12} md={9} lg={6}>
+                        <Typography variant="h4"><b>Personally Identifiable Information (PII) is never stored</b></Typography>
+                        <Typography variant="h6" color="text.secondary">
+                            Marble Metrics never stores or uses PII. Some other privacy-focused analytics services will attempt to fingerprint your users using IP addresses and other information. Our analytics solution specifically does not fingerprint users because PECR forbids fingerprinting.
+                        </Typography>
                     </Grid>
                 </Grid>
 
-
-                <Grid container alignItems="center" justifyContent="center" sx={{ pt: 5, px: 1  }}>
-                    <Grid container lg={12} xl={10} justifyContent="center" alignItems="center" textAlign={'center'}>
-                        <Grid item sm={6} lg={6}>
-                            <Typography variant="h4"><b>GDPR, PECR and CCPA Compliant</b></Typography>
-                            <Typography variant="h6" color="text.secondary">
-                                Marble Metrics has been built from the ground up with the intention of being fully compliant with global privacy initiatives. We go a step further to ensure that we always keep the spirit of the law in mind, not simply skirting by the law.
-                            </Typography>
-                        </Grid>
+                <Grid container alignItems="center" justifyContent="center" sx={{ pt: 5, px: 1  }} textAlign={'center'}>
+                    <Grid item xs={12} md={9} lg={6}>
+                        <Typography variant="h4"><b>GDPR, PECR and CCPA Compliant</b></Typography>
+                        <Typography variant="h6" color="text.secondary">
+                            Marble Metrics has been built from the ground up with the intention of being fully compliant with global privacy initiatives. We go a step further to ensure that we always keep the spirit of the law in mind, not simply skirting by the law.
+                        </Typography>
                     </Grid>
                 </Grid>
 
@@ -219,16 +207,16 @@ export default function Home(props) {
                 </Grid>
 
                 <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', py: 10 }}>
-                    <Grid container lg={10} justifyContent="center" alignItems="center" >
+                    <Grid item xs={12} sm={10} md={11} lg={11} xl={10} justifyContent="center" alignItems="center" >
                         <Typography variant="h3" sx={{py: 3}}><b>Simple Pricing</b></Typography>
                         <SubscriptionOptions showLabels={false} currentProductSubscription={subscriptionPlans[0]} />
                     </Grid>
                 </Grid>
 
-                <Grid container alignItems="center" justifyContent="center" className={['dark-blue', 'font-white']}>
+                <Grid container alignItems="center" justifyContent="center" className={'dark-blue'}>
                     <Grid item sm={12} lg={10}>
                         <Box sx={{ textAlign: 'center', py: 6, my: 6 }} >
-                            <Typography variant="h3">
+                            <Typography variant="h3" color={'white'}>
                                 <b>It's time to get serious about privacy and analytics</b>
                             </Typography>
                             <Typography variant="h6" color="#aaa">Setup in just a few minutes, no credit card required.</Typography>
