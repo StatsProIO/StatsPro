@@ -10,7 +10,6 @@ class Event extends Model
     protected $fillable = [
         'domain_id',
         'event_name',
-        'ip_address',
         'user_agent',
         'location_href',
         'host',
