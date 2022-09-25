@@ -6,7 +6,7 @@ var timeOnPageEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostn
 
 
 
-//TODO: respect navigator.doNotTrack? 
+//TODO: respect navigator.doNotTrack?
 
 var payload = {}
 payload.event_name = 'pageview'
@@ -55,8 +55,6 @@ function sendRequest(url, body, next) {
     request.onreadystatechange = function () {
         if (request.readyState === 4) {
             if (request.status >= 200 && request.status < 400) {
-                console.log("Done");
-
                 let json = null;
                 try {
                     json = JSON.parse(request.responseText);

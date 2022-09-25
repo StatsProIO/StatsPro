@@ -14,15 +14,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//         $user = \App\Models\User::factory()->create([
-//             'name' => 'Test User',
-//             'email' => 'user1@gmail.com',
-//         ]);
-//
-//          \App\Models\Domain::factory()->create([
-//             'user_id' => $user->id,
-//             'domain_name' => 'mydomain.com',
-//         ]);
+        try {
+            $user = \App\Models\User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'user1@gmail.com',
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+          	$user = \App\Models\User::where('email', 'user1@gmail.com')->first();
+      }
+
+        try {
+             \App\Models\Domain::factory()->create([
+                'user_id' => $user->id,
+                'domain_name' => 'mydomain.com',
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+          	\App\Models\Domain::where('domain_name', 'mydomain.com')->first();
+          }
 
          \App\Models\User::factory(10)->create();
          \App\Models\Domain::factory(10)->create();

@@ -45,7 +45,7 @@ export default function FirstEventWait({domain}) {
 
                         <Box sx={{ mt: 7 }}>
                             <Typography variant="body1" align="center">Here's the code snippet again</Typography>
-                            <ScriptAndInstructions />
+                            <ScriptAndInstructions domain={domain}/>
                         </Box>
                     </Box>
                 </Grid>

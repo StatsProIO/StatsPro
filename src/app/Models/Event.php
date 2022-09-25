@@ -12,8 +12,6 @@ class Event extends Model
         'event_name',
         'ip_address',
         'user_agent',
-        'visitor_id',
-        'request_hash',
         'is_unique',
         'location_href',
         'host',
@@ -27,9 +25,7 @@ class Event extends Model
         'device',
         'os',
         'time_zone',
-        'client_time',
-        'enter_time',
-        'exit_time'
+        'client_time'
     ];
 
     use HasFactory;

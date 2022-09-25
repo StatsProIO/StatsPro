@@ -21,15 +21,17 @@ use App\Utility\TimeRange;
 class EventsController extends Controller
 {
     public function postEvent(Request $request) {
-        $clientIp = array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : '';
-
         $userAgent = $request->server('HTTP_USER_AGENT');
 
-        //TODO: include a salt
-        $visitorHash = \Hash::make(hash('sha256', json_encode([$clientIp, $userAgent, $request->location_host ])));
-        $requestHash = \Hash::make(hash('sha256', json_encode([$clientIp, $userAgent, $request->location_host, $request->location_pathname ])));
+        $domain = Domain::where('domain_name', $request->domain)->firstOrFail();
 
-        $domain = Domain::where('domain_name', $request->domain)->first();
+        $source = null;
+        if($request->referrer != null) {
+            $parsedUrl = parse_url($request->referrer);
+            if($parsedUrl !== false) {
+                $source = $parsedUrl['host'];
+            }
+        }
         //TODO: determine if this is a subsequest request for the same visitor_hash in the last 30 minutes
             //TODO: if yes, update the previous request with an exit time
 
@@ -38,15 +40,13 @@ class EventsController extends Controller
         $event = new Event;
         $event->domain_id = $domain->id;
         $event->event_name = $request->event_name;
-        $event->ip_address = $clientIp;
         $event->user_agent = $userAgent;
-        $event->request_hash = '';
-        $event->visitor_id = '';
         $event->is_unique = false; //TODO
         $event->location_href = $request->location_href;
         $event->host = $request->location_host;
         $event->path = $request->location_pathname;
         $event->referrer = $request->referrer;
+        $event->source = $source;
         $event->inner_width = $request->inner_width;
         $event->language = $request->lang;
         $event->country = Helper::getCountry($request->client_time_zone);
@@ -56,17 +56,15 @@ class EventsController extends Controller
         $event->os = $systemInfo['os'];
         $event->time_zone = $request->client_time_zone;
         $event->client_time = $request->client_time;
-        $event->enter_time = Carbon::now();
-        $event->exit_time = null;
         $event->save();
 
-        return $event;
+        return ['id' => $event->id];
     }
 
     public function postTimeOnPage(Request $request) {
         DB::table('events')
             ->where('id',$request->id)
-            ->increment('time_on_page_seconds', 15);
+            ->increment('time_on_page_seconds', 15, ['updated_at' => Carbon::now()]);
 
         return 'SUCCESS';
     }
@@ -87,8 +85,6 @@ class EventsController extends Controller
         $event->event_name = 'pixel_pageview';
         $event->ip_address = $clientIp;
         $event->user_agent = $userAgent;
-        $event->visitor_hash = $visitorHash;
-        $event->request_hash = $requestHash;
         $event->is_unique = false; //TODO
         $event->location_href =  $request->server('HTTP_REFERER') ?? '';
         $event->host = '';
@@ -103,8 +99,6 @@ class EventsController extends Controller
         $event->os = '';
         $event->time_zone = '';
         $event->client_time = Carbon::now();
-        $event->enter_time = Carbon::now();
-        $event->exit_time = null;
         $event->save();
 
         return response(base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg=='))

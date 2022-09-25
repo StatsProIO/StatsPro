@@ -99,7 +99,7 @@ export default function Home(props) {
                         <Typography variant="h6">Drop this code on your website and <a href={'/register'}>register with your domain</a>.</Typography>
                     </Grid>
                     <Grid item xs={12} md={10} lg={5}>
-                        <IntegrationCode />
+                        <IntegrationCode domain={'YOUR-DOMAIN-HERE'} />
                     </Grid>
                 </Grid>
 

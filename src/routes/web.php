@@ -67,6 +67,8 @@ Route::middleware(['auth', 'verified', 'require_one_domain'])->group(function ()
 });
 
 Route::get('/test-page', [TestPageController::class, 'get']);
+Route::get('/test-page/nested', [TestPageController::class, 'getNested']);
+
 
 //static pages
 Route::get('/docs', function () { return Inertia::render('Docs');})->name('docs');
