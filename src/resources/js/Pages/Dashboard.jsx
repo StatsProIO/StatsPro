@@ -6,10 +6,9 @@ import { useEffect, useState } from 'react';
 
 export default function Dashboard(props) {
     const [eventStatus, setEventStatus] = useState(false);
-    const [domain, setDomain] = useQueryString("domain", '');
 
     useEffect(() => {
-        axios.get(`/api/event-status/${domain}`)
+        axios.get(`/api/event-status/${props.domain}`)
             .then(function (response) {
                 setEventStatus(response.data);
             })
@@ -17,7 +16,7 @@ export default function Dashboard(props) {
                 console.log(error);
             });
 
-    }, [domain]);
+    }, [props.domain]);
 
     return (
         <Authenticated
@@ -27,10 +26,8 @@ export default function Dashboard(props) {
 
             {/* <Head title="Dashboard" /> */}
 
-            {eventStatus === 'NO_DATA' && <FirstEventWait domain={domain}/>}
-            {eventStatus === 'SUCCESS' && <Charts domain={domain} setDomain={setDomain} />}
-
-            {/* TODO: the case if there are no domains */}
+            {eventStatus === 'NO_DATA' && <FirstEventWait domain={props.domain}/>}
+            {eventStatus === 'SUCCESS' && <Charts domain={props.domain} />}
 
         </Authenticated>
     );

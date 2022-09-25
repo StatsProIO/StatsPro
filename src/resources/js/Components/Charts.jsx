@@ -20,6 +20,7 @@ import {
     BarElement
 } from 'chart.js';
 import { RealTimeChart } from './RealTimeChart';
+import {Inertia} from "@inertiajs/inertia";
 
 
 ChartJS.register(
@@ -32,7 +33,7 @@ ChartJS.register(
     ArcElement
 );
 
-export default function Charts({ domain, setDomain }) {
+export default function Charts({ domain }) {
 
     const [domains, setDomains] = useState([]);
     const [range, setRange] = useQueryString("range", '24h');
@@ -100,16 +101,19 @@ export default function Charts({ domain, setDomain }) {
                     <Typography variant="h6" color="text.secondary">Welcome back!</Typography>
                 </Grid>
                 <Grid item lg={2} md={3} xs={6}>
-
                     <FormControl fullWidth variant="filled">
                         <InputLabel id="domain-label">Domain</InputLabel>
                         <Select
-                            value={domain}
+                            value={domains.includes(domain) ? domain : ''} /* domain is passed in as a prop from the server, domains is loaded async. Make sure the list contains the one we're selecting before selecting it */
                             labelId="domain-label"
                             label="Domain"
-                            onChange={(event) => { setDomain(event.target.value) }}
+                            onChange={(event) => {
+                                Inertia.get('/dashboard/' + event.target.value)
+                            }}
                         >
-                            {domains.map((domain) => { return (<MenuItem value={domain} key={domain}>{domain}</MenuItem>); })}
+                            { domains.map((domain) => {
+                                return (<MenuItem value={domain} key={domain}>{domain}</MenuItem>);
+                            })}
                         </Select>
                     </FormControl>
                 </Grid>

@@ -30,14 +30,14 @@ Route::get('/welcome', function () {
 
 
 Route::middleware(['auth', 'verified', 'require_one_domain'])->group(function () {
-    Route::get('/dashboard', function (Request $request) {
-        $domain = Domain::where('user_id', Auth::user()->id)->oldest()->first();
-
-        if(!$request->has('domain')) {  //TODO: move this into the URL
-            return redirect('/dashboard?domain='. $domain->domain_name);
+    Route::get('/dashboard/{domain?}', function ($domain = null) {
+        if($domain === null) {
+            $firstDomain = Domain::where('user_id', Auth::user()->id)->oldest()->first();
+            return redirect('/dashboard/'. $firstDomain->domain_name);
         }
 
-        return Inertia::render('Dashboard');
+        $domain = Domain::where('domain_name', $domain)->where('user_id', Auth::user()->id)->firstOrFail();
+        return Inertia::render('Dashboard', ['domain' => $domain->domain_name ]);
     })->name('dashboard');
 
     Route::get('/manage-domains', function () {
