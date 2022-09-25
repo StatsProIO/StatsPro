@@ -14,6 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/api/collect',
         'api/event/time-on-page',
-        'api/t.gif'
+        'api/t.gif',
+        '/api/error'
     ];
 }
