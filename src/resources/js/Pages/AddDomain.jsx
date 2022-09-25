@@ -8,8 +8,6 @@ import ValidationErrors from "@/Components/ValidationErrors";
 
 export default function ManageDomains(props) {
 
-    console.log(props);
-
     return (
         <Authenticated
             auth={props.auth}

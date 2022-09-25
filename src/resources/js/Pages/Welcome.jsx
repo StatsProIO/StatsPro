@@ -7,6 +7,7 @@ import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import React from "react";
 import {Head} from "@inertiajs/inertia-react";
+import ValidationErrors from "@/Components/ValidationErrors";
 
 export default function Welcome(props) {
 
@@ -17,6 +18,8 @@ export default function Welcome(props) {
             showDrawer={false}
         >
             <Head title="Welcome" />
+
+            <ValidationErrors errors={props?.flash?.message ? [props?.flash?.message] : []} />
 
             <Grid container justifyContent={'center'}>
                 <Grid item xl={5} lg={5} md={5} sm={7} xs={12}> {/*Left side of the form*/}

@@ -13,8 +13,8 @@ export function RealTimeChart({ domain }) {
   };
 
   useEffect(() => {
-    const timer = setInterval(getData, 2000);
-    return () => clearInterval(timer);
+    let timer = setInterval(getData, 2000);
+    return () => { clearInterval(timer) };
   }, []);
 
   return <>

@@ -7,10 +7,8 @@ import ScriptAndInstructions from './ScriptAndInstructions';
 
 
 export default function FirstEventWait({domain}) {
-    let interval;
-
     useEffect(() => {
-        interval = setInterval(() => {
+        let interval = setInterval(() => {
             axios.get(`/api/event-status/${domain}`)
                 .then(function (response) {
                     if (response.data === "SUCCESS") {
