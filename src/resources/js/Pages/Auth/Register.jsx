@@ -92,7 +92,6 @@ export default function Register() {
                                     loading={processing}
                                     fullWidth
                                     size='large'
-                                    loadingPosition="start"
                                     variant="contained"
                                     type='submit'
                                     sx={{ my: 3 }}

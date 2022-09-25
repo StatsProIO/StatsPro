@@ -5,17 +5,25 @@ export function RealTimeChart({ domain }) {
 
   const [realtime, setRealtime] = useState([]);
 
+  let componentIsMounted;
+
   const getData = async () => {
     const res = await fetch("/api/events/real-time/" + domain);
     const data = await res.json();
 
-    setRealtime(data);
+    if(componentIsMounted) { //don't update the state if the promise comes back and the component is not mounted anymore
+        setRealtime(data);
+    }
   };
 
   useEffect(() => {
+    componentIsMounted = true;
     let timer = setInterval(getData, 2000);
-    return () => { clearInterval(timer) };
-  }, []);
+    return () => {
+            componentIsMounted = false;
+            clearInterval(timer)
+        };
+    }, []);
 
   return <>
     <Paper className="blueShadow" sx={{ p: 3, backgroundColor: 'rgb(42,98,254)', color: '#fff' }}>
