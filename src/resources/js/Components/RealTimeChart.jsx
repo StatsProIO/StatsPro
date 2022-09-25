@@ -6,7 +6,7 @@ export function RealTimeChart({ domain }) {
   const [realtime, setRealtime] = useState([]);
 
   const getData = async () => {
-    const res = await fetch("/api/events/real-time?domain=" + domain);
+    const res = await fetch("/api/events/real-time/" + domain);
     const data = await res.json();
 
     setRealtime(data);

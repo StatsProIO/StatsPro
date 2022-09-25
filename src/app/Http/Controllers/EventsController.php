@@ -184,13 +184,8 @@ class EventsController extends Controller
         ];
     }
 
-    public function getEventsRealTime(Request $request) {
-        if($request->has('domain')) {
-            $domain = Domain::where('domain_name', $request->input('domain'))->where('user_id', Auth::user()->id)->firstOrFail();
-        } else {
-            $domain = Domain::firstWhere('user_id', Auth::user()->id);
-        }
-
+    public function getEventsRealTime($domain) {
+        $domain = Domain::where('domain_name', $domain)->where('user_id', Auth::user()->id)->firstOrFail();
         return EventRepository::getRealTime($domain);
     }
 

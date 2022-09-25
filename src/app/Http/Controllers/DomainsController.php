@@ -10,6 +10,7 @@ class DomainsController extends Controller
 {
 
     public function postDomain(Request $request) {
+        //TODO: don't allow duplicate domains
 
         $domainName = $request->domain_name;
         $domainName = strpos($domainName, 'http') !== 0 ? "https://$domainName" : $domainName;
@@ -36,6 +37,6 @@ class DomainsController extends Controller
 
         return redirect()->intended('/domain/' . $domain->domain_name . '/script');
     }
-    
+
 
 }
