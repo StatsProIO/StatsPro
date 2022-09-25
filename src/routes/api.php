@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/events', [EventsController::class, 'getEvents']);
+    Route::get('/events/{domainName}', [EventsController::class, 'getEvents']);
     Route::get('/events/real-time/{domainName}', [EventsController::class, 'getEventsRealTime']);
     Route::get('/event-status/{domainName}', [EventsController::class, 'getEventStatus']);
 

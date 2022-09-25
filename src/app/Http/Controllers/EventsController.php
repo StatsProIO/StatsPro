@@ -134,15 +134,11 @@ class EventsController extends Controller
         return $timeBuckets;
     }
 
-    public function getEvents (Request $request) {
+    public function getEvents ($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+
         $range = $request->has('range') ? $request->input('range') : '24h';
         $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
-
-        if($request->has('domain')) {
-            $domain = Domain::where('domain_name', $request->input('domain'))->where('user_id', Auth::user()->id)->firstOrFail();
-        } else {
-            $domain = Domain::firstWhere('user_id', Auth::user()->id);
-        }
 
         $timeBuckets = $this->getTimeBuckets($timeRangeInfo);
 
