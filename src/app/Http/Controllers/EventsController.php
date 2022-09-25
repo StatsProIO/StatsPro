@@ -69,14 +69,11 @@ class EventsController extends Controller
     public function getTrackerPixel(Request $request) {
         $domain = Domain::where('domain_name', $request->domain)->first();
 
-        $clientIp = array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : '';
-
         $userAgent = $request->server('HTTP_USER_AGENT');
 
         $event = new Event;
         $event->domain_id = $domain->id;
         $event->event_name = 'pixel_pageview';
-        $event->ip_address = $clientIp;
         $event->user_agent = $userAgent;
         $event->location_href =  $request->server('HTTP_REFERER') ?? '';
         $event->host = '';
