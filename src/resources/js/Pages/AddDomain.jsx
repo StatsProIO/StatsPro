@@ -4,8 +4,11 @@ import Authenticated from '@/Layouts/Authenticated';
 import AddDomainForm from '@/Components/AddDomainForm';
 import React from "react";
 import {Head} from "@inertiajs/inertia-react";
+import ValidationErrors from "@/Components/ValidationErrors";
 
 export default function ManageDomains(props) {
+
+    console.log(props);
 
     return (
         <Authenticated
@@ -14,6 +17,7 @@ export default function ManageDomains(props) {
         >
              <Head title="Add Domains" />
 
+            <ValidationErrors errors={props?.flash?.message ? [props?.flash?.message] : []} />
             <Grid container justifyContent={'center'}>
                 <Grid item xl={5} lg={5} md={5} sm={7} xs={12}>
 
