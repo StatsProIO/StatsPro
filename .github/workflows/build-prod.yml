@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: ./.github/workflows/build.yml
+      - uses: ./.github/actions/build-action.yml
