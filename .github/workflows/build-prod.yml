@@ -1,10 +1,10 @@
 on:
   push:
-    branches: [ master ]
-name: Build Staging
+    branches: [ prod ]
+name: Build Prod
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: staging
+    environment: production
     steps:
       - uses: ./build.yml
