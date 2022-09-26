@@ -1,70 +1,71 @@
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: setup dot env
-        run: |
-          mv src/.env.example src/.env
-          echo '${{ secrets.DOT_ENV }}' >> src/.env
-          cat src/.env
-      - name: setup dockercompose
-        run: |
-          export $(cat src/.env | grep ^APP_HOST | xargs) #get APP_HOST from the .env file
-          sed -i "s/APP_HOST/$APP_HOST/g" docker-compose.prod.yml
-          cat docker-compose.prod.yml
-      - name: view the secrets context
-        shell: bash
-        run: echo "$SECRETS_CONTEXT"
-        env:
-          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+name: 'Build'
+description: 'Build'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - name: setup dot env
+      run: |
+        mv src/.env.example src/.env
+        echo '${{ secrets.DOT_ENV }}' >> src/.env
+        cat src/.env
+    - name: setup dockercompose
+      run: |
+        export $(cat src/.env | grep ^APP_HOST | xargs) #get APP_HOST from the .env file
+        sed -i "s/APP_HOST/$APP_HOST/g" docker-compose.prod.yml
+        cat docker-compose.prod.yml
+    - name: view the secrets context
+      shell: bash
+      run: echo "$SECRETS_CONTEXT"
+      env:
+        SECRETS_CONTEXT: ${{ toJson(secrets) }}
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.17.0'
-          cache: 'npm'
-          cache-dependency-path: src/package-lock.json
-      - uses: "shivammathur/setup-php@v2"
-        with:
-          php-version: "latest"
-      - name: Install composer dependencies
-        uses: ramsey/composer-install@v2
-        with:
-          working-directory: "src"
-      - name: Install node dependencies
-        working-directory: ./src
-        run: |
-          npm install;
-      - name: Build vite
-        run: |
-          cd ./src
-          ls resources/js/Components
-          npm run build
-      - name: Deploy
-        run: |
-          set -x
-          #set up credentials to remote docker
-          cd /tmp/
-          curl -o certificates.tar https://docker:${{ secrets.STACKHERO_DOCKER_CERTIFICATES_PASSWORD }}@${{ secrets.STACKHERO_DOCKER_HOST }}/stackhero/docker/certificates.tar
-          tar -xf certificates.tar
-          (docker context rm -f ${{ secrets.STACKHERO_DOCKER_HOST }} 2> /dev/null || true)
-          docker context create ${{ secrets.STACKHERO_DOCKER_HOST }} --description "${{ secrets.STACKHERO_DOCKER_SERVICE_ID }} (${{ secrets.STACKHERO_DOCKER_HOST }})" --docker "host=tcp://${{ secrets.STACKHERO_DOCKER_HOST }}:2376,ca=ca.pem,cert=cert.pem,key=key.pem"
-          cd ${{ github.workspace }}
-          docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
-  
-          # do a deploy
-          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
-  
-          #clean up
-          docker image prune -f
-      - name: Run migrations
-        run: |
-          set -x
-          #create database migrations table
-          docker-compose exec -T app php artisan migrate:install || true
-  
-          #check for migrations
-          docker-compose exec -T app php artisan migrate:status
-  
-          #run migrations
-          docker-compose exec -T app php artisan migrate
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16.17.0'
+        cache: 'npm'
+        cache-dependency-path: src/package-lock.json
+    - uses: "shivammathur/setup-php@v2"
+      with:
+        php-version: "latest"
+    - name: Install composer dependencies
+      uses: ramsey/composer-install@v2
+      with:
+        working-directory: "src"
+    - name: Install node dependencies
+      working-directory: ./src
+      run: |
+        npm install;
+    - name: Build vite
+      run: |
+        cd ./src
+        ls resources/js/Components
+        npm run build
+    - name: Deploy
+      run: |
+        set -x
+        #set up credentials to remote docker
+        cd /tmp/
+        curl -o certificates.tar https://docker:${{ secrets.STACKHERO_DOCKER_CERTIFICATES_PASSWORD }}@${{ secrets.STACKHERO_DOCKER_HOST }}/stackhero/docker/certificates.tar
+        tar -xf certificates.tar
+        (docker context rm -f ${{ secrets.STACKHERO_DOCKER_HOST }} 2> /dev/null || true)
+        docker context create ${{ secrets.STACKHERO_DOCKER_HOST }} --description "${{ secrets.STACKHERO_DOCKER_SERVICE_ID }} (${{ secrets.STACKHERO_DOCKER_HOST }})" --docker "host=tcp://${{ secrets.STACKHERO_DOCKER_HOST }}:2376,ca=ca.pem,cert=cert.pem,key=key.pem"
+        cd ${{ github.workspace }}
+        docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
+
+        # do a deploy
+        docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+
+        #clean up
+        docker image prune -f
+    - name: Run migrations
+      run: |
+        set -x
+        #create database migrations table
+        docker-compose exec -T app php artisan migrate:install || true
+
+        #check for migrations
+        docker-compose exec -T app php artisan migrate:status
+
+        #run migrations
+        docker-compose exec -T app php artisan migrate
