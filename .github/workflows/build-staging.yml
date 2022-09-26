@@ -15,7 +15,7 @@ jobs:
           cat src/.env
       - name: setup dockercompose
         run: |
-          export $(cat src/.env | grep APP_HOST | xargs) #get APP_HOST from the .env file
+          export $(cat src/.env | grep ^APP_HOST | xargs) #get APP_HOST from the .env file
           sed -i "s/APP_HOST/$APP_HOST/g" docker-compose.prod.yml
           cat docker-compose.prod.yml
       - name: view the secrets context
