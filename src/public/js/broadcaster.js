@@ -46,20 +46,20 @@ function sendRequest(url, body, next) {
                 try {
                     json = JSON.parse(request.responseText);
                 } catch (e) {
-                    recordError('Failed to parse response from server: ' + e.toString());
+                    recordError({ message: 'Failed to parse response from server: ' + e.toString(), url, body } );
                 }
 
                 if (typeof next === 'function') {
                     return next(json)
                 }
             } else {
-                recordError('Response status is ' + request.status);
+                recordError({message: 'Response status is ' + request.status, url, body });
             }
         }
     }
 
     request.onerror = function (e) {
-        recordError('Error performing request: ' + JSON.stringify(e));
+        recordError({ message: 'Error performing request: ' + JSON.stringify(e), url, body });
     }
 }
 
