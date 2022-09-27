@@ -5,7 +5,7 @@ name: Build Prod
 
 jobs:
   deploy-staging:
-    uses: ./.github/actions/build.yml@main
+    uses: .github/actions/build.yml@main
     with:
       environment: prod
     secrets: inherit
