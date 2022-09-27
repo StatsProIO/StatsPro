@@ -104,4 +104,4 @@ jobs:
             docker-compose exec -T app php artisan migrate:status
     
             #run migrations
-            docker-compose exec -T app php artisan migrate
+            docker-compose exec -T app php artisan migrate --force
