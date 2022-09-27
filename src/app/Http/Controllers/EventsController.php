@@ -23,7 +23,10 @@ class EventsController extends Controller
     public function postEvent(Request $request) {
         $userAgent = $request->server('HTTP_USER_AGENT');
 
-        $domain = Domain::where('domain_name', $request->domain)->firstOrFail();
+        $domain = Domain::where('domain_name', $request->domain)->first();
+        if($domain === null) {
+            return response()->json(['message' => 'Domain ' . $request->domain . ' not found'], 404);
+        }
 
         $source = null;
         if($request->referrer != null) {
