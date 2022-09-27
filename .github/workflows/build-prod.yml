@@ -2,10 +2,10 @@ on:
   push:
     branches: [ prod ]
 name: Build Prod
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/build-action
+  deploy-staging:
+    uses: ./.github/actions/build.yml
+    with:
+      environment: prod
+    secrets: inherit
