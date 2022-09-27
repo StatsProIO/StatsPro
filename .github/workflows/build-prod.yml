@@ -4,7 +4,8 @@ on:
 name: Build Prod
 
 jobs:
-  deploy-staging:
+  deploy-prod:
+    name: "Deploy Prod"
     uses: ./.github/workflows/build.yml
     with:
       environment: prod
