@@ -1,5 +1,4 @@
 # Marble Metrics
-
 <p align="center">
     <a href="https://marblemetrics.com/">
         <img src="https://raw.githubusercontent.com/MarbleMetrics/MarbleMetrics/master/src/public/images/logo.svg" width="140px" />
@@ -7,6 +6,7 @@
 </p>
 
 [![Build Staging](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml)
+[![Build Prod](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-prod.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-prod.yml)
 ![](https://badgen.net/github/commits/marblemetrics/marblemetrics)
 ![](https://badgen.net/github/license/marblemetrics/marblemetrics)
 
