@@ -4,6 +4,7 @@ on:
 name: Build Staging
 jobs:
   deploy-staging:
+    name: "Deploy Staging"
     uses: ./.github/workflows/build.yml
     with:
       environment: staging
