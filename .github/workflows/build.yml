@@ -86,6 +86,7 @@ jobs:
         - name: Create logical database
           shell: bash
           run: |
+            set -x
             sudo apt-get update
             sudo apt-get install --yes --no-install-recommends postgresql-client
             echo "SELECT 'CREATE DATABASE marble_metrics' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'marble_metrics')\gexec" | PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USERNAME
