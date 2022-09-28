@@ -30,8 +30,8 @@ services:
   stripe:
       image: stripe/stripe-cli
       environment:
-        - STRIPE_API_KEY=${STRIPE_API_KEY}
-      command: 'listen --forward-to http://web/stripe/webhook'
+        - STRIPE_API_KEY=${STRIPE_SECRET}
+      command: listen --forward-to http://webnginx/stripe/webhook
       volumes:
         - stripe:/var/lib/stripe
 volumes:
