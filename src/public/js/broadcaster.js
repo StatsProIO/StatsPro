@@ -33,34 +33,33 @@ payload.p = props
 payload.h = 1
 
 function sendRequest(url, body, next) {
-    var request = new XMLHttpRequest();
-    request.open('POST', url, true);
-    request.setRequestHeader('Content-Type', 'application/json');
 
-    request.send(JSON.stringify(body));
+    let req = new Request(url, {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
 
-    request.onreadystatechange = function () {
-        if (request.readyState === 4) {
-            if (request.status >= 200 && request.status < 400) {
-                let json = null;
-                try {
-                    json = JSON.parse(request.responseText);
-                } catch (e) {
-                    recordError({ message: 'Failed to parse response from server: ' + e.toString(), url, body } );
-                }
-
-                if (typeof next === 'function') {
-                    return next(json)
-                }
+    fetch(req)
+        .then(function(response){
+            if (response.status >= 200 && response.status < 300) {
+                return Promise.resolve(response)
             } else {
-                recordError({message: 'Response status is ' + request.status, url, body });
+                return Promise.reject(new Error(response.statusText))
             }
-        }
-    }
-
-    request.onerror = function (e) {
-        recordError({ message: 'Error performing request: ' + JSON.stringify(e), url, body });
-    }
+        })
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(responseJson) {
+            if (typeof next === 'function') {
+                next(responseJson)
+            }
+        }).catch(function(err) {
+            recordError({ message: 'Broadcaster request failed: ' + err.toString(), url, body } );
+        });
 }
 
 function scheduleReoccringRequests(initialRequestJsonResponse) {
