@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y  \
     npm \
     libpq-dev \
     git \
+    cron \
     --no-install-recommends
     
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
@@ -17,3 +18,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN npm cache clean -f
 RUN npm install -g n
 RUN n stable
+
+COPY cron/generate-demo-data /etc/cron.d/generate-demo-data-cron
+RUN chmod 0644 /etc/cron.d/generate-demo-data-cron
+RUN touch /var/log/cron.log
+RUN crontab /etc/cron.d/generate-demo-data-cron
+RUN /etc/init.d/cron start

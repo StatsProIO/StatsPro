@@ -17,21 +17,6 @@ payload.lang = window.navigator.language || ''
 payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 payload.client_time = new Date().toISOString();
 
-var dimensionAttributes = scriptEl.getAttributeNames().filter(function (name) {
-    return name.substring(0, 6) === 'event-'
-})
-
-var props = payload.p || {}
-
-dimensionAttributes.forEach(function (attribute) {
-    var propKey = attribute.replace('event-', '')
-    var propValue = scriptEl.getAttribute(attribute)
-    props[propKey] = props[propKey] || propValue
-})
-
-payload.p = props
-payload.h = 1
-
 function sendRequest(url, body, next) {
 
     let req = new Request(url, {
