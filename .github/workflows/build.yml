@@ -92,6 +92,11 @@ jobs:
     
             #clean up
             docker image prune -f
+        - name: Start Cron
+          shell: bash
+          run: |
+            set -x
+            docker-compose exec app service cron start
 
         - name: Run migrations
           shell: bash
