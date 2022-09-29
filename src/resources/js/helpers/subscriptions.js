@@ -7,7 +7,7 @@ export const subscriptionPlans = [
         'isRecommended': false,
         'maxEvents': 5000,
         'maximumSites': 1,
-        'description': 'Great to evaluate Marble or for just a small site. Free to use for as long as you want.',
+        'description': 'Great to evaluate Marble or for just a small site. Free to use for as long as you want. No credit card required!',
         'isFree': true,
     },
     {

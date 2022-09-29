@@ -54,9 +54,11 @@ export default function Subscriptions(props) {
                     <Typography variant="h4"><b>Subscriptions</b></Typography>
                     <Typography variant="h6" color="text.secondary">No contracts, cancel anytime</Typography>
                 </Grid>
-                <Grid item lg={2}>
-                    <Button variant="contained" onClick={() => { Inertia.visit('/billing-portal'); }}>Go To Billing Portal</Button>
-                </Grid>
+                {props.auth.user.stripe_id != null &&
+                    (<Grid item lg={2}>
+                        <Button variant="contained" onClick={() => {window.open('/billing-portal', '_blank');}}>Go To Billing Portal</Button>
+                    </Grid>)
+                }
             </Grid>
 
 

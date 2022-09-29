@@ -65,6 +65,12 @@ These steps have been tested on Mac OS X 12.5.
     ```bash
     php artisan migrate
     ```
+6. (Optional) 
+   1. Setting up stripe signing secret: The docker compose file already specifies a stripe-cli container which will start up and listen for webhooks and forward them onto the nginx container. In order for this to work correctly, you must add the signing secret which is output from starting the containers into your .env file under `STRIPE_WEBHOOK_SECRET`
+   2. Create an `.env` file at the root of the project and add your STRIPE_SECRET to it so that docker can read it
+      ```
+      STRIPE_SECRET=<stripe secret here>
+      ```
 
 ### ☁️ Running In The Cloud
 Marble Metrics is hosted on Stackhero, a European company which has servers in Europe. This guide assumes you will be running on Stackhero. Marble Metrics should run the same on other docker cloud providers but there may be some work to get it all configured. If you don't want to deal with running Marble Metrics on your own, [we can handle it for you](https://marblemetrics.com).
