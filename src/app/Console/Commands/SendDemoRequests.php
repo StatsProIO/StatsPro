@@ -54,7 +54,7 @@ class SendDemoRequests extends Command
 
             $count++;
 
-            $hour = intval(\Carbon\Carbon::now())->format('H'));
+            $hour = intval((\Carbon\Carbon::now())->format('H'));
             Log::info($hour);
 
             if ($hour < 12) { //night time, lets sleep more
