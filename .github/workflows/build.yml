@@ -96,7 +96,7 @@ jobs:
           shell: bash
           run: |
             set -x
-            docker-compose exec app service cron start
+            docker-compose exec -T app service cron start
 
         - name: Run migrations
           shell: bash
