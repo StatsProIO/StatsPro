@@ -9,5 +9,5 @@ rebuild-local:
 	docker-compose -f docker-compose.yml -f docker-compose.local.yml down
 	docker-compose -f docker-compose.yml -f docker-compose.local.yml build
 	docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d
-	docker-compose exec app service cron start
+	docker-compose exec -T app service cron start
 	docker-compose logs stripe | grep --color "signing secret is .*"
