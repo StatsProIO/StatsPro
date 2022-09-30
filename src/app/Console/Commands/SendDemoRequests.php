@@ -55,11 +55,11 @@ class SendDemoRequests extends Command
             $count++;
 
             $hour = intval((\Carbon\Carbon::now())->format('H'));
-            Log::info($hour);
-            $sleepTime = ((sin((.261 * $hour)) + 1)*10) + sin($hour * 5) + 2;
+            Log::info("Hour " . $hour);
+            $sleepTime = intval((((sin((.261 * $hour)) + 1)*20) + sin($hour* 5) + 2) * 1000000);
 
-            Log::info($sleepTime);
-            sleep($sleepTime);
+            Log::info("Sleep " . $sleepTime);
+            usleep($sleepTime);
 
         }
 
