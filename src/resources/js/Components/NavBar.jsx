@@ -21,7 +21,7 @@ const pages = [
     {
         label: 'Login',
         url: '/login',
-        variant: "",
+        variant: "outlined",
         color: "primary",
         onClick: function () {
             Inertia.get('/login')
@@ -69,6 +69,7 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
                         component="a"
                         href="/"
                         sx={{
+                            fontSize: {xs: '1rem', sm: '1.25rem'},
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
@@ -93,7 +94,7 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
                         {(auth === undefined || auth.user === null) && pages.map((page) => (
                             <Button
                                 key={page.label}
-                                sx={{ my: 2, p: 1, display: 'block', fontSize: {xs: '0.6rem', sm: '0.8125rem'} }}
+                                sx={{ mx: .5, my: 2, p: 1, color: 'white', display: 'block', fontSize: {xs: '0.7rem', sm: '0.8125rem'} }}
                                 onClick={page.onClick}
                                 size={'small'}
 
