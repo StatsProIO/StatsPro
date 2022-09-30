@@ -9,6 +9,10 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+
+
 
 import {Inertia} from '@inertiajs/inertia'
 import {Menu, MenuItem} from '@mui/material';
@@ -17,7 +21,7 @@ const pages = [
     {
         label: 'Login',
         url: '/login',
-        variant: "outlined",
+        variant: "",
         color: "primary",
         onClick: function () {
             Inertia.get('/login')
@@ -27,14 +31,16 @@ const pages = [
         label: 'Register',
         url: '/register',
         variant: "contained",
-        color: "primary",
+        color: "secondary",
         onClick: function () {
             Inertia.get('/register')
         }
     }];
 
 const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
+    const theme = useTheme();
 
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleAvartarMenuClick = (event) => {
@@ -54,17 +60,15 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
 
     return (
         <AppBar position="fixed" sx={{ bgcolor: "#243044", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-            <Container maxWidth="xl">
+            <Container sx={{px: 1}}>
                 <Toolbar disableGutters>
-                    <Avatar variant={"rounded"} src="/images/logo.svg" style={{ width: 50, height: 'auto' }} sx={{ mx: 1 }} />
+                    <Avatar variant={"rounded"} src="/images/logo.svg" style={{ width: isSmallScreen ? 40 : 50, height: 'auto' }} sx={{ mr: 1}} />
                     <Typography
-                        variant="h6"
+                        variant={isSmallScreen ?  "subtitle1":  'h6'}
                         noWrap
                         component="a"
                         href="/"
                         sx={{
-                            mr: 2,
-
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
@@ -89,15 +93,17 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
                         {(auth === undefined || auth.user === null) && pages.map((page) => (
                             <Button
                                 key={page.label}
-                                sx={{ my: 2, mx: 1, color: 'white', display: 'block' }}
-                                variant={page.variant}
-                                color={page.color}
+                                sx={{ my: 2, p: 1, display: 'block', fontSize: {xs: '0.6rem', sm: '0.8125rem'} }}
                                 onClick={page.onClick}
+                                size={'small'}
+
+                                variant={page.variant}
                             >
                                 {page.label}
                             </Button>
                         ))
                         }
+
                     </Box>
 
                     {!(auth === undefined || auth.user === null) && <Box sx={{ flexGrow: 0 }}>

@@ -58,13 +58,13 @@ class SendDemoRequests extends Command
             Log::info($hour);
 
             if ($hour < 12) { //night time, lets sleep more
-                sleep($faker->numberBetween(5, 10));
+                sleep($faker->numberBetween(8, 10));
             } else if ($hour >= 12 && $hour < 16) { //waking up
-               sleep($faker->numberBetween(3, 9));
+               sleep($faker->numberBetween(1, 10));
             } else if ($hour >= 16 && $hour < 18) { //fully awake
-                sleep($faker->numberBetween(1, 8));
+                sleep($faker->numberBetween(1, 5));
             } else if ($hour >= 18) { //getting sleepy
-              sleep($faker->numberBetween(3, 9));
+              sleep($faker->numberBetween(1, 10));
           }
 
         }
