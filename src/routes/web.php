@@ -24,6 +24,10 @@ Route::get('/', function () {
     return Inertia::render('Home');
 });
 
+Route::get('/welcome', function () {
+    return Inertia::render('Welcome');
+})->middleware(['auth'])->name('welcome');
+
 Route::get('/dashboard/demo.com', function () {
     $domain = Domain::where('domain_name', 'demo.com')->firstOrFail();
     return Inertia::render('DemoDashboard', ['domain' => $domain->domain_name ]);
