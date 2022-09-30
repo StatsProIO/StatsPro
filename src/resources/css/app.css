@@ -146,3 +146,36 @@
 .large-icon {
     transform: scale(3);
 }
+
+.demo-image-container {
+    position: relative;
+}
+
+.demo-image-container:hover .demo-image-overlay {
+    opacity: 1;
+}
+
+.demo-image-overlay {
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease-in-out;
+    background-color: rgba(42, 98, 254, .7);
+}
+
+.live-demo-text {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}

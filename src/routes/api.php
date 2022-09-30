@@ -20,9 +20,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/events/demo.com', [EventsController::class, 'getDemoEvents']);
+Route::get('/events/real-time/demo.com', [EventsController::class, 'getDemoEventsRealTime']);
+
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/events/{domainName}', [EventsController::class, 'getEvents']);
-    Route::get('/events/real-time/{domainName}', [EventsController::class, 'getEventsRealTime']);
+    Route::get('/events/{domainName}', [EventsController::class, 'getEventsByDomainName']);
+    Route::get('/events/real-time/{domainName}', [EventsController::class, 'getEventsRealTimeByDomain']);
     Route::get('/event-status/{domainName}', [EventsController::class, 'getEventStatus']);
 
     Route::get('/subscription-status', [SubscriptionController::class, 'getSubscriptionStatus']);
