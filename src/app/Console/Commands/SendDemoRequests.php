@@ -37,7 +37,7 @@ class SendDemoRequests extends Command
             $client = new \GuzzleHttp\Client();
             $response = $client->request('POST',  config('app.url') . '/api/collect', [
             'headers' => [
-                'User-Agent' => $faker->userAgent,
+                'User-Agent' => $faker->userAgent(),
             ],
             'json' => [
                 "event_name" => "pageview",
@@ -56,16 +56,10 @@ class SendDemoRequests extends Command
 
             $hour = intval((\Carbon\Carbon::now())->format('H'));
             Log::info($hour);
+            $sleepTime = ((sin((.261 * $hour)) + 1)*10) + sin($hour * 5) + 2;
 
-            if ($hour < 12) { //night time, lets sleep more
-                sleep($faker->numberBetween(8, 10));
-            } else if ($hour >= 12 && $hour < 16) { //waking up
-               sleep($faker->numberBetween(1, 10));
-            } else if ($hour >= 16 && $hour < 18) { //fully awake
-                sleep($faker->numberBetween(1, 5));
-            } else if ($hour >= 18) { //getting sleepy
-              sleep($faker->numberBetween(1, 10));
-          }
+            Log::info($sleepTime);
+            sleep($sleepTime);
 
         }
 
