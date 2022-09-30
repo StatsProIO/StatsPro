@@ -120,9 +120,17 @@ class EventsController extends Controller
         return $timeBuckets;
     }
 
-    public function getEvents ($domainName, Request $request) {
-        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+    public function getDemoEvents(Request $request) {
+        $domain = Domain::where('domain_name', 'demo.com')->firstOrFail();
+        return $this->getEvents($domain, $request);
+    }
 
+    public function getEventsByDomainName ($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+        return $this->getEvents($domain, $request);
+    }
+
+   private function getEvents ($domain, Request $request) {
         $range = $request->has('range') ? $request->input('range') : '24h';
         $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
 
@@ -144,7 +152,7 @@ class EventsController extends Controller
         $comparisonVisitDuration = EventRepository::getVisitDuration($timeRangeInfo->getComparisonInterval(), $domain);
 
         return [
-            'domains' => Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name'),
+            'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
             'time_buckets' => $timeBuckets,
             'pageviews' => EventRepository::getPageviews($timeRangeInfo, $domain, $timeBuckets),
             'visitors' => EventRepository::getVisitors($timeRangeInfo, $domain, $timeBuckets),
@@ -166,7 +174,12 @@ class EventsController extends Controller
         ];
     }
 
-    public function getEventsRealTime($domain) {
+    public function getDemoEventsRealTime() {
+        $domain = Domain::where('domain_name', 'demo.com')->firstOrFail();
+        return EventRepository::getRealTime($domain);
+    }
+
+    public function getEventsRealTimeByDomain($domain) {
         $domain = Domain::where('domain_name', $domain)->where('user_id', Auth::user()->id)->firstOrFail();
         return EventRepository::getRealTime($domain);
     }
