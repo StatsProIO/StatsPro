@@ -247,8 +247,10 @@ export default function Home(props) {
                             </Typography>
                             <Typography variant="h6" color="#aaa">Setup in just a few minutes, no credit card required.</Typography>
 
-                            <Button onClick={() => Inertia.get('register')} variant="contained" size="large" style={{fontSize: '1.3em'}} endIcon={<ArrowForwardIosIcon/>}
-                                    sx={{px: 5, py: 2, my: 4}} fontWeight="bold"><b>Get Started For Free</b></Button>
+                            <Button onClick={() => Inertia.get('register')} variant="contained" size="large" style={{fontSize: '1.1em'}} endIcon={<ArrowForwardIosIcon/>}
+                                    sx={{px: 3, py: 1, my: 2}} fontWeight="bold"><b>Get Started For Free</b></Button>
+                            <Button onClick={() => Inertia.get('/dashboard/demo.com')} variant="outlined" style={{fontSize: '1.1em', borderColor: 'white', color: 'white'}} endIcon={<ArrowForwardIosIcon/>}
+                                    sx={{px: 3, py: 1, my: 2, mx: 2}} fontWeight="bold"><b>See Live Demo</b></Button>
                         </Box>
                     </Grid>
                 </Grid>
