@@ -85,18 +85,29 @@ export default function Home(props) {
                         <Typography variant="h3"><b>Powerful analytics to drive decisions</b></Typography>
                     </Box>
 
-                    <Grid container alignItems="center" justifyContent="center" sx={{ pb: 6, px: 1  }}>
+                    <Grid container alignItems="center" justifyContent="center" sx={{ pb: 3, px: 1  }}>
                         <Grid item sm={8} lg={6}>
-                            <picture>
-                                <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
-                                <img src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"}/>
-                            </picture>
+                            <a href='/dashboard/demo.com'>
+                                <div className="demo-image-container">
+                                    <picture>
+                                        <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
+                                        <img className={'demo-image'} src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"}/>
+                                    </picture>
+                                    <div class="demo-image-overlay">
+                                        <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>See Live Demo</Typography>
+                                    </div>
+                                </div>
+                            </a>
                         </Grid>
                     </Grid>
 
+                    <Grid container>
+                        <Grid item xs={12} textAlign={'center'}>
+                            <Button variant={'outlined'} onClick={() => Inertia.get('/dashboard/demo.com')}>See Live Demo</Button>
+                        </Grid>
+                    </Grid>
 
-
-                    <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', pt: 3, pb: 6, px: 1 }}>
+                    <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', pt: 5, pb: 6, px: 1 }}>
                         <Grid item sm={12} md={12} lg={12}>
                             <Typography variant="h3" sx={{py: 3}}><b>Get started in 5 seconds!</b></Typography>
                             <Typography variant="h6">Drop this code on your website and <a href={'/register'}>register with your domain</a>.</Typography>
