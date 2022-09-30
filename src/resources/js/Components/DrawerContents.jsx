@@ -31,14 +31,6 @@ export default function DrawerContents() {
             text: "Subscriptions",
             url: '/subscriptions',
             icon: <PaymentsIcon sx={{ color: '#fff' }} />
-        }, {
-            text: "Settings",
-            url: '/settings',
-            icon: <SettingsOutlinedIcon sx={{ color: '#fff' }} />
-        }, {
-            text: "Help",
-            url: '/help',
-            icon: <HelpOutlinedIcon sx={{ color: '#fff' }} />
         }];
 
     function handleClick(url) {
