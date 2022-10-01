@@ -23,7 +23,15 @@ class Event extends Model
         'device',
         'os',
         'time_zone',
-        'client_time'
+        'client_time',
+        'keyword',
+        'q',
+        'ref',
+        'utm_campaign',
+        'utm_content',
+        'utm_medium',
+        'utm_source',
+        'utm_term'
     ];
 
     use HasFactory;

@@ -16,6 +16,20 @@ payload.inner_width = window.innerWidth
 payload.lang = window.navigator.language || ''
 payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 payload.client_time = new Date().toISOString();
+payload.query_params = queryParams();
+
+function queryParams() {
+    var pair;
+    var data = {}
+    var pairs = window.location.search.substring(window.location.search.indexOf("?") + 1).split("&")
+    for (var i = 0; i < pairs.length; i++) {
+        pair = pairs[i].split("=");
+        if (-1 < ["keyword", "q", "ref", "utm_campaign", "utm_content", "utm_medium", "utm_source", "utm_term"].indexOf(decodeURIComponent(pair[0]))) {
+            data[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+        }
+    }
+    return data;
+}
 
 function sendRequest(url, body, next) {
 
