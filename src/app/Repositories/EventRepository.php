@@ -73,7 +73,11 @@ class EventRepository
     public static function getTopSources(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT source as label, count(*) as count
                                         FROM events
-                                        WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                        WHERE domain_id = :domain
+                                            AND event_name='pageview'
+                                            AND created_at >= '{$interval->getStart()}'
+                                            AND created_at <= '{$interval->getEnd()}'
+                                            AND source IS NOT NULL
                                         GROUP BY source
                                         ORDER BY count DESC
                                         LIMIT 8
