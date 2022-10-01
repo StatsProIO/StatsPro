@@ -56,6 +56,18 @@ class EventsController extends Controller
         $event->os = $parsedUserAgent->os->name;
         $event->time_zone = $request->client_time_zone;
         $event->client_time = $request->client_time;
+
+        if ($request->query_params) {
+            $event->keyword = $request->query_params['keyword'] ?? null;
+            $event->q = $request->query_params['q'] ?? null;
+            $event->ref = $request->query_params['ref'] ?? null;
+            $event->utm_campaign = $request->query_params['utm_campaign'] ?? null;
+            $event->utm_content = $request->query_params['utm_content'] ?? null;
+            $event->utm_medium = $request->query_params['utm_medium'] ?? null;
+            $event->utm_source = $request->query_params['utm_source'] ?? null;
+            $event->utm_term = $request->query_params['utm_term'] ?? null;
+        }
+
         $event->save();
 
         return ['id' => $event->id];
