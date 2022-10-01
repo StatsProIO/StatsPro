@@ -26,6 +26,8 @@
         @viteReactRefresh
         @vite('resources/js/app.jsx')
         @inertiaHead
+
+        <script data-domain="marblemetrics.com" src="{{ config('app.url') }}/js/broadcaster.js" async> </script>
     </head>
     <body class="font-sans antialiased" style="background-color: #f7f9fc">
         @inertia
