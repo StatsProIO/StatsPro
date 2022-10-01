@@ -78,11 +78,12 @@ class EventRepository
                                             AND created_at >= '{$interval->getStart()}'
                                             AND created_at <= '{$interval->getEnd()}'
                                             AND source IS NOT NULL
+                                            AND source <> :domain_name
                                         GROUP BY source
                                         ORDER BY count DESC
                                         LIMIT 8
                                         "),
-                                array('domain' => $domain->id)
+                                array('domain' => $domain->id, 'domain_name' => $domain->domain_name)
                             );
     }
 
