@@ -56,7 +56,7 @@ class SendDemoRequests extends Command
 
             $hour = intval((\Carbon\Carbon::now())->format('H'));
             Log::info("Hour " . $hour);
-            $sleepTime = intval((((sin((.261 * $hour)) + 1)*20) + sin($hour* 5) + 2) * 1000000);
+            $sleepTime = intval((((sin((.261 * $hour)) + 1)*30) + sin($hour* 5) + 2) * 1000000);
 
             Log::info("Sleep " . $sleepTime);
             usleep($sleepTime);
