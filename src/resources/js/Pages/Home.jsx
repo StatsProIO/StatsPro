@@ -87,7 +87,7 @@ export default function Home(props) {
 
                 <Box sx={{px: 1}}>
                     <Box sx={{ textAlign: 'center', py: 6, pb: 2, px: 1 }}>
-                        <Typography variant="h3"><b>Powerful analytics to drive decisions</b></Typography>
+                        <Typography variant="h3"><b>Powerful analytics</b></Typography>
                     </Box>
 
                     <Grid container alignItems="center" justifyContent="center" sx={{ pb: 3, px: 1  }}>
