@@ -27,7 +27,7 @@ function buildData(inputData) {
           '#2A63FE70',
           '#2A63FE59'
         ],
-        borderWidth: 5,
+        borderWidth: 0,
       },
     ],
   };

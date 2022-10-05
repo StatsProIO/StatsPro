@@ -37,9 +37,9 @@ export default function HorizontalBarChart({ valueTitle, data, totalValue, color
                         </Grid>
                         <Grid item xs={11} >
                             <Box sx={{ m: 1 }}>
-                                <Box style={{ backgroundColor: '#eee', borderTopRightRadius: '20px', borderBottomRightRadius: '20px' }}>
+                                <Box style={{ backgroundColor: '#eee', borderTopRightRadius: '10px', borderBottomRightRadius: '10px' }}>
                                     <Typography style={{ position: 'absolute', maxWidth: '15em', textOverflow: 'ellipsis', overflow: 'hidden' }} sx={{ py: 1, pl: 1 }} display="inline">{dataItem.label}</Typography>
-                                    <Box style={{ backgroundColor: colorScale(dataItem.count), width: (dataItem.count / totalValue) * 100 + '%', borderTopRightRadius: '20px', borderBottomRightRadius: '20px' }} sx={{ py: 1, pl: 1 }}>&nbsp;</Box>
+                                    <Box style={{ backgroundColor: colorScale(dataItem.count), width: (dataItem.count / totalValue) * 100 + '%', borderTopRightRadius: '10px', borderBottomRightRadius: '10px' }} sx={{ py: 1, pl: 1 }}>&nbsp;</Box>
                                 </Box>
                             </Box>
                         </Grid>

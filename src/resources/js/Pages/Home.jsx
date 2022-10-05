@@ -15,6 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import {Inertia} from "@inertiajs/inertia";
+import {Head} from "@inertiajs/inertia-react";
 
 
 function createData(name, marbleMetrics, googleAnalytics, fathom, plausible, simpleAnalytics) {
@@ -46,6 +47,10 @@ export default function Home(props) {
 
     return (
         <Guest auth={props.auth}>
+            <Head>
+                <title>Marble Metrics | Privacy-friendly Google Analytics alternative</title>
+                <meta name="description" content="Marble Metrics is a open-source Google Analytics alternative. Marble Metrics is GDPR, CCPA, PECR compliant and while still giving you answers." />
+            </Head>
 
             <div className="home">
                 <Grid container spacing={0} className="hero-row" sx={{ pt: 5, px: 1 }} justifyContent="center" >
@@ -82,7 +87,7 @@ export default function Home(props) {
 
                 <Box sx={{px: 1}}>
                     <Box sx={{ textAlign: 'center', py: 6, pb: 2, px: 1 }}>
-                        <Typography variant="h3"><b>Powerful analytics to drive decisions</b></Typography>
+                        <Typography variant="h3"><b>Powerful analytics</b></Typography>
                     </Box>
 
                     <Grid container alignItems="center" justifyContent="center" sx={{ pb: 3, px: 1  }}>

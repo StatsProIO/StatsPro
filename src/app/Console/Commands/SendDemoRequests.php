@@ -35,7 +35,7 @@ class SendDemoRequests extends Command
         $count = 0;
         while ($count < 5) { //send 5 total requests per minute
             $client = new \GuzzleHttp\Client();
-            $response = $client->request('POST',  config('app.url') . '/api/collect', [
+            $response = $client->request('POST',  (config('app.env') === 'local' ? 'webnginx' : config('app.url')) . '/api/collect', [
             'headers' => [
                 'User-Agent' => $faker->userAgent(),
             ],
