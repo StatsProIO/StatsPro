@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Log;
 use App\Models\Event;
 use App\Models\Domain;
+use App\Models\DomainBlacklistIp;
 use Helper;
 
 use Illuminate\Http\Request;
@@ -26,6 +27,14 @@ class EventsController extends Controller
         $domain = Domain::where('domain_name', $request->domain)->first();
         if($domain === null) {
             return response()->json(['message' => 'Domain ' . $request->domain . ' not found'], 404);
+        }
+
+        //don't record events for blacklisted IPs
+        $domainBlacklistedIps = DomainBlacklistIp::where('domain_id', $domain->id)->pluck('ip')->all();
+
+        $clientIp = array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
+        if (in_array($clientIp, $domainBlacklistedIps)) {
+            return response()->json(['message' => 'IP blacklisted'], 403);
         }
 
         $source = null;
