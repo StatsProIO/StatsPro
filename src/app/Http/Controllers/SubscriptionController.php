@@ -42,11 +42,8 @@ class SubscriptionController extends Controller
     }
 
     public function getSubscriptionBillingPortalPage (Request $request) {
-        try {
-            return Inertia::location($request->user()->redirectToBillingPortal(route('subscriptions')));
-        } catch ( \Exception $e ) {
-            Log::error($e->getMessage());
-        }
+        return Inertia::location($request->user()->redirectToBillingPortal(route('subscriptions')));
+
     }
 
     public function getSubscriptionStatus (Request $request) {
