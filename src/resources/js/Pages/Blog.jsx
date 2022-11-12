@@ -15,6 +15,11 @@ const blogPosts = [
         title: 'Ethical Analytics',
         url: '/blog/ethical-analytics',
         cardImage: '/images/ethical-analytics.webp'
+    },
+    {
+        title: 'Italy Decalres Google Analytics Illegal',
+        url: '/blog/italy-google-analytics-illegal',
+        cardImage: '/images/illegal.webp'
     }
 ];
 
