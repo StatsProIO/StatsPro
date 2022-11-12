@@ -45,6 +45,8 @@ function sendRequest(url, body, next) {
         .then(function(response){
             if (response.status >= 200 && response.status < 300) {
                 return Promise.resolve(response)
+            } else if(response.status === 403) {
+                return null; //end the chain, don't schedule any further requests
             } else {
                 return Promise.reject(new Error(response.statusText))
             }

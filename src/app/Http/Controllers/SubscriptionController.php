@@ -5,6 +5,8 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\SubscriptionService;
+use Illuminate\Support\Facades\Log;
+
 
 class SubscriptionController extends Controller
 {
@@ -41,6 +43,7 @@ class SubscriptionController extends Controller
 
     public function getSubscriptionBillingPortalPage (Request $request) {
         return Inertia::location($request->user()->redirectToBillingPortal(route('subscriptions')));
+
     }
 
     public function getSubscriptionStatus (Request $request) {

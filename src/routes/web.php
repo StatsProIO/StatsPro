@@ -84,5 +84,8 @@ Route::get('/docs/getting-started', function () { return Inertia::render('DocsGe
 Route::get('/terms', function () { return Inertia::render('terms'); })->name('Terms');
 Route::get('/privacy-policy', function () { return Inertia::render('PrivacyPolicy'); })->name('PrivacyPolicy');
 Route::get('/contact', function () { return Inertia::render('Contact'); })->name('Contact');
+Route::get('/blog', function () { return Inertia::render('Blog');})->name('blog');
+Route::get('/blog/deploying-from-github-actions-to-stackhero', function () { return Inertia::render('BlogDeployingToStackhero');})->name('BlogDeployingToStackhero');
+Route::get('/blog/ethical-analytics', function () { return Inertia::render('BlogEthicalAnalytics');})->name('BlogEthicalAnalytics');
 
 require __DIR__.'/auth.php';
