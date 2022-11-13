@@ -30,7 +30,7 @@ export default function BlogTopFiveAnalyticsAlternatives() {
             </Typography>
             <Typography variant="h4" sx={{py: 1}}>4. Plausible</Typography>
             <Typography sx={{py: 1}}>
-                GoSquared is another popular web analytics platform that offers a variety of features such as detailed visitor reporting, real-time analytics, and e-commerce tracking. Plausible is used by many websites worldwide and is GDPR compliant.
+                Plausible is another popular web analytics platform that offers a variety of features such as detailed visitor reporting, real-time analytics, and e-commerce tracking. Plausible is used by many websites worldwide and is GDPR compliant.
                 In addition, Plausible offers the possibility to anonymize IP addresses and gives website owners the ability to object to data collection altogether. Unfortunately, Plausible uses fingerprinting to track your users (this is illegal according to the UK's privacy directive) and also collects your user's IP addresses.
             </Typography>
             <Typography variant="h4" sx={{py: 1}}>5. Clicky</Typography>
