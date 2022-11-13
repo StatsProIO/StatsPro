@@ -88,6 +88,9 @@ Route::get('/blog', function () { return Inertia::render('Blog');})->name('blog'
 Route::get('/blog/deploying-from-github-actions-to-stackhero', function () { return Inertia::render('BlogDeployingToStackhero');})->name('BlogDeployingToStackhero');
 Route::get('/blog/ethical-analytics', function () { return Inertia::render('BlogEthicalAnalytics');})->name('BlogEthicalAnalytics');
 Route::get('/blog/italy-google-analytics-illegal', function () { return Inertia::render('BlogItalyGoogleAnalyticsIllegal');})->name('BlogItalyGoogleAnalyticsIllegal');
+Route::get('/blog/top-5-google-analytics-alternatives', function () { return Inertia::render('BlogTopFiveAnalyticsAlternatives');})->name('BlogTopFiveAnalyticsAlternatives');
+
+
 
 
 
