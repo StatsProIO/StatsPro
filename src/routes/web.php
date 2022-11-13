@@ -89,7 +89,7 @@ Route::get('/blog/deploying-from-github-actions-to-stackhero', function () { ret
 Route::get('/blog/ethical-analytics', function () { return Inertia::render('BlogEthicalAnalytics');})->name('BlogEthicalAnalytics');
 Route::get('/blog/italy-google-analytics-illegal', function () { return Inertia::render('BlogItalyGoogleAnalyticsIllegal');})->name('BlogItalyGoogleAnalyticsIllegal');
 Route::get('/blog/top-5-google-analytics-alternatives', function () { return Inertia::render('BlogTopFiveAnalyticsAlternatives');})->name('BlogTopFiveAnalyticsAlternatives');
-
+Route::get('/blog/your-analytics-are-likley-against-the-law', function () { return Inertia::render('BlogYourAnalyticsAreLikleyAgainstTheLaw');})->name('BlogYourAnalyticsAreLikleyAgainstTheLaw');
 
 
 
