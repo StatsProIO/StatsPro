@@ -17,7 +17,7 @@ const blogPosts = [
         cardImage: '/images/ethical-analytics.webp'
     },
     {
-        title: 'Italy Decalres Google Analytics Illegal',
+        title: 'Italy Declares Google Analytics Illegal',
         url: '/blog/italy-google-analytics-illegal',
         cardImage: '/images/illegal.webp'
     },
@@ -25,8 +25,13 @@ const blogPosts = [
         title: 'Top 5 Google Analytics Alternatives',
         url: '/blog/top-5-google-analytics-alternatives',
         cardImage: '/images/alternative.webp'
-    }
+    },
 
+    {
+        title: 'Your Analytics Are Likley Against The Law',
+        url: '/blog/your-analytics-are-likley-against-the-law',
+        cardImage: '/images/law.webp'
+    },
 
 ];
 
