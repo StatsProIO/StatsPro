@@ -3,9 +3,9 @@ import {Typography} from '@mui/material';
 import BlogLayout from "@/Layouts/BlogLayout";
 
 
-export default function BlogYourAnalyticsAreLikleyAgainstTheLaw() {
+export default function BlogYourAnalyticsAreLikelyAgainstTheLaw() {
     return (
-        <BlogLayout title={'Your Analytics Are Likley Against The Law'}>
+        <BlogLayout title={'Your Analytics Are Likely Against The Law'}>
             <img src='/images/law.webp' width='100%' style={{paddingTop: '15px', paddingBottom: '15px'}}/>
             <Typography sx={{py: 1}}>
                 If you are using one of the more popular website analytics providers like Google Analytics or Adobe Analytics, you're using software which behaves in a way that many countries in the European Union have determined to violate their laws. There have even been <a href="/blog/italy-google-analytics-illegal">fines levied on companies like Google</a> because of these violations. <br/><br/>
