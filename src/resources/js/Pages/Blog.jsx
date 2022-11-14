@@ -26,11 +26,15 @@ const blogPosts = [
         url: '/blog/top-5-google-analytics-alternatives',
         cardImage: '/images/alternative.webp'
     },
-
     {
-        title: 'Your Analytics Are Likley Against The Law',
-        url: '/blog/your-analytics-are-likley-against-the-law',
+        title: 'Your Analytics Are Likely Against The Law',
+        url: '/blog/your-analytics-are-likely-against-the-law',
         cardImage: '/images/law.webp'
+    },
+    {
+        title: 'Free Privacy Friendly Analytics',
+        url: '/blog/free-privacy-friendly-analytics',
+        cardImage: '/images/sample-dashboard.webp'
     },
 
 ];
