@@ -13,6 +13,11 @@
     <main>
         <h1>Test Page</h1>
         <a href="/test-page/nested">Go to nested page</a>
+
+        <button onclick="history.pushState({}, '', 'test-page/nested');">Go to nested page via pushState</button>
+
+        <button onclick="history.replaceState({}, '', 'test-page/nested');">Go to nested page via replaceState</button>
+
     </main>
   </body>
 </html>
