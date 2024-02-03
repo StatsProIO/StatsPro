@@ -86,6 +86,9 @@ jobs:
             docker context create ${{ secrets.STACKHERO_DOCKER_HOST }} --description "${{ secrets.STACKHERO_DOCKER_SERVICE_ID }} (${{ secrets.STACKHERO_DOCKER_HOST }})" --docker "host=tcp://${{ secrets.STACKHERO_DOCKER_HOST }}:2376,ca=ca.pem,cert=cert.pem,key=key.pem"
             cd ${{ github.workspace }}
             docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
+
+            #make sure we can reach the dockerhost
+            ping -c 10 212.129.51.182:2376
     
             # do a deploy
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
