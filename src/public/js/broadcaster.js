@@ -5,18 +5,21 @@ var endpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/ap
 var timeOnPageEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/event/time-on-page";
 var errorEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/error";
 
-var payload = {}
-payload.event_name = 'pageview'
-payload.location_href = location.href
-payload.location_host = window.location.host
-payload.location_pathname = window.location.pathname
-payload.domain = scriptEl.getAttribute('data-domain')
-payload.referrer = document.referrer || null
-payload.inner_width = window.innerWidth
-payload.lang = window.navigator.language || ''
-payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-payload.client_time = new Date().toISOString();
-payload.query_params = queryParams();
+function buildPayload() {
+    var payload = {};
+    payload.event_name = 'pageview';
+    payload.location_href = location.href;
+    payload.location_host = window.location.host;
+    payload.location_pathname = window.location.pathname;
+    payload.domain = scriptEl.getAttribute('data-domain');
+    payload.referrer = document.referrer || null;
+    payload.inner_width = window.innerWidth;
+    payload.lang = window.navigator.language || '';
+    payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    payload.client_time = new Date().toISOString();
+    payload.query_params = queryParams();
+    return payload;
+}
 
 function queryParams() {
     var pair;
@@ -84,4 +87,24 @@ function recordError(error) {
     errorRequest.send(JSON.stringify(error));
 }
 
-sendRequest(endpoint, payload, scheduleReoccringRequests);
+sendRequest(endpoint, buildPayload(), scheduleReoccringRequests);
+
+var pS = window.history.pushState;
+window.history.pushState = function() {
+    pS.apply(this, arguments);
+    sendRequest(endpoint, buildPayload(), null);
+    console.log("push state called");
+};
+
+window.addEventListener('popstate', function(event) {
+    sendRequest(endpoint, buildPayload(), null);
+    console.log('popstate fired!');
+});
+
+
+var rS = window.history.replaceState;
+window.history.replaceState = function() {
+    sendRequest(endpoint, buildPayload(), null);
+    rS.apply(this, arguments);
+    console.log("replace state called");
+};

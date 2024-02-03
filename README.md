@@ -53,8 +53,7 @@ These steps have been tested on Mac OS X 12.5.
 2. Manually connect to the database with username `postgres` and password `postgres` create a `marble_metrics` database.
 3. Now you'll need to SSH into the app container to install all Javascript and PHP dependencies and run our Vite server. This will compile and serve up our frontend resources.
     ```bash
-    docker-composer exec app /bin/bash
-    cd src
+    docker-compose exec app /bin/bash
     composer install
     npm install
     npm run dev
