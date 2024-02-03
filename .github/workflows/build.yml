@@ -88,7 +88,7 @@ jobs:
             docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
 
             #make sure we can reach the dockerhost
-            ping -c 10 212.129.51.182:2376
+            ping -c 10 212.129.51.182
     
             # do a deploy
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
