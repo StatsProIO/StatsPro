@@ -26,6 +26,7 @@ jobs:
         - name: Try reaching the docker host
           shell: bash
           run: |
+            curl -v "https://google.com"
             curl -v "https://212.129.51.182"
         - uses: actions/checkout@v3
         - name: setup dot env
