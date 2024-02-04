@@ -23,11 +23,10 @@ jobs:
       environment: ${{ inputs.environment }}
       runs-on: ubuntu-latest
       steps:
-        - name: Try reaching the docker host
+        - name: curl ifconfig.me
           shell: bash
           run: |
-            curl -v "https://google.com"
-            curl -v "https://212.129.51.182"
+            curl ifconfig.me
         - uses: actions/checkout@v3
         - name: setup dot env
           shell: bash
