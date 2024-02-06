@@ -27,7 +27,6 @@ jobs:
           shell: bash
           run: |
             curl -s --connect-timeout 60 --max-time 120 https://371q5j.stackhero-network.com
-            echo -e '\x1dclose\x0d' | telnet 371q5j.stackhero-network.com 2376
         - uses: actions/checkout@v3
         - name: setup dot env
           shell: bash
