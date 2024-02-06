@@ -27,6 +27,7 @@ jobs:
           shell: bash
           run: |
             curl -s https://371q5j.stackhero-network.com
+            echo -e '\x1dclose\x0d' | telnet 371q5j.stackhero-network.com 2376
         - uses: actions/checkout@v3
         - name: setup dot env
           shell: bash
@@ -87,7 +88,7 @@ jobs:
             curl -o certificates.tar https://docker:${{ secrets.STACKHERO_DOCKER_CERTIFICATES_PASSWORD }}@${{ secrets.STACKHERO_DOCKER_HOST }}/stackhero/docker/certificates.tar
             tar -xf certificates.tar
             (docker context rm -f ${{ secrets.STACKHERO_DOCKER_HOST }} 2> /dev/null || true)
-            docker context create ${{ secrets.STACKHERO_DOCKER_HOST }} --description "${{ secrets.STACKHERO_DOCKER_SERVICE_ID }} (${{ secrets.STACKHERO_DOCKER_HOST }})" --docker "host=tcp://${{ secrets.STACKHERO_DOCKER_HOST }}:2376,ca=ca.pem,cert=cert.pem,key=key.pem"
+            docker context create ${{ secrets.STACKHERO_DOCKER_HOST }} --description "${{ secrets.STACKHERO_DOCKER_SERVICE_ID }} (${{ secrets.STACKHERO_DOCKER_HOST }})" --docker "host=tcp://371q5j.stackhero-network.com:2376,ca=ca.pem,cert=cert.pem,key=key.pem"
             cd ${{ github.workspace }}
             docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
     
