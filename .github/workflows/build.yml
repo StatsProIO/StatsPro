@@ -26,7 +26,7 @@ jobs:
         - name: curl dockerhost
           shell: bash
           run: |
-            curl -s ${{ secrets.STACKHERO_DOCKER_HOST }}
+            curl -s https://371q5j.stackhero-network.com
         - uses: actions/checkout@v3
         - name: setup dot env
           shell: bash
