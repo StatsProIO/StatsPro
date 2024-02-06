@@ -26,6 +26,14 @@ jobs:
         - name: curl dockerhos
           shell: bash
           run: |
+            echo "time_namelookup:  %{time_namelookup}s\n
+            time_connect:  %{time_connect}s\n
+            time_appconnect:  %{time_appconnect}s\n
+            time_pretransfer:  %{time_pretransfer}s\n
+            time_redirect:  %{time_redirect}s\n
+            time_starttransfer:  %{time_starttransfer}s\n
+            ----------\n
+            time_total:  %{time_total}s\n" > curl-format.txt
             curl -w "%{time_total}s" -s --connect-timeout 60 --max-time 120 https://371q5j.stackhero-network.com
             curl -w "%{time_total}s" -s --connect-timeout 60 --max-time 120 https://371q5j.stackhero-network.com
             curl -w "%{time_total}s" -s --connect-timeout 60 --max-time 120 https://371q5j.stackhero-network.com
