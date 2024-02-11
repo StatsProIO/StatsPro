@@ -9,7 +9,7 @@ const Footer = () => {
     return (
         <Box className="gray-background" sx={{py: 6}}>
             <Grid container justifyContent="center" spacing={3}>
-                <Grid item xs={4} md={3}>
+                <Grid item xs={3} md={2}>
                     <Stack spacing={1} justifyContent="center">
                         <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>General</Typography>
                         <Link href="/" underline="hover" color="inherit" align={"center"}>Home</Link>
@@ -17,7 +17,7 @@ const Footer = () => {
                     </Stack>
 
                 </Grid>
-                <Grid item xs={4} md={3}>
+                <Grid item xs={3} md={2}>
                     <Stack spacing={1}>
                         <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Resources</Typography>
                         <Link href="/docs" underline="hover" color="inherit" align={"center"}>Docs</Link>
@@ -27,12 +27,19 @@ const Footer = () => {
                         <Link href="/privacy-policy" underline="hover" color="inherit" align={"center"}>Privacy Policy</Link>
                     </Stack>
                 </Grid>
-                <Grid item xs={4} md={3}>
+                <Grid item xs={3} md={2}>
                     <Stack spacing={1}>
                         <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Community</Typography>
                         <Link href="https://github.com/MarbleMetrics/MarbleMetrics" target={'_blank'} underline="hover" color="inherit" align={"center"}>Github</Link>
                         <Link href="https://twitter.com/MarbleMetrics" target={'_blank'} underline="hover" color="inherit" align={"center"}>Twitter</Link>
                         <Link href="/blog" underline="hover" color="inherit" align={"center"}>Blog</Link>
+                    </Stack>
+                </Grid>
+                <Grid item xs={3} md={2}>
+                    <Stack spacing={1}>
+                        <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Tools</Typography>
+                        <Link href="/tools/utm-validator" underline="hover" color="inherit" align={"center"}>UTM Validator</Link>
+                        <Link href="/tools/utm-generator" underline="hover" color="inherit" align={"center"}>UTM Generator</Link>
                     </Stack>
                 </Grid>
             </Grid>

@@ -92,6 +92,8 @@ Route::get('/blog/top-5-google-analytics-alternatives', function () { return Ine
 Route::get('/blog/your-analytics-are-likely-against-the-law', function () { return Inertia::render('BlogYourAnalyticsAreLikelyAgainstTheLaw');})->name('BlogYourAnalyticsAreLikelyAgainstTheLaw');
 Route::get('/blog/free-privacy-friendly-analytics', function () { return Inertia::render('BlogFreePrivacyFriendlyAnalytics');})->name('BlogFreePrivacyFriendlyAnalytics');
 
+Route::get('/tools/utm-generator', function () { return Inertia::render('ToolUTMGenerator');})->name('ToolUTMGenerator');
+Route::get('/tools/utm-validator', function () { return Inertia::render('ToolUTMValidator');})->name('ToolUTMValidator');
 
 
 
