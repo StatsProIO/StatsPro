@@ -1,27 +1,40 @@
-# Marble Metrics
 <p align="center">
     <a href="https://marblemetrics.com/">
         <img src="https://raw.githubusercontent.com/MarbleMetrics/MarbleMetrics/master/src/public/images/logo.svg" width="140px" />
     </a>
+    <h1>Stats Pro</h1>
+    Stats Pro is a open-source, easily deployable, and privacy friendly alternative to Google Analytics.
 </p>
+<br />
+<p align="center">
+  <a href="#about-the-project">About The Project</a> •
+  <a href="#why-choose-stats-pro">Why Choose Stats Pro</a> •
+  <a href="#architecture">Architecture</a> •
+  <a href="#running-locally">Running Locally</a> •
+  <a href="#running-in-the-cloud">Running In The Cloud</a> •
+  <a href="#license">License</a>
+</p>  
+
+
 
 [![Build Staging](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml)
 [![Build Prod](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-prod.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-prod.yml)
 ![](https://badgen.net/github/commits/marblemetrics/marblemetrics)
 ![](https://badgen.net/github/license/marblemetrics/marblemetrics)
 
-[Marble Metrics](https://marblemetrics.com) is a simple, open-source, easily deployable, and privacy friendly web analytics software. Marble Metrics has many of the features that you would expect from other analytics software without invading your users privacy and without selling data to 3rd parties for advertisements. 
+### About The Project
+[Marble Metrics](https://marblemetrics.com) is a open-source, easily deployable, and privacy friendly web analytics software. Marble Metrics has many of the features that you would expect from other analytics software without invading your users privacy and without selling data to 3rd parties for advertisements. 
 
 **Marble Metrics does not use cookies and is fully compliant with GDPR, PECR, CCPA.**
 
 You can run Marble Metrics on your own servers (by following the instructions below) or have us host it for you. We only host on European servers owned by European companies to ensure your analytics is compliant with the law.  
 
-### Choosing Marble Metrics
+### Why Choose Stats Pro
 ![](src/public/images/readme/comparison.png)  
 
 Learn more about why you should choose Marble Metrics over other analytics providers on our [website here](https://marblemetrics.com).
 
-### 🏛 Architecture
+### Architecture
 
 #### Broadcaster
 The Broadcaster is the javascript file which is installed on your website to collect pageview data when users visit your site. It is designed to be as lightweight and un-intrusive as possible.
@@ -34,7 +47,7 @@ One of the most important parts of the backend is The Collector. The Collector r
 #### Frontend
 The frontend of the application is written in React, allowing a clean separation between the backend and frontend application.
 
-### 🏠 Running Locally
+### Running Locally
 The steps below outline how you can run Marble Metrics on your own machine. If you don't want to deal with running Marble Metrics on your own, [we can handle it for you](https://marblemetrics.com).
 
 These steps have been tested on Mac OS X 12.5.
@@ -71,10 +84,9 @@ These steps have been tested on Mac OS X 12.5.
       STRIPE_SECRET=<stripe secret here>
       ```
 
-### ☁️ Running In The Cloud
+### Running In The Cloud
 Marble Metrics is hosted on Stackhero, a European company which has servers in Europe. This guide assumes you will be running on Stackhero. Marble Metrics should run the same on other docker cloud providers but there may be some work to get it all configured. If you don't want to deal with running Marble Metrics on your own, [we can handle it for you](https://marblemetrics.com).
 
-#### 
 Marble Metrics is deployed to Stackhero using Github Actions.
 
 1. Create a new Docker service within Stackhero. Keep the host, service ID, and certificates password handy as we'll be using them in a later step.
