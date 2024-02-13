@@ -17,10 +17,10 @@
 
 
 
-[![Build Staging](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml)
-[![Build Prod](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-prod.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-prod.yml)
-![](https://badgen.net/github/commits/marblemetrics/marblemetrics)
-![](https://badgen.net/github/license/marblemetrics/marblemetrics)
+[![Build Staging](https://github.com/StatsProIO/StatsPro/actions/workflows/build-staging.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml)
+[![Build Prod](https://github.com/StatsProIO/StatsPro/actions/workflows/build-prod.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-prod.yml)
+![](https://badgen.net/github/commits/StatsProIO/StatsPro)
+![](https://badgen.net/github/license/StatsProIO/StatsPro)
 
 ### About The Project
 [Marble Metrics](https://marblemetrics.com) is a open-source, easily deployable, and privacy friendly web analytics software. Marble Metrics has many of the features that you would expect from other analytics software without invading your users privacy and without selling data to 3rd parties for advertisements. 
