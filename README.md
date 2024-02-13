@@ -25,7 +25,7 @@
 ### About The Project
 [StatsPro](https://statspro.io) is a open-source, easily deployable, and privacy friendly web analytics software. Marble Metrics has many of the features that you would expect from other analytics software without invading your users privacy and without selling data to 3rd parties for advertisements. 
 
-**Marble Metrics does not use cookies and is fully compliant with GDPR, PECR, CCPA.**
+**StatsPro does not use cookies and is fully compliant with GDPR, PECR, CCPA.**
 
 You can run Marble Metrics on your own servers (by following the instructions below) or have us host it for you. We only host on European servers owned by European companies to ensure your analytics is compliant with the law.  
 
