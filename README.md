@@ -38,7 +38,6 @@ You can run StatsPro on your own servers (by following the instructions below) o
 Learn more about why you should choose StatsPro over other analytics providers on our [website here](https://statspro.io).
 
 ### Architecture
-
 #### Broadcaster
 The Broadcaster is the javascript file which is installed on your website to collect pageview data when users visit your site. It is designed to be as lightweight and un-intrusive as possible.
 
