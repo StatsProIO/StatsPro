@@ -7,7 +7,7 @@ export const subscriptionPlans = [
         'isRecommended': false,
         'maxEvents': 5000,
         'maximumSites': 1,
-        'description': 'Great to evaluate Marble or for just a small site. Free to use for as long as you want. No credit card required!',
+        'description': 'Great to evaluate StatsPro or for just a small site. Free to use for as long as you want. No credit card required!',
         'isFree': true,
     },
     {
@@ -18,7 +18,7 @@ export const subscriptionPlans = [
         'isRecommended': false,
         'maxEvents': 100000,
         'maximumSites': 2,
-        'description': 'Perfect for starting out with Marble Metrics on a couple of websites with lots of room to grow.',
+        'description': 'Perfect for starting out with StatsPro on a couple of websites with lots of room to grow.',
         'isFree': false,
     },
     {
@@ -29,7 +29,7 @@ export const subscriptionPlans = [
         'isRecommended': true,
         'maxEvents': 200000,
         'maximumSites': 10,
-        'description': 'For professionals who want to start integrating Marble Metrics into multiple websites with high traffic.',
+        'description': 'For professionals who want to start integrating StatsPro into multiple websites with high traffic.',
         'isFree': false,
     },
     {
@@ -40,7 +40,7 @@ export const subscriptionPlans = [
         'isRecommended': false,
         'maxEvents': 500000,
         'maximumSites': 50,
-        'description': 'For professionals getting serious about adding Marble Metrics to many websites with high traffic.',
+        'description': 'For professionals getting serious about adding StatsPro to many websites with high traffic.',
         'isFree': false,
     }
 ];

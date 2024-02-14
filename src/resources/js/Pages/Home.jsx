@@ -48,8 +48,8 @@ export default function Home(props) {
     return (
         <Guest auth={props.auth}>
             <Head>
-                <title>Marble Metrics | Privacy-friendly Google Analytics alternative</title>
-                <meta name="description" content="Marble Metrics is a open-source Google Analytics alternative. Marble Metrics is GDPR, CCPA, PECR compliant and while still giving you answers." />
+                <title>StatsPro | Privacy-friendly Google Analytics alternative</title>
+                <meta name="description" content="StatsPro is a open-source Google Analytics alternative. StatsPro is GDPR, CCPA, PECR compliant and while still giving you answers." />
             </Head>
 
             <div className="home">
@@ -131,7 +131,7 @@ export default function Home(props) {
                             <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2', height: '100%' }}>
                                 <img src="../images/Global Business.png" height={'100px'} loading="lazy" decoding="async" />
                                 <Typography variant="h4"><b>European hosted analytics</b></Typography>
-                                <Typography variant="h6" color="text.secondary">Unlike other privacy-focused analytics services, Marble Metrics keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit.</Typography>
+                                <Typography variant="h6" color="text.secondary">Unlike other privacy-focused analytics services, StatsPro keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit.</Typography>
                             </Paper>
                         </Grid>
                         <Grid item sm={12} md={4} lg={3}>
@@ -145,7 +145,7 @@ export default function Home(props) {
                             <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
                                 <img src="../images/Strategy.png" height={'100px'} loading="lazy" decoding="async" />
                                 <Typography variant="h4"><b>All the features you're used to</b></Typography>
-                                <Typography variant="h6" color="text.secondary">Marble Metrics comes standard with all of the features that you're used to seeing from your analytics platform: real-time, page views, time on page, bounce rate, and more.</Typography>
+                                <Typography variant="h6" color="text.secondary">StatsPro comes standard with all of the features that you're used to seeing from your analytics platform: real-time, page views, time on page, bounce rate, and more.</Typography>
                             </Paper>
                         </Grid>
                     </Grid>
@@ -213,7 +213,7 @@ export default function Home(props) {
                             <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
                                 <Typography variant="h4"><b>Personally Identifiable Information (PII) is never stored</b></Typography>
                                 <Typography variant="h6" color="text.secondary">
-                                    Marble Metrics never stores or uses PII. Some other privacy-focused analytics services will attempt to fingerprint your users using IP addresses and other information. Our analytics solution specifically does not fingerprint users because PECR forbids fingerprinting.
+                                    StatsPro never stores or uses PII. Some other privacy-focused analytics services will attempt to fingerprint your users using IP addresses and other information. Our analytics solution specifically does not fingerprint users because PECR forbids fingerprinting.
                                 </Typography>
                             </Paper>
                         </Grid>
@@ -224,7 +224,7 @@ export default function Home(props) {
                             <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
                                 <Typography variant="h4"><b>GDPR, PECR and CCPA Compliant</b></Typography>
                                 <Typography variant="h6" color="text.secondary">
-                                    Marble Metrics has been built from the ground up with the intention of being fully compliant with global privacy initiatives. We go a step further to ensure that we always keep the spirit of the law in mind, not simply skirting by the law.
+                                    StatsPro has been built from the ground up with the intention of being fully compliant with global privacy initiatives. We go a step further to ensure that we always keep the spirit of the law in mind, not simply skirting by the law.
                                 </Typography>
                             </Paper>
                         </Grid>
