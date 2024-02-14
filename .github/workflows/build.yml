@@ -103,6 +103,7 @@ jobs:
             docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
 
             # do a deploy
+            docker-compose ps
             docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
             docker-compose ps
 
