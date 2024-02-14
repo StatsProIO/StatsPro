@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://StatsPro.io/">
-        <img src="https://raw.githubusercontent.com/StatsProIO/StatsPro/master/src/public/images/logo.png" width="140px" />
+        <img src="https://raw.githubusercontent.com/StatsProIO/StatsPro/prod/src/public/images/logo.png" width="140px" />
     </a>
 </p>
 
