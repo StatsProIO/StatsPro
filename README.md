@@ -1,38 +1,39 @@
 <p align="center">
-    <a href="https://marblemetrics.com/">
-        <img src="https://raw.githubusercontent.com/MarbleMetrics/MarbleMetrics/master/src/public/images/logo.svg" width="140px" />
+    <a href="https://StatsPro.io/">
+        <img src="https://raw.githubusercontent.com/StatsProIO/StatsPro/master/src/public/images/logo.png" width="140px" />
     </a>
-    <h1>Stats Pro</h1>
-    Stats Pro is a open-source, easily deployable, and privacy friendly alternative to Google Analytics.
 </p>
-<br />
+
+<h1 align="center">StatsPro</h1>
+<p align="center">StatsPro is a open-source, easily deployable, and privacy friendly alternative to Google Analytics.</p>
+
 <p align="center">
   <a href="#about-the-project">About The Project</a> •
-  <a href="#why-choose-stats-pro">Why Choose Stats Pro</a> •
+  <a href="#why-choose-stats-pro">Why Choose StatsPro</a> •
   <a href="#architecture">Architecture</a> •
   <a href="#running-locally">Running Locally</a> •
   <a href="#running-in-the-cloud">Running In The Cloud</a> •
   <a href="#license">License</a>
 </p>  
 
+<br />
 
-
-[![Build Staging](https://github.com/StatsProIO/StatsPro/actions/workflows/build-staging.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-staging.yml)
-[![Build Prod](https://github.com/StatsProIO/StatsPro/actions/workflows/build-prod.yml/badge.svg)](https://github.com/MarbleMetrics/MarbleMetrics/actions/workflows/build-prod.yml)
+[![Build Staging](https://github.com/StatsProIO/StatsPro/actions/workflows/build-staging.yml/badge.svg)](https://github.com/StatsProIO/StatsPro/actions/workflows/build-staging.yml)
+[![Build Prod](https://github.com/StatsProIO/StatsPro/actions/workflows/build-prod.yml/badge.svg)](https://github.com/StatsProIO/StatsPro/actions/workflows/build-prod.yml)
 ![](https://badgen.net/github/commits/StatsProIO/StatsPro)
 ![](https://badgen.net/github/license/StatsProIO/StatsPro)
 
 ### About The Project
-[StatsPro](https://statspro.io) is a open-source, easily deployable, and privacy friendly web analytics software. Marble Metrics has many of the features that you would expect from other analytics software without invading your users privacy and without selling data to 3rd parties for advertisements. 
+[StatsPro](https://statspro.io) is a open-source, easily deployable, and privacy friendly web analytics software. StatsPro has many of the features that you would expect from other analytics software without invading your users privacy and without selling data to 3rd parties for advertisements. 
 
 **StatsPro does not use cookies and is fully compliant with GDPR, PECR, CCPA.**
 
-You can run Marble Metrics on your own servers (by following the instructions below) or have us host it for you. We only host on European servers owned by European companies to ensure your analytics is compliant with the law.  
+You can run StatsPro on your own servers (by following the instructions below) or have us host it for you. We only host on European servers owned by European companies to ensure your analytics is compliant with the law.  
 
-### Why Choose Stats Pro
+### Why Choose StatsPro
 ![](src/public/images/readme/comparison.png)  
 
-Learn more about why you should choose Marble Metrics over other analytics providers on our [website here](https://marblemetrics.com).
+Learn more about why you should choose StatsPro over other analytics providers on our [website here](https://statspro.io).
 
 ### Architecture
 
@@ -48,7 +49,7 @@ One of the most important parts of the backend is The Collector. The Collector r
 The frontend of the application is written in React, allowing a clean separation between the backend and frontend application.
 
 ### Running Locally
-The steps below outline how you can run Marble Metrics on your own machine. If you don't want to deal with running Marble Metrics on your own, [we can handle it for you](https://marblemetrics.com).
+The steps below outline how you can run StatsPro on your own machine. If you don't want to deal with running StatsPro on your own, [we can handle it for you](https://statspro.io).
 
 These steps have been tested on Mac OS X 12.5.
 
@@ -59,11 +60,11 @@ These steps have been tested on Mac OS X 12.5.
 * Basic understanding of Laravel.
 
 #### Steps
-1. Run this command to start containers to run nginx, the Marble Metics app, and Postgres
+1. Run this command to start containers to run nginx, the StatsPro app, and Postgres
     ```bash
     make rebuild-local
     ```
-2. Manually connect to the database with username `postgres` and password `postgres` create a `marble_metrics` database.
+2. Manually connect to the database with username `postgres` and password `postgres` create a `stats_pro` database.
 3. Now you'll need to SSH into the app container to install all Javascript and PHP dependencies and run our Vite server. This will compile and serve up our frontend resources.
     ```bash
     docker-compose exec app /bin/bash
@@ -72,7 +73,7 @@ These steps have been tested on Mac OS X 12.5.
     npm run dev
     ```
    
-4. Now you should be able to visit `localhost` to see Marble Metrics running.
+4. Now you should be able to visit `localhost` to see StatsPro running.
 5. Next, we'll run migrations on the database to get all the tables setup. While SSHed into the container, run
     ```bash
     php artisan migrate
@@ -85,9 +86,9 @@ These steps have been tested on Mac OS X 12.5.
       ```
 
 ### Running In The Cloud
-Marble Metrics is hosted on Stackhero, a European company which has servers in Europe. This guide assumes you will be running on Stackhero. Marble Metrics should run the same on other docker cloud providers but there may be some work to get it all configured. If you don't want to deal with running Marble Metrics on your own, [we can handle it for you](https://marblemetrics.com).
+StatsPro is hosted on Stackhero, a European company which has servers in Europe. This guide assumes you will be running on Stackhero. StatsPro should run the same on other docker cloud providers but there may be some work to get it all configured. If you don't want to deal with running StatsPro on your own, [we can handle it for you](https://statspro.io).
 
-Marble Metrics is deployed to Stackhero using Github Actions.
+StatsPro is deployed to Stackhero using Github Actions.
 
 1. Create a new Docker service within Stackhero. Keep the host, service ID, and certificates password handy as we'll be using them in a later step.
 
@@ -108,7 +109,7 @@ Marble Metrics is deployed to Stackhero using Github Actions.
     
     DB_HOST=<your postgres database host>
     DB_PORT=5432
-    DB_DATABASE=marble_metrics
+    DB_DATABASE=stats_pro
     DB_USERNAME=<your postgres username>
     DB_PASSWORD=<your postgres password>
    
@@ -126,9 +127,9 @@ Marble Metrics is deployed to Stackhero using Github Actions.
     `<your app key here>` should be a random base-64 encoded string of length 32
      
 3. Now go to Github Actions and run the Build Staging action.
-4. One the action has finished running, you should be able to see Marble Metrics running by visiting the docker host URL.         
+4. One the action has finished running, you should be able to see StatsPro running by visiting the docker host URL.         
 
 ### License
-Marble Metrics is open source under the GNU Affero General Public License Version 3 (AGPLv3).
+StatsPro is open source under the GNU Affero General Public License Version 3 (AGPLv3).
 
 [License](LICENSE.md)
