@@ -22,7 +22,7 @@ class GoogleAuthController extends Controller
 
     public function callback()
     {
-        $googleUser = Socialite::driver('google')->user();
+        $googleUser = Socialite::driver('google')->stateless()->user();
 
         $user = \App\Models\User::where('google_id', $googleUser->id)->first();
 
