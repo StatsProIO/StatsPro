@@ -65,7 +65,7 @@ jobs:
             export $(cat src/.env | grep ^DB_USERNAME | xargs) #get from the .env file
             sudo apt-get update
             sudo apt-get install --yes --no-install-recommends postgresql-client
-            echo "SELECT 'CREATE DATABASE marble_metrics' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'marble_metrics')\gexec" | PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USERNAME
+            echo "SELECT 'CREATE DATABASE stats_pro' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'stats_pro')\gexec" | PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USERNAME
         - uses: actions/setup-node@v3
           with:
             node-version: '16.17.0'
