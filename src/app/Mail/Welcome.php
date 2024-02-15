@@ -29,7 +29,7 @@ class Welcome extends Mailable
     public function build()
     {
         return $this
-            ->subject('Welcome to Marble Metrics!')
+            ->subject('Welcome to StatsPro!')
             ->markdown('emails.welcome');
     }
 }

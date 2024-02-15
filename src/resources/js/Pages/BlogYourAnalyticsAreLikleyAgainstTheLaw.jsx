@@ -24,7 +24,7 @@ export default function BlogYourAnalyticsAreLikelyAgainstTheLaw() {
 
                 The California Consumer Privacy Act (CCPA) is a law that gives Californians more control over their personal information. The law applies to companies that do business in California and collect personal information from California residents. The law gives Californians the right to know what personal information is being collected about them, the right to know why it is being collected, the right to know where it is being collected from, the right to know if it is being sold, and that Right to opt-out of the sale of your personal information.<br/><br/>
 
-                As more and more countries begin to examine the un-checked power that internet companies have implemented over the years, it is highly likely that more tools will be declared illegal and more fines will be issued. There are <a href="/blog/top-5-google-analytics-alternatives">many privacy-friendly analytics</a> to use instead of Google Analytics. We recommend you replace Google Analtyics with Marble Metrics in order to be fully compliant with GDPR, CCPA, and the ePrivacy Directive.
+                As more and more countries begin to examine the un-checked power that internet companies have implemented over the years, it is highly likely that more tools will be declared illegal and more fines will be issued. There are <a href="/blog/top-5-google-analytics-alternatives">many privacy-friendly analytics</a> to use instead of Google Analytics. We recommend you replace Google Analtyics with StatsPro in order to be fully compliant with GDPR, CCPA, and the ePrivacy Directive.
             </Typography>
         </BlogLayout>
 

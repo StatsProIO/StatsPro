@@ -30,8 +30,8 @@ const Footer = () => {
                 <Grid item xs={3} md={2}>
                     <Stack spacing={1}>
                         <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Community</Typography>
-                        <Link href="https://github.com/MarbleMetrics/MarbleMetrics" target={'_blank'} underline="hover" color="inherit" align={"center"}>Github</Link>
-                        <Link href="https://twitter.com/MarbleMetrics" target={'_blank'} underline="hover" color="inherit" align={"center"}>Twitter</Link>
+                        <Link href="https://github.com/statsProIO/StatsPro/" target={'_blank'} underline="hover" color="inherit" align={"center"}>Github</Link>
+                        <Link href="https://twitter.com/StatsProIO" target={'_blank'} underline="hover" color="inherit" align={"center"}>Twitter</Link>
                         <Link href="/blog" underline="hover" color="inherit" align={"center"}>Blog</Link>
                     </Stack>
                 </Grid>

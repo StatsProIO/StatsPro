@@ -10,17 +10,17 @@ export default function PrivacyPolicy(props) {
           <Typography>
               <br/>Last updated September 24, 2022
               <br/>
-              <br/>This privacy notice for Marble Metrics ("Company," "we," "us," or "our"), describes how and why we might collect, store, use, and/or share ("process") your information when you use our services ("Services"), such as when you:
-              <br/>Visit our website at https://marblemetrics.com, or any website of ours that links to this privacy notice
+              <br/>This privacy notice for StatsPro ("Company," "we," "us," or "our"), describes how and why we might collect, store, use, and/or share ("process") your information when you use our services ("Services"), such as when you:
+              <br/>Visit our website at https://statspro.io, or any website of ours that links to this privacy notice
               <br/>Engage with us in other related ways, including any sales, marketing, or events
-              <br/>Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at marblemetrics@gmail.com.
+              <br/>Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at statsproapp@gmail.com.
               <br/>
               <br/>
               <br/>SUMMARY OF KEY POINTS
               <br/>
               <br/>This summary provides key points from our privacy notice, but you can find out more details about any of these topics by clicking the link following each key point or by using our table of contents below to find the section you are looking for. You can also click here to go directly to our table of contents.
               <br/>
-              <br/>What personal information do we process? When you visit, use, or navigate our Services, we may process personal information depending on how you interact with Marble Metrics and the Services, the choices you make, and the products and features you use. Click here to learn more.
+              <br/>What personal information do we process? When you visit, use, or navigate our Services, we may process personal information depending on how you interact with StatsPro and the Services, the choices you make, and the products and features you use. Click here to learn more.
               <br/>
               <br/>Do we process any sensitive personal information? We may process sensitive personal information when necessary with your consent or as otherwise permitted by applicable law. Click here to learn more.
               <br/>
@@ -34,9 +34,9 @@ export default function PrivacyPolicy(props) {
               <br/>
               <br/>What are your rights? Depending on where you are located geographically, the applicable privacy law may mean you have certain rights regarding your personal information. Click here to learn more.
               <br/>
-              <br/>How do you exercise your rights? The easiest way to exercise your rights is by filling out our data subject request form available here: https://marblemetrics.com/contact, or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws.
+              <br/>How do you exercise your rights? The easiest way to exercise your rights is by filling out our data subject request form available here: https://statspro.io/contact, or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws.
               <br/>
-              <br/>Want to learn more about what Marble Metrics does with any information we collect? Click here to review the notice in full.
+              <br/>Want to learn more about what StatsPro does with any information we collect? Click here to review the notice in full.
               <br/>
               <br/>
               <br/>TABLE OF CONTENTS
@@ -188,7 +188,7 @@ export default function PrivacyPolicy(props) {
               <br/>Contact us using the contact information provided.
               <br/>Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, we may retain some information in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our legal terms and/or comply with applicable legal requirements.
               <br/>
-              <br/>If you have questions or comments about your privacy rights, you may email us at marblemetrics@gmail.com.
+              <br/>If you have questions or comments about your privacy rights, you may email us at statsproapp@gmail.com.
               <br/>
               <br/>9. CONTROLS FOR DO-NOT-TRACK FEATURES
               <br/>
@@ -282,7 +282,7 @@ export default function PrivacyPolicy(props) {
               <br/>
               <br/>More information about our data collection and sharing practices can be found in this privacy notice.
               <br/>
-              <br/>You may contact us by visiting https://marblemetrics.com/contact, or by referring to the contact details at the bottom of this document.
+              <br/>You may contact us by visiting https://statspro.io/contact, or by referring to the contact details at the bottom of this document.
               <br/>
               <br/>If you are using an authorized agent to exercise your right to opt out we may deny a request if the authorized agent does not submit proof that they have been validly authorized to act on your behalf.
               <br/>
@@ -292,7 +292,7 @@ export default function PrivacyPolicy(props) {
               <br/>
               <br/>We may use your personal information for our own business purposes, such as for undertaking internal research for technological development and demonstration. This is not considered to be "selling" of your personal information.
               <br/>
-              <br/>Marble Metrics has not disclosed or sold any personal information to third parties for a business or commercial purpose in the preceding twelve (12) months. Marble Metrics will not sell personal information in the future belonging to website visitors, users, and other consumers.
+              <br/>StatsPro has not disclosed or sold any personal information to third parties for a business or commercial purpose in the preceding twelve (12) months. StatsPro will not sell personal information in the future belonging to website visitors, users, and other consumers.
               <br/>
               <br/>Your rights with respect to your personal data
               <br/>
@@ -327,7 +327,7 @@ export default function PrivacyPolicy(props) {
               <br/>You may request correction of your personal data if it is incorrect or no longer relevant, or ask to restrict the processing of the information.
               <br/>You can designate an authorized agent to make a request under the CCPA on your behalf. We may deny a request from an authorized agent that does not submit proof that they have been validly authorized to act on your behalf in accordance with the CCPA.
               <br/>You may request to opt out from future selling of your personal information to third parties. Upon receiving an opt-out request, we will act upon the request as soon as feasibly possible, but no later than fifteen (15) days from the date of the request submission.
-              <br/>To exercise these rights, you can contact us by visiting https://marblemetrics.com/contact, or by referring to the contact details at the bottom of this document. If you have a complaint about how we handle your data, we would like to hear from you.
+              <br/>To exercise these rights, you can contact us by visiting https://statspro.io/contact, or by referring to the contact details at the bottom of this document. If you have a complaint about how we handle your data, we would like to hear from you.
               <br/>
               <br/>11. DO WE MAKE UPDATES TO THIS NOTICE?
               <br/>
@@ -337,14 +337,14 @@ export default function PrivacyPolicy(props) {
               <br/>
               <br/>12. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
               <br/>
-              <br/>If you have questions or comments about this notice, you may email us at marblemetrics@gmail.com or by post to:
+              <br/>If you have questions or comments about this notice, you may email us at statsproapp@gmail.com or by post to:
               <br/>
-              <br/>Marble Metrics
+              <br/>StatsPro
               <br/>United States
               <br/>
               <br/>13. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
               <br/>
-              <br/>Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it. To request to review, update, or delete your personal information, please visit: https://marblemetrics.com/contact.
+              <br/>Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it. To request to review, update, or delete your personal information, please visit: https://statspro.io/contact.
           </Typography>
 
       </General>

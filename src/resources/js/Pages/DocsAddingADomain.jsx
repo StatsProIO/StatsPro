@@ -18,10 +18,10 @@ export default function AddingADomain() {
             <img width='70%' src='/images/getting-started-step-3.webp'/>
 
             <Typography variant={'h4'} sx={{py: 1}}>4. Visit your website</Typography>
-            <Typography sx={{py: 1}}>Click on "Start Collecting Data". Now, visit your website like a normal user would. This will trigger a pageview event to be sent to Marble Metrics and make it easy to verify everything is setup correctly.</Typography>
+            <Typography sx={{py: 1}}>Click on "Start Collecting Data". Now, visit your website like a normal user would. This will trigger a pageview event to be sent to StatsPro and make it easy to verify everything is setup correctly.</Typography>
 
             <Typography variant={'h4'} sx={{py: 1}}>5. Wait for a successful pageview</Typography>
-            <Typography sx={{py: 1}}>Now Marble Metrics will be waiting to see a successful pageview event from the script that you installed on your site. It should only take a few moments for the event to show up. Refresh your dashboard and you should see your data flowing into Marble Metrics. If you don't see any data, it could mean that something was incorrectly setup when installing the script. Double check to make sure you've installed it in the right place.</Typography>
+            <Typography sx={{py: 1}}>Now StatsPro will be waiting to see a successful pageview event from the script that you installed on your site. It should only take a few moments for the event to show up. Refresh your dashboard and you should see your data flowing into StatsPro. If you don't see any data, it could mean that something was incorrectly setup when installing the script. Double check to make sure you've installed it in the right place.</Typography>
         </DocsLayout>
     );
 }

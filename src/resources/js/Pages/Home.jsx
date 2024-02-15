@@ -18,8 +18,8 @@ import {Inertia} from "@inertiajs/inertia";
 import {Head} from "@inertiajs/inertia-react";
 
 
-function createData(name, marbleMetrics, googleAnalytics, fathom, plausible, simpleAnalytics) {
-    return { name, marbleMetrics, googleAnalytics, fathom, plausible, simpleAnalytics};
+function createData(name, statsPro, googleAnalytics, fathom, plausible, simpleAnalytics) {
+    return { name, statsPro, googleAnalytics, fathom, plausible, simpleAnalytics};
 }
 
 const rows = [
@@ -181,7 +181,7 @@ export default function Home(props) {
                                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             >
                                                 <TableCell style={{fontWeight: 'bold', fontSize: '1em'}} component="th" scope="row">{row.name}</TableCell>
-                                                <TableCell align="center" className="light-gray-background">{row.marbleMetrics ? <CheckCircleIcon sx={{color: "#27ae60" }}/> : <CancelIcon color="error"/>}</TableCell>
+                                                <TableCell align="center" className="light-gray-background">{row.statsPro ? <CheckCircleIcon sx={{color: "#27ae60" }}/> : <CancelIcon color="error"/>}</TableCell>
                                                 <TableCell align="center">{row.googleAnalytics ? <CheckCircleIcon sx={{color: "#27ae60" }}/> : <CancelIcon color="error"/>}</TableCell>
                                                 <TableCell align="center">{row.fathom ? <CheckCircleIcon sx={{color: "#27ae60" }}/> : <CancelIcon color="error"/>}</TableCell>
                                                 <TableCell align="center">{row.plausible ? <CheckCircleIcon sx={{color: "#27ae60" }}/> : <CancelIcon color="error"/>}</TableCell>

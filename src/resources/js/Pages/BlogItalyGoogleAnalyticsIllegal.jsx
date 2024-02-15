@@ -22,9 +22,9 @@ export default function BlogItalyGoogleAnalyticsIllegal() {
 
                 Alternatively, you can use an alternative to Google Analytics that is built from the ground up to be compliant will all worldwide data regulations. <br/><br/>
 
-                Marble Metrics is compliant with GDPR and all other data privacy laws by default. No need to take special precautions and you still get great analytics about visitors to your website. <br/><br/>
+                StatsPro is compliant with GDPR and all other data privacy laws by default. No need to take special precautions and you still get great analytics about visitors to your website. <br/><br/>
 
-                Ultimately, the world is trending towards a more data-conscious state and users are becoming aware of the number of rights they have given up. Regulation will continue to increase to put power back into the hands of users. Stay at the forefront with Marble Metrics.
+                Ultimately, the world is trending towards a more data-conscious state and users are becoming aware of the number of rights they have given up. Regulation will continue to increase to put power back into the hands of users. Stay at the forefront with StatsPro.
             </Typography>
 
         </BlogLayout>

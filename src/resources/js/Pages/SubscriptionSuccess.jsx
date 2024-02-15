@@ -67,7 +67,7 @@ export default function SubscriptionSuccess(props) {
                         </Grid>
 
                             <Typography variant="h5" align="center" sx={{ mt: 2 }} style={{ fontWeight: 'bold' }}>Payment Confirmed!</Typography>
-                            <Typography variant="body1" align="center">You're all set to start using Marble Metrics!</Typography>
+                            <Typography variant="body1" align="center">You're all set to start using StatsPro!</Typography>
                             <Box textAlign='center' sx={{ pt: 3 }}>
                                 <Button variant="contained" onClick={onClickGoToDashboardButton}>Go To Dashboard</Button>
                             </Box>

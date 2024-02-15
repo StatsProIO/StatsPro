@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: http://marblemetrics.com/sitemap.xml
+Sitemap: https://statspro.io/sitemap.xml

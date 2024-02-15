@@ -44,7 +44,7 @@ export default function terms() {
                 <br/>
                 <br/>1. AGREEMENT TO TERMS
                 <br/>
-                <br/>These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and Marble Metrics ("Company", “we”, “us”, or “our”), concerning your access to and use of the https://marblemetrics.com website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”). You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms and Conditions. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS AND CONDITIONS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.
+                <br/>These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and StatsPro ("Company", “we”, “us”, or “our”), concerning your access to and use of the https://statspro.io website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”). You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms and Conditions. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS AND CONDITIONS, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.
                 <br/>
                 <br/>Supplemental terms and conditions or documents that may be posted on the Site from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Terms and Conditions from time to time. We will alert you about any changes by updating the “Last updated” date of these Terms and Conditions, and you waive any right to receive specific notice of each such change. Please ensure that you check the applicable Terms every time you use our Site so that you understand which Terms apply. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Terms and Conditions by your continued use of the Site after the date such revised Terms and Conditions are posted.
                 <br/>
@@ -99,7 +99,7 @@ export default function terms() {
                 <br/>
                 <br/>You can cancel your subscription at any time by logging into your account. Your cancellation will take effect at the end of the current paid term.
                 <br/>
-                <br/>If you are unsatisfied with our services, please email us at marblemetrics@gmail.com.
+                <br/>If you are unsatisfied with our services, please email us at statsproapp@gmail.com.
                 <br/>
                 <br/>
                 <br/>8. PROHIBITED ACTIVITIES
@@ -181,7 +181,7 @@ export default function terms() {
                 <br/>
                 <br/>15. PRIVACY POLICY
                 <br/>
-                <br/>We care about data privacy and security. Please review our Privacy Policy: https://marblemetrics.com/privacy-policy. By using the Site, you agree to be bound by our Privacy Policy, which is incorporated into these Terms and Conditions. Please be advised the Site is hosted in France. If you access the Site from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in France, then through your continued use of the Site, you are transferring your data to France, and you agree to have your data transferred to and processed in France.
+                <br/>We care about data privacy and security. Please review our Privacy Policy: https://statspro.io/privacy-policy. By using the Site, you agree to be bound by our Privacy Policy, which is incorporated into these Terms and Conditions. Please be advised the Site is hosted in France. If you access the Site from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in France, then through your continued use of the Site, you are transferring your data to France, and you agree to have your data transferred to and processed in France.
                 <br/>
                 <br/>
                 <br/>16. TERM AND TERMINATION
@@ -270,10 +270,10 @@ export default function terms() {
                 <br/>
                 <br/>In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at:
                 <br/>
-                <br/>Marble Metrics
+                <br/>StatsPro
                 <br/>__________
                 <br/>United States
-                <br/>marblemetrics@gmail.com
+                <br/>statsproapp@gmail.com
             </Typography>
 
         </General>

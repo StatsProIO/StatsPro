@@ -10,11 +10,11 @@ export default function BlogTopFiveAnalyticsAlternatives() {
             <Typography sx={{py: 1}}>
             It's no secret that Google Analytics is the most used web analytics tool out there in the world. But there is increasing pressure to avoid Google Analytics on your website, especially now that multiple European countries have declared Google Analytics as illegal. In this blog post, we take a look at the 5 Best Privacy-Based Google Analytics Alternatives for 2022.
             </Typography>
-            <Typography variant="h4" sx={{py: 1}}>1. Marble Metrics</Typography>
+            <Typography variant="h4" sx={{py: 1}}>1. StatsPro</Typography>
             <Typography sx={{py: 1}}>
-                If you're looking for an alternative to Google Analytics that puts privacy first, Marble Metrics is definitely worth considering.
-                Marble Metrics has all of the features that other privacy-friendly analytics have, plus it's open-source and can be self-hosted. Marble Metrics offers a range of features including detailed visitor logs, real-time analytics, and e-commerce tracking.
-                In addition, Marble Metrics is fully GDPR compliant and offers a variety of options for data protection. Additionally, Marble Metrics does not fingerprint users, something that not all privacy-friendly analytics providers are willing to do.
+                If you're looking for an alternative to Google Analytics that puts privacy first, StatsPro is definitely worth considering.
+                StatsPro has all of the features that other privacy-friendly analytics have, plus it's open-source and can be self-hosted. StatsPro offers a range of features including detailed visitor logs, real-time analytics, and e-commerce tracking.
+                In addition, StatsPro is fully GDPR compliant and offers a variety of options for data protection. Additionally, StatsPro does not fingerprint users, something that not all privacy-friendly analytics providers are willing to do.
             </Typography>
             <Typography variant="h4" sx={{py: 1}}>2. Fathom Analytics</Typography>
             <Typography sx={{py: 1}}>
