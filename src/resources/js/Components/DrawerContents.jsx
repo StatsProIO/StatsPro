@@ -7,10 +7,14 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DnsIcon from '@mui/icons-material/Dns';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import {Inertia} from '@inertiajs/inertia'
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+import Chip from "@mui/material/Chip";
+import AdsClickIcon from '@mui/icons-material/AdsClick';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import SpeedIcon from '@mui/icons-material/Speed';
 
 
 export default function DrawerContents() {
@@ -19,6 +23,26 @@ export default function DrawerContents() {
             text: "Dashboard",
             url: '/dashboard',
             icon: <DashboardIcon sx={{ color: '#fff' }} />
+        }, {
+            text: 'Audience',
+            url: '/audience',
+            icon: <EmojiPeopleIcon sx={{ color: '#fff' }} />,
+            comingSoon: true
+        }, {
+            text: 'Behavior',
+            url: '/behavior',
+            icon: <AdsClickIcon sx={{ color: '#fff' }} />,
+            comingSoon: true
+        }, {
+            text: 'Acquisition',
+            url: '/acquisition',
+            icon: <ExitToAppIcon sx={{ color: '#fff' }} />,
+            comingSoon: true
+        }, {
+            text: 'Performance',
+            url: '/performance',
+            icon: <SpeedIcon sx={{ color: '#fff' }} />,
+            comingSoon: true
         }, {
             text: "Manage Domains",
             url: '/manage-domains',
@@ -64,7 +88,7 @@ export default function DrawerContents() {
                                 <ListItemIcon>
                                     {item.icon}
                                 </ListItemIcon>
-                                <ListItemText primary={item.text} />
+                                <ListItemText primary={item.text} /> {item.comingSoon && <Chip label="Soon" color="warning" size="small" />}
                             </ListItemButton>
                         </ListItem>
                     ))}

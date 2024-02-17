@@ -45,6 +45,22 @@ Route::middleware(['auth', 'require_one_domain'])->group(function () {
         return Inertia::render('Dashboard', ['domain' => $domain->domain_name ]);
     })->name('dashboard');
 
+    Route::get('/audience', function () {
+        return Inertia::render('Audience', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
+    })->name('audience');
+
+    Route::get('/behavior', function () {
+        return Inertia::render('Behavior', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
+    })->name('behavior');
+
+    Route::get('/acquisition', function () {
+        return Inertia::render('Acquisition', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
+    })->name('acquisition');
+
+    Route::get('/performance', function () {
+        return Inertia::render('Performance', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
+    })->name('performance');
+
     Route::get('/manage-domains', function () {
         return Inertia::render('ManageDomains', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
     })->name('manage-domains');
