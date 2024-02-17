@@ -19,6 +19,7 @@ import {
 } from 'chart.js';
 import {RealTimeChart} from './RealTimeChart';
 import {Inertia} from "@inertiajs/inertia";
+import Filters from "@/Components/Filters";
 
 
 ChartJS.register(
@@ -31,7 +32,7 @@ ChartJS.register(
     ArcElement
 );
 
-export default function Charts({ domain }) {
+export default function DashboardCharts({ domain }) {
 
     const [domains, setDomains] = useState([]);
     const [range, setRange] = useQueryString("range", '24h');
@@ -97,44 +98,7 @@ export default function Charts({ domain }) {
                     <Typography variant="h4"><b>Dashboard</b></Typography>
                     <Typography variant="h6" color="text.secondary">Welcome back!</Typography>
                 </Grid>
-                <Grid item lg={2} md={3} xs={6}>
-                    <FormControl fullWidth variant="filled">
-                        <InputLabel id="domain-label">Domain</InputLabel>
-                        <Select
-                            value={domains.includes(domain) ? domain : ''} /* domain is passed in as a prop from the server, domains is loaded async. Make sure the list contains the one we're selecting before selecting it */
-                            labelId="domain-label"
-                            label="Domain"
-                            onChange={(event) => {
-                                Inertia.get('/dashboard/' + event.target.value)
-                            }}
-                        >
-                            { domains.map((domain) => {
-                                return (<MenuItem value={domain} key={domain}>{domain}</MenuItem>);
-                            })}
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item lg={2} md={3} xs={6}>
-
-                    <FormControl fullWidth variant="filled">
-                        <InputLabel id="time-range-label">Time Range</InputLabel>
-                        <Select
-                            labelId="time-range-label"
-                            value={range}
-                            label="Time Range"
-                            onChange={(event) => { setRange(event.target.value) }}
-                        >
-                            <MenuItem value='24h'>Last 24 hours</MenuItem>
-                            <MenuItem value='7d'>Last 7 days</MenuItem>
-                            <MenuItem value='30d'>Last 30 days</MenuItem>
-                            <MenuItem value='month-to-date'>Month to Date </MenuItem>
-                            <MenuItem value='last-month'>Last Month</MenuItem>
-                            <MenuItem value='year-to-date'>Year to Date</MenuItem>
-                            <MenuItem value='12m'>Last 12 Months</MenuItem>
-                            <MenuItem value='all-time'>All Time</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
+                <Filters domain={domain} domains={domains} setDomains={setDomains} range={range} setRange={setRange}/>
             </Grid>
 
             <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
@@ -167,7 +131,7 @@ export default function Charts({ domain }) {
             <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Top Souces</Typography>
+                        <Typography variant="h6">Top Sources</Typography>
                         <TopSourcesChart inputData={topSources} timeBuckets={timeBuckets} />
                     </Paper>
                 </Grid>

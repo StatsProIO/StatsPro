@@ -27,7 +27,6 @@ export default function DrawerContents() {
             text: 'Audience',
             url: '/audience',
             icon: <EmojiPeopleIcon sx={{ color: '#fff' }} />,
-            comingSoon: true
         }, {
             text: 'Behavior',
             url: '/behavior',

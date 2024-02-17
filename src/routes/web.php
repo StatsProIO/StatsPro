@@ -45,8 +45,14 @@ Route::middleware(['auth', 'require_one_domain'])->group(function () {
         return Inertia::render('Dashboard', ['domain' => $domain->domain_name ]);
     })->name('dashboard');
 
-    Route::get('/audience', function () {
-        return Inertia::render('Audience', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
+    Route::get('/audience/{domain?}', function ($domain = null) {
+        if($domain === null) {
+            $firstDomain = Domain::where('user_id', Auth::user()->id)->oldest()->first();
+            return redirect('/audience/'. $firstDomain->domain_name);
+        }
+
+        $domain = Domain::where('domain_name', $domain)->where('user_id', Auth::user()->id)->firstOrFail();
+        return Inertia::render('Audience', ['domain' => $domain->domain_name ]);
     })->name('audience');
 
     Route::get('/behavior', function () {

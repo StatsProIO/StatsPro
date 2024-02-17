@@ -181,7 +181,7 @@ class EventsController extends Controller
             'top_sources' => EventRepository::getTopSources($timeRangeInfo->getInterval(), $domain),
             'top_pages' => EventRepository::getTopPages($timeRangeInfo->getInterval(), $domain),
             'devices' => EventRepository::getDevices($timeRangeInfo->getInterval(), $domain),
-            'locations' => EventRepository::getLocations($timeRangeInfo->getInterval(), $domain),
+            'locations' => EventRepository::getLocationsForMap($timeRangeInfo->getInterval(), $domain),
             'unique_visitors_count' => $visitorsCount,
             'unique_visitors_count_difference_rate' => $comparisonVisitorsCount == 0 ? 100 : (($visitorsCount - $comparisonVisitorsCount)/$comparisonVisitorsCount),
             'pageviews_count' => $pageviewCount,
@@ -214,5 +214,20 @@ class EventsController extends Controller
         } else {
             return "NO_DATA";
         }
+    }
+
+    public function getEventsAudienceTimeByDomain($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
+
+        return [
+            'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
+            'devices' => EventRepository::getDevices($timeRangeInfo->getInterval(), $domain),
+            'locations' => EventRepository::getLocationsForList($timeRangeInfo->getInterval(), $domain),
+            'browsers' => EventRepository::getBrowsers($timeRangeInfo->getInterval(), $domain),
+            'languages' => EventRepository::getLanguages($timeRangeInfo->getInterval(), $domain),
+        ];
     }
 }

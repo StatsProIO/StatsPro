@@ -1,10 +1,10 @@
-import DashboardCharts from '@/Components/DashboardCharts';
 import FirstEventWait from '@/Components/FirstEventWait';
 import Authenticated from '@/Layouts/Authenticated';
 import {useEffect, useState} from 'react';
 import {Head} from "@inertiajs/inertia-react";
+import AudienceCharts from "@/Components/AudienceCharts";
 
-export default function Dashboard(props) {
+export default function Audience(props) {
     const [eventStatus, setEventStatus] = useState(false);
 
     useEffect(() => {
@@ -24,10 +24,10 @@ export default function Dashboard(props) {
             errors={props.errors}
         >
 
-             <Head title="Dashboard" />
+             <Head title="Audience" />
 
             {eventStatus === 'NO_DATA' && <FirstEventWait domain={props.domain}/>}
-            {eventStatus === 'SUCCESS' && <DashboardCharts domain={props.domain} />}
+            {eventStatus === 'SUCCESS' && <AudienceCharts domain={props.domain} />}
 
         </Authenticated>
     );

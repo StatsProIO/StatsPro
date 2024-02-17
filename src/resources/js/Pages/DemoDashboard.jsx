@@ -1,4 +1,4 @@
-import Charts from '@/Components/Charts';
+import DashboardCharts from '@/Components/DashboardCharts';
 import {Head} from "@inertiajs/inertia-react";
 import Guest from "@/Layouts/Guest";
 import {Box} from "@mui/system";
@@ -16,7 +16,7 @@ export default function Dashboard(props) {
             <Grid container justifyContent={'center'}>
                 <Grid item md={10} lg={9} xl={8}>
                     <Box sx={{mt: 4, px: 2}}>
-                        <Charts domain="demo.com" />
+                        <DashboardCharts domain="demo.com" />
                     </Box>
                 </Grid>
             </Grid>

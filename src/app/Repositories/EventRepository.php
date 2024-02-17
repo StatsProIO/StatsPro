@@ -10,6 +10,7 @@ use Carbon\CarbonInterval;
 use Carbon\CarbonInterface;
 use App\Utility\Interval;
 use App\Utility\TimeRangeInfo;
+use Locale;
 
 class EventRepository
 {
@@ -110,14 +111,61 @@ class EventRepository
                             );
     }
 
-    public static function getLocations(Interval $interval, Domain $domain) {
+    public static function getLocationsForMap(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT country, count(*)
                                 FROM events
                                 WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
-                                GROUP BY country" ),
+                                GROUP BY country
+                                ORDER BY count DESC" ),
                         array('domain' => $domain->id)
                     );
     }
+
+    public static function getLocationsForList(Interval $interval, Domain $domain) {
+        $locations = DB::select( DB::raw("SELECT country, count(*)
+                                FROM events
+                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                GROUP BY country
+                                ORDER BY count DESC
+                                LIMIT 5" ),
+            array('domain' => $domain->id)
+        );
+
+        foreach($locations as $location) {
+            $location->country = (new \League\ISO3166\ISO3166)->alpha3($location->country)['name'];
+        }
+
+        return $locations;
+    }
+
+    public static function getBrowsers(Interval $interval, Domain $domain) {
+        return DB::select( DB::raw("SELECT browser, count(*)
+                                FROM events
+                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                GROUP BY browser
+                                ORDER BY count DESC
+                                LIMIT 5" ),
+            array('domain' => $domain->id)
+        );
+    }
+
+    public static function getLanguages(Interval $interval, Domain $domain) {
+        $languages = DB::select( DB::raw("SELECT language, count(*)
+                                FROM events
+                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                GROUP BY language
+                                ORDER BY count DESC
+                                LIMIT 5" ),
+            array('domain' => $domain->id)
+        );
+
+        foreach($languages as $language) {
+            $language->language = Locale::getDisplayName(Locale::getPrimaryLanguage($language->language), 'en');
+        }
+
+        return $languages;
+    }
+
 
     public static function getPageviewsCount(Interval $interval, Domain $domain) {
         $pageviewsCount = DB::select(

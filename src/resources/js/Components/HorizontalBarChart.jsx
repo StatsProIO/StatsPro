@@ -3,7 +3,7 @@ import {scaleLinear} from "d3-scale";
 import {Fragment} from "react";
 
 
-export default function HorizontalBarChart({ valueTitle, data, totalValue, colorMin, colorMax }) {
+export default function HorizontalBarChart({ valueTitle, data, totalValue, colorMin, colorMax, labelKey }) {
 
     var min = Number.MAX_SAFE_INTEGER
     var max = 0;
@@ -38,7 +38,7 @@ export default function HorizontalBarChart({ valueTitle, data, totalValue, color
                         <Grid item xs={11} >
                             <Box sx={{ m: 1 }}>
                                 <Box style={{ backgroundColor: '#eee', borderTopRightRadius: '10px', borderBottomRightRadius: '10px' }}>
-                                    <Typography style={{ position: 'absolute', maxWidth: '15em', textOverflow: 'ellipsis', overflow: 'hidden' }} sx={{ py: 1, pl: 1 }} display="inline">{dataItem.label}</Typography>
+                                    <Typography style={{ position: 'absolute', maxWidth: '15em', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap'  }} sx={{ py: 1, pl: 1 }} display="inline">{dataItem.label ?? dataItem[labelKey]}</Typography>
                                     <Box style={{ backgroundColor: colorScale(dataItem.count), width: (dataItem.count / totalValue) * 100 + '%', borderTopRightRadius: '10px', borderBottomRightRadius: '10px' }} sx={{ py: 1, pl: 1 }}>&nbsp;</Box>
                                 </Box>
                             </Box>
