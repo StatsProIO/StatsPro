@@ -21,11 +21,11 @@ function buildData(inputData) {
       {
         data: inputData.map(inputItem => inputItem.count),
         backgroundColor: [
-          '#2a63fee6',
-          '#2a63feb0',
-          '#2a63fe7a',
-          '#2A63FE70',
-          '#2A63FE59'
+          '#35a2eb',
+          '#20cfcf',
+          '#ff3f69',
+          '#ff901f',
+          '#ffcd57'
         ],
         borderWidth: 0,
       },

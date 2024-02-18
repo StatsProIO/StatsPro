@@ -31,7 +31,6 @@ export default function DrawerContents() {
             text: 'Behavior',
             url: '/behavior',
             icon: <AdsClickIcon sx={{ color: '#fff' }} />,
-            comingSoon: true
         }, {
             text: 'Acquisition',
             url: '/acquisition',

@@ -58,7 +58,7 @@ export default function AudienceCharts({ domain }) {
                 setOses(response.data.oses);
             })
             .catch(function (error) {
-                axios.post(`/api/error`, {component: 'Charts', message: error});
+                axios.post(`/api/error`, {component: 'AudienceCharts', message: error});
             });
     }, [range, domain]);
 

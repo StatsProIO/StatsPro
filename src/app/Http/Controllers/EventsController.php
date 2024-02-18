@@ -231,4 +231,22 @@ class EventsController extends Controller
             'oses' => EventRepository::getOses($timeRangeInfo->getInterval(), $domain),
         ];
     }
+
+    public function getEventsBehaviorTimeByDomain($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
+
+        $timeBuckets = $this->getTimeBuckets($timeRangeInfo);
+
+        return [
+            'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
+            'bounceRate' => EventRepository::getBounceRate($timeRangeInfo, $timeRangeInfo->getInterval(), $domain, $timeBuckets),
+            'timeOnPage' => EventRepository::getTimeOnPage($timeRangeInfo, $timeRangeInfo->getInterval(), $domain, $timeBuckets),
+            'busiestDayOfWeek' => EventRepository::getBusiestDayOfWeek($timeRangeInfo->getInterval(), $domain),
+            'busiestHourOfDay' => EventRepository::getBusiestHourOfDay($timeRangeInfo->getInterval(), $domain),
+            'timeTrends' => EventRepository::getTimeTrends($timeRangeInfo->getInterval(), $domain),
+        ];
+    }
 }
