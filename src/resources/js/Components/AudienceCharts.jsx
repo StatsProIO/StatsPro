@@ -42,6 +42,7 @@ export default function AudienceCharts({ domain }) {
     const [locations, setLocations] = useState([]);
     const [browsers, setBrowsers] = useState([]);
     const [languages, setLanguages] = useState([]);
+    const [oses, setOses] = useState([]);
 
     useEffect(() => {
         //make an API request for range/domain
@@ -54,6 +55,7 @@ export default function AudienceCharts({ domain }) {
                 setLocations(response.data.locations);
                 setBrowsers(response.data.browsers);
                 setLanguages(response.data.languages);
+                setOses(response.data.oses);
             })
             .catch(function (error) {
                 axios.post(`/api/error`, {component: 'Charts', message: error});
@@ -97,6 +99,12 @@ export default function AudienceCharts({ domain }) {
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Languages</Typography>
                         <HorizontalBarChart alueTitle="Views" data={languages} labelKey={'language'} totalValue={languages.map((languageData) => languageData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Paper sx={{ p: 3 }}>
+                        <Typography variant="h6">Operating System</Typography>
+                        <HorizontalBarChart alueTitle="Views" data={oses} labelKey={'os'} totalValue={oses.map((osData) => osData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
                     </Paper>
                 </Grid>
             </Grid>

@@ -166,6 +166,16 @@ class EventRepository
         return $languages;
     }
 
+    public static function getOses(Interval $interval, Domain $domain) {
+        return DB::select( DB::raw("SELECT os, count(*)
+                                FROM events
+                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                GROUP BY os
+                                ORDER BY count DESC
+                                LIMIT 5" ),
+            array('domain' => $domain->id)
+        );
+    }
 
     public static function getPageviewsCount(Interval $interval, Domain $domain) {
         $pageviewsCount = DB::select(

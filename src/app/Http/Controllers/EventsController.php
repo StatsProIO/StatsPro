@@ -228,6 +228,7 @@ class EventsController extends Controller
             'locations' => EventRepository::getLocationsForList($timeRangeInfo->getInterval(), $domain),
             'browsers' => EventRepository::getBrowsers($timeRangeInfo->getInterval(), $domain),
             'languages' => EventRepository::getLanguages($timeRangeInfo->getInterval(), $domain),
+            'oses' => EventRepository::getOses($timeRangeInfo->getInterval(), $domain),
         ];
     }
 }
