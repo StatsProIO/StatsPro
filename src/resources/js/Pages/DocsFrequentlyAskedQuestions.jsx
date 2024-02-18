@@ -34,13 +34,7 @@ export default function DocsFrequentlyAskedQuestions() {
             <Typography sx={{py: 1}}>Your data is never sold and belongs to only you. StatsPro makes money by charging larger sites to use our service. We are not in the business of selling data.</Typography>
 
             <Typography variant={'h4'} sx={{py: 1}}>Is there a free plan?</Typography>
-            <Typography sx={{py: 1}}>Yes, you can use StatsPro for free forever on our Free plan. This plan is best for hobbists and users with small websites. If you exceed the limits of the free plan, we do ask that you move to a paid plan. This helps support StatsPro and lets us keep the Free plan available to smaller websites.</Typography>
-
-
-            https://usefathom.com/features
-
-            https://umami.is/docs/faq
-
+            <Typography sx={{py: 1}}>Yes, you can use StatsPro for free forever on our Free plan. This plan is best for hobbyists and users with small websites. If you exceed the limits of the free plan, we do ask that you move to a paid plan. This helps support StatsPro and lets us keep the Free plan available to smaller websites.</Typography>
 
         </DocsLayout>
     );
