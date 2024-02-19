@@ -2,6 +2,7 @@ import React from 'react';
 import {BarElement, CategoryScale, Chart as ChartJS, LinearScale} from 'chart.js';
 import Box from "@mui/material/Box";
 import {Grid} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 ChartJS.register(
   CategoryScale,
@@ -30,8 +31,8 @@ function calculateColor(weight) {
 }
 
 
-const DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const HOURS_OF_DAY_BUCKETS = ['', '', '12 AM', '3 AM', '6 AM', '9 AM', '12PM', '3 PM', '6PM', '9 PM'];
+const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+const HOURS_OF_DAY_BUCKETS = ['', '', '12AM', '3AM', '6AM', '9AM', '12PM', '3PM', '6PM', '9PM'];
 
 
 export function TimeTrendChart({ inputData }) {
@@ -39,18 +40,22 @@ export function TimeTrendChart({ inputData }) {
     return (
         <>
             <Grid container direction={'row'} xs={12}>
-            {HOURS_OF_DAY_BUCKETS.map(HOUR_OF_DAY => {
-                return (<Grid item xs={1} sx={{textAlign: "center"}} >{HOUR_OF_DAY}</Grid>)
+            {HOURS_OF_DAY_BUCKETS.map((HOUR_OF_DAY, index) => {
+                return (<Grid item xs={1} sx={{textAlign: "center"}} >
+                    <Typography sx={{ typography: { sm: 'body1', xs: 'caption' }, display: {xs: index%2 ? 'none' : 'block', sm: 'block' } }} >{HOUR_OF_DAY}</Typography>
+                </Grid>)
             })}
             </Grid>
 
             {inputData.map((weekDay, index) => {
                 return (<Grid container direction={'row'} xs={12}>
-                    <Grid item xs={2} sx={{textAlign: 'right'}} alignItems="center" flexDirection={'column'} justifyContent={'center'}><p>{DAYS_OF_WEEK[index]}</p></Grid>
+                    <Grid item xs={2} sx={{textAlign: 'right'}} alignItems="center" flexDirection={'column'} justifyContent={'center'}>
+                        <Typography sx={{ typography: { sm: 'body1', xs: 'subtitle2' }, pt: 2, mr: 1}} >{DAYS_OF_WEEK[index]}</Typography>
+                    </Grid>
                      {
                         weekDay.map(hourRate => {
                             return (<Grid item xs={1}>
-                                <Box sx={{backgroundColor: calculateColor(hourRate), borderRadius: '5px', textAlign: 'center', color: 'transparent'}} mx={1}  >
+                                <Box sx={{backgroundColor: calculateColor(hourRate), borderRadius: '5px', textAlign: 'center', color: 'transparent'}} mx={.5}  >
                                    <p> {'`'}</p>
                                 </Box>
                             </Grid>)
