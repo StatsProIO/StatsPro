@@ -33,7 +33,9 @@ class SendDemoRequests extends Command
         $faker = \Faker\Factory::create();
 
         $count = 0;
-        while ($count < 5) { //send 5 total requests per minute
+        $hour = intval((\Carbon\Carbon::now())->format('H'));
+
+        while ($count <  intval((((sin((.261 * $hour)) + 1)*15) ))) { //send 5 total requests per minute
             $client = new \GuzzleHttp\Client();
             $response = $client->request('POST',  (config('app.env') === 'local' ? 'webnginx' : config('app.url')) . '/api/collect', [
             'headers' => [
@@ -54,7 +56,6 @@ class SendDemoRequests extends Command
 
             $count++;
 
-            $hour = intval((\Carbon\Carbon::now())->format('H'));
             Log::info("Hour " . $hour);
             $sleepTime = intval((((sin((.261 * $hour)) + 1)*30) + sin($hour* 5) + 2) * 1000000);
 
