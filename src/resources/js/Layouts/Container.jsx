@@ -43,7 +43,8 @@ export default function Container({ children, showDrawer, showNavLinks, auth }) 
                 disableRipple: true,
             },
         },
-        shadows: ["rgb(50 50 93 / 2%) 0px 2px 5px -1px, rgb(0 0 0 / 5%) 0px 1px 3px -1px"]
+        shadows: ["rgb(50 50 93 / 2%) 0px 2px 5px -1px, rgb(0 0 0 / 5%) 0px 1px 3px -1px", ...Array(25).fill('none')],
+
     });
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);

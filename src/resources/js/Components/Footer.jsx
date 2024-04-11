@@ -38,6 +38,7 @@ const Footer = () => {
                 <Grid item xs={3} md={2}>
                     <Stack spacing={1}>
                         <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Tools</Typography>
+                        <Link href="/url-shortener" underline="hover" color="inherit" align={"center"}>URL Shortener</Link>
                         <Link href="/tools/utm-validator" underline="hover" color="inherit" align={"center"}>UTM Validator</Link>
                         <Link href="/tools/utm-generator" underline="hover" color="inherit" align={"center"}>UTM Generator</Link>
                     </Stack>

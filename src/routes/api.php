@@ -7,6 +7,7 @@ use App\Http\Controllers\DomainsController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ErrorController;
+use App\Http\Controllers\ShortLinkController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -37,6 +38,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/domain', [DomainsController::class, 'postDomain'])->name('domain');
 });
 
+Route::post('/shortLink', [ShortLinkController::class, 'createShortLink'])->name('createShortLink');
 
 Route::post('/collect', [EventsController::class, 'postEvent']);
 Route::post('/event/time-on-page', [EventsController::class, 'postTimeOnPage']);

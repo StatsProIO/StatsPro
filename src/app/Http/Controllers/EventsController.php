@@ -1,84 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use Log;
-use App\Models\Event;
 use App\Models\Domain;
-use App\Models\DomainBlacklistIp;
-use Helper;
-
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Carbon\CarbonInterval;
-use Carbon\CarbonInterface;
-use Illuminate\Support\Facades\Auth;
-use Sinergi\BrowserDetector\Browser;
-use Illuminate\Support\Facades\DB;
-use Ramsey\Uuid\Uuid;
+use App\Models\Event;
 use App\Repositories\EventRepository;
-use App\Utility\TimeRangeInfo;
+use App\Utility\EventSaver;
 use App\Utility\TimeRange;
+use App\Utility\TimeRangeInfo;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
+use Carbon\CarbonInterval;
+use Helper;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Log;
 
 class EventsController extends Controller
 {
     public function postEvent(Request $request) {
-        $userAgent = $request->server('HTTP_USER_AGENT');
-
-        $domain = Domain::where('domain_name', $request->domain)->first();
-        if($domain === null) {
-            return response()->json(['message' => 'Domain ' . $request->domain . ' not found'], 404);
-        }
-
-        //don't record events for blacklisted IPs
-        $domainBlacklistedIps = DomainBlacklistIp::where('domain_id', $domain->id)->pluck('ip')->all();
-
-        $clientIp = array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
-        if (in_array($clientIp, $domainBlacklistedIps)) {
-            return response()->json(['message' => 'IP blacklisted'], 403);
-        }
-
-        $source = null;
-        if($request->referrer != null) {
-            $parsedUrl = parse_url($request->referrer);
-            if($parsedUrl !== false) {
-                $source = $parsedUrl['host'];
-            }
-        }
-
-        $parsedUserAgent = new \WhichBrowser\Parser($userAgent);
-
-        $event = new Event;
-        $event->domain_id = $domain->id;
-        $event->event_name = $request->event_name;
-        $event->user_agent = $userAgent;
-        $event->location_href = $request->location_href;
-        $event->host = $request->location_host;
-        $event->path = $request->location_pathname;
-        $event->referrer = $request->referrer;
-        $event->source = $source;
-        $event->inner_width = $request->inner_width;
-        $event->language = $request->lang;
-        $event->country = Helper::getCountry($request->client_time_zone);
-        $event->region = Helper::getRegion($request->client_time_zone);
-        $event->browser = (new Browser())->getName();
-        $event->device = $parsedUserAgent->device->type;
-        $event->os = $parsedUserAgent->os->name;
-        $event->time_zone = $request->client_time_zone;
-        $event->client_time = $request->client_time;
-
-        if ($request->query_params) {
-            $event->keyword = $request->query_params['keyword'] ?? null;
-            $event->q = $request->query_params['q'] ?? null;
-            $event->ref = $request->query_params['ref'] ?? null;
-            $event->utm_campaign = $request->query_params['utm_campaign'] ?? null;
-            $event->utm_content = $request->query_params['utm_content'] ?? null;
-            $event->utm_medium = $request->query_params['utm_medium'] ?? null;
-            $event->utm_source = $request->query_params['utm_source'] ?? null;
-            $event->utm_term = $request->query_params['utm_term'] ?? null;
-        }
-
-        $event->save();
-
+        $event = (new EventSaver())->saveEventFromClientSideRequest($request);
         return ['id' => $event->id];
     }
 

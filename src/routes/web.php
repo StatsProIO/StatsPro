@@ -103,6 +103,20 @@ Route::get('/test-page', [TestPageController::class, 'get']);
 Route::get('/test-page/nested', [TestPageController::class, 'getNested']);
 
 
+Route::get('/url-shortener', function () { return Inertia::render('Shorteners/MainURLShortener');});
+Route::get('/amazon-url-shortener', function () { return Inertia::render('Shorteners/AmazonURLShortener');});
+Route::get('/chat-gpt-url-shortener', function () { return Inertia::render('Shorteners/ChatGPTURLShortener');});
+Route::get('/google-url-shortener', function () { return Inertia::render('Shorteners/GoogleURLShortener');});
+Route::get('/linked-in-url-shortener', function () { return Inertia::render('Shorteners/LinkedInURLShortener');});
+Route::get('/reddit-url-shortener', function () { return Inertia::render('Shorteners/RedditURLShortener');});
+Route::get('/spotify-url-shortener', function () { return Inertia::render('Shorteners/SpotifyURLShortener');});
+Route::get('/twitter-url-shortener', function () { return Inertia::render('Shorteners/TwitterURLShortener');});
+Route::get('/whats-app-url-shortener', function () { return Inertia::render('Shorteners/WhatsAppURLShortener');});
+Route::get('/x-url-shortener', function () { return Inertia::render('Shorteners/XURLShortener');});
+Route::get('/zoom-url-shortener', function () { return Inertia::render('Shorteners/ZoomURLShortener');});
+
+Route::get('/s/{short_code}', [\App\Http\Controllers\ShortLinkController::class, 'getShortLink']);
+
 //static pages
 Route::get('/docs', function () { return Inertia::render('Docs');})->name('docs');
 Route::get('/docs/about', function () { return Inertia::render('DocsAbout');})->name('about');

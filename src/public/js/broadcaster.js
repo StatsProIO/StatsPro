@@ -5,13 +5,18 @@ var endpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/ap
 var timeOnPageEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/event/time-on-page";
 var errorEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/error";
 
+var isShortLinkRedirect = scriptEl.getAttribute('data-short-link-id') != null;
+var shortLinkId = scriptEl.getAttribute('data-short-link-id');
+var shortLinkUrl = scriptEl.getAttribute('data-short-link-url');
+
 function buildPayload() {
     var payload = {};
-    payload.event_name = 'pageview';
+    payload.event_name = isShortLinkRedirect ? 'short-link-open' : 'pageview';
     payload.location_href = location.href;
     payload.location_host = window.location.host;
     payload.location_pathname = window.location.pathname;
     payload.domain = scriptEl.getAttribute('data-domain');
+    payload.short_link_id = shortLinkId;
     payload.referrer = document.referrer || null;
     payload.inner_width = window.innerWidth;
     payload.lang = window.navigator.language || '';
@@ -58,11 +63,17 @@ function sendRequest(url, body, next) {
             return response.json()
         })
         .then(function(responseJson) {
-            if (typeof next === 'function') {
+            if (isShortLinkRedirect) {
+                window.location.href = shortLinkUrl;
+            } else if (typeof next === 'function') {
                 next(responseJson)
             }
         }).catch(function(err) {
             recordError({ message: 'Broadcaster request failed: ' + err.toString(), url, body } );
+
+            if (isShortLinkRedirect) {
+                window.location.href = shortLinkUrl;
+            }
         });
 }
 

@@ -9,6 +9,7 @@ class Event extends Model
 {
     protected $fillable = [
         'domain_id',
+        'short_link_id',
         'event_name',
         'user_agent',
         'location_href',
