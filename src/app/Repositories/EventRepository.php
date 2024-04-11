@@ -20,7 +20,7 @@ class EventRepository
                 FROM events
                 WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
                 GROUP BY {$timeRangeInfo->getGroupBy()}
-                "),
+                ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
             );
 
@@ -43,7 +43,7 @@ class EventRepository
                 AND referrer is null
                 GROUP BY {$timeRangeInfo->getGroupBy()}
 
-                "),
+                ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
             );
 
@@ -66,7 +66,7 @@ class EventRepository
         return DB::select( DB::raw("SELECT id, path, created_at
                                         FROM events
                                         WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '$realTimeInterval[0]' AND created_at <= '$realTimeInterval[1]'
-                                        ORDER BY created_at desc"),
+                                        ORDER BY created_at desc")->getValue(DB::connection()->getQueryGrammar()),
                                 array('domain' => $domain->id)
                             );
     }
@@ -83,7 +83,7 @@ class EventRepository
                                         GROUP BY source
                                         ORDER BY count DESC
                                         LIMIT 8
-                                        "),
+                                        ")->getValue(DB::connection()->getQueryGrammar()),
                                 array('domain' => $domain->id, 'domain_name' => $domain->domain_name)
                             );
     }
@@ -95,7 +95,7 @@ class EventRepository
                                         GROUP BY path
                                         ORDER BY count DESC
                                         LIMIT 8
-                                        "),
+                                        ")->getValue(DB::connection()->getQueryGrammar()),
                                 array('domain' => $domain->id)
                             );
     }
@@ -106,7 +106,7 @@ class EventRepository
                                         WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                                         GROUP BY device
                                         ORDER BY count DESC
-                                        LIMIT 5" ),
+                                        LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
                                 array('domain' => $domain->id)
                             );
     }
@@ -116,7 +116,7 @@ class EventRepository
                                 FROM events
                                 WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY country
-                                ORDER BY count DESC" ),
+                                ORDER BY count DESC" )->getValue(DB::connection()->getQueryGrammar()),
                         array('domain' => $domain->id)
                     );
     }
@@ -127,7 +127,7 @@ class EventRepository
                                 WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY country
                                 ORDER BY count DESC
-                                LIMIT 5" ),
+                                LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
 
@@ -144,7 +144,7 @@ class EventRepository
                                 WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY browser
                                 ORDER BY count DESC
-                                LIMIT 5" ),
+                                LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
     }
@@ -155,7 +155,7 @@ class EventRepository
                                 WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY language
                                 ORDER BY count DESC
-                                LIMIT 5" ),
+                                LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
 
@@ -172,7 +172,7 @@ class EventRepository
                                 WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY os
                                 ORDER BY count DESC
-                                LIMIT 5" ),
+                                LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
     }
@@ -182,7 +182,7 @@ class EventRepository
                 DB::raw("SELECT count(*) as count
                     FROM events
                     WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
-                    "),
+                    ")->getValue(DB::connection()->getQueryGrammar()),
                 array('domain' => $domain->id)
                 );
         return $pageviewsCount[0]->count;
@@ -194,7 +194,7 @@ class EventRepository
                     FROM events
                     WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                     AND referrer is null
-                    "),
+                    ")->getValue(DB::connection()->getQueryGrammar()),
                 array('domain' => $domain->id)
                 );
         return $visitorsCount[0]->count;
@@ -205,7 +205,7 @@ class EventRepository
                 DB::raw("SELECT AVG(time_on_page_seconds) as average_visit_duration
                     FROM events
                     WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
-                    "),
+                    ")->getValue(DB::connection()->getQueryGrammar()),
                 array('domain' => $domain->id)
                 );
 
@@ -219,7 +219,7 @@ class EventRepository
                     WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                     AND time_on_page_seconds = 0
                     AND referrer is null
-                    "),
+                    ")->getValue(DB::connection()->getQueryGrammar()),
                 array('domain' => $domain->id)
                 );
         return $bounceCount[0]->count;
@@ -234,7 +234,7 @@ class EventRepository
                 AND referrer is null
                 GROUP BY {$timeRangeInfo->getGroupBy()}
 
-                "),
+                ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
 
@@ -245,7 +245,7 @@ class EventRepository
                 AND referrer is null
                 GROUP BY {$timeRangeInfo->getGroupBy()}
 
-                "),
+                ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
 
@@ -275,7 +275,7 @@ class EventRepository
                 WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
                 AND referrer is null
                 GROUP BY {$timeRangeInfo->getGroupBy()}
-                "),
+                ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
 
@@ -296,7 +296,7 @@ class EventRepository
                     FROM events
                     WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                     GROUP BY extract(dow from created_at)
-                    "),
+                    ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         ));
 
@@ -327,7 +327,7 @@ class EventRepository
                     FROM events
                     WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                     GROUP BY extract(hour from created_at)
-                    "),
+                    ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         ));
 
@@ -352,7 +352,7 @@ class EventRepository
                     FROM events
                     WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
                     GROUP BY extract(dow from created_at), floor(extract(hour from created_at)/3)
-                    "),
+                    ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         ));
 
