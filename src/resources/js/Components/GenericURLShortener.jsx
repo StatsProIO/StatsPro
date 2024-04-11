@@ -117,7 +117,7 @@ export default function GenericURLShortener({serviceTitle = '', icon = ''}) {
 
                         {shortLinks.map((shortLink) => {
 
-                            return (<Box key={shortLink.id} style={{borderColor: '#dddddd', borderWidth: '1px', borderStyle: 'solid', borderRadius: '5px', "&:hover": { boxShadow: 6 } }} my={1} p={2}  >
+                            return (<Box key={shortLink.id} style={{borderColor: '#dddddd', borderWidth: '1px', borderStyle: 'solid', borderRadius: '5px', "&:hover": { boxShadow: 6 }, overflow: 'hidden' }} my={1} p={2}  >
 
                                 <Grid container spacing={2}>
                                     <Grid item xs={2}>
