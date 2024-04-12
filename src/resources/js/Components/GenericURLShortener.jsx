@@ -18,7 +18,7 @@ import Guest from "@/Layouts/Guest";
 import Button from "@mui/material/Button";
 import FormHelperText from "@mui/material/FormHelperText";
 
-export default function GenericURLShortener({serviceTitle = '', icon = ''}) {
+export default function GenericURLShortener({serviceTitle = '', icon = '', faqBox}) {
     const [data, setData] = useState({
         long_url: '',
         name: '',
@@ -147,6 +147,8 @@ export default function GenericURLShortener({serviceTitle = '', icon = ''}) {
 
                         <Button loading={processing} fullWidth variant="outlined" type="submit" size="large" sx={{ my: 2 }}>Create an Account</Button>
                     </Box>
+
+                    {faqBox}
 
                     <Box style={{borderColor: '#dddddd', borderWidth: '1px', borderStyle: 'solid', borderRadius: '5px', backgroundColor: 'white'}} p={6} m={6}>
                         <Typography variant="h5" align={'center'}>More Link Shorteners</Typography>
