@@ -88,6 +88,38 @@ class EventRepository
                             );
     }
 
+    public static function getTopUTMSources(Interval $interval, Domain $domain) {
+        return DB::select( DB::raw("SELECT utm_source as label, count(*) as count
+                                        FROM events
+                                        WHERE domain_id = :domain
+                                            AND event_name='pageview'
+                                            AND created_at >= '{$interval->getStart()}'
+                                            AND created_at <= '{$interval->getEnd()}'
+                                            AND utm_source IS NOT NULL
+                                        GROUP BY utm_source
+                                        ORDER BY count DESC
+                                        LIMIT 8
+                                        ")->getValue(DB::connection()->getQueryGrammar()),
+                                array('domain' => $domain->id)
+                            );
+    }
+
+    public static function getTopEntryPages(Interval $interval, Domain $domain) {
+        return DB::select( DB::raw("SELECT path as label, count(*) as count
+                                        FROM events
+                                        WHERE domain_id = :domain
+                                            AND event_name='pageview'
+                                            AND created_at >= '{$interval->getStart()}'
+                                            AND created_at <= '{$interval->getEnd()}'
+                                            AND source <> :domain_name
+                                        GROUP BY path
+                                        ORDER BY count DESC
+                                        LIMIT 8
+                                        ")->getValue(DB::connection()->getQueryGrammar()),
+            array('domain' => $domain->id, 'domain_name' => $domain->domain_name)
+        );
+    }
+
     public static function getTopPages(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT path as label, count(*) as count
                                         FROM events

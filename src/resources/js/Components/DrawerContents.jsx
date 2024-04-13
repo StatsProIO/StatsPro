@@ -35,7 +35,6 @@ export default function DrawerContents() {
             text: 'Acquisition',
             url: '/acquisition',
             icon: <ExitToAppIcon sx={{ color: '#fff' }} />,
-            comingSoon: true
         }, {
             text: 'Performance',
             url: '/performance',

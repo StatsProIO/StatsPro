@@ -190,4 +190,18 @@ class EventsController extends Controller
             'timeTrends' => EventRepository::getTimeTrends($timeRangeInfo->getInterval(), $domain),
         ];
     }
+
+    public function getEventsAcquisitionByDomain($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
+
+        return [
+            'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
+            'topSources' => EventRepository::getTopSources($timeRangeInfo->getInterval(), $domain),
+            'topUTMSources' => EventRepository::getTopUTMSources($timeRangeInfo->getInterval(), $domain),
+            'topEntryPages' => EventRepository::getTopEntryPages($timeRangeInfo->getInterval(), $domain)
+        ];
+    }
 }

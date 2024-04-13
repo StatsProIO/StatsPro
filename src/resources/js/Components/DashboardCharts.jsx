@@ -132,7 +132,7 @@ export default function DashboardCharts({ domain }) {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top Sources</Typography>
-                        <TopSourcesChart inputData={topSources} timeBuckets={timeBuckets} />
+                        <TopSourcesChart inputData={topSources}  />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={6}>

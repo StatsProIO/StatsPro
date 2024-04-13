@@ -77,7 +77,7 @@ export default function AudienceCharts({ domain }) {
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Devices</Typography>
                         <Box>
-                            <HorizontalBarChart alueTitle="Views" data={devices} labelKey={'device'} totalValue={devices.map((deviceData) => deviceData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                            <HorizontalBarChart valueTitle="Views" data={devices} labelKey={'device'} totalValue={devices.map((deviceData) => deviceData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
                         </Box>
                     </Paper>
                 </Grid>
@@ -85,26 +85,26 @@ export default function AudienceCharts({ domain }) {
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Browsers</Typography>
                         <Box>
-                            <HorizontalBarChart alueTitle="Views" data={browsers} labelKey={'browser'} totalValue={browsers.map((browserData) => browserData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                            <HorizontalBarChart valueTitle="Views" data={browsers} labelKey={'browser'} totalValue={browsers.map((browserData) => browserData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
                         </Box>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Locations</Typography>
-                        <HorizontalBarChart alueTitle="Views" data={locations} labelKey={'country'} totalValue={locations.map((locationData) => locationData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                        <HorizontalBarChart valueTitle="Views" data={locations} labelKey={'country'} totalValue={locations.map((locationData) => locationData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Languages</Typography>
-                        <HorizontalBarChart alueTitle="Views" data={languages} labelKey={'language'} totalValue={languages.map((languageData) => languageData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                        <HorizontalBarChart valueTitle="Views" data={languages} labelKey={'language'} totalValue={languages.map((languageData) => languageData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Operating System</Typography>
-                        <HorizontalBarChart alueTitle="Views" data={oses} labelKey={'os'} totalValue={oses.map((osData) => osData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                        <HorizontalBarChart valueTitle="Views" data={oses} labelKey={'os'} totalValue={oses.map((osData) => osData.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
                     </Paper>
                 </Grid>
             </Grid>
