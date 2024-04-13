@@ -36,23 +36,28 @@ class SendDemoRequests extends Command
         $hour = intval((\Carbon\Carbon::now())->format('H'));
 
         while ($count <  intval((((sin((.261 * $hour)) + 1)*5) ))) { //send 5 total requests per minute
-            $client = new \GuzzleHttp\Client();
-            $response = $client->request('POST',  (config('app.env') === 'local' ? 'webnginx' : config('app.url')) . '/api/collect', [
-            'headers' => [
-                'User-Agent' => $faker->userAgent(),
-            ],
-            'json' => [
-                "event_name" => "pageview",
-                "location_href" => $faker->randomElement(array( 'https://demo.com/blog/example-1', 'https://demo.com/', 'https://demo.com/blog-example-2', 'https://demo.com/blog/example-1', 'https://demo.com/', 'https://demo.com/blog-example-2', 'https://demo.com/search', 'https://demo.com/help', 'https://demo.com/terms-of-service', 'https://demo.com/privacy')),
-                "location_host" => "demo.com",
-                "location_pathname" => $faker->randomElement(array( '/blog/example-1', '/', '/blog-example-2', '/blog/example-1', '/', '/blog-example-2', '/search', '/help', '/terms-of-service', '/privacy')),
-                "domain" => "demo.com",
-                "referrer" => $faker->randomElement(array (null,'https://www.google.com/', 'https://www.google.com/', 'https://www.google.com/','http://baidu.com/', 'https://reddit.com/', 'https://reddit.com/', 'https://t.co/')),
-                "inner_width" => $faker->randomNumber(),
-                "lang" => $faker->languageCode() . '-' . $faker->countryCode(),
-                "client_time_zone" => $faker->timezone(),
-                "client_time" => \Carbon\Carbon::now(),
-            ]]);
+
+            try {
+                $client = new \GuzzleHttp\Client();
+                $response = $client->request('POST', (config('app.env') === 'local' ? 'webnginx' : config('app.url')) . '/api/collect', [
+                    'headers' => [
+                        'User-Agent' => $faker->userAgent(),
+                    ],
+                    'json' => [
+                        "event_name" => "pageview",
+                        "location_href" => $faker->randomElement(array('https://demo.com/blog/example-1', 'https://demo.com/', 'https://demo.com/blog-example-2', 'https://demo.com/blog/example-1', 'https://demo.com/', 'https://demo.com/blog-example-2', 'https://demo.com/search', 'https://demo.com/help', 'https://demo.com/terms-of-service', 'https://demo.com/privacy')),
+                        "location_host" => "demo.com",
+                        "location_pathname" => $faker->randomElement(array('/blog/example-1', '/', '/blog-example-2', '/blog/example-1', '/', '/blog-example-2', '/search', '/help', '/terms-of-service', '/privacy')),
+                        "domain" => "demo.com",
+                        "referrer" => $faker->randomElement(array(null, 'https://www.google.com/', 'https://www.google.com/', 'https://www.google.com/', 'http://baidu.com/', 'https://reddit.com/', 'https://reddit.com/', 'https://t.co/')),
+                        "inner_width" => $faker->randomNumber(),
+                        "lang" => $faker->languageCode() . '-' . $faker->countryCode(),
+                        "client_time_zone" => $faker->timezone(),
+                        "client_time" => \Carbon\Carbon::now(),
+                    ]]);
+            } catch (\Throwable $e) {
+                Log::error($e->getMessage());
+            }
 
             $count++;
 
