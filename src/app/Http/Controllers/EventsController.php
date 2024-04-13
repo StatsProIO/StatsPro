@@ -204,4 +204,18 @@ class EventsController extends Controller
             'topEntryPages' => EventRepository::getTopEntryPages($timeRangeInfo->getInterval(), $domain)
         ];
     }
+
+    public function getEventsPerformanceByDomain($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
+
+        $timeBuckets = $this->getTimeBuckets($timeRangeInfo);
+
+        return [
+            'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
+            'pageLoadTime' => EventRepository::getPageLoadTime($timeRangeInfo, $timeRangeInfo->getInterval(), $domain, $timeBuckets),
+        ];
+    }
 }

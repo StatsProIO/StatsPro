@@ -322,6 +322,28 @@ class EventRepository
         return $visitors;
     }
 
+    public static function getPageLoadTime(TimeRangeInfo $timeRangeInfo, Interval $interval, Domain $domain, $timeBuckets) {
+        $pageLoadTimes = DB::select(
+            DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, AVG(page_load_time)/1000 as average_page_load_time
+                FROM events
+                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
+                AND page_load_time IS NOT null
+                GROUP BY {$timeRangeInfo->getGroupBy()}
+                ")->getValue(DB::connection()->getQueryGrammar()),
+            array('domain' => $domain->id)
+        );
+
+        $pageLoadTimeByDate = [];
+        foreach($pageLoadTimes as $pageLoadTime) {
+            $pageLoadTimeByDate[$pageLoadTime->date] = $pageLoadTime->average_page_load_time;
+        }
+
+        $pageLoadTimeByDate = array_merge($timeBuckets, $pageLoadTimeByDate);
+        uksort($pageLoadTimeByDate,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
+
+        return $pageLoadTimeByDate;
+    }
+
     public static function getBusiestDayOfWeek(Interval $interval, Domain $domain) {
         $countsWithDayOfWeek = collect(DB::select(
             DB::raw("SELECT extract(dow from created_at) as day_of_week, count(*) as count

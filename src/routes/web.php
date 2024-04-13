@@ -75,8 +75,14 @@ Route::middleware(['auth', 'require_one_domain'])->group(function () {
         return Inertia::render('Acquisition', ['domain' => $domain->domain_name]);
     })->name('acquisition');
 
-    Route::get('/performance', function () {
-        return Inertia::render('Performance', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
+    Route::get('/performance/{domain?}', function ($domain = null) {
+        if($domain === null) {
+            $firstDomain = Domain::where('user_id', Auth::user()->id)->oldest()->first();
+            return redirect('/performance/'. $firstDomain->domain_name);
+        }
+
+        $domain = Domain::where('domain_name', $domain)->where('user_id', Auth::user()->id)->firstOrFail();
+        return Inertia::render('Performance', ['domain' => $domain->domain_name]);
     })->name('performance');
 
     Route::get('/manage-domains', function () {

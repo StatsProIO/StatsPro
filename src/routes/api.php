@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/events/audience/{domainName}', [EventsController::class, 'getEventsAudienceTimeByDomain']);
     Route::get('/events/behavior/{domainName}', [EventsController::class, 'getEventsBehaviorTimeByDomain']);
     Route::get('/events/acquisition/{domainName}', [EventsController::class, 'getEventsAcquisitionByDomain']);
+    Route::get('/events/performance/{domainName}', [EventsController::class, 'getEventsPerformanceByDomain']);
     Route::get('/event-status/{domainName}', [EventsController::class, 'getEventStatus']);
 
     Route::get('/subscription-status', [SubscriptionController::class, 'getSubscriptionStatus']);

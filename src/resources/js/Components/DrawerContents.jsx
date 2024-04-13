@@ -39,7 +39,6 @@ export default function DrawerContents() {
             text: 'Performance',
             url: '/performance',
             icon: <SpeedIcon sx={{ color: '#fff' }} />,
-            comingSoon: true
         }, {
             text: "Manage Domains",
             url: '/manage-domains',
@@ -81,7 +80,7 @@ export default function DrawerContents() {
                 }}>
                     {items.map((item) => (
                         <ListItem key={item.text} disablePadding onClick={handleClick(item.url)}>
-                            <ListItemButton selected={window.location.pathname === item.url}>
+                            <ListItemButton selected={window.location.pathname.startsWith(item.url)}>
                                 <ListItemIcon>
                                     {item.icon}
                                 </ListItemIcon>
