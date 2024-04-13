@@ -5,6 +5,7 @@ use App\Models\Domain;
 use App\Models\DomainBlacklistIp;
 use App\Models\Event;
 use App\Repositories\EventRepository;
+use App\Repositories\EventSaltRepository;
 use App\Utility\EventSaver;
 use App\Utility\TimeRange;
 use App\Utility\TimeRangeInfo;
@@ -15,7 +16,7 @@ use Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Sinergi\BrowserDetector\Browser;
 
 class EventsController extends Controller
@@ -49,7 +50,12 @@ class EventsController extends Controller
 
         $parsedUserAgent = new \WhichBrowser\Parser($userAgent);
 
+        $eventSalt = EventSaltRepository::getOrCreateCurrentEventSalt();
+        Log::info($userAgent . '/' . $request->ip() . '/' . $eventSalt->salt);
+        $visitorId = base64_encode(hash('sha256', $userAgent . '/' . $request->ip() . '/' . $eventSalt->salt));
+
         $event = new Event;
+        $event->visitor_id = $visitorId;
         $event->domain_id = $domain ? $domain->id : null;
         $event->short_link_id = $request->short_link_id ? $request->short_link_id : null;
         $event->event_name = $request->event_name;

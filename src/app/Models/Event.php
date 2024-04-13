@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     protected $fillable = [
+        'visitor_id',
         'domain_id',
         'short_link_id',
         'event_name',
