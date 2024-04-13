@@ -23,7 +23,7 @@ function buildPayload() {
     payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     payload.client_time = new Date().toISOString();
     payload.query_params = queryParams();
-    payload.page_load_time = window.performance.timing.domContentLoadedEventEnd- window.performance.timing.navigationStart;
+    payload.page_load_time = Math.max(window.performance.timing.domContentLoadedEventEnd- window.performance.timing.navigationStart, 0);
     return payload;
 }
 
