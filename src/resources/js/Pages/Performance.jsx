@@ -23,6 +23,7 @@ export default function Performance(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
+            domain={props.domain}
         >
 
              <Head title="Performance" />

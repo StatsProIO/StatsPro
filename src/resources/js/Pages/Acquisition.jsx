@@ -22,6 +22,7 @@ export default function Acquisition(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
+            domain={props.domain}
         >
 
              <Head title="Acquisition" />

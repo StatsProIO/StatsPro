@@ -22,6 +22,7 @@ export default function Audience(props) {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
+            domain={props.domain}
         >
 
              <Head title="Audience" />

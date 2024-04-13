@@ -59,7 +59,7 @@ export default function AcquisitionCharts({ domain }) {
                     <Typography variant="h4"><b>Acquisition</b></Typography>
                     <Typography variant="h6" color="text.secondary">Here you will see information about how your users enter your site</Typography>
                 </Grid>
-                <Filters domain={domain} domains={domains} setDomains={setDomains} range={range} setRange={setRange}/>
+                <Filters currentUrlPath={'acquisition'} domain={domain} domains={domains} setDomains={setDomains} range={range} setRange={setRange}/>
             </Grid>
 
             <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>

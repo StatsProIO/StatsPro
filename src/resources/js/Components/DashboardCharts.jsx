@@ -98,7 +98,7 @@ export default function DashboardCharts({ domain }) {
                     <Typography variant="h4"><b>Dashboard</b></Typography>
                     <Typography variant="h6" color="text.secondary">Welcome back!</Typography>
                 </Grid>
-                <Filters domain={domain} domains={domains} setDomains={setDomains} range={range} setRange={setRange}/>
+                <Filters currentUrlPath={'dashboard'} domain={domain} domains={domains} setDomains={setDomains} range={range} setRange={setRange}/>
             </Grid>
 
             <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>

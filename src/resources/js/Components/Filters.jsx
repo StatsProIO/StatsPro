@@ -3,7 +3,7 @@ import React from 'react';
 import {Inertia} from "@inertiajs/inertia";
 
 
-export default function Filters({ domain, domains, setDomain, range, setRange }) {
+export default function Filters({ currentUrlPath, domain, domains, setDomain, range, setRange }) {
 
     return (
         <>
@@ -15,7 +15,7 @@ export default function Filters({ domain, domains, setDomain, range, setRange })
                         labelId="domain-label"
                         label="Domain"
                         onChange={(event) => {
-                            Inertia.get('/dashboard/' + event.target.value)
+                            Inertia.get('/' + currentUrlPath + '/' + event.target.value)
                         }}
                     >
                         { domains.map((domain) => {

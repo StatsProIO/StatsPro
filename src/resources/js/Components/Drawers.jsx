@@ -2,7 +2,7 @@ import {Drawer} from '@mui/material';
 import DrawerContents from './DrawerContents';
 
 
-export default function Drawers({ isDrawerOpen }) {
+export default function Drawers({ isDrawerOpen, domain }) {
 
     const drawerWidth = 240;
 
@@ -19,7 +19,7 @@ export default function Drawers({ isDrawerOpen }) {
                     '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#243044', color: '#fff' },
                 }}
             >
-                <DrawerContents />
+                <DrawerContents domain={domain}/>
             </Drawer>
 
             <Drawer
@@ -32,7 +32,7 @@ export default function Drawers({ isDrawerOpen }) {
                 }}
                 open
             >
-                <DrawerContents />
+                <DrawerContents domain={domain}/>
             </Drawer>
         </>
     );

@@ -17,27 +17,32 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import SpeedIcon from '@mui/icons-material/Speed';
 
 
-export default function DrawerContents() {
+export default function DrawerContents({domain}) {
     var items = [
         {
             text: "Dashboard",
             url: '/dashboard',
+            appendDomain: true,
             icon: <DashboardIcon sx={{ color: '#fff' }} />
         }, {
             text: 'Audience',
             url: '/audience',
+            appendDomain: true,
             icon: <EmojiPeopleIcon sx={{ color: '#fff' }} />,
         }, {
             text: 'Behavior',
             url: '/behavior',
+            appendDomain: true,
             icon: <AdsClickIcon sx={{ color: '#fff' }} />,
         }, {
             text: 'Acquisition',
             url: '/acquisition',
+            appendDomain: true,
             icon: <ExitToAppIcon sx={{ color: '#fff' }} />,
         }, {
             text: 'Performance',
             url: '/performance',
+            appendDomain: true,
             icon: <SpeedIcon sx={{ color: '#fff' }} />,
         }, {
             text: "Manage Domains",
@@ -53,9 +58,9 @@ export default function DrawerContents() {
             icon: <PaymentsIcon sx={{ color: '#fff' }} />
         }];
 
-    function handleClick(url) {
+    function handleClick(url, appendDomain) {
         return () => {
-            Inertia.visit(url);
+            Inertia.visit(url + '/' + ((appendDomain && domain) ? domain : ''));
         }
     }
 
@@ -79,7 +84,7 @@ export default function DrawerContents() {
                     },
                 }}>
                     {items.map((item) => (
-                        <ListItem key={item.text} disablePadding onClick={handleClick(item.url)}>
+                        <ListItem key={item.text} disablePadding onClick={handleClick(item.url, item.appendDomain)}>
                             <ListItemButton selected={window.location.pathname.startsWith(item.url)}>
                                 <ListItemIcon>
                                     {item.icon}

@@ -6,7 +6,7 @@ import {ThemeProvider} from '@emotion/react';
 import Drawers from '@/Components/Drawers';
 
 
-export default function Container({ children, showDrawer, showNavLinks, auth }) {
+export default function Container({ children, showDrawer, showNavLinks, auth, domain }) {
 
     const theme = createTheme({
 
@@ -61,7 +61,7 @@ export default function Container({ children, showDrawer, showNavLinks, auth }) 
             <ThemeProvider theme={theme}>
                 {
                     showDrawer ?
-                        <Box sx={{ display: 'flex' }}> <Drawers isDrawerOpen={isDrawerOpen} /> {children} </Box> :
+                        <Box sx={{ display: 'flex' }}> <Drawers isDrawerOpen={isDrawerOpen} domain={domain} /> {children} </Box> :
                         children
                 }
             </ThemeProvider>
