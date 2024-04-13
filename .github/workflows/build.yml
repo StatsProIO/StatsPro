@@ -108,7 +108,7 @@ jobs:
             docker-compose ps
 
             #clean up
-            docker image prune -f
+            docker system prune --all -f
         - name: Start Cron
           shell: bash
           run: |
