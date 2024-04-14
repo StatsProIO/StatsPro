@@ -53,21 +53,20 @@ function sendRequest(url, body, next) {
     fetch(req)
         .then(function(response){
             if (response.status >= 200 && response.status < 300) {
-                return Promise.resolve(response)
+                return response.json();
             } else if(response.status === 403) {
                 return null; //end the chain, don't schedule any further requests
             } else {
                 return Promise.reject(new Error(response.statusText))
             }
         })
-        .then(function(response){
-            return response.json()
-        })
         .then(function(responseJson) {
-            if (isShortLinkRedirect) {
-                window.location.href = shortLinkUrl;
-            } else if (typeof next === 'function') {
-                next(responseJson)
+            if (responseJson) {
+                if (isShortLinkRedirect) {
+                    window.location.href = shortLinkUrl;
+                } else if (typeof next === 'function') {
+                    next(responseJson)
+                }
             }
         }).catch(function(err) {
             recordError({ message: 'Broadcaster request failed: ' + err.toString(), url, body } );
