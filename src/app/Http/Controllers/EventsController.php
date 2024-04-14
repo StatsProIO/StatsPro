@@ -53,7 +53,6 @@ class EventsController extends Controller
             $parsedUserAgent = new \WhichBrowser\Parser($userAgent);
 
             $eventSalt = EventSaltRepository::getOrCreateCurrentEventSalt();
-            Log::info($userAgent . '/' . $this->getRealUserIp($request) . '/' . $eventSalt->salt);
             $visitorId = base64_encode(hash('sha256', $userAgent . '/' . $this->getRealUserIp($request) . '/' . $eventSalt->salt));
 
             $event = new Event;
@@ -90,6 +89,7 @@ class EventsController extends Controller
             }
 
             $event->save();
+            Log::info("Collected event!");
             return ['id' => $event->id];
         } catch (\Throwable $t) {
             Log::info("Error collecting event");
