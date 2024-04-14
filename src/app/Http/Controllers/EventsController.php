@@ -51,8 +51,8 @@ class EventsController extends Controller
         $parsedUserAgent = new \WhichBrowser\Parser($userAgent);
 
         $eventSalt = EventSaltRepository::getOrCreateCurrentEventSalt();
-        Log::info($userAgent . '/' . $request->ip() . '/' . $eventSalt->salt);
-        $visitorId = base64_encode(hash('sha256', $userAgent . '/' . $request->ip() . '/' . $eventSalt->salt));
+        Log::info($userAgent . '/' . $this->getRealUserIp($request) . '/' . $eventSalt->salt);
+        $visitorId = base64_encode(hash('sha256', $userAgent . '/' . $this->getRealUserIp($request) . '/' . $eventSalt->salt));
 
         $event = new Event;
         $event->visitor_id = $visitorId;
@@ -89,6 +89,14 @@ class EventsController extends Controller
 
         $event->save();
         return ['id' => $event->id];
+    }
+
+    private function getRealUserIp($request){
+        switch(true){
+            case (!empty($_SERVER['HTTP_X_REAL_IP'])) : return $_SERVER['HTTP_X_REAL_IP'];
+            case (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) : return $_SERVER['HTTP_X_FORWARDED_FOR'];
+            default : $request->ip();
+        }
     }
 
     public function postTimeOnPage(Request $request) {
