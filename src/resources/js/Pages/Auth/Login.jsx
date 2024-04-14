@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 
 
 export default function Login({ status, canResetPassword }) {
-    const { flash } = usePage().props;
+    // const { flash } = usePage().props;
 
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
@@ -41,9 +41,9 @@ export default function Login({ status, canResetPassword }) {
 
             <br/>
             {status && <Alert severity="success">{status}</Alert>}
-            Status: {JSON.stringify(status)}
-            usePage: {JSON.stringify(usePage())}
-            UseForm Errors: {JSON.stringify(errors)}
+            {/*Status: {JSON.stringify(status)}*/}
+            {/*usePage: {JSON.stringify(usePage())}*/}
+            {/*UseForm Errors: {JSON.stringify(errors)}*/}
 
             <ValidationErrors errors={errors} />
 
