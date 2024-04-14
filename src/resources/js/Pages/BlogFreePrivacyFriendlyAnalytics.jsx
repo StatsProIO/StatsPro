@@ -5,9 +5,9 @@ import BlogLayout from "@/Layouts/BlogLayout";
 
 export default function BlogFreePrivacyFriendlyAnalytics() {
     return (
-        <BlogLayout title={'Free Privacy Friendly Analytics'}>
+        <BlogLayout title={'Free Privacy Friendly Analytics'} date={'November 29, 2024'} category={'Analytics'}>
             <img src='/images/sample-dashboard.webp' width='100%' style={{paddingTop: '15px', paddingBottom: '15px'}}/>
-            <Typography sx={{py: 1}}>
+            <Typography sx={{py: 1}} variant={'body1'}>
 
                 Most people are aware that websites may collect information about them when they visit. This data is then used for a variety of purposes, e.g. for targeted advertising or simply to improve the user experience on the website. However, many people are unaware that this data collection may also include sensitive information such as IP address or location which can be used to track your online activities or even your physical location. <br/><br/>
 
@@ -21,7 +21,7 @@ export default function BlogFreePrivacyFriendlyAnalytics() {
 
             <Typography variant="h4" sx={{py: 1}}>What are privacy-friendly analytics?</Typography>
 
-            <Typography sx={{py: 1}}>
+            <Typography sx={{py: 1}} variant={'body1'}>
                 When it comes to website analytics, there are many different options, each with its own set of features and pricing structure. Not all are privacy-friendly. In fact some of them can be quite intrusive. <br/><br/>
 
                 So what are privacy-friendly analytics?<br/><br/>
@@ -33,7 +33,7 @@ export default function BlogFreePrivacyFriendlyAnalytics() {
 
             <Typography variant="h4" sx={{py: 1}}>How can it be free?</Typography>
 
-            <Typography sx={{py: 1}}>
+            <Typography sx={{py: 1}} variant={'body1'}>
                 There's no such thing as a free lunch, is there? So how can something be free? StatsPro has different tiers of subscription plans. The higher plans require a monthly fee but are only needed if you have many websites with large amounts of traffic. We know that smaller websites usually don't have any income to justify paying for them. That's why we decided to offer a free plan for small and medium websites. The money that's made from the higher plans is used to provide this service for free.<br/><br/>
 
                 In fact if you'd just like to see how StatsPro works on your site, just sign up for an account and <a href={"/register"}>get started for free</a>, without a credit card. Check it out and let us know what you think!

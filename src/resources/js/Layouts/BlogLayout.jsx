@@ -3,15 +3,25 @@ import Guest from '@/Layouts/Guest';
 import {Grid, Typography} from '@mui/material';
 import ConvincingBanner from "@/Components/ConvincingBanner";
 import {Head} from "@inertiajs/inertia-react";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
 
-export default function BlogLayout({auth, title, children}) {
+export default function BlogLayout({auth, title, date, category, children}) {
     return (
         <Guest auth={auth}>
             <Head title={title} />
             <Grid container spacing={2} justifyContent={"center"} sx={{ py: 5, px: 1 }}>
                 <Grid item lg={6} md={9} sm={8} xs={12} order={{xs: 1, sm: 2}}>
                     <Typography variant="p"><a href='/blog'>← Back to Blog</a></Typography>
-                    <Typography variant="h3"><b>{title}</b></Typography>
+                    <Typography variant="h2" sx={{pt: 2}}><b>{title}</b></Typography>
+
+                    <Grid container alignItems={'center'} spacing={2} sx={{py: 2}}>
+                        <Grid item><Avatar alt="Remy Sharp" src="/images/remy.png" /></Grid>
+                        <Grid item><Typography variant={'subtitle1'}>Remy Sharp</Typography></Grid>
+                        <Grid item><Typography variant={'subtitle1'}>{date}</Typography></Grid>
+                        <Grid item><Typography variant={'subtitle1'}><Chip label={category} variant="outlined" color="primary" /></Typography></Grid>
+                    </Grid>
+
                     {children}
                 </Grid>
             </Grid>

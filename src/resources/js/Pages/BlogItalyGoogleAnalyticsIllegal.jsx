@@ -5,9 +5,9 @@ import BlogLayout from "@/Layouts/BlogLayout";
 
 export default function BlogItalyGoogleAnalyticsIllegal() {
     return (
-        <BlogLayout title={'Italy Decalres Google Analytics Illegal'}>
-            <img src='/images/illegal.webp' width='100%' style={{paddingTop: '15px', paddingBottom: '15px'}}/>
-            <Typography sx={{py: 1}}>
+        <BlogLayout title={'Italy Decalres Google Analytics Illegal'} date={'February 10, 2024'} category={'Legal'}>
+            <img src='/images/illegal.png' width='100%' style={{paddingTop: '15px', paddingBottom: '15px'}}/>
+            <Typography sx={{py: 1}} variant={'body1'}>
                 The Italian Data Protection Agency (DPA) has fined Google €1,000,000 for violating the country's privacy laws. The DPA stated that Google failed to comply with its request for information about the company's processing of personal data.<br/><br/>
                 DPA investigation was prompted by a complaint from an Italian citizen who claimed that Google was processing his personal data without his consent. The DPA found that Google was processing the man's personal data without his consent and that the company had not provided any information about its data processing activities. DPA told Google that non-compliance is a "serious" violation of the country's data protection laws. The DPA also said it was concerned about the possibility of Google using its vast amounts of data to gain an unfair advantage in the
                 market.

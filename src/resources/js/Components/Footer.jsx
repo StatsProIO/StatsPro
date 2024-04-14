@@ -59,7 +59,7 @@ const Footer = () => {
                 </Grid>
             </Grid>
 
-            <Typography variant="body1" textAlign="center" sx={{pb: 5}}>© 2022</Typography>
+            <Typography variant="body1" textAlign="center" sx={{pb: 5}}>© 2024</Typography>
 
 
         </Box>
