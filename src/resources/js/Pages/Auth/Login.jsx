@@ -3,13 +3,16 @@ import React, {useEffect} from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import Guest from '@/Layouts/Guest';
 import ValidationErrors from '@/Components/ValidationErrors';
-import {Head, Link, useForm} from '@inertiajs/inertia-react';
+import {Head, Link, useForm, usePage} from '@inertiajs/inertia-react';
 import {Box, FormControlLabel, Grid, Paper, TextField, Typography} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import LoginWithGoogle from "@/Components/LoginWithGoogle";
+import Alert from "@mui/material/Alert";
 
 
 export default function Login({ status, canResetPassword }) {
+    const { flash } = usePage().props;
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -36,7 +39,11 @@ export default function Login({ status, canResetPassword }) {
         <Guest>
             <Head title="Login" />
 
+            <br/>
             {status && <Alert severity="success">{status}</Alert>}
+            Status: {JSON.stringify(status)}
+            usePage: {JSON.stringify(usePage())}
+            UseForm Errors: {JSON.stringify(errors)}
 
             <ValidationErrors errors={errors} />
 

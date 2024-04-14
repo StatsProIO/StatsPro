@@ -114,9 +114,3 @@ window.addEventListener('popstate', function(event) {
 });
 
 
-var rS = window.history.replaceState;
-window.history.replaceState = function() {
-    sendRequest(endpoint, buildPayload(), null);
-    rS.apply(this, arguments);
-    console.log("replace state called");
-};
