@@ -69,9 +69,7 @@ class SendDemoRequests extends Command
 
         }
 
-        $statusCode = $response->getStatusCode();
-        $content = $response->getBody();
 
-        return $statusCode;
+        return 'DONE';
     }
 }

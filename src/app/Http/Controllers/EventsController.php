@@ -75,7 +75,7 @@ class EventsController extends Controller
             $event->os = $parsedUserAgent->os->name;
             $event->time_zone = $request->client_time_zone;
             $event->client_time = $request->client_time;
-            $event->page_load_time = $request->page_load_time;
+            $event->page_load_time = max($request->page_load_time, 0);
 
             if ($request->query_params) {
                 $event->keyword = $request->query_params['keyword'] ?? null;
