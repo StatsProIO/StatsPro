@@ -22,6 +22,7 @@ use Sinergi\BrowserDetector\Browser;
 class EventsController extends Controller
 {
     public function postEvent(Request $request) {
+        Log::info("Collecting event");
         try {
             $userAgent = $request->server('HTTP_USER_AGENT');
 
@@ -91,7 +92,8 @@ class EventsController extends Controller
             $event->save();
             return ['id' => $event->id];
         } catch (\Throwable $t) {
-            Log::error($t->getMessage());
+            Log::info("Error collecting event");
+            Log::info($t->getMessage());
             abort(500);
         }
     }
