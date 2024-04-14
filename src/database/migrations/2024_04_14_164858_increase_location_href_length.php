@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             $table->string('location_href', 2048)->change();
-            $table->string('path', 2048)->change();
-            $table->string('referrer', 2048)->change();
+            $table->string('path', 2048)->nullable()->change();
+            $table->string('referrer', 2048)->nullable()->change();
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             $table->string('location_href', 256)->change();
-            $table->string('path', 256)->change();
-            $table->string('referrer', 256)->change();
+            $table->string('path', 256)->nullable()->change();
+            $table->string('referrer', 256)->nullable()->change();
         });
     }
 };
