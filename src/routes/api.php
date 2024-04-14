@@ -25,7 +25,10 @@ Route::get('/events/demo.com', [EventsController::class, 'getDemoEvents']);
 Route::get('/events/real-time/demo.com', [EventsController::class, 'getDemoEventsRealTime']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/events/{domainName}', [EventsController::class, 'getEventsByDomainName']);
+
+    Route::get('/events/dashboard/top-bar/{domainName}', [EventsController::class, 'getDashboardEventsTopRowByDomainName']);
+    Route::get('/events/dashboard/above-the-fold/{domainName}', [EventsController::class, 'getDashboardEventsAboveTheFoldByDomainName']);
+    Route::get('/events/dashboard/below-the-fold/{domainName}', [EventsController::class, 'getDashboardEventsBelowTheFoldByDomainName']);
     Route::get('/events/real-time/{domainName}', [EventsController::class, 'getEventsRealTimeByDomain']);
     Route::get('/events/audience/{domainName}', [EventsController::class, 'getEventsAudienceTimeByDomain']);
     Route::get('/events/behavior/{domainName}', [EventsController::class, 'getEventsBehaviorTimeByDomain']);

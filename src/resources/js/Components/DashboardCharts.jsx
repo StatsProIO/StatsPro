@@ -60,35 +60,51 @@ export default function DashboardCharts({ domain }) {
     useEffect(() => {
         //make an API request for range/domain
 
-        axios.get(`/api/events/${domain}?range=${range}`)
-            .then(function (response) {
+        Promise.all([
+            axios.get(`/api/events/dashboard/top-bar/${domain}?range=${range}`)
+                .then(function (response) {
+                    setUniqueVisitorsCount(response.data.unique_visitors_count);
+                    setUniqueVisitorsCountDifferenceRate(response.data.unique_visitors_count_difference_rate);
 
-                // handle success
-                setDomains(response.data.domains);
-                setTimeBuckets(response.data.time_buckets);
-                setPageviews(response.data.pageviews);
-                setVisitors(response.data.visitors);
-                setTopSources(response.data.top_sources);
-                setTopPages(response.data.top_pages);
-                setDevices(response.data.devices);
-                setLocations(response.data.locations);
+                    setPageviewsCount(response.data.pageviews_count);
+                    setPageviewsCountDifferenceRate(response.data.pageviews_count_difference_rate);
 
-                setUniqueVisitorsCount(response.data.unique_visitors_count);
-                setUniqueVisitorsCountDifferenceRate(response.data.unique_visitors_count_difference_rate)
-                setPageviewsCount(response.data.pageviews_count);
-                setPageviewsCountDifferenceRate(response.data.pageviews_count_difference_rate);
-                setBounceRate(response.data.bounce_rate);
-                setBounceRateDifferenceRate(response.data.bounce_rate_difference_rate);
-                setVisitDuration(response.data.visit_duration);
-                setVisitDurationDifferenceRate(response.data.visit_duration_difference_rate);
-                setComparisonIntervalDescriptionSuffix(response.data.comparison_interval_description_suffix);
-            })
-            .catch(function (error) {
-                axios.post(`/api/error`, {component: 'Charts', message: error});
-            })
-            .then(function () {
-                // always executed
-            });
+                    setBounceRate(response.data.bounce_rate);
+                    setBounceRateDifferenceRate(response.data.bounce_rate_difference_rate);
+
+                    setVisitDuration(response.data.visit_duration);
+                    setVisitDurationDifferenceRate(response.data.visit_duration_difference_rate);
+
+                    setComparisonIntervalDescriptionSuffix(response.data.comparison_interval_description_suffix);
+                })
+                .catch(function (error) {
+                    axios.post(`/api/error`, {component: 'Charts top bar', message: error});
+                }),
+
+
+            axios.get(`/api/events/dashboard/above-the-fold/${domain}?range=${range}`)
+                .then(function (response) {
+                    setDomains(response.data.domains);
+                    setTimeBuckets(response.data.time_buckets);
+                    setPageviews(response.data.pageviews);
+                    setVisitors(response.data.visitors);
+                })
+                .catch(function (error) {
+                    axios.post(`/api/error`, {component: 'Charts above the fold', message: error});
+                })
+                .finally(function () {
+
+                    axios.get(`/api/events/dashboard/below-the-fold/${domain}?range=${range}`)
+                        .then(function (response) {
+                            setTopSources(response.data.top_sources);
+                            setTopPages(response.data.top_pages);
+                            setDevices(response.data.devices);
+                            setLocations(response.data.locations);
+                        }).catch(function (error) {
+                            axios.post(`/api/error`, {component: 'Charts below the fold', message: error});
+                        })
+                })
+            ]);
     }, [range, domain])
 
     return (

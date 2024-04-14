@@ -163,16 +163,10 @@ class EventsController extends Controller
         return $this->getEvents($domain, $request);
     }
 
-    public function getEventsByDomainName ($domainName, Request $request) {
+    public function getDashboardEventsTopRowByDomainName ($domainName, Request $request) {
         $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
-        return $this->getEvents($domain, $request);
-    }
-
-   private function getEvents ($domain, Request $request) {
         $range = $request->has('range') ? $request->input('range') : '24h';
         $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
-
-        $timeBuckets = $this->getTimeBuckets($timeRangeInfo);
 
         $bounceCount = EventRepository::getBounceCount($timeRangeInfo->getInterval(), $domain);
         $comparisonBounceCount = EventRepository::getBounceCount($timeRangeInfo->getComparisonInterval(), $domain);
@@ -190,25 +184,48 @@ class EventsController extends Controller
         $comparisonVisitDuration = EventRepository::getVisitDuration($timeRangeInfo->getComparisonInterval(), $domain);
 
         return [
+            'unique_visitors_count' => $visitorsCount,
+            'unique_visitors_count_difference_rate' => $comparisonVisitorsCount == 0 ? 100 : (($visitorsCount - $comparisonVisitorsCount)/$comparisonVisitorsCount),
+
+            'pageviews_count' => $pageviewCount,
+            'pageviews_count_difference_rate' => $comparisonPageviewsCount == 0 ? 100 : (($pageviewCount - $comparisonPageviewsCount)/$comparisonPageviewsCount),
+
+            'bounce_rate' => round($bounceRate, 1) . '%',
+            'bounce_rate_difference_rate' => $comparisonBounceRate == 0 ? 100 : (($bounceRate - $comparisonBounceRate)/$comparisonBounceRate),
+
+            'visit_duration' => CarbonInterval::seconds($visitDuration)->cascade()->forHumans([CarbonInterface::DIFF_ABSOLUTE], true),
+            'visit_duration_difference_rate' => $comparisonVisitDuration == 0 ? 100 : (($visitDuration - $comparisonVisitDuration)/$comparisonVisitDuration),
+
+            'comparison_interval_description_suffix' => $timeRangeInfo->getComparisonIntervalDescriptionSuffix()
+        ];
+    }
+
+    public function getDashboardEventsAboveTheFoldByDomainName ($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
+
+        $timeBuckets = $this->getTimeBuckets($timeRangeInfo);
+
+        return [
             'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
             'time_buckets' => $timeBuckets,
             'pageviews' => EventRepository::getPageviews($timeRangeInfo, $domain, $timeBuckets),
             'visitors' => EventRepository::getVisitors($timeRangeInfo, $domain, $timeBuckets),
             'realtime' => EventRepository::getRealTime($domain),
+        ];
+    }
+
+    public function getDashboardEventsBelowTheFoldByDomainName ($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
+
+        return [
             'top_sources' => EventRepository::getTopSources($timeRangeInfo->getInterval(), $domain),
             'top_pages' => EventRepository::getTopPages($timeRangeInfo->getInterval(), $domain),
             'devices' => EventRepository::getDevices($timeRangeInfo->getInterval(), $domain),
             'locations' => EventRepository::getLocationsForMap($timeRangeInfo->getInterval(), $domain),
-            'unique_visitors_count' => $visitorsCount,
-            'unique_visitors_count_difference_rate' => $comparisonVisitorsCount == 0 ? 100 : (($visitorsCount - $comparisonVisitorsCount)/$comparisonVisitorsCount),
-            'pageviews_count' => $pageviewCount,
-            'pageviews_count_difference_rate' => $comparisonPageviewsCount == 0 ? 100 : (($pageviewCount - $comparisonPageviewsCount)/$comparisonPageviewsCount),
-            'bounce_rate' => round($bounceRate, 1) . '%',
-            'bounce_rate_difference_rate' => $comparisonBounceRate == 0 ? 100 : (($bounceRate - $comparisonBounceRate)/$comparisonBounceRate),
-            'visit_duration' => CarbonInterval::seconds($visitDuration)->cascade()->forHumans([CarbonInterface::DIFF_ABSOLUTE], true),
-            'visit_duration_difference_rate' => $comparisonVisitDuration == 0 ? 100 : (($visitDuration - $comparisonVisitDuration)/$comparisonVisitDuration),
-            'comparison_visit_duration' => EventRepository::getVisitDuration($timeRangeInfo->getComparisonInterval(), $domain),
-            'comparison_interval_description_suffix' => $timeRangeInfo->getComparisonIntervalDescriptionSuffix()
         ];
     }
 
