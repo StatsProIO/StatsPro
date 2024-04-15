@@ -23,6 +23,10 @@ COPY --chown=www-data src /var/www/
 
 WORKDIR /var/www/
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --optimize-autoloader --no-dev
+RUN mkdir -p storage/logs/
+RUN touch storage/logs/laravel.log
+RUN chmod 777 storage/logs/laravel.log
+
 RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
