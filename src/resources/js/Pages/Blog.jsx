@@ -9,27 +9,27 @@ const blogPosts = [
     {
         title: 'Deploying From Github Actions to Stackhero',
         url: '/blog/deploying-from-github-actions-to-stackhero',
-        cardImage: '/images/deploying-from-github-actions-to-stackhero.avif'
+        cardImage: '/images/deploying-from-github-actions-to-stackhero.png'
     },
     {
         title: 'Ethical Analytics',
         url: '/blog/ethical-analytics',
-        cardImage: '/images/ethical-analytics.webp'
+        cardImage: '/images/ethical-analytics.png'
     },
     {
         title: 'Italy Declares Google Analytics Illegal',
         url: '/blog/italy-google-analytics-illegal',
-        cardImage: '/images/illegal.webp'
+        cardImage: '/images/illegal.png'
     },
     {
         title: 'Top 5 Google Analytics Alternatives',
         url: '/blog/top-5-google-analytics-alternatives',
-        cardImage: '/images/alternative.webp'
+        cardImage: '/images/alternative.png'
     },
     {
         title: 'Your Analytics Are Likely Against The Law',
         url: '/blog/your-analytics-are-likely-against-the-law',
-        cardImage: '/images/law.webp'
+        cardImage: '/images/law.png'
     },
     {
         title: 'Free Privacy Friendly Analytics',
