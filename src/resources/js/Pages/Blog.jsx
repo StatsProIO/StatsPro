@@ -7,6 +7,11 @@ import {Grid} from '@mui/material';
 
 const blogPosts = [
     {
+        title: 'Privacy Friendly Location from Timezones',
+        url: '/blog/timezone-to-location-privacy-friendly',
+        cardImage: '/images/timezone-to-location.png'
+    },
+    {
         title: 'Deploying From Github Actions to Stackhero',
         url: '/blog/deploying-from-github-actions-to-stackhero',
         cardImage: '/images/deploying-from-github-actions-to-stackhero.png'
