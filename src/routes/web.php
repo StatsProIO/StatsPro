@@ -145,10 +145,10 @@ Route::get('/blog/italy-google-analytics-illegal', function () { return Inertia:
 Route::get('/blog/top-5-google-analytics-alternatives', function () { return Inertia::render('BlogTopFiveAnalyticsAlternatives');})->name('BlogTopFiveAnalyticsAlternatives');
 Route::get('/blog/your-analytics-are-likely-against-the-law', function () { return Inertia::render('BlogYourAnalyticsAreLikelyAgainstTheLaw');})->name('BlogYourAnalyticsAreLikelyAgainstTheLaw');
 Route::get('/blog/free-privacy-friendly-analytics', function () { return Inertia::render('BlogFreePrivacyFriendlyAnalytics');})->name('BlogFreePrivacyFriendlyAnalytics');
+Route::get('/blog/timezone-to-location-privacy-friendly', function () { return Inertia::render('BlogPrivacyFriendlyLocationFromTimezones');})->name('BlogPrivacyFriendlyLocationFromTimezones');
 
 Route::get('/tools/utm-generator', function () { return Inertia::render('ToolUTMGenerator');})->name('ToolUTMGenerator');
 Route::get('/tools/utm-validator', function () { return Inertia::render('ToolUTMValidator');})->name('ToolUTMValidator');
-
 
 
 require __DIR__.'/auth.php';
