@@ -18,7 +18,10 @@ class EventRepository
         $pageviews = DB::select(
             DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, count(*)
                 FROM events
-                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
+                WHERE domain_id = :domain
+                  AND event_name='pageview'
+                  AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}'
+                  AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
                 GROUP BY {$timeRangeInfo->getGroupBy()}
                 ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
@@ -37,12 +40,13 @@ class EventRepository
 
     public static function getVisitors(TimeRangeInfo $timeRangeInfo, Domain $domain, $timeBuckets) {
         $visitors = DB::select(
-            DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, count(*)
+            DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, COUNT(DISTINCT visitor_id)
                 FROM events
-                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
-                AND referrer is null
+                WHERE domain_id = :domain
+                  AND event_name='pageview'
+                  AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}'
+                  AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
                 GROUP BY {$timeRangeInfo->getGroupBy()}
-
                 ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
             );
@@ -66,7 +70,9 @@ class EventRepository
         return DB::select( DB::raw("SELECT id, path, created_at
                                         FROM events
                                         WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '$realTimeInterval[0]' AND created_at <= '$realTimeInterval[1]'
-                                        ORDER BY created_at desc")->getValue(DB::connection()->getQueryGrammar()),
+                                        ORDER BY created_at DESC
+                                        LIMIT 15"
+                                )->getValue(DB::connection()->getQueryGrammar()),
                                 array('domain' => $domain->id)
                             );
     }
@@ -106,12 +112,15 @@ class EventRepository
 
     public static function getTopEntryPages(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT path as label, count(*) as count
-                                        FROM events
-                                        WHERE domain_id = :domain
-                                            AND event_name='pageview'
-                                            AND created_at >= '{$interval->getStart()}'
-                                            AND created_at <= '{$interval->getEnd()}'
-                                            AND source <> :domain_name
+                                        FROM (SELECT DISTINCT ON (visitor_id) path
+                                            FROM events
+                                            WHERE domain_id = :domain
+                                                AND event_name='pageview'
+                                                AND created_at >= '{$interval->getStart()}'
+                                                AND created_at <= '{$interval->getEnd()}'
+                                                AND source <> :domain_name
+                                            ORDER BY visitor_id, created_at DESC
+                                            ) AS first_paths_by_visitor_id
                                         GROUP BY path
                                         ORDER BY count DESC
                                         LIMIT 8
@@ -123,7 +132,10 @@ class EventRepository
     public static function getTopPages(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT path as label, count(*) as count
                                         FROM events
-                                        WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                        WHERE domain_id = :domain
+                                          AND event_name='pageview'
+                                          AND created_at >= '{$interval->getStart()}'
+                                          AND created_at <= '{$interval->getEnd()}'
                                         GROUP BY path
                                         ORDER BY count DESC
                                         LIMIT 8
@@ -135,7 +147,10 @@ class EventRepository
     public static function getDevices(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT device, count(*)
                                         FROM events
-                                        WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                        WHERE domain_id = :domain
+                                          AND event_name='pageview'
+                                          AND created_at >= '{$interval->getStart()}'
+                                          AND created_at <= '{$interval->getEnd()}'
                                         GROUP BY device
                                         ORDER BY count DESC
                                         LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
@@ -146,7 +161,10 @@ class EventRepository
     public static function getLocationsForMap(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT country, count(*)
                                 FROM events
-                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                WHERE domain_id = :domain
+                                  AND event_name='pageview'
+                                  AND created_at >= '{$interval->getStart()}'
+                                  AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY country
                                 ORDER BY count DESC" )->getValue(DB::connection()->getQueryGrammar()),
                         array('domain' => $domain->id)
@@ -156,7 +174,10 @@ class EventRepository
     public static function getLocationsForList(Interval $interval, Domain $domain) {
         $locations = DB::select( DB::raw("SELECT country, count(*)
                                 FROM events
-                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                WHERE domain_id = :domain
+                                  AND event_name='pageview'
+                                  AND created_at >= '{$interval->getStart()}'
+                                  AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY country
                                 ORDER BY count DESC
                                 LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
@@ -173,7 +194,10 @@ class EventRepository
     public static function getBrowsers(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT browser, count(*)
                                 FROM events
-                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                WHERE domain_id = :domain
+                                  AND event_name='pageview'
+                                  AND created_at >= '{$interval->getStart()}'
+                                  AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY browser
                                 ORDER BY count DESC
                                 LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
@@ -184,7 +208,10 @@ class EventRepository
     public static function getLanguages(Interval $interval, Domain $domain) {
         $languages = DB::select( DB::raw("SELECT language, count(*)
                                 FROM events
-                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                WHERE domain_id = :domain
+                                  AND event_name='pageview'
+                                  AND created_at >= '{$interval->getStart()}'
+                                  AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY language
                                 ORDER BY count DESC
                                 LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
@@ -201,7 +228,10 @@ class EventRepository
     public static function getOses(Interval $interval, Domain $domain) {
         return DB::select( DB::raw("SELECT os, count(*)
                                 FROM events
-                                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                                WHERE domain_id = :domain
+                                  AND event_name='pageview'
+                                  AND created_at >= '{$interval->getStart()}'
+                                  AND created_at <= '{$interval->getEnd()}'
                                 GROUP BY os
                                 ORDER BY count DESC
                                 LIMIT 5" )->getValue(DB::connection()->getQueryGrammar()),
@@ -213,7 +243,10 @@ class EventRepository
         $pageviewsCount = DB::select(
                 DB::raw("SELECT count(*) as count
                     FROM events
-                    WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                    WHERE domain_id = :domain
+                      AND event_name='pageview'
+                      AND created_at >= '{$interval->getStart()}'
+                      AND created_at <= '{$interval->getEnd()}'
                     ")->getValue(DB::connection()->getQueryGrammar()),
                 array('domain' => $domain->id)
                 );
@@ -222,10 +255,12 @@ class EventRepository
 
     public static function getVisitorsCount(Interval $interval, Domain $domain) {
         $visitorsCount = DB::select(
-                DB::raw("SELECT count(*) as count
+                DB::raw("SELECT count(DISTINCT visitor_id) as count
                     FROM events
-                    WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
-                    AND referrer is null
+                    WHERE domain_id = :domain
+                      AND event_name='pageview'
+                      AND created_at >= '{$interval->getStart()}'
+                      AND created_at <= '{$interval->getEnd()}'
                     ")->getValue(DB::connection()->getQueryGrammar()),
                 array('domain' => $domain->id)
                 );
@@ -235,8 +270,15 @@ class EventRepository
     public static function getVisitDuration(Interval $interval, Domain $domain) {
         $visitDuration = DB::select(
                 DB::raw("SELECT AVG(time_on_page_seconds) as average_visit_duration
-                    FROM events
-                    WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                    FROM (
+                        SELECT visitor_id, SUM(time_on_page_seconds) as time_on_page_seconds
+                        FROM events
+                        WHERE domain_id = :domain
+                          AND event_name='pageview'
+                          AND created_at >= '{$interval->getStart()}'
+                          AND created_at <= '{$interval->getEnd()}'
+                        GROUP BY visitor_id
+                    ) as total_time_on_page_seconds_per_visitor
                     ")->getValue(DB::connection()->getQueryGrammar()),
                 array('domain' => $domain->id)
                 );
@@ -246,11 +288,18 @@ class EventRepository
 
     public static function getBounceCount(Interval $interval, Domain $domain) {
         $bounceCount = DB::select(
-                DB::raw("SELECT count(*) as count
-                    FROM events
-                    WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
-                    AND time_on_page_seconds = 0
-                    AND referrer is null
+                DB::raw("
+                SELECT count(*) as count
+                FROM (
+                    SELECT visitor_id
+                        FROM events
+                        WHERE domain_id = :domain
+                          AND event_name='pageview'
+                          AND created_at >= '{$interval->getStart()}'
+                          AND created_at <= '{$interval->getEnd()}'
+                        GROUP BY visitor_id
+                        HAVING count(*) = 1 AND sum(time_on_page_seconds) = 0
+                ) AS bounced_visitors
                     ")->getValue(DB::connection()->getQueryGrammar()),
                 array('domain' => $domain->id)
                 );
@@ -260,20 +309,28 @@ class EventRepository
     public static function getBounceRate(TimeRangeInfo $timeRangeInfo, Interval $interval, Domain $domain, $timeBuckets) {
         $bouncedPageviews = DB::select(
             DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, count(*)
-                FROM events
-                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
-                AND time_on_page_seconds = 0
-                AND referrer is null
-                GROUP BY {$timeRangeInfo->getGroupBy()}
-
+                    FROM (
+                        SELECT visitor_id, MIN(created_at) as created_at
+                        FROM events
+                        WHERE domain_id = :domain
+                          AND event_name='pageview'
+                          AND created_at >= '{$interval->getStart()}'
+                          AND created_at <= '{$interval->getEnd()}'
+                        GROUP BY visitor_id
+                        HAVING count(*) = 1 AND sum(time_on_page_seconds) = 0
+                    ) as bounced_visitors
+                    GROUP BY {$timeRangeInfo->getGroupBy()}
                 ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
 
         $visitors = DB::select(
-            DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, count(*)
+            DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, count(DISTINCT visitor_id)
                 FROM events
-                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
+                WHERE domain_id = :domain
+                  AND event_name='pageview'
+                  AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}'
+                  AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
                 AND referrer is null
                 GROUP BY {$timeRangeInfo->getGroupBy()}
 
@@ -303,9 +360,13 @@ class EventRepository
     public static function getTimeOnPage(TimeRangeInfo $timeRangeInfo, Interval $interval, Domain $domain, $timeBuckets) {
         $timesOnPage = DB::select(
             DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, AVG(time_on_page_seconds) as average_visit_duration
-                FROM events
-                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
-                AND referrer is null
+                FROM (SELECT visitor_id, SUM(time_on_page_seconds) as time_on_page_seconds, MIN(created_at) as created_at
+                    FROM events
+                    WHERE domain_id = :domain
+                      AND event_name='pageview'
+                      AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}'
+                      AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
+                    GROUP BY visitor_id) AS total_time_on_page_seconds_per_visitor
                 GROUP BY {$timeRangeInfo->getGroupBy()}
                 ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
@@ -326,7 +387,10 @@ class EventRepository
         $pageLoadTimes = DB::select(
             DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, AVG(page_load_time)/1000 as average_page_load_time
                 FROM events
-                WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}' AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
+                WHERE domain_id = :domain
+                  AND event_name='pageview'
+                  AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}'
+                  AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
                 AND page_load_time IS NOT null
                 GROUP BY {$timeRangeInfo->getGroupBy()}
                 ")->getValue(DB::connection()->getQueryGrammar()),
@@ -348,7 +412,10 @@ class EventRepository
         $countsWithDayOfWeek = collect(DB::select(
             DB::raw("SELECT extract(dow from created_at) as day_of_week, count(*) as count
                     FROM events
-                    WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                    WHERE domain_id = :domain
+                      AND event_name='pageview'
+                      AND created_at >= '{$interval->getStart()}'
+                      AND created_at <= '{$interval->getEnd()}'
                     GROUP BY extract(dow from created_at)
                     ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
@@ -379,7 +446,10 @@ class EventRepository
         $countsWithHourOfDay = collect(DB::select(
             DB::raw("SELECT extract(hour from created_at) as hour_of_day , count(*) as count
                     FROM events
-                    WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                    WHERE domain_id = :domain
+                      AND event_name='pageview'
+                      AND created_at >= '{$interval->getStart()}'
+                      AND created_at <= '{$interval->getEnd()}'
                     GROUP BY extract(hour from created_at)
                     ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
@@ -404,7 +474,10 @@ class EventRepository
         $countsWithHourAndDayOfWeek = collect(DB::select(
             DB::raw("SELECT extract(dow from created_at) as day_of_week, floor(extract(hour from created_at)/3) as hour_of_day, count(*) as count
                     FROM events
-                    WHERE domain_id = :domain AND event_name='pageview' AND created_at >= '{$interval->getStart()}' AND created_at <= '{$interval->getEnd()}'
+                    WHERE domain_id = :domain
+                      AND event_name='pageview'
+                      AND created_at >= '{$interval->getStart()}'
+                      AND created_at <= '{$interval->getEnd()}'
                     GROUP BY extract(dow from created_at), floor(extract(hour from created_at)/3)
                     ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
