@@ -5,7 +5,7 @@ export const subscriptionPlans = [
         'productId': 'free',
         'price': '$0.00',
         'isRecommended': false,
-        'maxEvents': 5000,
+        'maxEvents': 50000,
         'maximumSites': 1,
         'description': 'Great to evaluate StatsPro or for just a small site. Free to use for as long as you want. No credit card required!',
         'isFree': true,
