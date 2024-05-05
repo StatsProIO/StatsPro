@@ -114,6 +114,8 @@ export default function BlogPrivacyFriendlyLocationFromTimezones() {
             <Typography variant={'h6'}>Correct city identification: 14.5%</Typography>
             <Typography variant={'h6'}>Average distance to control: 532 miles</Typography>
 
+            <Typography sx={{py: 1}} variant={'body1'}>From the results, its clear that Timezone to Location is very accurate at identifying a user's country but not very accurate at identifying their city. So, if you have a use case that requires a users country and not their city (like we at StatsPro do), consider using Timezone to Location as a privacy-friendly alternative to IP to Location.</Typography>
+
 
             <Box sx={{backgroundColor: '#d8e8ff', fontFamily: 'monospace', p: 3, my: 4, borderRadius: '5px'}}>
                 <Typography sx={{pt: 1}} variant={'h3'}>tl;dr</Typography>

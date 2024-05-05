@@ -26,8 +26,7 @@ const rows = [
     createData('Free for hobbyists', true, true, false, false, false),
     createData('Hosted only in the EU', true, false, false, true, true),
     createData('No cookie banner required', true, false, true, true, true),
-    createData('Does not use fingerprinting', true,false, false, false, true),
-    createData('Does not collect users IP addresses', true,false, false, false, true),
+    createData('Does not record users IP addresses', true,false, false, false, true),
     createData('Open Source', true,false, false, true, false),
     createData('Can be self hosted', true,true, false, true, false),
 ];
