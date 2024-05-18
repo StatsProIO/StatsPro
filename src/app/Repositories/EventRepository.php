@@ -185,7 +185,7 @@ class EventRepository
         );
 
         foreach($locations as $location) {
-            $location->country = (new \League\ISO3166\ISO3166)->alpha3($location->country)['name'];
+            $location->country = $location->country ? (new \League\ISO3166\ISO3166)->alpha3($location->country)['name'] : 'Unknown';
         }
 
         return $locations;
