@@ -2599,11 +2599,11 @@ class Helper
             return null;
         }
 
-        $timeZoneInfo = self::timezones[$timezone];
-
-        if (!$timeZoneInfo) {
+        if (!array_key_exists($timezone, self::timezones)) {
             return null;
         }
+
+        $timeZoneInfo = self::timezones[$timezone];
 
         if (!array_key_exists("c", $timeZoneInfo)) {
             return null;
