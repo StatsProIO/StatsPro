@@ -92,8 +92,8 @@ class EventsController extends Controller
             Log::info("Collected event!");
             return ['id' => $event->id];
         } catch (\Throwable $t) {
-            Log::info("Error collecting event");
-            Log::info($t->getMessage());
+            Log::error("Error collecting event!");
+            report($t);
             abort(500);
         }
     }
