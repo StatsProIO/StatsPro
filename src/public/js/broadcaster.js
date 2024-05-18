@@ -57,7 +57,7 @@ function sendRequest(url, body, next) {
             } else if(response.status === 403) {
                 return null; //end the chain, don't schedule any further requests
             } else {
-                return Promise.reject(new Error(response.statusText))
+                return response.text().then(text => {throw new Error("Non-successful status code: " + response.status + " " + text)})
             }
         })
         .then(function(responseJson) {
