@@ -17,6 +17,7 @@ import ConvincingBanner from "@/Components/ConvincingBanner";
 import Guest from "@/Layouts/Guest";
 import Button from "@mui/material/Button";
 import FormHelperText from "@mui/material/FormHelperText";
+import Alert from "@mui/material/Alert";
 
 export default function GenericURLShortener({serviceTitle = '', icon = '', faqBox}) {
     const [data, setData] = useState({
@@ -34,12 +35,13 @@ export default function GenericURLShortener({serviceTitle = '', icon = '', faqBo
     const submit = (e) => {
         e.preventDefault();
 
-        setProcessing(true);
-        axios.post(route('createShortLink'), data)
-            .then(res => {
-                setProcessing(false);
-                setShortLinks([res.data, ...shortLinks]);
-            });
+        // setProcessing(true);
+        // axios.post(route('createShortLink'), data)
+        //     .then(res => {
+        //         setProcessing(false);
+        //         setShortLinks([res.data, ...shortLinks]);
+        //
+        //     });
     };
 
     const copyToClipboard = (text) => { navigator.clipboard.writeText(text); };
@@ -55,6 +57,9 @@ export default function GenericURLShortener({serviceTitle = '', icon = '', faqBo
                     </Box>
                     <Typography variant="h2" align={'center'}><b>{serviceTitle} Link Shortener!</b></Typography>
                     <Typography variant="h5" align={'center'}>{serviceTitle} link shortener to share URLs with short, trackable URLs. Easily track clicks, locations, and your audience every time your short link is used!</Typography>
+
+                    <Alert severity="warning" sx={{mt: 3}}>Link shortening has been temporarily suspended, please come back later.</Alert>
+
 
                     <Box style={{borderColor: '#dddddd', borderWidth: '1px', borderStyle: 'solid', borderRadius: '5px', backgroundColor: 'white'}} p={6} m={6}>
                         <form onSubmit={submit}>
@@ -112,7 +117,7 @@ export default function GenericURLShortener({serviceTitle = '', icon = '', faqBo
                                 </AccordionDetails>
                             </Accordion>
 
-                            <LoadingButton loading={processing} fullWidth variant="contained" type="submit" size="large" sx={{ my: 2 }}>Create!</LoadingButton>
+                            <LoadingButton loading={processing} fullWidth variant="contained" type="submit" size="large" sx={{ my: 2 }} disabled={true}>Create!</LoadingButton>
                         </form>
 
                         {shortLinks.map((shortLink) => {

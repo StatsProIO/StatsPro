@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 class ShortLinkController extends Controller
 {
     public function createShortLink(Request $request) {
+        return 0;
+
         switch($request->expires) {
             case 'no-expiration':
                 $expiresAt = null;
