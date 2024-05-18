@@ -2622,7 +2622,13 @@ class Helper
         if ($timezone === "" || !$timezone) {
             return null;
         }
-        return str_replace("_", " ", explode("/", $timezone)[1]);
+
+        $splitTimezone = explode("/", $timezone);
+        if (!array_key_exists(1, $splitTimezone)) {
+            return null;
+        }
+
+        return str_replace("_", " ", $splitTimezone[1]);
     }
 
 }

@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y  \
     git \
     libicu-dev \
     cron \
+    ffmpeg \
     --no-install-recommends
     
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
