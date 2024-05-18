@@ -2599,7 +2599,21 @@ class Helper
             return null;
         }
 
-        $alpha2CountryCode = self::timezones[$timezone]["c"][0];
+        $timeZoneInfo = self::timezones[$timezone];
+
+        if (!$timeZoneInfo) {
+            return null;
+        }
+
+        if (!array_key_exists("c", $timeZoneInfo)) {
+            return null;
+        }
+
+        if (!array_key_exists(0, $timeZoneInfo["c"])) {
+            return null;
+        }
+
+        $alpha2CountryCode = $timeZoneInfo["c"][0];
         $data = (new \League\ISO3166\ISO3166)->alpha2($alpha2CountryCode);
         return $data['alpha3'];
     }
