@@ -16,6 +16,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import {Inertia} from "@inertiajs/inertia";
 import {Head} from "@inertiajs/inertia-react";
+import Rating from "@mui/material/Rating";
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 
 function createData(name, statsPro, googleAnalytics, fathom, plausible, simpleAnalytics) {
@@ -52,28 +54,43 @@ export default function Home(props) {
             </Head>
 
             <div className="home">
-                <Grid container spacing={0} className="hero-row" sx={{ pt: 5, px: 1 }} justifyContent="center" >
+                <Grid container spacing={0} className="hero-row" sx={{ pt: 4, px: 1 }} justifyContent="center" >
                     <Grid item xl={5} lg={7} md={7} sm={11} xs={12} textAlign='center' >
-                        <Typography variant="h2" component="div" sx={{ fontWeight: 600, textAlign: 'center', fontSize: {xs: '45px', sm : '50px', md: '55px'} }} gutterBottom style={{fontFamily: 'Helvetica', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
-                            The Easy-to-Use Google Analytics Alternative
+                        <Typography variant="h2" component="div" sx={{ pt: 3, fontWeight: 600, textAlign: 'center', fontSize: {xs: '40px', sm : '45px', md: '50px'} }} gutterBottom style={{fontFamily: 'Helvetica', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
+                            Google Analytics but easy to use and no cookie banner required!
+                        {/*    Stop annoying users with a cookie banner*/}
                         </Typography>
-                        <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 4}}>
-                            Google Analytics 4 is complicated! Switched to a better alternative. Fully compliant with GDPR, CCPA and PECR. Fully hosted in the EU.
+                        <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 6}}>
+                            GA4 is complicated and a legal minefield. StatsPro makes it easy to focus on your users and business.
                         </Typography>
+                        <Grid container justifyContent={'center'}>
+                            <Grid item>
+                                <Rating size="large"
+                                    name="simple-controlled"
+                                        color={'white'}
+                                        border
 
-                        <Grid container spacing={1} justifyContent='center'>
-                            <Grid item lg={6} sm={6} xs={8}>
-                                <TextField size="large" fullWidth label={email.length === 0 ? 'Email' : ''} variant="outlined" sx={{  backgroundColor: '#fff', borderRadius: '8px', mt: 1}} type="email" InputLabelProps={{
-                                    shrink: false
-                                }} onChange={onChange}/>
-                            </Grid>
-                            <Grid item lg={3} sm={3} xs={4}>
-                                <Button variant="contained" fullWidth size="large" onClick={submitSignUpForm}
-                                        sx={{px: 2, py: 2, mt: 1}} >Sign Up</Button>
+                                    defaultValue={4.3}
+                                        value={4.3}
+                                        emptyIcon={<StarBorderIcon sx={{color: 'white'}} fontSize={'30px'}/> }
+                                />
+                                <Typography variant={'subtitle2'} >Our users love StatsPro! Rated 4.3 by over 80 users!</Typography>
                             </Grid>
                         </Grid>
 
-                        <Typography variant="subtitle2" color="#aaa" align="center" sx={{pb: 8}}>No credit card required.</Typography>
+                        {/*<Grid container spacing={1} justifyContent='center'>*/}
+                        {/*    <Grid item lg={6} sm={6} xs={8}>*/}
+                        {/*        <TextField size="large" fullWidth label={email.length === 0 ? 'Email' : ''} variant="outlined" sx={{  backgroundColor: '#fff', borderRadius: '8px', mt: 1}} type="email" InputLabelProps={{*/}
+                        {/*            shrink: false*/}
+                        {/*        }} onChange={onChange}/>*/}
+                        {/*    </Grid>*/}
+                        {/*    <Grid item lg={3} sm={3} xs={4}>*/}
+                        {/*        <Button variant="contained" fullWidth size="large" onClick={submitSignUpForm}*/}
+                        {/*                sx={{px: 2, py: 2, mt: 1}} >Sign Up</Button>*/}
+                        {/*    </Grid>*/}
+                        {/*</Grid>*/}
+
+                        {/*<Typography variant="subtitle2" color="#aaa" align="center" sx={{pb: 8}}>No credit card required.</Typography>*/}
                     </Grid>
                     <Grid item xl={5} lg={4} md={4} sm={12} alignItems="center" justifyContent="center" sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' } }}>
                         <img src="images/header.svg" style={{ width: '100%', height: '100%' }} />
@@ -85,8 +102,8 @@ export default function Home(props) {
 
 
                 <Box sx={{px: 1}}>
-                    <Box sx={{ textAlign: 'center', py: 6, pb: 2, px: 1 }}>
-                        <Typography variant="h3"><b>Powerful analytics</b></Typography>
+                    <Box sx={{ textAlign: 'center', py: 3, pb: 2, px: 1 }}>
+                        <Typography variant="h4"><b>See Live Demo</b></Typography>
                     </Box>
 
                     <Grid container alignItems="center" justifyContent="center" sx={{ pb: 3, px: 1  }}>
@@ -127,23 +144,23 @@ export default function Home(props) {
                         </Grid>
 
                         <Grid item sm={12} md={4} lg={3} >
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2', height: '100%' }}>
+                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2', height: '100%' }}>
                                 <img src="../images/Global Business.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h4"><b>European hosted analytics</b></Typography>
+                                <Typography variant="h5"><b>European hosted analytics</b></Typography>
                                 <Typography variant="h6" color="text.secondary">Unlike other privacy-focused analytics services, StatsPro keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit.</Typography>
                             </Paper>
                         </Grid>
                         <Grid item sm={12} md={4} lg={3}>
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
+                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
                                 <img src="../images/Business Protection.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h4"><b>Your data is never sold</b></Typography>
-                                <Typography variant="h6" color="text.secondary">We charge larger customers to use our service. This allows us to keep our service Free for small projects and ensures that we have no conflict of interest between privacy and profits.</Typography>
+                                <Typography variant="h5"><b>No Cookie Banner</b></Typography>
+                                <Typography variant="h6" color="text.secondary">StatsPro does not use cookies to track users so you don't need to worry about adding yet another popup on your screen.</Typography>
                             </Paper>
                         </Grid>
                         <Grid item sm={12} md={4} lg={3}>
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
+                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
                                 <img src="../images/Strategy.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h4"><b>All the features you're used to</b></Typography>
+                                <Typography variant="h5"><b>All the features you're used to</b></Typography>
                                 <Typography variant="h6" color="text.secondary">StatsPro comes standard with all of the features that you're used to seeing from your analytics platform: real-time, page views, time on page, bounce rate, and more.</Typography>
                             </Paper>
                         </Grid>
@@ -197,8 +214,8 @@ export default function Home(props) {
 
                     <Grid container alignItems="center" justifyContent="center" sx={{ pt: 9, px: 1 }} textAlign={'center'}>
                         <Grid item xs={12} md={9} lg={6}>
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
-                                <Typography variant="h4"><b>Your data is secured and belongs to only you</b></Typography>
+                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
+                                <Typography variant="h5"><b>Your data is secured and belongs to only you</b></Typography>
                                 <Typography variant="h6" color="text.secondary">
                                     All of the analytics data collected on your websites belongs to you, it is never used for any other purpose other than to show in your Dashboard. We store all data securely in the EU and no analytics information can be traced to identify an individual user.
                                 </Typography>
@@ -209,8 +226,8 @@ export default function Home(props) {
                     <Grid container alignItems="center" justifyContent="center" sx={{ pt: 5, px: 1  }} textAlign={'center'}>
                         <Grid item xs={12} md={9} lg={6}>
 
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
-                                <Typography variant="h4"><b>Personally Identifiable Information (PII) is never stored</b></Typography>
+                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
+                                <Typography variant="h5"><b>Personally Identifiable Information (PII) is never stored</b></Typography>
                                 <Typography variant="h6" color="text.secondary">
                                     StatsPro never stores or uses PII. Some other privacy-focused analytics services will attempt to fingerprint your users using IP addresses and other information. Our analytics solution specifically does not fingerprint users because PECR forbids fingerprinting.
                                 </Typography>
@@ -220,8 +237,8 @@ export default function Home(props) {
 
                     <Grid container alignItems="center" justifyContent="center" sx={{ pt: 5, px: 1  }} textAlign={'center'}>
                         <Grid item xs={12} md={9} lg={6}>
-                            <Paper elevation={0} sx={{ p: 2, backgroundColor: '#f2f2f2' }}>
-                                <Typography variant="h4"><b>GDPR, PECR and CCPA Compliant</b></Typography>
+                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
+                                <Typography variant="h5"><b>GDPR, PECR and CCPA Compliant</b></Typography>
                                 <Typography variant="h6" color="text.secondary">
                                     StatsPro has been built from the ground up with the intention of being fully compliant with global privacy initiatives. We go a step further to ensure that we always keep the spirit of the law in mind, not simply skirting by the law.
                                 </Typography>
@@ -247,7 +264,7 @@ export default function Home(props) {
                     <Grid item sm={12} lg={10}>
                         <Box sx={{ textAlign: 'center', py: 6, my: 6 }} >
                             <Typography variant="h3" color={'white'}>
-                                <b>It's time to get serious about privacy and analytics</b>
+                                <b>Ready to ditch Google Analytics?</b>
                             </Typography>
                             <Typography variant="h6" color="#aaa">Setup in just a few minutes, no credit card required.</Typography>
 
