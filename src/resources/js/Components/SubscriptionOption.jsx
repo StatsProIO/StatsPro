@@ -33,7 +33,7 @@ export function SubscriptionOption({ authUser, showLabels, title, price, descrip
                 </Stack>
 
                 {isFree && <Typography variant="h4"><b>Free</b></Typography>}
-                {!isFree && <Typography variant="h4"><b>{price}/month</b></Typography>}
+                {!isFree && <Typography variant="h4" sx={{overflow: 'hidden'}}><b>{price}/month</b></Typography>}
                 <Typography variant="body1" sx={{ pt: 3, pb: 2 }} color='text.secondary'>{description}</Typography>
             </Box>
 
