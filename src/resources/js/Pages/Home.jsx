@@ -63,14 +63,14 @@ export default function Home(props) {
             <div className="home">
                 <Grid container spacing={0} className="hero-row" sx={{ pt: 4, px: 1 }} justifyContent="center" >
                     <Grid item xl={5} lg={7} md={7} sm={11} xs={12} textAlign='center' >
-                        <Typography variant="h2" component="div" sx={{ pt: 3, fontWeight: 600, textAlign: 'center', fontSize: {xs: '40px', sm : '45px', md: '50px'} }} gutterBottom style={{fontFamily: 'Helvetica', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
+                        <Typography variant="h2" component="div" sx={{pb: 0, fontWeight: 600, textAlign: 'center', fontSize: {xs: '35px', sm : '45px', md: '50px'} }} gutterBottom style={{fontFamily: 'Helvetica', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
                             Google Analytics but easy to use and no cookie banner required!
                         {/*    Stop annoying users with a cookie banner*/}
                         </Typography>
-                        <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 6}}>
+                        <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 4}}>
                             GA4 is complicated and a legal minefield. StatsPro makes it easy to focus on your users and business.
                         </Typography>
-                        <Grid container justifyContent={'center'}>
+                        <Grid container justifyContent={'center'} sx={{pb: 7}}>
                             <Grid item>
                                 <Rating size="large"
                                     name="simple-controlled"
