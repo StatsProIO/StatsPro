@@ -18,6 +18,8 @@ import {Inertia} from "@inertiajs/inertia";
 import {Head} from "@inertiajs/inertia-react";
 import Rating from "@mui/material/Rating";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import SpeedIcon from '@mui/icons-material/Speed';
+import Chip from "@mui/material/Chip";
 
 
 function createData(name, statsPro, googleAnalytics, fathom, plausible, simpleAnalytics) {
@@ -32,6 +34,11 @@ const rows = [
     createData('Open Source', true,false, false, true, false),
     createData('Can be self hosted', true,true, false, true, false),
 ];
+
+const trackingFeatures =
+    ['Realtime Visitors', 'Pageviews', 'Unique Visitors', 'Bouce Rate', 'Visit Duration', 'Referral Sources', '[New!] Page Load Performance', 'UTM Data',
+        'Entry Pages', 'Top Pages', 'Device Types', 'Browsers', 'Geolocation', 'Languages', 'Operating Systems', 'Time of Day Trends'
+    ];
 
 
 
@@ -74,7 +81,7 @@ export default function Home(props) {
                                         value={4.3}
                                         emptyIcon={<StarBorderIcon sx={{color: 'white'}} fontSize={'30px'}/> }
                                 />
-                                <Typography variant={'subtitle2'} >Our users love StatsPro! Rated 4.3 by over 80 users!</Typography>
+                                <Typography variant={'subtitle2'} >Our users ❤️ StatsPro, rated 4.3 by over 80 users!</Typography>
                             </Grid>
                         </Grid>
 
@@ -115,7 +122,7 @@ export default function Home(props) {
                                         <img className={'demo-image'} src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"}/>
                                     </picture>
                                     <div class="demo-image-overlay">
-                                        <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>See Live Demo</Typography>
+                                        <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>Click for Live Demo</Typography>
                                     </div>
                                 </div>
                             </a>
@@ -124,51 +131,30 @@ export default function Home(props) {
 
                     <Grid container>
                         <Grid item xs={12} textAlign={'center'}>
-                            <Button variant={'outlined'} onClick={() => Inertia.get('/dashboard/demo.com')}>See Live Demo</Button>
+                            <Button variant={'contained'} size={'large'} onClick={() => Inertia.get('/dashboard/demo.com')}>See Live Demo</Button>
                         </Grid>
                     </Grid>
 
-                    <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', pt: 5, pb: 6, px: 1 }}>
-                        <Grid item sm={12} md={12} lg={12}>
-                            <Typography variant="h3" sx={{py: 3}}><b>Get started in 5 seconds!</b></Typography>
-                            <Typography variant="h6">Drop this code on your website and <a href={'/register'}>register with your domain</a>.</Typography>
-                        </Grid>
-                        <Grid item xs={12} md={10} lg={5}>
-                            <IntegrationCode domain={'YOUR-DOMAIN-HERE'} />
-                        </Grid>
-                    </Grid>
+
 
                     <Grid container spacing={3} justifyContent="center" alignItems="stretch" sx={{ textAlign: 'center', py: 5, px: 1 }}>
                         <Grid item sm={12} md={12} lg={12}>
-                            <Typography variant="h3" sx={{py: 3, pb: 0}}><b>Features</b></Typography>
+                            <Typography variant="h4" sx={{py: 3, pb: 0}}><b>With StatsPro, analyze...</b></Typography>
                         </Grid>
 
-                        <Grid item sm={12} md={4} lg={3} >
-                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2', height: '100%' }}>
-                                <img src="../images/Global Business.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h5"><b>European hosted analytics</b></Typography>
-                                <Typography variant="h6" color="text.secondary">Unlike other privacy-focused analytics services, StatsPro keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit.</Typography>
-                            </Paper>
+                        <Grid item sm={12} md={6} lg={4} >
+                            {trackingFeatures.map((trackingFeature) => {
+                                    return <Chip label={trackingFeature} sx={{m: 1, fontSize: '18px'}} size={'large'} color={'primary'}  variant="outlined" />
+                                })}
                         </Grid>
-                        <Grid item sm={12} md={4} lg={3}>
-                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
-                                <img src="../images/Business Protection.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h5"><b>No Cookie Banner</b></Typography>
-                                <Typography variant="h6" color="text.secondary">StatsPro does not use cookies to track users so you don't need to worry about adding yet another popup on your screen.</Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item sm={12} md={4} lg={3}>
-                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
-                                <img src="../images/Strategy.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h5"><b>All the features you're used to</b></Typography>
-                                <Typography variant="h6" color="text.secondary">StatsPro comes standard with all of the features that you're used to seeing from your analytics platform: real-time, page views, time on page, bounce rate, and more.</Typography>
-                            </Paper>
+                        <Grid item sm={12} md={12} lg={12}>
+                            <Typography variant="h4" sx={{ pb: 0}}><b>... and more!</b></Typography>
                         </Grid>
                     </Grid>
 
                     <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', py: 5 }}>
                         <Grid item sm={12} md={10} xl={7} zeroMinWidth={true}>
-                            <Typography variant="h3"><b>Compare to the competition</b></Typography>
+                            <Typography variant="h4"><b>Compare to the competition</b></Typography>
 
                             <TableContainer component={Paper} sx={{ pt: 3 }} style={{maxWidth: '100%', width: '100%', overflowX: 'scroll'}} >
                                 <Table>
@@ -212,36 +198,30 @@ export default function Home(props) {
                     </Grid>
 
 
-                    <Grid container alignItems="center" justifyContent="center" sx={{ pt: 9, px: 1 }} textAlign={'center'}>
-                        <Grid item xs={12} md={9} lg={6}>
-                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
-                                <Typography variant="h5"><b>Your data is secured and belongs to only you</b></Typography>
-                                <Typography variant="h6" color="text.secondary">
-                                    All of the analytics data collected on your websites belongs to you, it is never used for any other purpose other than to show in your Dashboard. We store all data securely in the EU and no analytics information can be traced to identify an individual user.
-                                </Typography>
+                    <Grid container spacing={3} justifyContent="center" alignItems="stretch" sx={{ textAlign: 'center', py: 5, px: 1 }}>
+                        <Grid item sm={12} md={12} lg={12}>
+                            <Typography variant="h4" sx={{py: 3, pb: 0}}><b>Features</b></Typography>
+                        </Grid>
+
+                        <Grid item sm={12} md={4} lg={3} >
+                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2', height: '100%' }}>
+                                <img src="../images/Global Business.png" height={'100px'} loading="lazy" decoding="async" />
+                                <Typography variant="h5"><b>European hosted analytics</b></Typography>
+                                <Typography variant="h6" color="text.secondary">Unlike other privacy-focused analytics services, StatsPro keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit.</Typography>
                             </Paper>
                         </Grid>
-                    </Grid>
-
-                    <Grid container alignItems="center" justifyContent="center" sx={{ pt: 5, px: 1  }} textAlign={'center'}>
-                        <Grid item xs={12} md={9} lg={6}>
-
+                        <Grid item sm={12} md={4} lg={3}>
                             <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
-                                <Typography variant="h5"><b>Personally Identifiable Information (PII) is never stored</b></Typography>
-                                <Typography variant="h6" color="text.secondary">
-                                    StatsPro never stores or uses PII. Some other privacy-focused analytics services will attempt to fingerprint your users using IP addresses and other information. Our analytics solution specifically does not fingerprint users because PECR forbids fingerprinting.
-                                </Typography>
+                                <img src="../images/Business Protection.png" height={'100px'} loading="lazy" decoding="async" />
+                                <Typography variant="h5"><b>No Cookie Banner</b></Typography>
+                                <Typography variant="h6" color="text.secondary">StatsPro does not use cookies to track users so you don't need to worry about adding yet another popup on your screen.</Typography>
                             </Paper>
                         </Grid>
-                    </Grid>
-
-                    <Grid container alignItems="center" justifyContent="center" sx={{ pt: 5, px: 1  }} textAlign={'center'}>
-                        <Grid item xs={12} md={9} lg={6}>
+                        <Grid item sm={12} md={4} lg={3}>
                             <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
-                                <Typography variant="h5"><b>GDPR, PECR and CCPA Compliant</b></Typography>
-                                <Typography variant="h6" color="text.secondary">
-                                    StatsPro has been built from the ground up with the intention of being fully compliant with global privacy initiatives. We go a step further to ensure that we always keep the spirit of the law in mind, not simply skirting by the law.
-                                </Typography>
+                                <img src="../images/Strategy.png" height={'100px'} loading="lazy" decoding="async" />
+                                <Typography variant="h5"><b>All the features you're used to</b></Typography>
+                                <Typography variant="h6" color="text.secondary">StatsPro comes standard with all of the features that you're used to seeing from your analytics platform: real-time, page views, time on page, bounce rate, and more.</Typography>
                             </Paper>
                         </Grid>
                     </Grid>
@@ -252,13 +232,23 @@ export default function Home(props) {
                         </Grid>
                     </Grid>
 
-                    <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', py: 10 }}>
+                    <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', pt: 10 }}>
                         <Grid item xs={12} sm={10} md={11} lg={11} xl={10} justifyContent="center" alignItems="center" >
-                            <Typography variant="h3" sx={{py: 1}}><b>Simple Pricing</b></Typography>
+                            <Typography variant="h4" sx={{py: 1}}><b>Simple Pricing</b></Typography>
                             <SubscriptionOptions showLabels={false} currentProductSubscription={subscriptionPlans[0]} />
                         </Grid>
                     </Grid>
                 </Box>
+
+                <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', pt: 3, pb: 6, px: 1 }}>
+                    <Grid item sm={12} md={12} lg={12}>
+                        <Typography variant="h4" sx={{py: 3}}><b>Get started in 5 seconds!</b></Typography>
+                        <Typography variant="h6">Drop this code on your website and <a href={'/register'}>register with your domain</a>.</Typography>
+                    </Grid>
+                    <Grid item xs={12} md={10} lg={5}>
+                        <IntegrationCode domain={'YOUR-DOMAIN-HERE'} />
+                    </Grid>
+                </Grid>
 
                 <Grid container alignItems="center" justifyContent="center" className={'dark-blue'}>
                     <Grid item sm={12} lg={10}>
