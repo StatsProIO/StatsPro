@@ -165,13 +165,14 @@ class EventsController extends Controller
         return $timeBuckets;
     }
 
-    public function getDemoEvents(Request $request) {
-        $domain = Domain::where('domain_name', 'demo.com')->firstOrFail();
-        return $this->getEvents($domain, $request);
-    }
+    public function getDashboardEventsTopRowByDomainName (Request $request, $domainName = '') {
+        if (!Auth::user() || $domainName === '') { ///not logged in or no domain name
+            $domainName = 'demo.com';
+            $domain = Domain::where('domain_name', $domainName)->firstOrFail();
+        } else { //otherwise get the domain the user asked for
+            $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+        }
 
-    public function getDashboardEventsTopRowByDomainName ($domainName, Request $request) {
-        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
         $range = $request->has('range') ? $request->input('range') : '24h';
         $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
 
@@ -207,8 +208,14 @@ class EventsController extends Controller
         ];
     }
 
-    public function getDashboardEventsAboveTheFoldByDomainName ($domainName, Request $request) {
-        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+    public function getDashboardEventsAboveTheFoldByDomainName (Request $request, $domainName = '') {
+        if (!Auth::user() || $domainName === '') { //not logged in and no domain name
+            $domainName = 'demo.com';
+            $domain = Domain::where('domain_name', $domainName)->firstOrFail();
+        } else { //otherwise get the domain the user asked for
+            $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+        }
+
         $range = $request->has('range') ? $request->input('range') : '24h';
         $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
 
@@ -223,8 +230,14 @@ class EventsController extends Controller
         ];
     }
 
-    public function getDashboardEventsBelowTheFoldByDomainName ($domainName, Request $request) {
-        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+    public function getDashboardEventsBelowTheFoldByDomainName (Request $request, $domainName = '') {
+        if (!Auth::user() || $domainName === '') { //not logged in and no domain name
+            $domainName = 'demo.com';
+            $domain = Domain::where('domain_name', $domainName)->firstOrFail();
+        } else { //otherwise get the domain the user asked for
+            $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+        }
+
         $range = $request->has('range') ? $request->input('range') : '24h';
         $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
 
@@ -236,13 +249,14 @@ class EventsController extends Controller
         ];
     }
 
-    public function getDemoEventsRealTime() {
-        $domain = Domain::where('domain_name', 'demo.com')->firstOrFail();
-        return EventRepository::getRealTime($domain);
-    }
+    public function getEventsRealTimeByDomain($domainName = '') {
+        if (!Auth::user() || $domainName === '') { //not logged in and no domain name
+            $domainName = 'demo.com';
+            $domain = Domain::where('domain_name', $domainName)->firstOrFail();
+        } else { //otherwise get the domain the user asked for
+            $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+        }
 
-    public function getEventsRealTimeByDomain($domain) {
-        $domain = Domain::where('domain_name', $domain)->where('user_id', Auth::user()->id)->firstOrFail();
         return EventRepository::getRealTime($domain);
     }
 

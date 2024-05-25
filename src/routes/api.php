@@ -21,11 +21,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/events/demo.com', [EventsController::class, 'getDemoEvents']);
-Route::get('/events/real-time/demo.com', [EventsController::class, 'getDemoEventsRealTime']);
+Route::get('/events/dashboard/top-bar/demo.com', [EventsController::class, 'getDashboardEventsTopRowByDomainName']);
+Route::get('/events/dashboard/above-the-fold/demo.com', [EventsController::class, 'getDashboardEventsAboveTheFoldByDomainName']);
+Route::get('/events/dashboard/below-the-fold/demo.com', [EventsController::class, 'getDashboardEventsBelowTheFoldByDomainName']);
+Route::get('/events/real-time/demo.com', [EventsController::class, 'getEventsRealTimeByDomain']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-
     Route::get('/events/dashboard/top-bar/{domainName}', [EventsController::class, 'getDashboardEventsTopRowByDomainName']);
     Route::get('/events/dashboard/above-the-fold/{domainName}', [EventsController::class, 'getDashboardEventsAboveTheFoldByDomainName']);
     Route::get('/events/dashboard/below-the-fold/{domainName}', [EventsController::class, 'getDashboardEventsBelowTheFoldByDomainName']);
