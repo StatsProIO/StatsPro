@@ -142,7 +142,7 @@ export default function SessionData({ domain }) {
                                                 <SouthEastIcon />
                                                 <Typography sx={{fontWeight: 'bold'}}>{(new Date(pageView.created_at)).toLocaleString()} </Typography>
                                                 <Typography variant={'body1'}> {pageView.location_href}</Typography>
-                                                <Typography variant={'subtitle2'} color={'#ccc'}> (time on page: {pageView.time_on_page_seconds}s)</Typography>
+                                                <Typography variant={'subtitle2'} color={'#ccc'}> (time on page: {pageView.time_on_page_seconds!=0 ? pageView.time_on_page_seconds : 'less than 5'}s)</Typography>
                                             </Stack>
 
                                         </>
