@@ -383,6 +383,36 @@ class EventRepository
         return $visitors;
     }
 
+
+
+    public static function getSessions(TimeRangeInfo $timeRangeInfo, Domain $domain) {
+        $sessions = DB::select(
+            DB::raw("
+                SELECT visitor_id, json_agg(json_build_object('referrer', referrer, 'created_at', created_at, 'event_name', event_name, 'location_href', location_href, 'country', country, 'language', language, 'device', device, 'os', os, 'time_on_page_seconds', time_on_page_seconds )) AS data
+                FROM events WHERE visitor_id IN (SELECT visitor_id
+                                                 FROM events
+                                                 WHERE domain_id = :domain
+                                                 AND visitor_id IS NOT NULL
+                                                 AND created_at >= '{$timeRangeInfo->getInterval()->getStart()}'
+                                                 AND created_at <= '{$timeRangeInfo->getInterval()->getEnd()}'
+                                                 ORDER BY id DESC
+                                                 LIMIT 100)
+                AND domain_id = :domain
+                GROUP BY visitor_id
+                ")->getValue(DB::connection()->getQueryGrammar()),
+            array('domain' => $domain->id)
+        );
+
+        $returnSessions = [];
+        foreach($sessions as $session) {
+            $decodedData = json_decode($session->data);
+            usort($decodedData, fn($a, $b) => Carbon::parse($a->created_at)->gt(Carbon::parse($b->created_at)) );
+            $returnSessions[] = $decodedData;
+        }
+
+        return $returnSessions;
+    }
+
     public static function getPageLoadTime(TimeRangeInfo $timeRangeInfo, Interval $interval, Domain $domain, $timeBuckets) {
         $pageLoadTimes = DB::select(
             DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, AVG(page_load_time)/1000 as average_page_load_time

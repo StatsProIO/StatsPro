@@ -305,6 +305,20 @@ class EventsController extends Controller
         ];
     }
 
+    public function getEventsSessionsByDomain($domainName, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+
+        $range = $request->has('range') ? $request->input('range') : '24h';
+        $timeRangeInfo = TimeRangeInfo::rangeStringToQueryInfo($range);
+
+        $sessions = EventRepository::getSessions($timeRangeInfo, $domain);
+
+        return [
+            'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
+            'sessions' => $sessions
+        ];
+    }
+
     public function getEventsPerformanceByDomain($domainName, Request $request) {
         $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
 

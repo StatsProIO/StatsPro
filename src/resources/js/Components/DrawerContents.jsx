@@ -15,6 +15,7 @@ import Chip from "@mui/material/Chip";
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import SpeedIcon from '@mui/icons-material/Speed';
+import ViewListIcon from '@mui/icons-material/ViewList';
 
 
 export default function DrawerContents({domain}) {
@@ -39,6 +40,11 @@ export default function DrawerContents({domain}) {
             url: '/acquisition',
             appendDomain: true,
             icon: <ExitToAppIcon sx={{ color: '#fff' }} />,
+        }, {
+            text: 'Sessions',
+            url: '/sessions',
+            appendDomain: true,
+            icon: <ViewListIcon sx={{ color: '#fff' }} />,
         }, {
             text: 'Performance',
             url: '/performance',

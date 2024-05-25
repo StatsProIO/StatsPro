@@ -33,6 +33,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/events/audience/{domainName}', [EventsController::class, 'getEventsAudienceTimeByDomain']);
     Route::get('/events/behavior/{domainName}', [EventsController::class, 'getEventsBehaviorTimeByDomain']);
     Route::get('/events/acquisition/{domainName}', [EventsController::class, 'getEventsAcquisitionByDomain']);
+    Route::get('/events/sessions/{domainName}', [EventsController::class, 'getEventsSessionsByDomain']);
     Route::get('/events/performance/{domainName}', [EventsController::class, 'getEventsPerformanceByDomain']);
     Route::get('/event-status/{domainName}', [EventsController::class, 'getEventStatus']);
 
@@ -50,4 +51,6 @@ Route::post('/event/time-on-page', [EventsController::class, 'postTimeOnPage']);
 Route::get('/2Vj2pBn.jpg', [EventsController::class, 'getTrackerPixel']);
 Route::post('/contact', [ContactsController::class, 'postContact'])->name('contact');
 Route::post('/error', [ErrorController::class, 'add'])->name('error');
+
+
 

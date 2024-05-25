@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VisitorWidget;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -85,6 +86,16 @@ Route::middleware(['auth', 'require_one_domain'])->group(function () {
         return Inertia::render('Performance', ['domain' => $domain->domain_name]);
     })->name('performance');
 
+    Route::get('/sessions/{domain?}', function ($domain = null) {
+        if($domain === null) {
+            $firstDomain = Domain::where('user_id', Auth::user()->id)->oldest()->first();
+            return redirect('/sessions/'. $firstDomain->domain_name);
+        }
+
+        $domain = Domain::where('domain_name', $domain)->where('user_id', Auth::user()->id)->firstOrFail();
+        return Inertia::render('Sessions', ['domain' => $domain->domain_name]);
+    })->name('sessions');
+
     Route::get('/manage-domains', function () {
         return Inertia::render('ManageDomains', ['domains' => Domain::where('user_id', Auth::user()->id)->get()]);
     })->name('manage-domains');
@@ -111,9 +122,12 @@ Route::middleware(['auth', 'require_one_domain'])->group(function () {
     });
 });
 
+//Route::get('/visitor-widget', [VisitorWidget::class, 'get']);
+
 Route::get('/test-page', [TestPageController::class, 'get']);
 Route::get('/test-page/nested', [TestPageController::class, 'getNested']);
 
+//Route::get('/stats-pets', function () { return Inertia::render('StatsPets');});
 
 Route::get('/url-shortener', function () { return Inertia::render('Shorteners/MainURLShortener');});
 Route::get('/amazon-url-shortener', function () { return Inertia::render('Shorteners/AmazonURLShortener');});
@@ -146,9 +160,13 @@ Route::get('/blog/top-5-google-analytics-alternatives', function () { return Ine
 Route::get('/blog/your-analytics-are-likely-against-the-law', function () { return Inertia::render('BlogYourAnalyticsAreLikelyAgainstTheLaw');})->name('BlogYourAnalyticsAreLikelyAgainstTheLaw');
 Route::get('/blog/free-privacy-friendly-analytics', function () { return Inertia::render('BlogFreePrivacyFriendlyAnalytics');})->name('BlogFreePrivacyFriendlyAnalytics');
 Route::get('/blog/timezone-to-location-privacy-friendly', function () { return Inertia::render('BlogPrivacyFriendlyLocationFromTimezones');})->name('BlogPrivacyFriendlyLocationFromTimezones');
+//Route::get('/blog/creepy-crawlies-public-internet', function () { return Inertia::render('BlogCreepyCrawlies');})->name('BlogCreepyCrawlies');
+//Route::get('/blog/ccpa-compliant-webiste-analytics', function () { return Inertia::render('BlogCCPACompliantWebsiteAnalytics');})->name('BlogCCPACompliantWebsiteAnalytics');
 
 Route::get('/tools/utm-generator', function () { return Inertia::render('ToolUTMGenerator');})->name('ToolUTMGenerator');
 Route::get('/tools/utm-validator', function () { return Inertia::render('ToolUTMValidator');})->name('ToolUTMValidator');
+
+//Route::get('/parse', [\App\Http\Controllers\TestPageController::class, 'parse'])->name('Parse');
 
 
 require __DIR__.'/auth.php';
