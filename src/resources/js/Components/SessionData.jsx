@@ -168,31 +168,31 @@ function osToIcon(os) {
     }
 
     if (os.includes('Chrome')) {
-        return <Tooltip title="Chrome OS"><img src={chromeLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Chrome OS"><img src={chromeLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     if (os.includes('FreeBSD')) {
-        return <Tooltip title="FreeBSD"><img src={freeBSDLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="FreeBSD"><img src={freeBSDLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     if (os.includes('Linux')) {
-        return <Tooltip title="Linux"><img src={linuxLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Linux"><img src={linuxLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     if (os.includes('OS X')) {
-        return <Tooltip title="OS X"><img src={macOsLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="OS X"><img src={macOsLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     if (os.includes('Ubuntu')) {
-        return <Tooltip title="Ubuntu"><img src={ubuntuLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Ubuntu"><img src={ubuntuLogo} width={'25px'} style={{borderRadius: '10px'}} /></Tooltip>;
     }
 
     if (os.includes('Windows')) {
-        return <Tooltip title="Windows"><img src={windowsLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Windows"><img src={windowsLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     if (os.includes('iOS')) {
-        return <Tooltip title="iOS"><img src={appleLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="iOS"><img src={appleLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     return <Tooltip title="Unknown OS"><LanguageIcon/></Tooltip>;
@@ -269,31 +269,31 @@ function browserToIcon(browser) {
     }
 
     if (browser.includes('Chrome')) {
-        return <Tooltip title="Chrome"><img src={chromeLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Chrome"><img src={chromeLogo} width={'25px'} style={{borderRadius: '10px'}} /></Tooltip>;
     }
 
     if (browser.includes('Edge') || browser.includes('Internet Explorer')) {
-        return <Tooltip title="Edge"><img src={edgeLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Edge"><img src={edgeLogo} width={'25px'} style={{borderRadius: '10px'}} /></Tooltip>;
     }
 
     if (browser.includes('Firefox') || browser.includes('Mozilla')) {
-        return <Tooltip title="Mozilla Firefox"><img src={firefoxLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Mozilla Firefox"><img src={firefoxLogo} width={'25px'} style={{borderRadius: '10px'}} /></Tooltip>;
     }
 
     if (browser.includes('Google')) {
-        return <Tooltip title="Google"><img src={googleLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Google"><img src={googleLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     if (browser.includes('Opera')) {
-        return <Tooltip title="Opera"><img src={operaLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Opera"><img src={operaLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     if (browser.includes('Safari')) {
-        return <Tooltip title="Safari"><img src={safariLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Safari"><img src={safariLogo} width={'25px'} style={{borderRadius: '10px'}}/></Tooltip>;
     }
 
     if (browser.includes('Samsung')) {
-        return <Tooltip title="Samsung Browser"><img src={samsungInternetLogo} width={'25px'} /></Tooltip>;
+        return <Tooltip title="Samsung Browser"><img src={samsungInternetLogo} width={'25px'} style={{borderRadius: '10px'}} /></Tooltip>;
     }
 
     return <Tooltip title="Unknown Browser"><TravelExploreIcon/></Tooltip>
