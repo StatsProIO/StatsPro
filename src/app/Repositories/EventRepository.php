@@ -388,7 +388,7 @@ class EventRepository
     public static function getSessions(TimeRangeInfo $timeRangeInfo, Domain $domain) {
         $sessions = DB::select(
             DB::raw("
-                SELECT visitor_id, json_agg(json_build_object('referrer', referrer, 'created_at', created_at, 'event_name', event_name, 'location_href', location_href, 'country', country, 'language', language, 'device', device, 'os', os, 'time_on_page_seconds', time_on_page_seconds )) AS data
+                SELECT visitor_id, json_agg(json_build_object('referrer', referrer, 'created_at', created_at, 'event_name', event_name, 'location_href', location_href, 'country', country, 'language', language, 'device', device, 'os', os, 'browser', browser, 'time_on_page_seconds', time_on_page_seconds )) AS data
                 FROM events WHERE visitor_id IN (SELECT visitor_id
                                                  FROM events
                                                  WHERE domain_id = :domain

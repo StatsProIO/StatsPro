@@ -30,13 +30,20 @@ import Stack from "@mui/material/Stack";
 import getCountryISO2 from "country-iso-3-to-2";
 import AndroidIcon from '@mui/icons-material/Android';
 import LanguageIcon from '@mui/icons-material/Language';
-import chromeLogo from 'super-tiny-icons/images/svg/chrome.svg';
 import freeBSDLogo from 'super-tiny-icons/images/svg/freebsd.svg';
 import linuxLogo from 'super-tiny-icons/images/svg/linux.svg';
 import macOsLogo from 'super-tiny-icons/images/svg/macos.svg';
 import ubuntuLogo from 'super-tiny-icons/images/svg/ubuntu.svg';
 import windowsLogo from 'super-tiny-icons/images/svg/windows.svg';
 import appleLogo from 'super-tiny-icons/images/svg/apple.svg';
+import chromeLogo from 'super-tiny-icons/images/svg/chrome.svg';
+import edgeLogo from 'super-tiny-icons/images/svg/edge.svg';
+import firefoxLogo from 'super-tiny-icons/images/svg/firefox.svg';
+import googleLogo from 'super-tiny-icons/images/svg/google.svg';
+import operaLogo from 'super-tiny-icons/images/svg/opera.svg';
+import safariLogo from 'super-tiny-icons/images/svg/safari.svg';
+import samsungInternetLogo from 'super-tiny-icons/images/svg/samsung_internet.svg';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import Tooltip from "@mui/material/Tooltip";
 
 
@@ -113,8 +120,8 @@ export default function SessionData({ domain }) {
                                     <Typography variant={'subtitle1'}>{session.length} actions </Typography>
                                     <Typography variant={'subtitle1'} sx={{fontSize: '30px'}}>{countryToIcon(session[0].country)}</Typography>
                                     {osToIcon(session[0].os)}
-
                                     {deviceToIcon(session[0].device)}
+                                    {browserToIcon(session[0].browser)}
                                     <Typography variant={'subtitle1'}>{languageCodeToName(session[0].language)}</Typography>
                                 </Stack>
 
@@ -193,7 +200,15 @@ function osToIcon(os) {
 }
 
 function countryToIcon(countryCode) {
+    if (!countryCode) {
+        return <Tooltip title={"Unknown country"}>🏳</Tooltip>;
+    }
+
     let twoLetterCountryCode = getCountryISO2(countryCode);
+
+    if (!twoLetterCountryCode) {
+        return <Tooltip title={"Unknown country"}>🏳</Tooltip>;
+    }
 
     const codePoints = twoLetterCountryCode
         .toUpperCase()
@@ -245,4 +260,41 @@ function deviceToIcon(device) {
     }
 
     return <Tooltip title="Unknown Device"><DeviceUnknownIcon/></Tooltip>;
+}
+
+function browserToIcon(browser) {
+
+    if (browser === null) {
+        return <Tooltip title="Unknown Browser"><TravelExploreIcon/></Tooltip>
+    }
+
+    if (browser.includes('Chrome')) {
+        return <Tooltip title="Chrome"><img src={chromeLogo} width={'25px'} /></Tooltip>;
+    }
+
+    if (browser.includes('Edge') || browser.includes('Internet Explorer')) {
+        return <Tooltip title="Edge"><img src={edgeLogo} width={'25px'} /></Tooltip>;
+    }
+
+    if (browser.includes('Firefox') || browser.includes('Mozilla')) {
+        return <Tooltip title="Mozilla Firefox"><img src={firefoxLogo} width={'25px'} /></Tooltip>;
+    }
+
+    if (browser.includes('Google')) {
+        return <Tooltip title="Google"><img src={googleLogo} width={'25px'} /></Tooltip>;
+    }
+
+    if (browser.includes('Opera')) {
+        return <Tooltip title="Opera"><img src={operaLogo} width={'25px'} /></Tooltip>;
+    }
+
+    if (browser.includes('Safari')) {
+        return <Tooltip title="Safari"><img src={safariLogo} width={'25px'} /></Tooltip>;
+    }
+
+    if (browser.includes('Samsung')) {
+        return <Tooltip title="Samsung Browser"><img src={samsungInternetLogo} width={'25px'} /></Tooltip>;
+    }
+
+    return <Tooltip title="Unknown Browser"><TravelExploreIcon/></Tooltip>
 }
