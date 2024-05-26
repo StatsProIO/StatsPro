@@ -182,11 +182,13 @@
 
 .floating-emoji-1 {
     animation: MoveUpDown1 4s ease-in-out infinite;
+    width: 100%;
+    height: 100%;
 }
 
 @keyframes MoveUpDown1 {
     0%, 100% {
-        transform: translateY(0) rotate(-10deg);
+        transform: translateY(0) rotate(-2deg);
 
     }
     50% {
@@ -196,11 +198,13 @@
 
 .floating-emoji-2 {
     animation: MoveUpDown2 5s ease-in-out infinite;
+    width: 100%;
+    height: 100%;
 }
 
 @keyframes MoveUpDown2 {
     0%, 100% {
-        transform: translateY(0) rotate(10deg);
+        transform: translateY(0) rotate(2deg);
 
     }
     50% {
