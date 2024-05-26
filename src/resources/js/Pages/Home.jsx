@@ -36,9 +36,10 @@ const rows = [
 ];
 
 const trackingFeatures =
-    ['Realtime Visitors', 'Pageviews', 'Unique Visitors', 'Bouce Rate', 'Visit Duration', 'Referral Sources', '[New!] Page Load Performance', 'UTM Data',
+    ['Realtime Visitors', 'Pageviews', 'Unique Visitors', 'Bouce Rate', 'Visit Duration', 'Referral Sources', 'UTM Data',
         'Entry Pages', 'Top Pages', 'Device Types', 'Browsers', 'Geolocation', 'Languages', 'Operating Systems', 'Time of Day Trends'
     ];
+const newTrackingFeatures = ['Page Load Performance', 'Session Explorer'];
 
 
 
@@ -115,7 +116,7 @@ export default function Home(props) {
 
                     <Grid container alignItems="center" justifyContent="center" sx={{ pb: 3, px: 1  }}>
                         <Grid item sm={8} lg={6}>
-                            <a href='/dashboard/demo.com'>
+                            <a href='/dashboard/demo.com' style={{position: 'relative'}}>
                                 <div className="demo-image-container">
                                     <picture>
                                         <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
@@ -125,6 +126,14 @@ export default function Home(props) {
                                         <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>Click for Live Demo</Typography>
                                     </div>
                                 </div>
+
+                                <Box className={'floating-emoji-1'} sx={{position: 'absolute', top: '30%', left: {xs: '-20px', md: '-50px'}}}>
+                                    <Box component={'img'} className={''} src="../images/astonished.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>
+                                </Box>
+
+                                <Box className={'floating-emoji-2'} sx={{position: 'absolute', top: '70%', right: {xs: '-20px', md: '-50px'}}}>
+                                    <Box component={'img'} className={''} src="../images/grinning.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>
+                                </Box>
                             </a>
                         </Grid>
                     </Grid>
@@ -146,6 +155,10 @@ export default function Home(props) {
                             {trackingFeatures.map((trackingFeature) => {
                                     return <Chip label={trackingFeature} sx={{m: 1, fontSize: '18px'}} size={'large'} color={'primary'}  variant="outlined" />
                                 })}
+
+                            {newTrackingFeatures.map((newTrackingFeature) => {
+                                return <Chip label={'[NEW!] ' + newTrackingFeature} sx={{m: 1, fontSize: '18px'}} size={'large'} color={'success'}  variant="outlined" />
+                            })}
                         </Grid>
                         <Grid item sm={12} md={12} lg={12}>
                             <Typography variant="h4" sx={{ pb: 0}}><b>... and more!</b></Typography>

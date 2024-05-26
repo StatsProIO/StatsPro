@@ -179,3 +179,32 @@
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.floating-emoji-1 {
+    animation: MoveUpDown1 4s ease-in-out infinite;
+}
+
+@keyframes MoveUpDown1 {
+    0%, 100% {
+        transform: translateY(0) rotate(-10deg);
+
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.floating-emoji-2 {
+    animation: MoveUpDown2 5s ease-in-out infinite;
+}
+
+@keyframes MoveUpDown2 {
+    0%, 100% {
+        transform: translateY(0) rotate(10deg);
+
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
