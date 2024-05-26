@@ -1,9 +1,10 @@
 import ValidationErrors from '@/Components/ValidationErrors';
 import {useForm} from '@inertiajs/inertia-react';
-import {Box, Link, TextField} from '@mui/material';
+import {Box, Button, Link, TextField} from '@mui/material';
 import React, {useEffect} from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import {LoadingButton} from "@mui/lab";
+import {Inertia} from "@inertiajs/inertia";
 
 export default function AddDomainForm() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -44,7 +45,8 @@ export default function AddDomainForm() {
             <LoadingButton loading={processing} fullWidth variant="contained" type="submit" size="large" sx={{ my: 2 }} startIcon={<AddIcon />}>Add Domain</LoadingButton>
         </form>
         <Box sx={{mt: 3}}>
-            <Link variant={'subtitle1'} href={'/contact'}>Need Help?</Link>
+            <Button variant="text" sx={{mt: 1}} onClick={() => { Inertia.visit('/docs/adding-a-domain?utm_source=add-domain'); }} fullWidth size='small'>What do I add here?</Button>
+            <Button variant="text" sx={{mt: 1}}  onClick={() => { Inertia.visit('/contact?utm_source=add-domain'); }} fullWidth size='small'>Need More Help? Contact us!</Button>
         </Box>
     </>
   );

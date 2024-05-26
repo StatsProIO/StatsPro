@@ -1,6 +1,8 @@
-import {Box, Link} from '@mui/material';
+import {Box, Button, Link} from '@mui/material';
 import React from 'react';
 import IntegrationCode from './IntegrationCode';
+import {Inertia} from "@inertiajs/inertia";
+import Typography from "@mui/material/Typography";
 
 export default function ScriptAndInstructions({domain}) {
     return (
@@ -8,7 +10,9 @@ export default function ScriptAndInstructions({domain}) {
             <IntegrationCode domain={domain}/>
 
             <Box sx={{my: 3}}>
-                <Link variant={'subtitle1'} href={'/contact'}>Need Help? Contact us</Link>
+                <Button variant="text"  onClick={() => { Inertia.visit('/docs/adding-a-domain?utm_source=script-and-instructions'); }} fullWidth size='small'>Need help adding the script?</Button>
+                <Button variant="text" sx={{mt: 1}} onClick={() => { Inertia.visit('/docs/adding-a-domain?utm_source=script-and-instructions'); }} fullWidth size='small'>Added the script but still having trouble?</Button>
+                <Button variant="text" sx={{mt: 1}}  onClick={() => { Inertia.visit('/contact?utm_source=script-and-instructions'); }} fullWidth size='small'>Need More Help? Contact us!</Button>
             </Box>
         </>
     );

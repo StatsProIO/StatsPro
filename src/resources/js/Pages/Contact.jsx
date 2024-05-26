@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Alert, AlertTitle, Grid, TextField} from '@mui/material';
+import {Alert, AlertTitle, Grid, TextField, Typography} from '@mui/material';
 import General from "@/Layouts/General";
 import {useForm, usePage} from "@inertiajs/inertia-react";
 import ValidationErrors from "@/Components/ValidationErrors";
@@ -36,6 +36,7 @@ export default function Contact() {
     return (
         <>
             <General title={'Contact'}>
+                <Typography variant="h6" color="text.secondary">We're always available to help! Leave us a message and we'll get back to you within 24 hours.</Typography>
                 <ValidationErrors errors={errors} />
                 <Grid container>
                     <Grid item lg={12} md={12} xs={12}>
