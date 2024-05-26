@@ -43,7 +43,6 @@ class TimeRangeInfo
     }
 
     public static function rangeStringToQueryInfo(string $range) {
-        //TODO: make this into an object
         switch ($range) {
             case '24h':
                 return new TimeRangeInfo(

@@ -122,12 +122,12 @@ Route::middleware(['auth', 'require_one_domain'])->group(function () {
     });
 });
 
-//Route::get('/visitor-widget', [VisitorWidget::class, 'get']);
+Route::get('/visitor-widget', [VisitorWidget::class, 'getWidget']);
 
 Route::get('/test-page', [TestPageController::class, 'get']);
 Route::get('/test-page/nested', [TestPageController::class, 'getNested']);
 
-//Route::get('/stats-pets', function () { return Inertia::render('StatsPets');});
+Route::get('/stats-pets', function () { return Inertia::render('StatsPets');});
 
 Route::get('/url-shortener', function () { return Inertia::render('Shorteners/MainURLShortener');});
 Route::get('/amazon-url-shortener', function () { return Inertia::render('Shorteners/AmazonURLShortener');});
