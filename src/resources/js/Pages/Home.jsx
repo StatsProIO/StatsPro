@@ -117,22 +117,24 @@ export default function Home(props) {
                     <Grid container alignItems="center" justifyContent="center" sx={{ pb: 3, px: 1  }}>
                         <Grid item sm={8} lg={6}>
                             <a href='/dashboard/demo.com' style={{position: 'relative'}}>
-                                <div className="demo-image-container">
-                                    <picture>
-                                        <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
-                                        <img className={'demo-image'} src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"}/>
-                                    </picture>
-                                    <div class="demo-image-overlay">
-                                        <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>Click for Live Demo</Typography>
+                                <Box style={{position: 'relative'}}>
+                                    <div className="demo-image-container">
+                                        <picture>
+                                            <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
+                                            <img className={'demo-image'} src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"}/>
+                                        </picture>
+                                        <div class="demo-image-overlay">
+                                            <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>Click for Live Demo</Typography>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <Box className={'floating-emoji-1'} sx={{position: 'absolute', top: '30%', left: {xs: '-20px', md: '-50px'}}}>
-                                    <Box component={'img'} className={''} src="../images/astonished.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>
-                                </Box>
+                                    <Box className={'floating-emoji-1'} sx={{position: 'absolute', top: '30%', left: {xs: '-20px', md: '-50px'}}}>
+                                        <Box component={'img'} className={''} src="../images/astonished.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>
+                                    </Box>
 
-                                <Box className={'floating-emoji-2'} sx={{position: 'absolute', top: '70%', right: {xs: '-20px', md: '-50px'}}}>
-                                    <Box component={'img'} className={''} src="../images/grinning.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}, float: 'right'}}/>
+                                    <Box className={'floating-emoji-2'} sx={{position: 'absolute', top: '70%', right: {xs: '-20px', md: '-50px'}}}>
+                                        <Box component={'img'} className={''} src="../images/grinning.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}, float: 'right'}}/>
+                                    </Box>
                                 </Box>
                             </a>
                         </Grid>
