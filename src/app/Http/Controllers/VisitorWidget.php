@@ -25,7 +25,8 @@ class VisitorWidget extends Controller
             $domain = null;
 
             $referer = $request->header('referer');
-            dd($request->headers);
+            return response()->json($request->headers->all(), 200);
+
             if ($referer) {
                 $fullDomain = parse_url($referer)['host']; //gets google.com, www.google.com, subdomain.google.com, etc
                 $domain = Domain::where('domain_name', $fullDomain)->first();
