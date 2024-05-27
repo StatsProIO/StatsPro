@@ -35,7 +35,7 @@ export default function StatsPets(props) {
                     </Grid>
 
                 </Grid>
-                <video src={'http://localhost/visitor-widget?color-variant=2'}/>
+                <video src={'/visitor-widget?color-variant=2'}/>
                 <Grid container spacing={0} sx={{ pt: 5, px: 1 }} justifyContent="center">
 
                     <Grid item xl={2} lg={7} md={7} sm={11} xs={12} textAlign='center'>
