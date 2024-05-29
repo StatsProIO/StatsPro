@@ -20,6 +20,8 @@ import Rating from "@mui/material/Rating";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import SpeedIcon from '@mui/icons-material/Speed';
 import Chip from "@mui/material/Chip";
+import AvatarGroup from "@mui/material/AvatarGroup";
+import Avatar from "@mui/material/Avatar";
 
 
 function createData(name, statsPro, googleAnalytics, fathom, plausible, simpleAnalytics) {
@@ -72,17 +74,27 @@ export default function Home(props) {
                             Google Analytics is complicated and a legal minefield. StatsPro makes it easy to focus on your users and business.
                         </Typography>
                         <Grid container justifyContent={'center'} sx={{pb: 7}}>
-                            <Grid item>
-                                <Rating size="large"
-                                    name="simple-controlled"
-                                        color={'white'}
-                                        border
+                            <Grid item xs={12} justifyContent={'center'}>
+                                <AvatarGroup renderSurplus={(surplus) => <span>+</span>}
+                                             total={380} sx={{justifyContent: 'center'}}>
+                                    <Avatar alt="Remy Sharp" src="/images/avatar-1.png" />
+                                    <Avatar alt="Travis Howard" src="/images/avatar-2.png" />
+                                    <Avatar alt="Cindy Baker" src="/images/avatar-3.png" />
 
-                                    defaultValue={4.3}
-                                        value={4.3}
-                                        emptyIcon={<StarBorderIcon sx={{color: 'white'}} fontSize={'30px'}/> }
-                                />
-                                <Typography variant={'subtitle2'} >Our users ❤️ StatsPro, rated 4.3 by over 80 users!</Typography>
+                                </AvatarGroup>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography variant={'subtitle2'} >Rated 4.3 ⭐️ by over 80 users!</Typography>
+                                {/*<Rating size="large"*/}
+                                {/*    name="simple-controlled"*/}
+                                {/*        color={'white'}*/}
+                                {/*        border*/}
+
+                                {/*    defaultValue={4.3}*/}
+                                {/*        value={4.3}*/}
+                                {/*        emptyIcon={<StarBorderIcon sx={{color: 'white'}} fontSize={'30px'}/> }*/}
+                                {/*/>*/}
+
                             </Grid>
                         </Grid>
 
@@ -129,7 +141,7 @@ export default function Home(props) {
                                     </div>
 
                                     <Box className={'floating-emoji-1'} sx={{position: 'absolute', top: '30%', left: {xs: '-20px', md: '-50px'}}}>
-                                        <Box component={'img'} className={''} src="../images/astonished.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>
+                                        <Box component={'img'} className={''} src="../images/Sparkles.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>
                                     </Box>
 
                                     <Box className={'floating-emoji-2'} sx={{position: 'absolute', top: '70%', right: {xs: '-20px', md: '-50px'}}}>

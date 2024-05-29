@@ -63,6 +63,9 @@
 
 @media (min-width: 1200px) {}
 
+.MuiAvatar-root {
+    margin-left: -16px !important;
+}
 
 .blueShadow {
     box-shadow: 1px 0px 58px 1px rgba(42, 98, 254, 0.48);
@@ -233,6 +236,7 @@
     animation: move 11s linear infinite;
     transform: translateX(-10vw);
 }
+
 
 
 @media (min-width: 1200px) {
