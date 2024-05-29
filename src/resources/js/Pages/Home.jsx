@@ -77,9 +77,9 @@ export default function Home(props) {
                             <Grid item xs={12} justifyContent={'center'}>
                                 <AvatarGroup renderSurplus={(surplus) => <span>+</span>}
                                              total={380} sx={{justifyContent: 'center'}}>
-                                    <Avatar alt="Remy Sharp" src="/images/avatar-1.png" />
-                                    <Avatar alt="Travis Howard" src="/images/avatar-2.png" />
-                                    <Avatar alt="Cindy Baker" src="/images/avatar-3.png" />
+                                    <Avatar alt="Remy Sharp" src="/images/avatar-1.webp" />
+                                    <Avatar alt="Travis Howard" src="/images/avatar-2.webp" />
+                                    <Avatar alt="Cindy Baker" src="/images/avatar-3.webp" />
 
                                 </AvatarGroup>
                             </Grid>
