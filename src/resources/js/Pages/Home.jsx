@@ -79,7 +79,7 @@ export default function Home(props) {
                                              total={380} sx={{justifyContent: 'center'}}>
                                     <Avatar alt="Remy Sharp" src="/images/avatar-1.webp" />
                                     <Avatar alt="Travis Howard" src="/images/avatar-2.webp" />
-                                    <Avatar alt="Cindy Baker" src="/images/avatar-3.webp"  />
+                                    <Avatar alt="Cindy Baker" src="/images/avatar-3.webp" />
 
                                 </AvatarGroup>
                             </Grid>
