@@ -35,8 +35,21 @@ class SendDemoRequests extends Command
         $count = 0;
         $hour = intval((\Carbon\Carbon::now())->format('H'));
 
-        $random = rand(2, 7);
-        while ($count <  intval(sin(.13 * $hour) + (sin($hour)/3) + 2)) { //send 1 to 3 requests a minute
+
+        $valueOnSinGraph = sin(.13 * $hour) + (sin($hour)/3) + 2;
+
+        $baseNumberOfRequestsToMake = floor($valueOnSinGraph);
+
+        $remainder = ($valueOnSinGraph - $baseNumberOfRequestsToMake) * 10;
+
+        $randomChance = rand(0, 10);
+
+        $extraRequestToMake = 0;
+        if($randomChance < $remainder) {
+            $extraRequestToMake = 1;
+        }
+
+        while ($count < ($baseNumberOfRequestsToMake + $extraRequestToMake)) {
 
             try {
                 $client = new \GuzzleHttp\Client();
@@ -63,7 +76,7 @@ class SendDemoRequests extends Command
             $count++;
 
             Log::info("Sleeping for 20 seconds....");
-            sleep(20);
+            sleep(10);
         }
 
 
