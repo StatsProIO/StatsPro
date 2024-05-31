@@ -1,6 +1,7 @@
 on:
   push:
     branches: [ staging ]
+  workflow_dispatch:
 name: Build Staging
 jobs:
   deploy-staging:

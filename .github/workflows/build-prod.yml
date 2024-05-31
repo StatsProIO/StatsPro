@@ -1,6 +1,7 @@
 on:
   push:
     branches: [ prod ]
+  workflow_dispatch:
 name: Build Prod
 
 jobs:
