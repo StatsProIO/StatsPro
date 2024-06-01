@@ -166,7 +166,7 @@ export default function Home(props) {
                                         <Box component={'img'} className={''} src="../images/Sparkles.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>
                                     </Box>
 
-                                    <Box className={'floating-emoji-2'} sx={{position: 'absolute', top: '70%', right: {xs: '-20px', md: '-50px'}}}>
+                                    <Box className={'floating-emoji-2'} sx={{position: 'absolute', top: '70%', right: {xs: '-10px', md: '-50px'}}}>
                                         <Box component={'img'} className={''} src="../images/grinning.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}, float: 'right'}}/>
                                     </Box>
                                 </Box>
@@ -341,34 +341,35 @@ export default function Home(props) {
                                         <Typography variant="body1" sx={{ pt: 0, mt: 0}}>
                                             StatsPro integrates with all websites. Our lightweight script is tiny - only 4kB - but incredibly powerful. You can add it to any framework, CMS or website builder you're already using. Easily integrate with WordPress, Next.JS, React, Vue, and Shopify, and any other way that you run your website.
                                         </Typography>
-                                        <Stack direction={'row'} justifyContent={'space-between'} sx={{py: 4}}>
-                                            <img src={'/images/icons/angular.svg'} width={'50px'}/>
-                                            <img src={'/images/icons/drupal.svg'} width={'50px'}/>
-                                            <Box component={'div'} sx={{ display: { xs: 'none', sm: 'block' } }}>
-                                                <img src={'/images/icons/framermotion.svg'} width={'50px'}/>
-                                            </Box>
-                                            <Box component={'div'} sx={{ display: { xs: 'none', sm: 'block' } }}>
-                                                <img src={'/images/icons/go.svg'} width={'50px'}/>
-                                            </Box>
-                                            <img src={'/images/icons/laravel.svg'} width={'50px'}/>
-                                            <img src={'/images/icons/nextjs.svg'} width={'50px'}/>
-                                            <Box component={'div'} sx={{ display: { xs: 'none', sm: 'block' } }}>
-                                                <img src={'/images/icons/nuxtjs.svg'} width={'50px'}/>
-                                            </Box>
-                                            <img src={'/images/icons/react.svg'} width={'50px'}/>
-                                            <img src={'/images/icons/vuejs.svg'} width={'50px'}/>
-                                            <img src={'/images/icons/wordpress.svg'} width={'50px'}/>
-                                        </Stack>
+
+                                            <Grid container justifyContent={'space-between'} spacing={3} sx={{py: 3}}>
+                                                <Grid item justifyContent={'space-between'} xs={12} sm={12} md={6}>
+                                                    <Box justifyContent={'space-between'} sx={{display: 'flex', justifyContent: 'space-between'}}>
+                                                    <img src={'/images/icons/angular.svg'} width={'50px'}/>
+                                                    <img src={'/images/icons/drupal.svg'} width={'50px'}/>
+                                                    <img src={'/images/icons/framermotion.svg'} width={'50px'}/>
+                                                    <img src={'/images/icons/go.svg'} width={'50px'}/>
+                                                    <img src={'/images/icons/laravel.svg'} width={'50px'}/>
+                                                    </Box>
+                                                </Grid>
+
+                                                <Grid item justifyContent={'space-between'} xs={12} sm={12} md={6}>
+                                                    <Box justifyContent={'space-between'} sx={{display: 'flex', justifyContent: 'space-between'}}>
+                                                        <img src={'/images/icons/nextjs.svg'} width={'50px'}/>
+                                                        <img src={'/images/icons/nuxtjs.svg'} width={'50px'}/>
+                                                        <img src={'/images/icons/react.svg'} width={'50px'}/>
+                                                        <img src={'/images/icons/vuejs.svg'} width={'50px'}/>
+                                                        <img src={'/images/icons/wordpress.svg'} width={'50px'}/>
+                                                    </Box>
+
+                                                </Grid>
+                                            </Grid>
+
                                     </Stack>
                                 </Box>
                             </Paper>
                         </Grid>
-
                     </Grid>
-
-
-
-
 
                     <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', pt: 10 }}>
                         <Grid item sm={12} md={12} lg={12}>
