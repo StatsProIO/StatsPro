@@ -37,7 +37,7 @@ export function SubscriptionOption({ authUser, showLabels, title, price, descrip
                 <Typography variant="body1" sx={{ pt: 3, pb: 2 }} color='text.secondary'>{description}</Typography>
             </Box>
 
-            <Box sx={{ p: 3 }}>
+            <Box sx={{ px: 3 }}>
                 <Stack direction="row" alignItems="center" gap={1}>
                     <CheckIcon sx={{ color: "#59ce9f" }} />
                     <Typography variant="body1" sx={{ py: 1 }}>{maxEvents.toLocaleString()}  events per month per site</Typography>

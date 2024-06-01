@@ -170,6 +170,25 @@
     z-index: 10;
 }
 
+.feature-pictures {
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #eee;
+}
+
+.overlap-vertically-10-percent {
+    margin-top: -10%;
+}
+
+.rotate-slightly-left {
+    transform: rotate(-5deg);
+}
+
+.rotate-slightly-right {
+    transform: rotate(5deg);
+}
+
 .live-demo-text {
     color: white;
     position: absolute;
@@ -183,8 +202,6 @@
 
 .floating-emoji-1 {
     animation: MoveUpDown1 4s ease-in-out infinite;
-    width: 100%;
-    height: 100%;
 }
 
 @keyframes MoveUpDown1 {
@@ -199,8 +216,6 @@
 
 .floating-emoji-2 {
     animation: MoveUpDown2 5s ease-in-out infinite;
-    width: 100%;
-    height: 100%;
 }
 
 @keyframes MoveUpDown2 {

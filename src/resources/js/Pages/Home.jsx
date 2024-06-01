@@ -22,6 +22,7 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import Chip from "@mui/material/Chip";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
 
 
 function createData(name, statsPro, googleAnalytics, fathom, plausible, simpleAnalytics) {
@@ -43,6 +44,27 @@ const trackingFeatures =
     ];
 const newTrackingFeatures = ['Page Load Performance', 'Session Explorer'];
 
+const faqs = [
+    {
+        title: 'What is StatsPro?',
+        answer: 'StatsPro is an easy-to-use and powerful analytics tool. Use it to learn about your users behavior to optimize your site. You will see which pages are popular, where your users come from, how long they stay on pages, how quickly your pages load, and many more valuable insights.'
+    }, {
+        title: 'How do I setup StatsPro?',
+        answer: 'Once you create an account, you\'ll tell us the domain (your website URL) that you will be setting up for StatsPro. Then, we\'ll give you a line of code that you will copy on to your website. That\'s it! After that, your stats will show up on StatsPro!'
+    }, {
+        title: 'How is StatsPro different from Google Analytics?',
+        answer: 'From the ground up, StatsPro is built to be more capable and flexible than Google Analytics. All data on StatsPro is shown in real-time, StatsPro captures more users because it\'s not blocked by ad blockers, additionally StatsPro is GDPR compliant and doesn\'t require an annoying cookie banner.'
+    }, {
+        title: 'Does StatsPro use cookies?',
+        answer: 'Nope! StatsPro uses exactly 0 cookies to track your users. This means you can safely add StatsPro to your website without an annoying cookie banner.'
+    },  {
+        title: 'Is StatsPro compliant with GDPR?',
+        answer: 'Yes, StatsPro does not collect any personally identifiable information. All information that StatsPro collects is anonymous and aggregated and none of the data can be used to identify users.'
+    },  {
+        title: 'How much does StatsPro cost?',
+        answer: 'The initial tier of StatsPro is free to use, forever! If your website has more traffic, we have offer paid plans that scale with the amount of traffic you have.'
+    }
+]
 
 
 export default function Home(props) {
@@ -66,7 +88,7 @@ export default function Home(props) {
             <div className="home">
                 <Grid container spacing={0} className="hero-row" sx={{ pt: 4, px: 1 }} justifyContent="center" >
                     <Grid item xl={5} lg={7} md={7} sm={11} xs={12} textAlign='center' >
-                        <Typography variant="h2" component="div" sx={{pb: 0, fontWeight: 600, textAlign: 'center', fontSize: {xs: '35px', sm : '45px', md: '50px'} }} gutterBottom style={{fontFamily: 'Helvetica', letterSpacing: '0.3px', wordSpacing: '.75px'}}>
+                        <Typography variant="h2" component="div" sx={{pb: 0, fontWeight: 600, textAlign: 'center', fontSize: {xs: '35px', sm : '45px', md: '50px'} }} gutterBottom style={{letterSpacing: '0.3px', wordSpacing: '.75px', fontWeight: 800}}>
                             Easy to use web analytics, no cookie banner needed!
                         {/*    Stop annoying users with a cookie banner*/}
                         </Typography>
@@ -159,13 +181,51 @@ export default function Home(props) {
                     </Grid>
 
 
+                    <Grid container spacing={3} justifyContent="center" alignItems="stretch" sx={{ textAlign: 'center', py: 10, px: 1 }}>
+                        <Grid item sm={12} md={12} lg={12}>
+                            <Typography variant="h4" sx={{py: 3, pb: 0}}><b>Features</b></Typography>
+                        </Grid>
 
-                    <Grid container spacing={3} justifyContent="center" alignItems="stretch" sx={{ textAlign: 'center', py: 5, px: 1 }}>
+                        {/*Left column*/}
+                        <Grid item md={6} lg={4}>
+                            <img src={'/images/feature-2.png'} width={'80%'} className={'feature-pictures rotate-slightly-right'}/>
+                            <img src={'/images/feature-1.png'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'}/>
+                            <img src={'/images/feature-3.png'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-right'}/>
+                            <img src={'/images/feature-4.png'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'}/>
+                        </Grid>
+
+                        <Grid item md={6} lg={4}>
+                            <Stack spacing={3} justifyContent={'space-between'} sx={{height: '100%'}}>
+                                <Paper sx={{ p: 3,  height: '100%' }}>
+                                    {/*<img src="../images/Business Protection.png" height={'100px'} loading="lazy" decoding="async" />*/}
+                                    <Typography variant="h5"><b>Powerful features</b></Typography>
+                                    <Typography variant="body1" color="text.secondary">StatsPro comes comes with all of the tools needed to understand your users. You can see real-time data, page views, time on page, space speed, bounce rate, and much more.</Typography>
+                                </Paper>
+
+                                <Paper sx={{ p: 3,  height: '100%' }}>
+                                    {/*<img src="../images/Global Business.png" height={'100px'} loading="lazy" decoding="async" />*/}
+                                    <Typography variant="h5"><b>Say goodbye to the annoying cookie banner 🍪</b></Typography>
+                                    <Typography variant="body1" color="text.secondary">StatsPro does not use cookies to track users so you don't need to worry about adding that annoying cookie banner for your users.</Typography>
+
+                                </Paper>
+
+                                <Paper sx={{ p: 3,  height: '100%' }}>
+                                    {/*<img src="../images/Strategy.png" height={'100px'} loading="lazy" decoding="async" />*/}
+                                    <Typography variant="h5"><b>European hosted analytics</b></Typography>
+                                    <Typography variant="body1" color="text.secondary">Unlike other privacy-focused analytics services, StatsPro keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit. Sleep easy knowing your users data complies with GDPR.</Typography>
+                                </Paper>
+                            </Stack>
+                        </Grid>
+                    </Grid>
+
+
+
+                    <Grid container spacing={3} justifyContent="center" alignItems="stretch" sx={{ textAlign: 'center', py: 8, px: 1 }}>
                         <Grid item sm={12} md={12} lg={12}>
                             <Typography variant="h4" sx={{py: 3, pb: 0}}><b>With StatsPro, analyze...</b></Typography>
                         </Grid>
 
-                        <Grid item sm={12} md={6} lg={4} >
+                        <Grid item sm={12} md={8} lg={6} >
                             {trackingFeatures.map((trackingFeature) => {
                                     return <Chip label={trackingFeature} sx={{m: 1, fontSize: '18px'}} size={'large'} color={'primary'}  variant="outlined" />
                                 })}
@@ -179,7 +239,47 @@ export default function Home(props) {
                         </Grid>
                     </Grid>
 
-                    <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', py: 5 }}>
+                    <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'left', py: 8, mt: 4, backgroundColor: '#f7f7f7' }}>
+                        <Grid item sm={12} md={12} lg={12}>
+                            <Typography variant="h4" sx={{ pb: 0, textAlign: 'center'}}><b>Setup is quick and easy</b></Typography>
+                        </Grid>
+
+                        <Grid item sm={12} md={4} lg={3} >
+                            <Paper elevation={1} sx={{ m: 2}} style={{boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
+                                <Box sx={{ borderRadius: '5px', p: 3 }}>
+                                    <Stack direction="column" alignItems="left" justifyContent="left" gap={0}>
+                                        <Typography variant="overline" sx={{ pb: 0, mb: 0, color: '#999'}}><b>Step 1</b></Typography>
+                                        <Typography variant="h6" sx={{ pt: 0, mt: 0}}><b>Sign Up</b></Typography>
+                                        <Typography variant="body1" color="text.secondary">Sign up for an account. But keep your credit card in your wallet, we offer a generous free tier that you can use to try out all the features of StatsPro.</Typography>
+                                    </Stack>
+                                </Box>
+                            </Paper>
+                        </Grid>
+                        <Grid item sm={12} md={4} lg={3} >
+                            <Paper elevation={1} sx={{ m: 2}} style={{boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
+                                <Box sx={{ borderRadius: '5px', p: 3 }}>
+                                    <Stack direction="column" alignItems="left" justifyContent="left" gap={0}>
+                                        <Typography variant="overline" sx={{ pb: 0, mb: 0, color: '#999'}}><b>Step 2</b></Typography>
+                                        <Typography variant="h6" sx={{ pt: 0, mt: 0}}><b>Add Script</b></Typography>
+                                        <Typography variant="body1" color="text.secondary">We'll give you some code, just copy it on to your website. If you need help, we can guide you through the process.</Typography>
+                                    </Stack>
+                                </Box>
+                            </Paper>
+                        </Grid>
+                        <Grid item sm={12} md={4} lg={3} >
+                            <Paper elevation={1} sx={{ m: 2}} style={{boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
+                                <Box sx={{ borderRadius: '5px', p: 3 }}>
+                                    <Stack direction="column" alignItems="left" justifyContent="left" gap={0}>
+                                        <Typography variant="overline" sx={{ pb: 0, mb: 0, color: '#999'}}><b>Step 3</b></Typography>
+                                        <Typography variant="h6" sx={{ pt: 0, mt: 0}}><b>View Your Data!</b></Typography>
+                                        <Typography variant="body1" color="text.secondary">That's it! Your stats will begin flowing in and show up in your StatsPro dashboard.</Typography>
+                                    </Stack>
+                                </Box>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+
+                    <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', pt: 8, pb: 4 }}>
                         <Grid item sm={12} md={10} xl={7} zeroMinWidth={true}>
                             <Typography variant="h4"><b>Compare to the competition</b></Typography>
 
@@ -225,37 +325,71 @@ export default function Home(props) {
                     </Grid>
 
 
-                    <Grid container spacing={3} justifyContent="center" alignItems="stretch" sx={{ textAlign: 'center', py: 5, px: 1 }}>
-                        <Grid item sm={12} md={12} lg={12}>
-                            <Typography variant="h4" sx={{py: 3, pb: 0}}><b>Features</b></Typography>
-                        </Grid>
-
-                        <Grid item sm={12} md={4} lg={3} >
-                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2', height: '100%' }}>
-                                <img src="../images/Global Business.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h5"><b>European hosted analytics</b></Typography>
-                                <Typography variant="h6" color="text.secondary">Unlike other privacy-focused analytics services, StatsPro keeps <b>100%</b> of your analytics data on European-owned servers. This applies to all data, all the time, in storage or even in transit.</Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item sm={12} md={4} lg={3}>
-                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
-                                <img src="../images/Business Protection.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h5"><b>No Cookie Banner</b></Typography>
-                                <Typography variant="h6" color="text.secondary">StatsPro does not use cookies to track users so you don't need to worry about adding yet another popup on your screen.</Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item sm={12} md={4} lg={3}>
-                            <Paper elevation={0} sx={{ p: 3, backgroundColor: '#f2f2f2' }}>
-                                <img src="../images/Strategy.png" height={'100px'} loading="lazy" decoding="async" />
-                                <Typography variant="h5"><b>All the features you're used to</b></Typography>
-                                <Typography variant="h6" color="text.secondary">StatsPro comes standard with all of the features that you're used to seeing from your analytics platform: real-time, page views, time on page, bounce rate, and more.</Typography>
-                            </Paper>
+                    <Grid container>
+                        <Grid item xs={12} textAlign={'center'}>
+                            <Button sx={{ mb: 2}} variant={'outlined'} onClick={() => Inertia.get('/docs/about')}>Learn More</Button>
                         </Grid>
                     </Grid>
 
-                    <Grid container>
-                        <Grid item xs={12} textAlign={'center'}>
-                            <Button sx={{ my: 2}} variant={'outlined'} onClick={() => Inertia.get('/docs/about')}>Learn More</Button>
+                    <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'left', py: 5, mt: 4}}>
+                        <Grid item sm={12} md={10} lg={8} >
+                            <Paper elevation={1} sx={{ m: 2}} style={{boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
+                                <Box sx={{ borderRadius: '5px', p: 5 }}>
+                                    <Stack direction="column" alignItems="left" justifyContent="left" gap={0}>
+
+                                        <Typography variant="h4" sx={{ pb: 2, mb: 0}}><b>Integrates easily</b></Typography>
+                                        <Typography variant="body1" sx={{ pt: 0, mt: 0}}>
+                                            StatsPro integrates with all websites. Our lightweight script is tiny - only 4kB - but incredibly powerful. You can add it to any framework, CMS or website builder you're already using. Easily integrate with WordPress, Next.JS, React, Vue, and Shopify, and any other way that you run your website.
+                                        </Typography>
+                                        <Stack direction={'row'} justifyContent={'space-between'} sx={{py: 4}}>
+                                            <img src={'/images/icons/angular.svg'} width={'50px'}/>
+                                            <img src={'/images/icons/drupal.svg'} width={'50px'}/>
+                                            <Box component={'div'} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                                                <img src={'/images/icons/framermotion.svg'} width={'50px'}/>
+                                            </Box>
+                                            <Box component={'div'} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                                                <img src={'/images/icons/go.svg'} width={'50px'}/>
+                                            </Box>
+                                            <img src={'/images/icons/laravel.svg'} width={'50px'}/>
+                                            <img src={'/images/icons/nextjs.svg'} width={'50px'}/>
+                                            <Box component={'div'} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                                                <img src={'/images/icons/nuxtjs.svg'} width={'50px'}/>
+                                            </Box>
+                                            <img src={'/images/icons/react.svg'} width={'50px'}/>
+                                            <img src={'/images/icons/vuejs.svg'} width={'50px'}/>
+                                            <img src={'/images/icons/wordpress.svg'} width={'50px'}/>
+                                        </Stack>
+                                    </Stack>
+                                </Box>
+                            </Paper>
+                        </Grid>
+
+                    </Grid>
+
+
+
+
+
+                    <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', pt: 10 }}>
+                        <Grid item sm={12} md={12} lg={12}>
+                            <Typography variant="h4" sx={{py: 3, pb: 0}}><b>Frequently Asked Questions</b></Typography>
+                        </Grid>
+
+                        <Grid item xs={12} sm={12} md={12} lg={10}>
+                            <Grid container>
+                                {faqs.map((faq => (
+                                    <Grid item sm={12} sm={6} md={4} >
+                                        <Paper elevation={1} sx={{ m: 2}} style={{boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
+                                            <Box sx={{ borderRadius: '5px', p: 3 }}>
+                                                <Stack direction="column" alignItems="center" justifyContent="center" gap={1}>
+                                                    <Typography variant="h6" sx={{ pb: 0}}><b>{faq.title}</b></Typography>
+                                                    <Typography variant="body1" color="text.secondary">{faq.answer}</Typography>
+                                                </Stack>
+                                            </Box>
+                                        </Paper>
+                                    </Grid>
+                                )))}
+                            </Grid>
                         </Grid>
                     </Grid>
 
@@ -265,9 +399,10 @@ export default function Home(props) {
                             <SubscriptionOptions showLabels={false} currentProductSubscription={subscriptionPlans[0]} />
                         </Grid>
                     </Grid>
+
                 </Box>
 
-                <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', pt: 3, pb: 6, px: 1 }}>
+                <Grid container alignItems="center" justifyContent="center" sx={{ textAlign: 'center', py: 8, px: 1 }}>
                     <Grid item sm={12} md={12} lg={12}>
                         <Typography variant="h4" sx={{py: 3}}><b>Get started in 5 seconds!</b></Typography>
                         <Typography variant="h6">Drop this code on your website and <a href={'/register'}>register with your domain</a>.</Typography>

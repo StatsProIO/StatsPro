@@ -23,8 +23,11 @@ export default function Container({ children, showDrawer, showNavLinks, auth, do
             }
         },
         typography: {
-            fontFamily: 'Barlow, Helvetica, sans-serif',
+            fontFamily: ['Inter', 'Helvetica'].join(','),
             fontSize: 16,
+            button: {
+                fontFamily: ['Inter', 'Helvetica'].join(','),
+            }
         },
         shape: {
             borderRadius: 8,
@@ -57,9 +60,9 @@ export default function Container({ children, showDrawer, showNavLinks, auth, do
     return (
         <>
             <CssBaseline />
-            <NavBar toggleIsDrawerOpen={toggleIsDrawerOpen} showDrawer={showDrawer} showNavLinks={showNavLinks} auth={auth} />
-            <Toolbar />
             <ThemeProvider theme={theme}>
+                <NavBar toggleIsDrawerOpen={toggleIsDrawerOpen} showDrawer={showDrawer} showNavLinks={showNavLinks} auth={auth} />
+                <Toolbar />
                 {
                     showDrawer ?
                         <Box sx={{ display: 'flex' }}> <Drawers isDrawerOpen={isDrawerOpen} domain={domain} /> {children} </Box> :

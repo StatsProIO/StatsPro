@@ -19,53 +19,29 @@
 
         <!-- Fonts -->
         <style>
-            /* roboto-regular - latin */
+            /* inter-regular - latin */
             @font-face {
                 font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-                font-family: 'Roboto';
+                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 400;
-                src: url('/fonts/roboto-v30-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+                src: url('/fonts/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
             }
-            /* roboto-500 - latin */
+            /* inter-600 - latin */
             @font-face {
                 font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-                font-family: 'Roboto';
-                font-style: normal;
-                font-weight: 500;
-                src: url('/fonts/roboto-v30-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-            }
-            /* roboto-700 - latin */
-            @font-face {
-                font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-                font-family: 'Roboto';
-                font-style: normal;
-                font-weight: 700;
-                src: url('/fonts/roboto-v30-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-            }
-            /* barlow-regular - latin */
-            @font-face {
-                font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-                font-family: 'Barlow';
-                font-style: normal;
-                font-weight: 400;
-                src: url('../fonts/barlow-v12-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-            }
-            /* barlow-500 - latin */
-            @font-face {
-                font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-                font-family: 'Barlow';
-                font-style: normal;
-                font-weight: 500;
-                src: url('../fonts/barlow-v12-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-            }
-            /* barlow-600 - latin */
-            @font-face {
-                font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-                font-family: 'Barlow';
+                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 600;
-                src: url('../fonts/barlow-v12-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+                src: url('/fonts/inter-v13-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+            }
+            /* inter-800 - latin */
+            @font-face {
+                font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 800;
+                src: url('/fonts/inter-v13-latin-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
             }
         </style>
         <!-- Scripts -->
