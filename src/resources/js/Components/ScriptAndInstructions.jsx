@@ -8,6 +8,7 @@ export default function ScriptAndInstructions({domain}) {
     return (
         <>
             <IntegrationCode domain={domain}/>
+            <Typography variant="subtitle1" sx={{py: 1}}>Copy the code above and add it to your website inside of the {`<head>`} tag.</Typography>
 
             <Box sx={{my: 3}}>
                 <Button variant="text"  onClick={() => { Inertia.visit('/docs/adding-a-domain?utm_source=script-and-instructions'); }} fullWidth size='small'>Need help adding the script?</Button>
