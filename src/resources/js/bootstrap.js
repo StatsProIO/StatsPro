@@ -12,7 +12,7 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-const parsedScriptUrl = (new URL(import.meta.url));
+const parsedScriptUrl = (new URL(window.location.href));
 const errorEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/error";
 
 function sendStuffToServer(...args){
@@ -44,6 +44,7 @@ var newConsole=(function(oldCons){
         }
     };
 }(window.console));
+
 
 window.console = newConsole;
 window.onerror = sendStuffToServer;
