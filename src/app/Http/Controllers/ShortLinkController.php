@@ -41,6 +41,11 @@ class ShortLinkController extends Controller
     public function getShortLink(string $shortCode, Request $request) {
         $shortLink = ShortLink::where('short_code', $shortCode)->first();
 
+        if (!$shortLink) {
+            Logger::info("Short link not found");
+            abort(404);
+        }
+
         if ($shortLink->expires_at != null && Carbon::now() > $shortLink->expires_at) {
             Logger::info("Expired short link clicked");
             abort(404);
