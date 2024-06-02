@@ -15,11 +15,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 const parsedScriptUrl = (new URL(import.meta.url));
 const errorEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/error";
 
-function sendStuffToServer(messageObject){
+function sendStuffToServer(...args){
     var errorRequest = new XMLHttpRequest();
     errorRequest.open('POST', errorEndpoint, true);
     errorRequest.setRequestHeader('Content-Type', 'application/json');
-    errorRequest.send(JSON.stringify(messageObject));
+    errorRequest.send(JSON.stringify(args));
 }
 
 // define a new console
