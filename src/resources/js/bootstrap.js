@@ -12,6 +12,41 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+const parsedScriptUrl = (new URL(import.meta.url));
+const errorEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/error";
+
+function sendStuffToServer(messageObject){
+    var errorRequest = new XMLHttpRequest();
+    errorRequest.open('POST', errorEndpoint, true);
+    errorRequest.setRequestHeader('Content-Type', 'application/json');
+    errorRequest.send(JSON.stringify(messageObject));
+}
+
+// define a new console
+var newConsole=(function(oldCons){
+    return {
+        ...oldCons,
+        log: function(text){
+            oldCons.log(text);
+            sendStuffToServer(text);
+        },
+        info: function (text) {
+            oldCons.info(text);
+            sendStuffToServer(text);
+        },
+        warn: function (text) {
+            oldCons.warn(text);
+            sendStuffToServer(text);
+        },
+        error: function (text) {
+            oldCons.error(text);
+            sendStuffToServer(text);
+        }
+    };
+}(window.console));
+
+window.console = newConsole;
+window.onerror = sendStuffToServer;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

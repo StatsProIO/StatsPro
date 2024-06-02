@@ -104,12 +104,10 @@ var pS = window.history.pushState;
 window.history.pushState = function() {
     pS.apply(this, arguments);
     sendRequest(endpoint, buildPayload(), null);
-    console.log("push state called");
 };
 
 window.addEventListener('popstate', function(event) {
     sendRequest(endpoint, buildPayload(), null);
-    console.log('popstate fired!');
 });
 
 
