@@ -53,7 +53,7 @@ export default function Welcome(props) {
                     </Stack>
                     <Stack direction="row" alignItems="center" gap={1}>
                         <RadioButtonUncheckedIcon />
-                        <Typography variant="body1" sx={{ py: 2, fontWeight: 'bold' }} textAlign='center'>4. Verify Results</Typography>
+                        <Typography variant="body1" sx={{ py: 2, fontWeight: 'bold'  }} textAlign='center'>4. Verify Results</Typography>
                     </Stack>
                 </Grid>
             </Grid>

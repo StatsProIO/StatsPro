@@ -38,7 +38,7 @@ export default function AddDomainForm() {
             variant="outlined"
             type="text"
             name="domain_name"
-            value={data.domain_name}
+            value={data.domain_name }
             onChange={onHandleChange}
             sx={{mt: 2}}
             />
