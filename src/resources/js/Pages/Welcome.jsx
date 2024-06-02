@@ -28,9 +28,10 @@ export default function Welcome(props) {
                         <Grid item xs={12} justifyContent={'center'}>
                             <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }} >
                                 <Typography variant="h3"  textAlign='center'><b>Welcome!</b></Typography>
-                                <Typography variant="h6" sx={{pb: 2, color: '#b7b7b7' }} textAlign='center'>Lets get started!</Typography>
+                                <Typography variant="h6" sx={{pb: 5, color: '#b7b7b7' }} textAlign='center'>Lets get started!</Typography>
 
-                                <Typography variant="h5" ><b>Your Domain</b></Typography>
+                                <Typography variant="h5" ><b>Your website</b></Typography>
+                                <Typography variant="body1">Enter the URL of the website that you'll be analyzing.</Typography>
                                 <AddDomainForm />
                             </Box>
                         </Grid>

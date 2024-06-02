@@ -34,7 +34,7 @@ export default function AddDomainForm() {
         <form onSubmit={submit}>
             <TextField
             fullWidth
-            label="URL (https://example.com)"
+            label="URL (https://example.com)..."
             variant="outlined"
             type="text"
             name="domain_name"
