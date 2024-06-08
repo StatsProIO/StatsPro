@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import {Box, createTheme, Toolbar} from '@mui/material';
 import NavBar from '@/Components/NavBar';
 import {ThemeProvider} from '@emotion/react';
 import Drawers from '@/Components/Drawers';
+import * as rrweb from "rrweb";
+import {Head} from "@inertiajs/inertia-react";
+import { gzipSync, strToU8 } from 'fflate'
 
 
 export default function Container({ children, showDrawer, showNavLinks, auth, domain }) {
@@ -57,9 +60,46 @@ export default function Container({ children, showDrawer, showNavLinks, auth, do
         setIsDrawerOpen(!isDrawerOpen);
     }
 
+    const events = useRef([]);
+
+    // this function will send events to the backend and reset the events array
+    function save() {
+        if(events.current.length === 0) {
+            return;
+        }
+        const body = gzipSync(strToU8(JSON.stringify( events.current)), { mtime: 0 });
+        events.current = [];
+        fetch('/api/replay/statspro.io', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body,
+        });
+    }
+
+    useEffect(() => {
+        if (!window.location.pathname.includes('replay')) {
+            rrweb.record({
+                emit(event) {
+                    events.current.push(event)
+                },
+            })
+        };
+
+        // save events every 3 seconds
+        const intervalId = setInterval(save, 3 * 1000);
+        return () => clearInterval(intervalId);
+
+    })
+
     return (
         <>
             <CssBaseline />
+            <Head>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.css"/>
+            </Head>
+
             <ThemeProvider theme={theme}>
                 <NavBar toggleIsDrawerOpen={toggleIsDrawerOpen} showDrawer={showDrawer} showNavLinks={showNavLinks} auth={auth} />
                 <Toolbar />

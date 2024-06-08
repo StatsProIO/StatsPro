@@ -45,6 +45,10 @@ import safariLogo from 'super-tiny-icons/images/svg/safari.svg';
 import samsungInternetLogo from 'super-tiny-icons/images/svg/samsung_internet.svg';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import Tooltip from "@mui/material/Tooltip";
+import {Inertia} from "@inertiajs/inertia";
+import Button from "@mui/material/Button";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 
 ChartJS.register(
@@ -127,7 +131,11 @@ export default function SessionData({ domain }) {
 
                             </AccordionSummary>
                             <AccordionDetails>
-                                {
+                                {domain === 'statspro.io' &&
+                                (<Button variant={'contained'} size='large' onClick={() => Inertia.get('/replay/statspro.io/' + session[0].visitor_id)}
+                                        endIcon={<PlayCircleIcon/>}>Replay this Session</Button>)
+                                }
+                                    {
                                     session.map((pageView, index) =>
                                         <>
 

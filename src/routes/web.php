@@ -168,5 +168,8 @@ Route::get('/tools/utm-validator', function () { return Inertia::render('ToolUTM
 
 //Route::get('/parse', [\App\Http\Controllers\TestPageController::class, 'parse'])->name('Parse');
 
+Route::get('/replay/{domainName}/{visitorId}', function ($domainName, $visitorId) {
+    return Inertia::render('Replay', ['domainName' => $domainName, 'visitorId' => $visitorId]);
+})->name('Replay');
 
 require __DIR__.'/auth.php';

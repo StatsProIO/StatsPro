@@ -31,7 +31,7 @@ export default function FirstEventWait({domain}) {
     return (
         <>
             <Grid container justifyContent="center">
-                <Grid item md={5}>
+                <Grid item xs={12} md={8} lg={6}>
                     <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
 
                         <Grid container justifyContent="center">

@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         '/api/collect',
         'api/event/time-on-page',
         'api/t.gif',
-        '/api/error'
+        '/api/error',
+        '/api/replay/*'
     ];
 }

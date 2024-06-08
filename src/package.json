@@ -31,10 +31,13 @@
         "chart.js": "^3.8.0",
         "country-iso-3-to-2": "^1.1.1",
         "d3-scale": "^4.0.2",
+        "fflate": "^0.8.2",
         "query-string": "^7.1.1",
         "react-chartjs-2": "^4.3.1",
         "react-simple-maps": "^2.3.0",
         "react-tooltip": "^4.2.21",
+        "rrweb": "^2.0.0-alpha.4",
+        "rrweb-player": "^1.0.0-alpha.4",
         "super-tiny-icons": "^0.6.0",
         "yup": "^1.3.3"
     }

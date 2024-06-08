@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Helpers\VisitorIdHelper;
 use App\Models\Domain;
 use App\Models\DomainBlacklistIp;
 use App\Models\Event;
@@ -24,7 +25,6 @@ class EventsController extends Controller
     public function postEvent(Request $request) {
         Log::info("Collecting event");
         try {
-            $userAgent = $request->server('HTTP_USER_AGENT');
 
             $domain = null;
             if ($request->domain) {
@@ -50,10 +50,10 @@ class EventsController extends Controller
                 }
             }
 
+            $userAgent = $request->server('HTTP_USER_AGENT');
             $parsedUserAgent = new \WhichBrowser\Parser($userAgent);
 
-            $eventSalt = EventSaltRepository::getOrCreateCurrentEventSalt();
-            $visitorId = base64_encode(hash('sha256', $userAgent . '/' . $this->getRealUserIp($request) . '/' . $eventSalt->salt));
+            $visitorId = VisitorIdHelper::getVisitorId($request);
 
             $event = new Event;
             $event->visitor_id = $visitorId;
@@ -95,14 +95,6 @@ class EventsController extends Controller
             Log::error("Error collecting event!");
             report($t);
             abort(500);
-        }
-    }
-
-    private function getRealUserIp($request){
-        switch(true){
-            case (!empty($_SERVER['HTTP_X_REAL_IP'])) : return $_SERVER['HTTP_X_REAL_IP'];
-            case (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) : return $_SERVER['HTTP_X_FORWARDED_FOR'];
-            default : $request->ip();
         }
     }
 

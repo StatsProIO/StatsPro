@@ -23,6 +23,7 @@ RUN npm install -g n
 RUN n stable
 
 COPY cron/generate-demo-data /etc/cron.d/generate-demo-data-cron
+COPY app/local.ini /usr/local/etc/php/conf.d/local.ini
 RUN chmod 0644 /etc/cron.d/generate-demo-data-cron
 RUN touch /var/log/cron.log
 RUN crontab /etc/cron.d/generate-demo-data-cron
