@@ -230,7 +230,13 @@ function languageCodeToName(languageCode) {
         type: 'language'
     });
 
-    return languageNames.of(languageCode);
+    try {
+        return languageNames.of(languageCode);
+    } catch (e) {
+        console.error("Unable to convert lanague code to name" + languageCode);
+        return 'Unknown';
+    }
+
 }
 
 function deviceToIcon(device) {
