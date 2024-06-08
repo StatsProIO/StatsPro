@@ -50,7 +50,7 @@
         @vite('resources/js/app.jsx')
         @inertiaHead
 
-        <script data-domain="stats.io" src="{{ config('app.url') }}/js/broadcaster.js" async> </script>
+        <script data-domain="statspro.io" src="{{ config('app.url') }}/js/broadcaster.js" async> </script>
 
     </head>
     <body class="font-sans antialiased" style="background-color: #f7f9fc">
