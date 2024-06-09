@@ -27,7 +27,7 @@ class ReplaysController extends Controller
 
             $clientIp = array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
             if (in_array($clientIp, $domainBlacklistedIps)) {
-                return response()->json(['message' => 'IP blacklisted'], 403);
+                return response()->json(['message' => 'IP blacklisted'], 200);
             }
         }
 

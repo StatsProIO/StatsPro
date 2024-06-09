@@ -23,7 +23,6 @@ use Sinergi\BrowserDetector\Browser;
 class EventsController extends Controller
 {
     public function postEvent(Request $request) {
-        Log::info("Collecting event");
         try {
 
             $domain = null;
@@ -38,7 +37,7 @@ class EventsController extends Controller
 
                 $clientIp = array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : null;
                 if (in_array($clientIp, $domainBlacklistedIps)) {
-                    return response()->json(['message' => 'IP blacklisted'], 403);
+                    return response()->json(['message' => 'IP blacklisted'], 200);
                 }
             }
 
@@ -89,7 +88,6 @@ class EventsController extends Controller
             }
 
             $event->save();
-            Log::info("Collected event!");
             return ['id' => $event->id];
         } catch (\Throwable $t) {
             Log::error("Error collecting event!");
