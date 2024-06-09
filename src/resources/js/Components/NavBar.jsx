@@ -62,7 +62,7 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
         <AppBar position="fixed" sx={{ bgcolor: "#243044", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Container sx={{px: 1}}>
                 <Toolbar disableGutters>
-                    <Avatar variant={"rounded"} src="/images/logo.png" style={{ width: isSmallScreen ? 40 : 50, height: 'auto' }} sx={{ mr: 1}} />
+                    <Avatar variant={"rounded"} src="/images/logo.webp" style={{ width: isSmallScreen ? 40 : 50, height: 'auto' }} sx={{ mr: 1}} />
                     <Typography
                         variant={isSmallScreen ?  "subtitle1":  'h6'}
                         noWrap

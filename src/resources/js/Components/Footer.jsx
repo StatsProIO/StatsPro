@@ -11,7 +11,7 @@ const Footer = () => {
             <Grid container justifyContent="center" spacing={3}>
                 <Grid item xs={3} md={2}>
                     <Stack spacing={1} justifyContent="center">
-                        <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>General</Typography>
+                        <Typography variant={"body1"} fontWeight={"bold"} align={"center"}>General</Typography>
                         <Link href="/" underline="hover" color="inherit" align={"center"}>Home</Link>
                         <Link href="/contact" underline="hover" color="inherit" align={"center"}>Contact</Link>
                     </Stack>
@@ -19,7 +19,7 @@ const Footer = () => {
                 </Grid>
                 <Grid item xs={3} md={2}>
                     <Stack spacing={1}>
-                        <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Resources</Typography>
+                        <Typography variant={"body1"} fontWeight={"bold"} align={"center"}>Resources</Typography>
                         <Link href="/docs" underline="hover" color="inherit" align={"center"}>Docs</Link>
 
                         <Link href="/docs/about" underline="hover" color="inherit" align={"center"}>About</Link>
@@ -29,7 +29,7 @@ const Footer = () => {
                 </Grid>
                 <Grid item xs={3} md={2}>
                     <Stack spacing={1}>
-                        <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Community</Typography>
+                        <Typography variant={"body1"} fontWeight={"bold"} align={"center"}>Community</Typography>
                         <Link href="https://github.com/statsProIO/StatsPro/" target={'_blank'} underline="hover" color="inherit" align={"center"}>Github</Link>
                         <Link href="https://twitter.com/StatsProIO" target={'_blank'} underline="hover" color="inherit" align={"center"}>Twitter</Link>
                         <Link href="/blog" underline="hover" color="inherit" align={"center"}>Blog</Link>
@@ -37,7 +37,7 @@ const Footer = () => {
                 </Grid>
                 <Grid item xs={3} md={2}>
                     <Stack spacing={1}>
-                        <Typography color={'gray'} variant={"h6"} fontWeight={"bold"} align={"center"}>Tools</Typography>
+                        <Typography variant={"body1"} fontWeight={"bold"} align={"center"}>Tools</Typography>
                         <Link href="/url-shortener" underline="hover" color="inherit" align={"center"}>URL Shortener</Link>
                         <Link href="/tools/utm-validator" underline="hover" color="inherit" align={"center"}>UTM Validator</Link>
                         <Link href="/tools/utm-generator" underline="hover" color="inherit" align={"center"}>UTM Generator</Link>
@@ -47,7 +47,7 @@ const Footer = () => {
 
             <Grid container justifyContent="center" alignItems="center" textAlign="center" sx={{pt: 6}}>
                 <Grid align="center">
-                    <Avatar variant={"rounded"} src="/images/logo.png" style={{ width: 100, height: 'auto', }} />
+                    <Avatar variant={"rounded"} src="/images/logo.webp" style={{ width: 100, height: 'auto', }} />
                     <Typography variant="h6" noWrap component="a" href="/"
                         sx={{
                             color: 'inherit',

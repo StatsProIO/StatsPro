@@ -78,6 +78,8 @@ export default function Home(props) {
         Inertia.get('/register?email=' + email);
     }
 
+    const queryParams = new URLSearchParams(window.location.search);
+
     return (
         <Guest auth={props.auth}>
             <Head>
@@ -89,11 +91,14 @@ export default function Home(props) {
                 <Grid container spacing={0} className="hero-row" sx={{ pt: 4, px: 1 }} justifyContent="center" >
                     <Grid item xl={5} lg={7} md={7} sm={11} xs={12} textAlign='center' >
                         <Typography variant="h2" component="div" sx={{pb: 0, fontWeight: 600, textAlign: 'center', fontSize: {xs: '35px', sm : '45px', md: '50px'} }} gutterBottom style={{letterSpacing: '0.3px', wordSpacing: '.75px', fontWeight: 800}}>
-                            Easy to use web analytics, no cookie banner needed!
+                            {queryParams.get("v") === "100" ? 'Capture analytics for 100% of your visitors' : 'Easy to use web analytics, no cookie banner needed!'}
+
                         {/*    Stop annoying users with a cookie banner*/}
                         </Typography>
                         <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 4}}>
-                            Google Analytics is complicated and a legal minefield. StatsPro makes it easy to focus on your users and business.
+                            {queryParams.get("v") === "100" ? '30%+ of your visitors aren\'t captured in Google Analytics due to adblockers. See all of your users while being privacy-friendly and GDPR compliant.' :
+                                'Google Analytics is complicated and a legal minefield. StatsPro makes it easy to focus on your users and business.'}
+
                         </Typography>
                         <Grid container justifyContent={'center'} sx={{pb: 7}}>
                             <Grid item xs={12} justifyContent={'center'}>
@@ -102,20 +107,24 @@ export default function Home(props) {
                                     <Avatar alt="Remy Sharp" src="/images/avatar-1.webp" />
                                     <Avatar alt="Travis Howard" src="/images/avatar-2.webp" />
                                     <Avatar alt="Cindy Baker" src="/images/avatar-3.webp" />
+                                    <Avatar alt="Cody Markle" src="/images/avatar-4.webp"/>
+
+
 
                                 </AvatarGroup>
                             </Grid>
-                            <Grid item xs={12}>
-                                <Typography variant={'subtitle2'} >Rated 4.3 ⭐️ by over 80 users!</Typography>
-                                {/*<Rating size="large"*/}
-                                {/*    name="simple-controlled"*/}
-                                {/*        color={'white'}*/}
-                                {/*        border*/}
+                            <Grid item xs={12} sx={{mt: 1}}>
+                                <Typography variant={'subtitle2'} >Rated 4.3 by over 80 users!</Typography>
+                                <Rating size="large"
+                                    name="simple-controlled"
+                                        color={'white'}
+                                        border
 
-                                {/*    defaultValue={4.3}*/}
-                                {/*        value={4.3}*/}
-                                {/*        emptyIcon={<StarBorderIcon sx={{color: 'white'}} fontSize={'30px'}/> }*/}
-                                {/*/>*/}
+
+                                    defaultValue={4.3}
+                                        value={4.3}
+                                        emptyIcon={<StarBorderIcon sx={{color: 'white'}} fontSize={'30px'}/> }
+                                />
 
                             </Grid>
                         </Grid>
@@ -155,20 +164,20 @@ export default function Home(props) {
                                     <div className="demo-image-container">
                                         <picture>
                                             <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
-                                            <img className={'demo-image'} src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"}/>
+                                            <img className={'demo-image'} src="../images/sample-dashboard-m.webp" loading="lazy" decoding="async" style={{borderRadius: '10px'}} width={"100%"} alt={'Shows a demo of statspro'}/>
                                         </picture>
                                         <div class="demo-image-overlay">
                                             <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>Click for Live Demo</Typography>
                                         </div>
                                     </div>
 
-                                    <Box className={'floating-emoji-1'} sx={{position: 'absolute', top: '30%', left: {xs: '-20px', md: '-50px'}}}>
-                                        <Box component={'img'} className={''} src="../images/Sparkles.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>
-                                    </Box>
+                                    {/*<Box className={'floating-emoji-1'} sx={{position: 'absolute', top: '30%', left: {xs: '-20px', md: '-50px'}}}>*/}
+                                    {/*    <Box component={'img'} className={''} src="../images/Sparkles.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}}}/>*/}
+                                    {/*</Box>*/}
 
-                                    <Box className={'floating-emoji-2'} sx={{position: 'absolute', top: '70%', right: {xs: '-10px', md: '-50px'}}}>
-                                        <Box component={'img'} className={''} src="../images/grinning.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}, float: 'right'}}/>
-                                    </Box>
+                                    {/*<Box className={'floating-emoji-2'} sx={{position: 'absolute', top: '70%', right: {xs: '-10px', md: '-50px'}}}>*/}
+                                    {/*    <Box component={'img'} className={''} src="../images/grinning.png" loading="lazy" decoding="async" sx={{width: {xs: '50px', md:'70px'}, float: 'right'}}/>*/}
+                                    {/*</Box>*/}
                                 </Box>
                             </a>
                         </Grid>
@@ -188,10 +197,10 @@ export default function Home(props) {
 
                         {/*Left column*/}
                         <Grid item md={6} lg={4}>
-                            <img src={'/images/feature-2.png'} width={'80%'} className={'feature-pictures rotate-slightly-right'}/>
-                            <img src={'/images/feature-1.png'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'}/>
-                            <img src={'/images/feature-3.png'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-right'}/>
-                            <img src={'/images/feature-4.png'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'}/>
+                            <img src={'/images/feature-2.webp'} width={'80%'} className={'feature-pictures rotate-slightly-right'} alt={'Shows an example of real time visitors'}/>
+                            <img src={'/images/feature-1.webp'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of a graph of visitors and pageviews'}/>
+                            <img src={'/images/feature-3.webp'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-right'} alt={'Shows an example of a world map of visitors'}/>
+                            <img src={'/images/feature-4.webp'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of the top pages bar chart'}/>
                         </Grid>
 
                         <Grid item md={6} lg={4}>
