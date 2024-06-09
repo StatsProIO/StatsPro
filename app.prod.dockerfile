@@ -30,6 +30,7 @@ RUN chmod 777 storage/logs/laravel.log
 RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
+RUN php artisan optimize
 
 COPY cron/generate-demo-data /etc/cron.d/generate-demo-data-cron
 COPY app/local.ini /usr/local/etc/php/conf.d/local.ini
