@@ -20,6 +20,7 @@ import {
 import {RealTimeChart} from './RealTimeChart';
 import {Inertia} from "@inertiajs/inertia";
 import Filters from "@/Components/Filters";
+import Loading from "@/Components/common/Loading";
 
 
 ChartJS.register(
@@ -36,6 +37,10 @@ export default function DashboardCharts({ domain }) {
 
     const [domains, setDomains] = useState([]);
     const [range, setRange] = useQueryString("range", '24h');
+
+    const [topBarLoading, setTopBarLoading] = useState(false);
+    const [aboveTheFoldLoading, setAboveTheFoldLoading] = useState(false);
+    const [belowTheFoldLoading, setBelowTheFoldLoading] = useState(false);
 
     const [timeBuckets, setTimeBuckets] = useState([]);
     const [pageviews, setPageviews] = useState([]);
@@ -60,6 +65,9 @@ export default function DashboardCharts({ domain }) {
     useEffect(() => {
         //make an API request for range/domain
 
+        setTopBarLoading(true);
+        setAboveTheFoldLoading(true);
+        setBelowTheFoldLoading(true);
         Promise.all([
             axios.get(`/api/events/dashboard/top-bar/${domain}?range=${range}`)
                 .then(function (response) {
@@ -77,10 +85,10 @@ export default function DashboardCharts({ domain }) {
 
                     setComparisonIntervalDescriptionSuffix(response.data.comparison_interval_description_suffix);
                 })
+                .finally(() => setTopBarLoading(false))
                 .catch(function (error) {
                     axios.post(`/api/error`, {component: 'Charts top bar', message: error});
                 }),
-
 
             axios.get(`/api/events/dashboard/above-the-fold/${domain}?range=${range}`)
                 .then(function (response) {
@@ -93,14 +101,16 @@ export default function DashboardCharts({ domain }) {
                     axios.post(`/api/error`, {component: 'Charts above the fold', message: error});
                 })
                 .finally(function () {
-
+                    setAboveTheFoldLoading(false);
                     axios.get(`/api/events/dashboard/below-the-fold/${domain}?range=${range}`)
                         .then(function (response) {
                             setTopSources(response.data.top_sources);
                             setTopPages(response.data.top_pages);
                             setDevices(response.data.devices);
                             setLocations(response.data.locations);
-                        }).catch(function (error) {
+                        })
+                        .finally(() => setBelowTheFoldLoading(false))
+                        .catch(function (error) {
                             axios.post(`/api/error`, {component: 'Charts below the fold', message: error});
                         })
                 })
@@ -117,61 +127,67 @@ export default function DashboardCharts({ domain }) {
                 <Filters currentUrlPath={'dashboard'} domain={domain} domains={domains} setDomains={setDomains} range={range} setRange={setRange}/>
             </Grid>
 
-            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
-                <Grid item xs={6} lg={3} >
-                    <DashboardInfoCard title='Unique Visitors' value={uniqueVisitorsCount} subtitleValue={uniqueVisitorsCountDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
+            <Loading loading={topBarLoading}>
+                <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
+                    <Grid item xs={6} lg={3} >
+                        <DashboardInfoCard title='Unique Visitors' value={uniqueVisitorsCount} subtitleValue={uniqueVisitorsCountDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
+                    </Grid>
+                    <Grid item xs={6} lg={3}>
+                        <DashboardInfoCard title='Pageviews' value={pageviewsCount} subtitleValue={pageviewsCountDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
+                    </Grid>
+                    <Grid item xs={6} lg={3}>
+                        <DashboardInfoCard title='Bounce Rate' value={bounceRate} subtitleValue={bounceRateDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
+                    </Grid>
+                    <Grid item xs={6} lg={3}>
+                        <DashboardInfoCard title='Visit Duration' value={visitDuration} subtitleValue={visitDurationDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
+                    </Grid>
                 </Grid>
-                <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Pageviews' value={pageviewsCount} subtitleValue={pageviewsCountDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
-                </Grid>
-                <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Bounce Rate' value={bounceRate} subtitleValue={bounceRateDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
-                </Grid>
-                <Grid item xs={6} lg={3}>
-                    <DashboardInfoCard title='Visit Duration' value={visitDuration} subtitleValue={visitDurationDifferenceRate} subtitleText={comparisonIntervalDescriptionSuffix} />
-                </Grid>
-            </Grid>
+            </Loading>
 
-            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
-                <Grid item xs={12} lg={8}>
-                    <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Pageviews</Typography>
-                        <PageviewsChart inputData={pageviews} inputVisitors={visitors} />
-                    </Paper>
+            <Loading loading={aboveTheFoldLoading}>
+                <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
+                    <Grid item xs={12} lg={8}>
+                        <Paper sx={{ p: 3 }}>
+                            <Typography variant="h6">Pageviews</Typography>
+                            <PageviewsChart inputData={pageviews} inputVisitors={visitors} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} lg={4}>
+                        <RealTimeChart domain={domain} />
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} lg={4}>
-                    <RealTimeChart domain={domain} />
-                </Grid>
-            </Grid>
+            </Loading>
 
-            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
-                <Grid item xs={12} md={6}>
-                    <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Top Sources</Typography>
-                        <TopSourcesChart inputData={topSources}  />
-                    </Paper>
+            <Loading loading={belowTheFoldLoading}>
+                <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
+                    <Grid item xs={12} md={6}>
+                        <Paper sx={{ p: 3 }}>
+                            <Typography variant="h6">Top Sources</Typography>
+                            <TopSourcesChart inputData={topSources}  />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Paper sx={{ p: 3 }}>
+                            <Typography variant="h6">Top Pages</Typography>
+                            <TopPages inputData={topPages} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} md={5}>
+                        <Paper sx={{ p: 3 }}>
+                            <Typography variant="h6">Devices</Typography>
+                            <Box>
+                                <DevicesChart inputData={devices} />
+                            </Box>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} md={7}>
+                        <Paper sx={{ p: 3 }}>
+                            <Typography variant="h6">Locations</Typography>
+                            <LocationChart inputData={locations} />
+                        </Paper>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} md={6}>
-                    <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Top Pages</Typography>
-                        <TopPages inputData={topPages} />
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} md={5}>
-                    <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Devices</Typography>
-                        <Box>
-                            <DevicesChart inputData={devices} />
-                        </Box>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} md={7}>
-                    <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Locations</Typography>
-                        <LocationChart inputData={locations} />
-                    </Paper>
-                </Grid>
-            </Grid>
+            </Loading>
         </>
     );
 }
