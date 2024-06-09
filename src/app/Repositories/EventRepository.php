@@ -413,6 +413,21 @@ class EventRepository
         return $returnSessions;
     }
 
+    public static function getLatestEvent(Domain $domain, String $visitorId) {
+        $session = DB::select(
+            DB::raw("
+                SELECT visitor_id, country, language, device, os, browser, created_at
+                FROM events WHERE visitor_id = :visitorId
+                AND domain_id = :domain
+                ORDER BY ID DESC
+                LIMIT 1;
+                ")->getValue(DB::connection()->getQueryGrammar()),
+            array('domain' => $domain->id, 'visitorId' => $visitorId)
+        );
+
+        return $session[0];
+    }
+
     public static function getPageLoadTime(TimeRangeInfo $timeRangeInfo, Interval $interval, Domain $domain, $timeBuckets) {
         $pageLoadTimes = DB::select(
             DB::raw("SELECT {$timeRangeInfo->getGroupBy()} as date, AVG(page_load_time)/1000 as average_page_load_time

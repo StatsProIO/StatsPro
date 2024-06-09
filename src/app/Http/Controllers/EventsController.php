@@ -323,6 +323,17 @@ class EventsController extends Controller
         ];
     }
 
+    public function getLatestEventByDomainAndVisitorId($domainName, $visitorId, Request $request) {
+        $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
+
+        $event = EventRepository::getLatestEvent($domain, $visitorId);
+
+        return [
+            'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
+            'event' => $event
+        ];
+    }
+
     public function getEventsPerformanceByDomain($domainName, Request $request) {
         $domain = Domain::where('domain_name', $domainName)->where('user_id', Auth::user()->id)->firstOrFail();
 
