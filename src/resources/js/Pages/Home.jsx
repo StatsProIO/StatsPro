@@ -84,18 +84,18 @@ export default function Home(props) {
         <Guest auth={props.auth}>
             <Head>
                 <title>StatsPro | Privacy-friendly Google Analytics alternative</title>
-                <meta name="description" content="StatsPro is a open-source Google Analytics alternative. StatsPro is GDPR, CCPA, PECR compliant and while still giving you answers." />
+                <meta name="description" content="StatsPro is a Google Analytics alternative that can capture 100% of website visitors. Unlike other analytics tools, see all of your traffic without discrepancies. StatsPro is GDPR, CCPA, PECR compliant while still providing actionable data." />
             </Head>
 
             <div className="home">
                 <Grid container spacing={0} className="hero-row" sx={{ pt: 4, px: 1 }} justifyContent="center" >
                     <Grid item xl={5} lg={7} md={7} sm={11} xs={12} textAlign='center' >
-                        <Typography variant="h2" component="div" sx={{pb: 0, fontWeight: 600, textAlign: 'center', fontSize: {xs: '35px', sm : '45px', md: '50px'} }} gutterBottom style={{letterSpacing: '0.3px', wordSpacing: '.75px', fontWeight: 800}}>
+                        <Typography variant="h2" component={'h1'} sx={{pb: 0, fontWeight: 600, textAlign: 'center', fontSize: {xs: '35px', sm : '45px', md: '50px'} }} gutterBottom style={{letterSpacing: '0.3px', wordSpacing: '.75px', fontWeight: 800}}>
                             {queryParams.get("v") === "100" ? 'Capture analytics for 100% of your visitors' : 'Easy to use web analytics, no cookie banner needed!'}
 
                         {/*    Stop annoying users with a cookie banner*/}
                         </Typography>
-                        <Typography color="#aaa"  variant="h6" component="div" align='center' sx={{pb: 4}}>
+                        <Typography color="#aaa"  variant="h6" component="h2" align='center' sx={{pb: 4}}>
                             {queryParams.get("v") === "100" ? '30%+ of your visitors aren\'t captured in Google Analytics due to adblockers. See all of your users while being privacy-friendly and GDPR compliant.' :
                                 'Google Analytics is complicated and a legal minefield. StatsPro makes it easy to focus on your users and business.'}
 
@@ -108,9 +108,6 @@ export default function Home(props) {
                                     <Avatar alt="Travis Howard" src="/images/avatar-2.webp" />
                                     <Avatar alt="Cindy Baker" src="/images/avatar-3.webp" />
                                     <Avatar alt="Cody Markle" src="/images/avatar-4.webp"/>
-
-
-
                                 </AvatarGroup>
                             </Grid>
                             <Grid item xs={12} sx={{mt: 1}}>
@@ -119,8 +116,6 @@ export default function Home(props) {
                                     name="simple-controlled"
                                         color={'white'}
                                         border
-
-
                                     defaultValue={4.3}
                                         value={4.3}
                                         emptyIcon={<StarBorderIcon sx={{color: 'white'}} fontSize={'30px'}/> }
