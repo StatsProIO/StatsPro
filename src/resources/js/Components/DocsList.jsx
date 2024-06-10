@@ -25,7 +25,7 @@ export default function DocsList() {
 
     return (
         <>
-            <List sx={{backgroundColor: '#eee'}}>
+            <List>
                 <ListItem disablePadding>
                     <ListItemButton component="a" href="/docs">
                         <ListItemText primary="Docs" primaryTypographyProps={{variant: "h5", fontWeight: 'bold'}} />

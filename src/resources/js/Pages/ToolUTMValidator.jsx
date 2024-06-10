@@ -68,37 +68,39 @@ export default function ToolUTMGenerator() {
 
     return (
         <General title={'UTM Validator'}>
-            <Typography sx={{py: 1}}>Use this tool to determine if your UTM URL is correct. To generate UTM URLs, use our  <Link href={route('ToolUTMGenerator')}>UTM Generator Tool</Link>!</Typography>
-            <TextField
-                required
-                fullWidth
-                label="URL"
-                variant="outlined"
-                type="url"
-                name="inputUrl"
-                onChange={updateInputUrl}
-                sx={{mt: 2}}
-            />
+            <Paper elevation={0} sx={{ mt: 1,  p: 2 }}>
+                <Typography sx={{py: 1}}>Use this tool to determine if your UTM URL is correct. To generate UTM URLs, use our  <Link href={route('ToolUTMGenerator')}>UTM Generator Tool</Link>!</Typography>
+                <TextField
+                    required
+                    fullWidth
+                    label="URL"
+                    variant="outlined"
+                    type="url"
+                    name="inputUrl"
+                    onChange={updateInputUrl}
+                    sx={{mt: 2}}
+                />
 
-            <Box sx={{mt: 2}}>
-                {errors === '' ? (
-                        <Paper elevation={2} sx={{p: 3}} style={{outlineColor: theme.palette.success.main, outlineStyle: 'solid', outlineWidth: '3px'}}>
-                            <Typography variant={'h5'} color={theme.palette.success.main}>Valid!</Typography>
-                            {Object.keys(parsedValues).map(key =>
-                                (<Typography variant={'p'} style={{display: 'block'}} color={theme.palette.success.main}>
-                                    {key}: {parsedValues[key]}
-                                </Typography>)
+                <Box sx={{mt: 2}}>
+                    {errors === '' ? (
+                            <Paper elevation={2} sx={{p: 3}} style={{outlineColor: theme.palette.success.main, outlineStyle: 'solid', outlineWidth: '3px'}}>
+                                <Typography variant={'h5'} color={theme.palette.success.main}>Valid!</Typography>
+                                {Object.keys(parsedValues).map(key =>
+                                    (<Typography variant={'p'} style={{display: 'block'}} color={theme.palette.success.main}>
+                                        {key}: {parsedValues[key]}
+                                    </Typography>)
 
-                            )}
-                        </Paper>
-                    ) :
-                    (
-                        <Paper elevation={2} sx={{p: 3}} style={{outlineColor: theme.palette.error.dark, outlineStyle: 'solid', outlineWidth: '3px'}}>
-                            <Typography variant={'h5'} color={theme.palette.error.dark}>{errors}</Typography>
-                        </Paper>
-                    )
-                }
-            </Box>
+                                )}
+                            </Paper>
+                        ) :
+                        (
+                            <Paper elevation={2} sx={{p: 3}} style={{outlineColor: theme.palette.error.dark, outlineStyle: 'solid', outlineWidth: '3px'}}>
+                                <Typography variant={'h5'} color={theme.palette.error.dark}>{errors}</Typography>
+                            </Paper>
+                        )
+                    }
+                </Box>
+            </Paper>
 
         </General>
     );
