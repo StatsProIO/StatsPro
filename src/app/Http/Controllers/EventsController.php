@@ -213,7 +213,6 @@ class EventsController extends Controller
 
         return [
             'domains' => Auth::user() ? Domain::where('user_id', Auth::user()->id)->get()->pluck('domain_name') : ['demo.com'],
-            'time_buckets' => $timeBuckets,
             'pageviews' => EventRepository::getPageviews($timeRangeInfo, $domain, $timeBuckets),
             'visitors' => EventRepository::getVisitors($timeRangeInfo, $domain, $timeBuckets),
             'realtime' => EventRepository::getRealTime($domain),

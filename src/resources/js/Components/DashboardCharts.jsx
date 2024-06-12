@@ -42,7 +42,6 @@ export default function DashboardCharts({ domain }) {
     const [aboveTheFoldLoading, setAboveTheFoldLoading] = useState(false);
     const [belowTheFoldLoading, setBelowTheFoldLoading] = useState(false);
 
-    const [timeBuckets, setTimeBuckets] = useState([]);
     const [pageviews, setPageviews] = useState([]);
     const [visitors, setVisitors] = useState([]);
     const [topSources, setTopSources] = useState([]);
@@ -93,7 +92,6 @@ export default function DashboardCharts({ domain }) {
             axios.get(`/api/events/dashboard/above-the-fold/${domain}?range=${range}`)
                 .then(function (response) {
                     setDomains(response.data.domains);
-                    setTimeBuckets(response.data.time_buckets);
                     setPageviews(response.data.pageviews);
                     setVisitors(response.data.visitors);
                 })

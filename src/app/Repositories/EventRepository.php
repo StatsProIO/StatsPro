@@ -34,8 +34,7 @@ class EventRepository
 
         $pageviews = array_merge($timeBuckets, $pageviewsCountByDate);
         uksort($pageviews,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
-
-        return $pageviews;
+        return $timeRangeInfo->convertDateTimeKeysIntoLabelFormat($pageviews);
     }
 
     public static function getVisitors(TimeRangeInfo $timeRangeInfo, Domain $domain, $timeBuckets) {
@@ -58,8 +57,7 @@ class EventRepository
 
         $visitors = array_merge($timeBuckets, $visitorsCountByDate);
         uksort($visitors,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
-
-        return $visitors;
+        return $timeRangeInfo->convertDateTimeKeysIntoLabelFormat($visitors);
     }
 
     public static function getRealTime(Domain $domain) {
@@ -353,8 +351,7 @@ class EventRepository
         //fill the gaps in with 0s
         $bounceRateByDate = array_merge($timeBuckets, $bounceRateByDate);
         uksort($bounceRateByDate,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
-
-        return $bounceRateByDate;
+        return $timeRangeInfo->convertDateTimeKeysIntoLabelFormat($bounceRateByDate);
     }
 
     public static function getTimeOnPage(TimeRangeInfo $timeRangeInfo, Interval $interval, Domain $domain, $timeBuckets) {
@@ -379,11 +376,8 @@ class EventRepository
 
         $visitors = array_merge($timeBuckets, $timeOnPageByDate);
         uksort($visitors,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
-
-        return $visitors;
+        return $timeRangeInfo->convertDateTimeKeysIntoLabelFormat($visitors);
     }
-
-
 
     public static function getSessions(TimeRangeInfo $timeRangeInfo, Domain $domain) {
         $sessions = DB::select(
@@ -449,8 +443,7 @@ class EventRepository
 
         $pageLoadTimeByDate = array_merge($timeBuckets, $pageLoadTimeByDate);
         uksort($pageLoadTimeByDate,  function ($dt1, $dt2) {return strtotime($dt1) - strtotime($dt2);});
-
-        return $pageLoadTimeByDate;
+        return $timeRangeInfo->convertDateTimeKeysIntoLabelFormat($pageLoadTimeByDate);
     }
 
     public static function getBusiestDayOfWeek(Interval $interval, Domain $domain) {

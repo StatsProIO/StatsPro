@@ -30,7 +30,7 @@ export function RealTimeChart({ domain }) {
     }, []);
 
   return <>
-    <Paper className="blueShadow" sx={{ p: 3, backgroundColor: 'rgb(42,98,254)', color: '#fff' }}>
+    <Paper className="blueShadow" sx={{ p: 3, backgroundColor: 'rgb(42,98,254)', color: '#fff', height: "100%" }}>
       <Stack
         direction="row"
         justifyContent="space-between"
