@@ -192,10 +192,10 @@ export default function Home(props) {
 
                         {/*Left column*/}
                         <Grid item md={6} lg={4}>
-                            <img src={'/images/feature-2.webp'} width={'80%'} className={'feature-pictures rotate-slightly-right'} alt={'Shows an example of real time visitors'}/>
-                            <img src={'/images/feature-1.webp'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of a graph of visitors and pageviews'}/>
-                            <img src={'/images/feature-3.webp'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-right'} alt={'Shows an example of a world map of visitors'}/>
-                            <img src={'/images/feature-4.webp'} width={'80%'} className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of the top pages bar chart'}/>
+                            <img src={'/images/feature-2.webp'} width={'80%'} loading="lazy" className={'feature-pictures rotate-slightly-right'} alt={'Shows an example of real time visitors'}/>
+                            <img src={'/images/feature-1.webp'} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of a graph of visitors and pageviews'}/>
+                            <img src={'/images/feature-3.webp'} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-right'} alt={'Shows an example of a world map of visitors'}/>
+                            <img src={'/images/feature-4.webp'} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of the top pages bar chart'}/>
                         </Grid>
 
                         <Grid item md={6} lg={4}>
@@ -349,21 +349,21 @@ export default function Home(props) {
                                             <Grid container justifyContent={'space-between'} spacing={3} sx={{py: 3}}>
                                                 <Grid item justifyContent={'space-between'} xs={12} sm={12} md={6}>
                                                     <Box justifyContent={'space-between'} sx={{display: 'flex', justifyContent: 'space-between'}}>
-                                                    <img src={'/images/icons/angular.svg'} width={'50px'}/>
-                                                    <img src={'/images/icons/drupal.svg'} width={'50px'}/>
-                                                    <img src={'/images/icons/framermotion.svg'} width={'50px'}/>
-                                                    <img src={'/images/icons/go.svg'} width={'50px'}/>
-                                                    <img src={'/images/icons/laravel.svg'} width={'50px'}/>
+                                                    <img loading="lazy" src={'/images/icons/angular.svg'} width={'50px'}/>
+                                                    <img loading="lazy" src={'/images/icons/drupal.svg'} width={'50px'}/>
+                                                    <img loading="lazy" src={'/images/icons/framermotion.svg'} width={'50px'}/>
+                                                    <img loading="lazy" src={'/images/icons/go.svg'} width={'50px'}/>
+                                                    <img loading="lazy" src={'/images/icons/laravel.svg'} width={'50px'}/>
                                                     </Box>
                                                 </Grid>
 
                                                 <Grid item justifyContent={'space-between'} xs={12} sm={12} md={6}>
                                                     <Box justifyContent={'space-between'} sx={{display: 'flex', justifyContent: 'space-between'}}>
-                                                        <img src={'/images/icons/nextjs.svg'} width={'50px'}/>
-                                                        <img src={'/images/icons/nuxtjs.svg'} width={'50px'}/>
-                                                        <img src={'/images/icons/react.svg'} width={'50px'}/>
-                                                        <img src={'/images/icons/vuejs.svg'} width={'50px'}/>
-                                                        <img src={'/images/icons/wordpress.svg'} width={'50px'}/>
+                                                        <img loading="lazy" src={'/images/icons/nextjs.svg'} width={'50px'}/>
+                                                        <img loading="lazy" src={'/images/icons/nuxtjs.svg'} width={'50px'}/>
+                                                        <img loading="lazy" src={'/images/icons/react.svg'} width={'50px'}/>
+                                                        <img loading="lazy" src={'/images/icons/vuejs.svg'} width={'50px'}/>
+                                                        <img loading="lazy" src={'/images/icons/wordpress.svg'} width={'50px'}/>
                                                     </Box>
 
                                                 </Grid>
