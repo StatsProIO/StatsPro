@@ -24,44 +24,44 @@ export default function DrawerContents({domain}) {
             text: "Dashboard",
             url: '/dashboard',
             appendDomain: true,
-            icon: <DashboardIcon sx={{ color: '#fff' }} />
+            icon: <DashboardIcon />
         }, {
             text: 'Audience',
             url: '/audience',
             appendDomain: true,
-            icon: <EmojiPeopleIcon sx={{ color: '#fff' }} />,
+            icon: <EmojiPeopleIcon/>,
         }, {
             text: 'Behavior',
             url: '/behavior',
             appendDomain: true,
-            icon: <AdsClickIcon sx={{ color: '#fff' }} />,
+            icon: <AdsClickIcon/>,
         }, {
             text: 'Acquisition',
             url: '/acquisition',
             appendDomain: true,
-            icon: <ExitToAppIcon sx={{ color: '#fff' }} />,
+            icon: <ExitToAppIcon/>,
         }, {
             text: 'Sessions',
             url: '/sessions',
             appendDomain: true,
-            icon: <ViewListIcon sx={{ color: '#fff' }} />,
+            icon: <ViewListIcon/>,
         }, {
             text: 'Performance',
             url: '/performance',
             appendDomain: true,
-            icon: <SpeedIcon sx={{ color: '#fff' }} />,
+            icon: <SpeedIcon/>
         }, {
             text: "Manage Domains",
             url: '/manage-domains',
-            icon: <DnsIcon sx={{ color: '#fff' }} />
+            icon: <DnsIcon />
         }, {
             text: "Profile",
             url: '/profile',
-            icon: <AccountCircleIcon sx={{ color: '#fff' }} />
+            icon: <AccountCircleIcon />
         }, {
             text: "Subscriptions",
             url: '/subscriptions',
-            icon: <PaymentsIcon sx={{ color: '#fff' }} />
+            icon: <PaymentsIcon />
         }];
 
     function handleClick(url, appendDomain) {
@@ -73,37 +73,37 @@ export default function DrawerContents({domain}) {
     return (
         <>
             <Toolbar />
-            <Box sx={{ overflow: 'auto', }}>
-                <List disablePadding sx={{
-                    // selected and (selected + hover) states
-                    '&& .Mui-selected, && .Mui-selected:hover': {
-                        bgcolor: 'rgb(42,98,254)',
-                        background: 'linear-gradient(270deg, rgba(0,156,255,1) 0%, rgba(13,95,254,1) 100%);'
-                    },
-                    // hover states
-                    '& .MuiListItemButton-root:hover': {
-                        bgcolor: '#dedede',
-                        background: 'linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 76%, rgba(209,209,209,1) 100%)',
-                        '&, & .MuiListItemIcon-root': {
-                            color: 'text.secondary',
+            <Box sx={{ overflow: 'auto'}} >
+                <Box sx={{backgroundColor: '#fff', my: 1, mx: 1, borderRadius: '10px'}}>
+                    <List disablePadding sx={{
+                        // selected and (selected + hover) states
+                        '&& .Mui-selected, && .Mui-selected:hover': {
+                            bgcolor: '#ccc',
+                            background: '#ccc',
+                            color: '#2a62fe'
                         },
-                    },
-                }}>
-                    {items.map((item) => (
-                        <ListItem key={item.text} disablePadding onClick={handleClick(item.url, item.appendDomain)}>
-                            <ListItemButton selected={window.location.pathname.startsWith(item.url)}>
-                                <ListItemIcon>
-                                    {item.icon}
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} /> {item.comingSoon && <Chip label="Soon" color="warning" size="small" />}
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Paper sx={{ p: 3, m: 2, backgroundColor: '#364967', color: '#fff' }}>
-                    <Typography variant="h5"><b>⚡️ Need help?</b></Typography>
 
-                    <Typography variant='body1' >We're always available help you out.</Typography>
+                        // hover states
+                        '& .MuiListItemButton-root:hover': {
+                            bgcolor: '#ddd',
+                        },
+                    }}>
+                        {items.map((item) => (
+                            <ListItem key={item.text} disablePadding onClick={handleClick(item.url, item.appendDomain)}>
+                                <ListItemButton selected={window.location.pathname.startsWith(item.url)} sx={{borderRadius: '10px', mx: 1, my: .5, py: .5}}>
+                                    <ListItemIcon sx={{color: window.location.pathname.startsWith(item.url) ? '#2a62fe': ''}}>
+                                        {item.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.text} primaryTypographyProps={{variant: 'body1' }}  /> {item.comingSoon && <Chip label="Soon" color="warning" size="small" />}
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Box>
+                <Paper sx={{ p: 2, mx: .5, my: 3, backgroundColor: '#fff', color: '#595960', borderWidth: '1px', borderStyle: 'solid', borderColor: '#146ff2' }}>
+                    <Typography variant="h6">⚡️ Need help?</Typography>
+
+                    <Typography variant='body1' align={'center'} >We're available help!</Typography>
                     <Box textAlign='center'>
                         <Button onClick={() => Inertia.get('/contact')} variant="contained" sx={{ my: 2, }}>Contact Us</Button>
                     </Box>

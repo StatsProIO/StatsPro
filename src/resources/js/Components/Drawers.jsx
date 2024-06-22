@@ -16,7 +16,7 @@ export default function Drawers({ isDrawerOpen, domain }) {
                 }}
                 sx={{
                     display: { xs: 'block', md: 'none' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#243044', color: '#fff' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#f8f9fc', color: '#080808' },
                 }}
             >
                 <DrawerContents domain={domain}/>
@@ -28,7 +28,7 @@ export default function Drawers({ isDrawerOpen, domain }) {
                     width: drawerWidth,
                     flexShrink: 0,
                     display: { xs: 'none', md: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#243044', color: '#fff' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, borderWidth: 0, backgroundColor: '#f8f9fc', color: '#080808' },
                 }}
                 open
             >
