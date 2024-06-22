@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\VisitorWidget;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\TestPageController;
@@ -152,7 +153,10 @@ Route::get('/docs/getting-started', function () { return Inertia::render('DocsGe
 Route::get('/terms', function () { return Inertia::render('terms'); })->name('Terms');
 Route::get('/privacy-policy', function () { return Inertia::render('PrivacyPolicy'); })->name('PrivacyPolicy');
 Route::get('/contact', function () { return Inertia::render('Contact'); })->name('Contact');
-Route::get('/blog', function () { return Inertia::render('Blog');})->name('blog');
+Route::get('/blog', function () {
+    $response = Http::get('https://notion-api.splitbee.io/v1/table/6ce9b42ce7f344c2b154a9b4dcc1e769');
+    return Inertia::render('Blog', ['notionDataRaw' => $response->body()]);
+})->name('blog');
 Route::get('/blog/deploying-from-github-actions-to-stackhero', function () { return Inertia::render('BlogDeployingToStackhero');})->name('BlogDeployingToStackhero');
 Route::get('/blog/ethical-analytics', function () { return Inertia::render('BlogEthicalAnalytics');})->name('BlogEthicalAnalytics');
 Route::get('/blog/italy-google-analytics-illegal', function () { return Inertia::render('BlogItalyGoogleAnalyticsIllegal');})->name('BlogItalyGoogleAnalyticsIllegal');
@@ -171,5 +175,11 @@ Route::get('/tools/utm-validator', function () { return Inertia::render('ToolUTM
 Route::get('/replay/{domainName}/{visitorId}', function ($domainName, $visitorId) {
     return Inertia::render('Replay', ['domainName' => $domainName, 'visitorId' => $visitorId]);
 })->name('Replay');
+
+
+Route::get('/blog/{slug}/{id}', function ($slug, $id) {
+    $response = Http::get('https://notion-api.splitbee.io/v1/page/' . $id);
+    return Inertia::render('BlogPost', ['data' => $response->body()]);
+})->name('BlogPost');
 
 require __DIR__.'/auth.php';

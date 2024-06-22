@@ -14,6 +14,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Billable;
 
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -50,7 +52,16 @@ class User extends Authenticatable
     ];
 
     public function domains()
-        {
-            return $this->hasMany(Domain::class);
-        }
+    {
+        return $this->hasMany(Domain::class);
+    }
+
+    public function isAdmin()
+    {
+        if ($this->isAdmin)
+            return true;
+        else
+            return false;
+    }
+
 }

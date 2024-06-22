@@ -273,8 +273,6 @@
     }
 }
 
-
-
 @keyframes move {
     100% {
         transform: translateX(100vw);
@@ -282,4 +280,17 @@
     100.001% {
         transform: translateX(-10vw);
     }
+}
+
+/*blog templates*/
+.notion-image-inset {
+    width: 100%
+}
+
+div:has(> img.notion-image-inset) {
+    padding-bottom: 0 !important;
+}
+
+.notion-asset-wrapper {
+    width: auto !important;
 }
