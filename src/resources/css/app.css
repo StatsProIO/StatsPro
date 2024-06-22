@@ -294,3 +294,7 @@ div:has(> img.notion-image-inset) {
 .notion-asset-wrapper {
     width: auto !important;
 }
+
+.language-php {
+    text-wrap: 'wrap' !important;
+}
