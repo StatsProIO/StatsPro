@@ -21,6 +21,7 @@ import {RealTimeChart} from './RealTimeChart';
 import {Inertia} from "@inertiajs/inertia";
 import Filters from "@/Components/Filters";
 import Loading from "@/Components/common/Loading";
+import NoData from "@/Components/common/NoData";
 
 
 ChartJS.register(
@@ -161,20 +162,20 @@ export default function DashboardCharts({ domain }) {
                     <Grid item xs={12} md={6}>
                         <Paper sx={{ p: 3 }}>
                             <Typography variant="h6">Top Sources</Typography>
-                            <TopSourcesChart inputData={topSources}  />
+                            {topSources.length === 0 ? <NoData/> : <TopSourcesChart inputData={topSources}  />}
                         </Paper>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <Paper sx={{ p: 3 }}>
                             <Typography variant="h6">Top Pages</Typography>
-                            <TopPages inputData={topPages} />
+                            {topPages.length === 0 ? <NoData/> : <TopPages inputData={topPages} /> }
                         </Paper>
                     </Grid>
                     <Grid item xs={12} md={5}>
                         <Paper sx={{ p: 3 }}>
                             <Typography variant="h6">Devices</Typography>
                             <Box>
-                                <DevicesChart inputData={devices} />
+                                {devices.length === 0 ? <NoData/> : <DevicesChart inputData={devices} /> }
                             </Box>
                         </Paper>
                     </Grid>

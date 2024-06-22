@@ -15,6 +15,7 @@ import {
 import Filters from "@/Components/Filters";
 import {LineChart} from "@/Components/LineChart";
 import {TimeTrendChart} from "@/Components/TimeTrendChart";
+import Loading from "@/Components/common/Loading";
 
 
 ChartJS.register(
@@ -28,6 +29,7 @@ ChartJS.register(
 );
 
 export default function BehaviorCharts({ domain }) {
+    const [loading, setLoading] = useState(false);
 
     const [domains, setDomains] = useState([]);
     const [range, setRange] = useQueryString("range", '24h');
@@ -41,7 +43,7 @@ export default function BehaviorCharts({ domain }) {
 
 
     useEffect(() => {
-        //make an API request for range/domain
+        setLoading(true);
 
         axios.get(`/api/events/behavior/${domain}?range=${range}`)
             .then(function (response) {
@@ -54,6 +56,7 @@ export default function BehaviorCharts({ domain }) {
                 setTimeTrends(response.data.timeTrends);
 
             })
+            .finally(() => setLoading(false))
             .catch(function (error) {
                 axios.post(`/api/error`, {component: 'BehaviorCharts', message: error});
             });
@@ -69,36 +72,38 @@ export default function BehaviorCharts({ domain }) {
                 <Filters currentUrlPath={'behavior'} domain={domain} domains={domains} setDomains={setDomains} range={range} setRange={setRange}/>
             </Grid>
 
-            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
-                <Grid item xs={6} lg={6} >
-                    <DashboardInfoCard title='Busiest Day of the Week' value={busiestDayOfWeek} />
-                </Grid>
-                <Grid item xs={6} lg={6}>
-                    <DashboardInfoCard title='Busiest Hour of the Day' value={busiestHourOfDay} />
-                </Grid>
-            </Grid>
-
-            <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
-                <Grid item xs={12} lg={6}>
-                    <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Bounce Rate</Typography>
-                        <LineChart inputData={bounceRate} label={'Bounce Rate'} />
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} lg={6}>
-                    <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Average Time On Page</Typography>
-                        <LineChart inputData={timeOnPage} label={'Time (seconds)'} />
-                    </Paper>
+            <Loading loading={loading}>
+                <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
+                    <Grid item xs={6} lg={6} >
+                        <DashboardInfoCard title='Busiest Day of the Week' value={busiestDayOfWeek} />
+                    </Grid>
+                    <Grid item xs={6} lg={6}>
+                        <DashboardInfoCard title='Busiest Hour of the Day' value={busiestHourOfDay} />
+                    </Grid>
                 </Grid>
 
-                <Grid item xs={12} lg={12}>
-                    <Paper sx={{ p: 3 }}>
-                        <Typography variant="h6">Time Trends</Typography>
-                        <TimeTrendChart inputData={timeTrends} />
-                    </Paper>
+                <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} columnSpacing={{ xs: 1, sm: 1, md: 2, lg: 3 }} sx={{ mt: { xs: 0, sm: 0, md: 0 } }}>
+                    <Grid item xs={12} lg={6}>
+                        <Paper sx={{ p: 3 }}>
+                            <Typography variant="h6">Bounce Rate</Typography>
+                            <LineChart inputData={bounceRate} label={'Bounce Rate'} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                        <Paper sx={{ p: 3 }}>
+                            <Typography variant="h6">Average Time On Page</Typography>
+                            <LineChart inputData={timeOnPage} label={'Time (seconds)'} />
+                        </Paper>
+                    </Grid>
+
+                    <Grid item xs={12} lg={12}>
+                        <Paper sx={{ p: 3 }}>
+                            <Typography variant="h6">Time Trends</Typography>
+                            <TimeTrendChart inputData={timeTrends} />
+                        </Paper>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Loading>
         </>
     );
 }

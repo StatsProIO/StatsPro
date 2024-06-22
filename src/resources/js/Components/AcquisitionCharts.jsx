@@ -14,6 +14,7 @@ import {
 import Filters from "@/Components/Filters";
 import HorizontalBarChart from "@/Components/HorizontalBarChart";
 import {TopSourcesChart} from "@/Components/TopSourcesChart";
+import NoData from "@/Components/common/NoData";
 
 
 ChartJS.register(
@@ -67,7 +68,9 @@ export default function AcquisitionCharts({ domain }) {
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top Referral Sources</Typography>
                         <Box>
-                            <TopSourcesChart inputData={topSources} />
+                            {topSources.length === 0 ? <NoData/> :
+                                <TopSourcesChart inputData={topSources}/>
+                            }
                         </Box>
                     </Paper>
                 </Grid>
@@ -75,14 +78,24 @@ export default function AcquisitionCharts({ domain }) {
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top UTM Sources</Typography>
                         <Box>
-                            <HorizontalBarChart valueTitle="Views" data={topUTMSources} totalValue={topUTMSources.map((utmSource) => utmSource.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                            {topUTMSources.length === 0 ? <NoData/> :
+                                <HorizontalBarChart valueTitle="Views" data={topUTMSources}
+                                                    totalValue={topUTMSources.map((utmSource) => utmSource.count).reduce(function (a, b) {
+                                                        return a + b
+                                                    }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                            }
                         </Box>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={12}>
                     <Paper sx={{ p: 3 }}>
                         <Typography variant="h6">Top Entry Pages</Typography>
-                        <HorizontalBarChart valueTitle="Views" data={topEntryPages} totalValue={topEntryPages.map((entryPage) => entryPage.count).reduce(function (a, b) { return a + b }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                        {topEntryPages.length === 0 ? <NoData/> :
+                            <HorizontalBarChart valueTitle="Views" data={topEntryPages}
+                                                totalValue={topEntryPages.map((entryPage) => entryPage.count).reduce(function (a, b) {
+                                                    return a + b
+                                                }, 0)} colorMin="#52bdf7" colorMax="#1f75ff"/>
+                        }
                     </Paper>
                 </Grid>
             </Grid>
