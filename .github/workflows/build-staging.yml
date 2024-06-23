@@ -10,3 +10,6 @@ jobs:
     with:
       environment: staging
     secrets: inherit
+    concurrency:
+      group: "staging"
+      cancel-in-progress: false

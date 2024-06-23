@@ -11,3 +11,6 @@ jobs:
     with:
       environment: prod
     secrets: inherit
+    concurrency:
+      group: "prod"
+      cancel-in-progress: false
