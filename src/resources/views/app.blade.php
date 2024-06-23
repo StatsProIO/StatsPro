@@ -15,6 +15,8 @@
         <meta name="theme-color" content="#ffffff">
         <link rel="preload" href="{{asset("/images/sample-dashboard.webp")}}" as="image">
         <link rel="preload" href="{{asset("/images/sample-dashboard-m.webp")}}" as="image">
+        <link rel="preload" href="{{asset("/images/header.svg")}}" as="image">
+        <link rel="preload" href="{{asset("/images/header-mobile.svg")}}" as="image">
 
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
