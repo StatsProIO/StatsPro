@@ -23,6 +23,7 @@ import Chip from "@mui/material/Chip";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import {asset} from "@/helpers/asset";
 
 
 function createData(name, statsPro, googleAnalytics, fathom, plausible, simpleAnalytics) {
@@ -104,10 +105,10 @@ export default function Home(props) {
                             <Grid item xs={12} justifyContent={'center'}>
                                 <AvatarGroup renderSurplus={(surplus) => <span>+</span>}
                                              total={380} sx={{justifyContent: 'center'}}>
-                                    <Avatar alt="Remy Sharp" src="/images/avatar-1.webp" />
-                                    <Avatar alt="Travis Howard" src="/images/avatar-2.webp" />
-                                    <Avatar alt="Cindy Baker" src="/images/avatar-3.webp" />
-                                    <Avatar alt="Cody Markle" src="/images/avatar-4.webp"/>
+                                    <Avatar alt="Remy Sharp" src={asset("/images/avatar-1.webp")} />
+                                    <Avatar alt="Travis Howard" src={asset("/images/avatar-2.webp")} />
+                                    <Avatar alt="Cindy Baker" src={asset("/images/avatar-3.webp")} />
+                                    <Avatar alt="Cody Markle" src={asset("/images/avatar-4.webp")}/>
                                 </AvatarGroup>
                             </Grid>
                             <Grid item xs={12} sx={{mt: 1}}>
@@ -139,10 +140,10 @@ export default function Home(props) {
                         {/*<Typography variant="subtitle2" color="#aaa" align="center" sx={{pb: 8}}>No credit card required.</Typography>*/}
                     </Grid>
                     <Grid item xl={5} lg={4} md={4} sm={12} alignItems="center" justifyContent="center" sx={{ display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' } }}>
-                        <img src="images/header.svg" style={{ width: '100%', height: '100%' }} />
+                        <img src={asset("/images/header.svg")} style={{ width: '100%', height: '100%' }} />
                     </Grid>
                     <Grid item sm={4} md={4} alignItems="center" justifyContent="center" sx={{ display: { xs: 'none', sm: 'none', md: 'block', lg: 'none' } }}>
-                        <img src="images/header-mobile.svg" style={{ width: '100%', height: '100%' }} />
+                        <img src={asset("/images/header-mobile.svg")} style={{ width: '100%', height: '100%' }} />
                     </Grid>
                 </Grid>
 
@@ -158,8 +159,8 @@ export default function Home(props) {
                                 <Box style={{position: 'relative'}}>
                                     <div className="demo-image-container">
                                         <picture>
-                                            <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
-                                            <img fetchpriority="high" className={'demo-image'} src="../images/sample-dashboard-m.webp" style={{borderRadius: '10px'}} width={"100%"} alt={'Shows a demo of statspro'}/>
+                                            <source srcSet={asset("/images/sample-dashboard.webp")} media="(min-width: 800px)" />
+                                            <img fetchpriority="high" className={'demo-image'} src={asset("/images/sample-dashboard-m.webp")} style={{borderRadius: '10px'}} width={"100%"} alt={'Shows a demo of statspro'}/>
                                         </picture>
                                         <div class="demo-image-overlay">
                                             <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>Click for Live Demo</Typography>
@@ -192,10 +193,10 @@ export default function Home(props) {
 
                         {/*Left column*/}
                         <Grid item md={6} lg={4}>
-                            <img src={'/images/feature-2.webp'} width={'80%'} loading="lazy" className={'feature-pictures rotate-slightly-right'} alt={'Shows an example of real time visitors'}/>
-                            <img src={'/images/feature-1.webp'} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of a graph of visitors and pageviews'}/>
-                            <img src={'/images/feature-3.webp'} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-right'} alt={'Shows an example of a world map of visitors'}/>
-                            <img src={'/images/feature-4.webp'} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of the top pages bar chart'}/>
+                            <img src={asset('/images/feature-2.webp')} width={'80%'} loading="lazy" className={'feature-pictures rotate-slightly-right'} alt={'Shows an example of real time visitors'}/>
+                            <img src={asset('/images/feature-1.webp')} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of a graph of visitors and pageviews'}/>
+                            <img src={asset('/images/feature-3.webp')} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-right'} alt={'Shows an example of a world map of visitors'}/>
+                            <img src={asset('/images/feature-4.webp')} width={'80%'} loading="lazy" className={'feature-pictures overlap-vertically-10-percent rotate-slightly-left'} alt={'Shows an example of the top pages bar chart'}/>
                         </Grid>
 
                         <Grid item md={6} lg={4}>
@@ -349,11 +350,11 @@ export default function Home(props) {
                                             <Grid container justifyContent={'space-between'} spacing={3} sx={{py: 3}}>
                                                 <Grid item justifyContent={'space-between'} xs={12} sm={12} md={6}>
                                                     <Box justifyContent={'space-between'} sx={{display: 'flex', justifyContent: 'space-between'}}>
-                                                    <img loading="lazy" src={'/images/icons/angular.svg'} width={'50px'}/>
-                                                    <img loading="lazy" src={'/images/icons/drupal.svg'} width={'50px'}/>
-                                                    <img loading="lazy" src={'/images/icons/framermotion.svg'} width={'50px'}/>
-                                                    <img loading="lazy" src={'/images/icons/go.svg'} width={'50px'}/>
-                                                    <img loading="lazy" src={'/images/icons/laravel.svg'} width={'50px'}/>
+                                                    <img loading="lazy" src={asset('/images/icons/angular.svg')} width={'50px'}/>
+                                                    <img loading="lazy" src={asset('/images/icons/drupal.svg')} width={'50px'}/>
+                                                    <img loading="lazy" src={asset('/images/icons/framermotion.svg')} width={'50px'}/>
+                                                    <img loading="lazy" src={asset('/images/icons/go.svg')} width={'50px'}/>
+                                                    <img loading="lazy" src={asset('/images/icons/laravel.svg')} width={'50px'}/>
                                                     </Box>
                                                 </Grid>
 

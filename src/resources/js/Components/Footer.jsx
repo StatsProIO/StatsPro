@@ -4,6 +4,7 @@ import {Grid, Link, Stack, Typography} from '@mui/material';
 
 import Box from '@mui/material/Box';
 import Avatar from "@mui/material/Avatar";
+import {asset} from "@/helpers/asset";
 
 const Footer = () => {
     return (
@@ -47,7 +48,7 @@ const Footer = () => {
 
             <Grid container justifyContent="center" alignItems="center" textAlign="center" sx={{pt: 6}}>
                 <Grid align="center">
-                    <Avatar variant={"rounded"} src="/images/logo.webp" style={{ width: 100, height: 'auto', }} />
+                    <Avatar variant={"rounded"} src={asset("/images/logo.webp")} style={{ width: 100, height: 'auto', }} />
                     <Typography variant="h6" noWrap component="a" href="/"
                         sx={{
                             color: 'inherit',

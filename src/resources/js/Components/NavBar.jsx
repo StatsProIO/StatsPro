@@ -16,6 +16,7 @@ import { useTheme } from '@mui/material/styles';
 
 import {Inertia} from '@inertiajs/inertia'
 import {Menu, MenuItem} from '@mui/material';
+import {asset} from "@/helpers/asset";
 
 const pages = [
     {
@@ -62,7 +63,7 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
         <AppBar position="fixed" sx={{ bgcolor: "#243044", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Container sx={{px: 1}}>
                 <Toolbar disableGutters>
-                    <Avatar variant={"rounded"} src="/images/logo.webp" style={{ width: isSmallScreen ? 40 : 50, height: 'auto' }} sx={{ mr: 1}} />
+                    <Avatar variant={"rounded"} src={asset("/images/logo.webp")} style={{ width: isSmallScreen ? 40 : 50, height: 'auto' }} sx={{ mr: 1}} />
                     <Typography
                         variant={isSmallScreen ?  "subtitle1":  'h6'}
                         noWrap
