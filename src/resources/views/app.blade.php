@@ -13,6 +13,8 @@
         <meta name="msapplication-TileColor" content="#2b5797">
         <meta name="msapplication-config" content="{{asset("/images/favicon/browserconfig.xml")}}">
         <meta name="theme-color" content="#ffffff">
+        <link rel="preload" href="{{asset("/images/sample-dashboard.webp")}}" as="image">
+        <link rel="preload" href="{{asset("/images/sample-dashboard-m.webp")}}" as="image">
 
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
