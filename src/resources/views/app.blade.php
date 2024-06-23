@@ -25,7 +25,7 @@
                 font-family: 'Inter';
                 font-style: normal;
                 font-weight: 400;
-                src: url('/fonts/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+                src: url('{{asset('/fonts/inter-v13-latin-regular.woff2')}}') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
             }
             /* inter-600 - latin */
             @font-face {
@@ -33,7 +33,7 @@
                 font-family: 'Inter';
                 font-style: normal;
                 font-weight: 600;
-                src: url('/fonts/inter-v13-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+                src: url('{{asset('/fonts/inter-v13-latin-600.woff2')}}') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
             }
             /* inter-800 - latin */
             @font-face {
@@ -41,7 +41,7 @@
                 font-family: 'Inter';
                 font-style: normal;
                 font-weight: 800;
-                src: url('/fonts/inter-v13-latin-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+                src: url('{{asset('/fonts/inter-v13-latin-800.woff2')}}') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
             }
         </style>
         <!-- Scripts -->
