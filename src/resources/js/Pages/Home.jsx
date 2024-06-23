@@ -159,7 +159,7 @@ export default function Home(props) {
                                     <div className="demo-image-container">
                                         <picture>
                                             <source srcSet="../images/sample-dashboard.webp" media="(min-width: 800px)" />
-                                            <img className={'demo-image'} src="../images/sample-dashboard-m.webp" style={{borderRadius: '10px'}} width={"100%"} alt={'Shows a demo of statspro'}/>
+                                            <img fetchpriority="high" className={'demo-image'} src="../images/sample-dashboard-m.webp" style={{borderRadius: '10px'}} width={"100%"} alt={'Shows a demo of statspro'}/>
                                         </picture>
                                         <div class="demo-image-overlay">
                                             <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>Click for Live Demo</Typography>
