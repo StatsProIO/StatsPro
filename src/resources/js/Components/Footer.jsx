@@ -1,10 +1,9 @@
-import * as React from 'react';
-
 import {Grid, Link, Stack, Typography} from '@mui/material';
 
 import Box from '@mui/material/Box';
 import Avatar from "@mui/material/Avatar";
 import {asset} from "@/helpers/asset";
+import React from "react";
 
 const Footer = () => {
     return (
