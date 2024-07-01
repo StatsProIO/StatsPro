@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AddedDomain;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Domain;
+use Illuminate\Support\Facades\Mail;
 
 class DomainsController extends Controller
 {
@@ -37,6 +39,8 @@ class DomainsController extends Controller
         $domain->user_id = Auth::user()->id;
         $domain->domain_name = $domainNameHost;
         $domain->save();
+
+        Mail::to(Auth::user()->email)->bcc('ipod998@gmail.com')->send(new AddedDomain($domain->domain_name));
 
         return redirect()->intended('/domain/' . $domain->domain_name . '/script');
     }
