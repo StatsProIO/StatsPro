@@ -8,8 +8,8 @@ class TestPageController extends Controller
 {
     public function get()
     {
-        return phpinfo();
-//        return view('test-page');
+//        return phpinfo();
+        return view('test-page');
     }
 
      public function getNested()
