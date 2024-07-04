@@ -19,6 +19,9 @@
         <link rel="preload" href="{{asset("/images/header.svg")}}" as="image">
         <link rel="preload" href="{{asset("/images/header-mobile.svg")}}" as="image">
 
+        <title>StatsPro | Privacy-friendly Google Analytics alternative</title>
+        <meta name="description" content="StatsPro is a Google Analytics alternative that can capture 100% of website visitors. Unlike other analytics tools, see all of your traffic without discrepancies. StatsPro is GDPR, CCPA, PECR compliant while still providing actionable data." />
+
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
