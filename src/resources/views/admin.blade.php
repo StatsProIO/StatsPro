@@ -6,26 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin</title>
 
-    <style>
-        table {
-            border-collapse: collapse;
-            font-family: sans-serif;
-            min-width: 400px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            border-radius: 5px;
+      <style>
+          table {
+              border-collapse: collapse;
+              width: 100%;
+              color: #333;
+              font-family: Arial, sans-serif;
+              font-size: 14px;
+              text-align: left;
+              border-radius: 10px;
+              overflow: hidden;
+              box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+              margin: auto;
+              margin-top: 50px;
+              margin-bottom: 50px;
+          }
 
-        }
+          table th {
+              background-color: #226bb5;
+              color: #fff;
+              font-weight: bold;
+              padding: 10px;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              border-top: 1px solid #fff;
+              border-bottom: 1px solid #ccc;
+          }
 
-        td{
-            padding: 2px;
-        }
+          table tr:nth-child(even) td {
+              background-color: #f2f2f2;
+          }
 
-        th {
-            padding-top: 10px;
-        }
+          table tr:hover td {
+              background-color: #ffedcc;
+          }
 
-    </style>
+          table td {
+              background-color: #fff;
+              padding: 10px;
+              border-bottom: 1px solid #ccc;
+              font-weight: bold;
+          }
+      </style>
 
   </head>
   <body>
@@ -42,7 +64,7 @@
             </tr>
             @foreach ($errorsGroupedByDate as $errorCountByDate)
                 <tr>
-                    <td>{{$errorCountByDate->created_date}}<td>
+                    <td>{{$errorCountByDate->created_date}}</td>
                     <td>{{$errorCountByDate->total}}</td>
                 </tr>
             @endforeach
@@ -69,7 +91,7 @@
         </tr>
         @foreach ($eventsGroupedByDate as $eventCountByDate)
             <tr>
-                <td>{{$eventCountByDate->created_date}}<td>
+                <td>{{$eventCountByDate->created_date}}</td>
                 <td>{{$eventCountByDate->total}}</td>
             </tr>
         @endforeach
@@ -84,7 +106,7 @@
         </tr>
         @foreach ($users as $user)
             <tr>
-                <td>{{$user->email}}<td>
+                <td>{{$user->email}}</td>
                 <td>{{$user->created_at}}</td>
             </tr>
         @endforeach
@@ -98,7 +120,7 @@
         </tr>
         @foreach ($domains as $domain)
             <tr>
-                <td>{{$domain->domain_name}}<td>
+                <td>{{$domain->domain_name}}</td>
                 <td>{{$domain->created_at}}</td>
             </tr>
         @endforeach
