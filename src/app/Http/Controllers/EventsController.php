@@ -44,14 +44,6 @@ class EventsController extends Controller
                 }
             }
 
-            $source = null;
-            if ($request->referrer != null) {
-                $parsedUrl = parse_url($request->referrer);
-                if ($parsedUrl !== false) {
-                    $source = $parsedUrl['host'];
-                }
-            }
-
             $userAgent = $request->server('HTTP_USER_AGENT');
             $parsedUserAgent = new \WhichBrowser\Parser($userAgent);
 
@@ -66,7 +58,7 @@ class EventsController extends Controller
             }
 
             foreach ($requestAll as $eventPayload) {
-                $lastEvent = $this->saveEventFromPayload($visitorId, $domain, $eventPayload, $userAgent, $parsedUserAgent, $source);
+                $lastEvent = $this->saveEventFromPayload($visitorId, $domain, $eventPayload, $userAgent, $parsedUserAgent);
                 if ($lastEvent->event_name === 'pageview') {
                     $lastPageviewEvent = $lastEvent;
                 }
@@ -87,8 +79,16 @@ class EventsController extends Controller
         }
     }
 
-    private function saveEventFromPayload($visitorId, $domain, $request, $userAgent, $parsedUserAgent, $source)
+    private function saveEventFromPayload($visitorId, $domain, $request, $userAgent, $parsedUserAgent)
     {
+        $source = null;
+        if ($request['referrer'] ?? null) {
+            $parsedUrl = parse_url($request['referrer']);
+            if ($parsedUrl !== false) {
+                $source = $parsedUrl['host'];
+            }
+        }
+
         $event = new Event;
         $event->visitor_id = $visitorId;
         $event->domain_id = $domain ? $domain->id : null;
