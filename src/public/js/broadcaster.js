@@ -9,7 +9,7 @@ var isShortLinkRedirect = scriptEl.getAttribute('data-short-link-id') != null;
 var shortLinkId = scriptEl.getAttribute('data-short-link-id');
 var shortLinkUrl = scriptEl.getAttribute('data-short-link-url');
 
-function buildPayload() {
+function buildPageviewPayload() {
     var payload = {};
     payload.event_name = isShortLinkRedirect ? 'short-link-open' : 'pageview';
     payload.location_href = location.href;
@@ -23,8 +23,29 @@ function buildPayload() {
     payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     payload.client_time = new Date().toISOString();
     payload.query_params = queryParams();
-    payload.page_load_time = Math.max(window.performance.timing.domContentLoadedEventEnd- window.performance.timing.navigationStart, 0);
+    payload.page_load_time = Math.max(window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart, 0);
     return payload;
+}
+
+function buildCustomEventsPayloads(sp_events) {
+    var payloads = [];
+    for (var i = 0; i < sp_events.length; i++) {
+        var payload = {};
+        payload.event_name = 'custom-event';
+        payload.custom_event_name = sp_events[i][0] || 'none';
+        payload.location_href = location.href;
+        payload.location_host = window.location.host;
+        payload.location_pathname = window.location.pathname;
+        payload.domain = scriptEl.getAttribute('data-domain');
+        payload.referrer = document.referrer || null;
+        payload.inner_width = window.innerWidth;
+        payload.lang = window.navigator.language || '';
+        payload.client_time_zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        payload.client_time = new Date().toISOString();
+        payload.query_params = queryParams();
+        payloads.push(payload);
+    }
+    return payloads;
 }
 
 function queryParams() {
@@ -51,16 +72,16 @@ function sendRequest(url, body, next) {
     });
 
     fetch(req)
-        .then(function(response){
+        .then(function (response) {
             if (response.status >= 200 && response.status < 300) {
                 return response.json();
-            } else if(response.status === 403) {
+            } else if (response.status === 403) {
                 return null; //end the chain, don't schedule any further requests
             } else {
-                return response.text().then(text => {throw new Error("Non-successful status code: " + response.status + " " + text)})
+                return response.text().then(text => { throw new Error("Non-successful status code: " + response.status + " " + text) })
             }
         })
-        .then(function(responseJson) {
+        .then(function (responseJson) {
             if (responseJson) {
                 if (isShortLinkRedirect) {
                     window.location.href = shortLinkUrl;
@@ -68,13 +89,13 @@ function sendRequest(url, body, next) {
                     next(responseJson)
                 }
             }
-        }).catch(function(err) {
-            recordError({ message: 'Broadcaster request failed: ' + err.toString(), url, body } );
+        }).catch(function (err) {
+        recordError({ message: 'Broadcaster request failed: ' + err.toString(), url, body });
 
-            if (isShortLinkRedirect) {
-                window.location.href = shortLinkUrl;
-            }
-        });
+        if (isShortLinkRedirect) {
+            window.location.href = shortLinkUrl;
+        }
+    });
 }
 
 function scheduleReoccringRequests(initialRequestJsonResponse) {
@@ -98,16 +119,33 @@ function recordError(error) {
     errorRequest.send(JSON.stringify(error));
 }
 
-sendRequest(endpoint, buildPayload(), scheduleReoccringRequests);
+function initialize() {
+    if (typeof sp_events !== "object") {
+        sp_events = []
+    }
 
-var pS = window.history.pushState;
-window.history.pushState = function() {
-    pS.apply(this, arguments);
-    sendRequest(endpoint, buildPayload(), null);
-};
+    // send our first pageview and any custom events that have been gathered
+    const pageviewPayload = buildPageviewPayload();
+    const customEventsPayload = buildCustomEventsPayloads(window.sp_events);
+    const initialPayload = [pageviewPayload].concat(customEventsPayload);
 
-window.addEventListener('popstate', function(event) {
-    sendRequest(endpoint, buildPayload(), null);
-});
+    sendRequest(endpoint, initialPayload, scheduleReoccringRequests);
 
+    // setup javascript page handlers
+    var pS = window.history.pushState;
+    window.history.pushState = function () {
+        pS.apply(this, arguments);
+        sendRequest(endpoint, buildPageviewPayload(), null);
+    };
 
+    window.addEventListener('popstate', function (event) {
+        sendRequest(endpoint, buildPageviewPayload(), null);
+    });
+
+    // replace the sp_events array with an object that sends requests
+    window.sp_events = {
+        push: function () { sendRequest(endpoint, buildCustomEventsPayloads(arguments)) }
+    }
+}
+
+initialize();

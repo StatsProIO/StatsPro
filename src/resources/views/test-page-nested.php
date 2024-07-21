@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
 
-    <script data-domain="mydomain.com" src="/js/broadcaster.js" async></script>
+      <script data-domain="roastmygame.com" src="http://localhost/js/broadcaster.js" async></script>
+      <script> window.sp_events = window.sp_events || []; function sp_track(){window.sp_events.push(arguments)} </script>
 
   </head>
   <body>
