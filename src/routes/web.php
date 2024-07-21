@@ -182,4 +182,8 @@ Route::get('/blog/{slug}/{id}', function ($slug, $id) {
     return Inertia::render('BlogPost', ['data' => $response->body()]);
 })->name('BlogPost');
 
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'get']);
+});
+
 require __DIR__.'/auth.php';
