@@ -34,7 +34,8 @@ class Event extends Model
         'utm_medium',
         'utm_source',
         'utm_term',
-        'page_load_time'
+        'page_load_time',
+        'custom_event_name'
     ];
 
     use HasFactory;

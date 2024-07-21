@@ -25,11 +25,14 @@ class EventsController extends Controller
     public function postEvent(Request $request) {
         try {
 
+            $requestAll = $request->all();
+
             $domain = null;
-            if ($request->domain) {
-                $domain = Domain::where('domain_name', $request->domain)->first();
+            $requestDomain = $requestAll[0]['domain'] ?? $request->domain ?? null;
+            if ($requestDomain) { // the domain in the first event is what all events will be associated with
+                $domain = Domain::where('domain_name', $requestDomain)->first();
                 if ($domain === null) {
-                    return response()->json(['message' => 'Domain ' . $request->domain . ' not found'], 404);
+                    return response()->json(['message' => 'Domain ' . $requestDomain . ' not found'], 404);
                 }
 
                 //don't record events for blacklisted IPs
@@ -54,46 +57,73 @@ class EventsController extends Controller
 
             $visitorId = VisitorIdHelper::getVisitorId($request);
 
-            $event = new Event;
-            $event->visitor_id = $visitorId;
-            $event->domain_id = $domain ? $domain->id : null;
-            $event->short_link_id = $request->short_link_id ? $request->short_link_id : null;
-            $event->event_name = $request->event_name;
-            $event->user_agent = $userAgent;
-            $event->location_href = $request->location_href;
-            $event->host = $request->location_host;
-            $event->path = $request->location_pathname;
-            $event->referrer = $request->referrer;
-            $event->source = $source;
-            $event->inner_width = $request->inner_width;
-            $event->language = $request->lang;
-            $event->country = \App\Helpers\Helper::getCountry($request->client_time_zone);
-            $event->region = Helper::getRegion($request->client_time_zone);
-            $event->browser = (new Browser())->getName();
-            $event->device = $parsedUserAgent->device->type ?? null;
-            $event->os = $parsedUserAgent->os->name ?? null;
-            $event->time_zone = $request->client_time_zone;
-            $event->client_time = $request->client_time;
-            $event->page_load_time = max($request->page_load_time, 0);
+            $lastEvent = null;
+            $lastPageviewEvent = null;
 
-            if ($request->query_params) {
-                $event->keyword = $request->query_params['keyword'] ?? null;
-                $event->q = $request->query_params['q'] ?? null;
-                $event->ref = $request->query_params['ref'] ?? null;
-                $event->utm_campaign = $request->query_params['utm_campaign'] ?? null;
-                $event->utm_content = $request->query_params['utm_content'] ?? null;
-                $event->utm_medium = $request->query_params['utm_medium'] ?? null;
-                $event->utm_source = $request->query_params['utm_source'] ?? null;
-                $event->utm_term = $request->query_params['utm_term'] ?? null;
+            // handle requests from legacy script by checking if its a list, if not convert to list
+            if (!array_is_list($requestAll)) {
+                $requestAll = [$requestAll];
             }
 
-            $event->save();
-            return ['id' => $event->id];
+            foreach ($requestAll as $eventPayload) {
+                $lastEvent = $this->saveEventFromPayload($visitorId, $domain, $eventPayload, $userAgent, $parsedUserAgent, $source);
+                if ($lastEvent->event_name === 'pageview') {
+                    $lastPageviewEvent = $lastEvent;
+                }
+            }
+
+            // if there are multiple events, return the ID of the pageview so we can track time on page
+            // otherwise, just return the last event id
+            if ($lastPageviewEvent) {
+                return ['id' => $lastPageviewEvent->id];
+            } else {
+                return ['id' => $lastEvent->id];
+            }
+
         } catch (\Throwable $t) {
             Log::error("Error collecting event!");
             report($t);
             abort(500);
         }
+    }
+
+    private function saveEventFromPayload($visitorId, $domain, $request, $userAgent, $parsedUserAgent, $source)
+    {
+        $event = new Event;
+        $event->visitor_id = $visitorId;
+        $event->domain_id = $domain ? $domain->id : null;
+        $event->short_link_id = $request['short_link_id'] ?? null;
+        $event->event_name = $request['event_name'];
+        $event->user_agent = $userAgent;
+        $event->location_href = $request['location_href'];
+        $event->host = $request['location_host'];
+        $event->path = $request['location_pathname'] ?? null;
+        $event->referrer = $request['referrer'] ?? null;
+        $event->source = $source;
+        $event->inner_width = $request['inner_width'] ?? null;
+        $event->language = $request['lang'] ?? null;
+        $event->country = \App\Helpers\Helper::getCountry($request['client_time_zone']);
+        $event->region = \App\Helpers\Helper::getRegion($request['client_time_zone']);
+        $event->browser = (new Browser())->getName();
+        $event->device = $parsedUserAgent->device->type ?? null;
+        $event->os = $parsedUserAgent->os->name ?? null;
+        $event->time_zone = $request['client_time_zone'] ?? null;
+        $event->client_time = $request['client_time'] ?? null;
+        $event->page_load_time = max($request['page_load_time'] ?? 0, 0);
+        $event->custom_event_name = $request['custom_event_name'] ?? null;
+
+        if (array_key_exists('query_params', $request)) {
+            $event->keyword = $request['query_params']['keyword'] ?? null;
+            $event->q = $request['query_params']['q'] ?? null;
+            $event->ref = $request['query_params']['ref'] ?? null;
+            $event->utm_campaign = $request['query_params']['utm_campaign'] ?? null;
+            $event->utm_content = $request['query_params']['utm_content'] ?? null;
+            $event->utm_medium = $request['query_params']['utm_medium'] ?? null;
+            $event->utm_source = $request['query_params']['utm_source'] ?? null;
+            $event->utm_term = $request['query_params']['utm_term'] ?? null;
+        }
+        $event->save();
+        return $event;
     }
 
     public function postTimeOnPage(Request $request) {
