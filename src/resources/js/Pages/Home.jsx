@@ -399,7 +399,7 @@ export default function Home(props) {
                         </Grid>
                     </Grid>
 
-                    <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', pt: 10 }}>
+                    <Grid container justifyContent="center" alignItems="center" sx={{ textAlign: 'center', pt: 10 }} id={'pricing'}>
                         <Grid item xs={12} sm={10} md={11} lg={11} xl={10} justifyContent="center" alignItems="center" >
                             <Typography variant="h4" sx={{py: 1}}><b>Simple Pricing</b></Typography>
                             <SubscriptionOptions showLabels={false} currentProductSubscription={subscriptionPlans[0]} />

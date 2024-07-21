@@ -50,7 +50,7 @@ export function SubscriptionOption({ authUser, showLabels, title, price, descrip
 
                 <Stack direction="row" alignItems="center" gap={1}>
                     <CheckIcon sx={{ color: "#59ce9f" }} />
-                    <Typography variant="body1" sx={{ py: 1 }}>99.99% uptime</Typography>
+                    <Typography variant="body1" sx={{ py: 1 }}>Guaranteed uptime</Typography>
                 </Stack>
 
                 <Stack direction="row" alignItems="center" gap={1}>

@@ -18,10 +18,33 @@ import {Inertia} from '@inertiajs/inertia'
 import {Menu, MenuItem} from '@mui/material';
 import {asset} from "@/helpers/asset";
 
+const links = [
+    {
+        label: 'Docs',
+        color: "primary",
+        onClick: function () {
+            location.href = 'https://docs.statspro.io/';
+        }
+    },
+    {
+        label: 'Blog',
+        color: "primary",
+        onClick: function () {
+            Inertia.get('/blog')
+        }
+    },
+    {
+        label: 'Pricing',
+        color: "primary",
+        onClick: function () {
+            Inertia.get('/#pricing')
+        }
+    }
+];
+
 const pages = [
     {
         label: 'Login',
-        url: '/login',
         variant: "outlined",
         color: "primary",
         onClick: function () {
@@ -29,8 +52,7 @@ const pages = [
         }
     },
     {
-        label: 'Register',
-        url: '/register',
+        label: 'Get Started',
         variant: "contained",
         color: "secondary",
         onClick: function () {
@@ -92,10 +114,22 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
                     </Box>}
 
                     <Box sx={{ flexGrow: 1, display: 'flex' }} justifyContent="right">
+                        {(auth === undefined || auth.user === null) && links.map((link) => (
+                            <Button
+                                key={link.label}
+                                sx={{ mx: {xs: 0, sm: .25, md: .5}, my: 2, px: {xs: 0, sm: .5, md: 1}, py: 1, color: 'white', display: 'block', fontWeight: 'bold', fontSize: {xs: '0.7rem', sm: '0.9rem'} }}
+                                onClick={link.onClick}
+                                size={'small'}
+                                variant={"text"}
+                            >
+                                {link.label}
+                            </Button>
+                        ))
+                        }
                         {(auth === undefined || auth.user === null) && pages.map((page) => (
                             <Button
                                 key={page.label}
-                                sx={{ mx: .5, my: 2, p: 1, color: 'white', display: 'block', fontSize: {xs: '0.7rem', sm: '0.8125rem'} }}
+                                sx={{ mx: .5, my: 2, px: {xs: .75, sm: .5, md: 1}, py: 1, color: 'white', display: 'block', fontWeight: 'bold', fontSize: {xs: '0.7rem', sm: '0.9rem'} }}
                                 onClick={page.onClick}
                                 size={'small'}
 

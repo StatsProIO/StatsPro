@@ -10,6 +10,8 @@
       <script> window.sp_events = window.sp_events || []; function sp_track(){window.sp_events.push(arguments)} </script>
       <script>sp_track("my-test-event")</script>
 
+      <script>sp_track("user-register")</script>
+
   </head>
   <body>
     <main>
@@ -19,6 +21,9 @@
         <button onclick="history.pushState({}, '', 'test-page/nested');">Go to nested page via pushState</button>
 
         <button onclick="history.replaceState({}, '', 'test-page/nested');">Go to nested page via replaceState</button>
+
+        <a onclick="sp_track('my-custom-event')" href="/test-page/nested">Click for more!</a>
+
 
     </main>
 

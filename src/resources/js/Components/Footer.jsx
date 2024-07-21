@@ -20,9 +20,8 @@ const Footer = () => {
                 <Grid item xs={3} md={2}>
                     <Stack spacing={1}>
                         <Typography variant={"body1"} fontWeight={"bold"} align={"center"}>Resources</Typography>
-                        <Link href="/docs" underline="hover" color="inherit" align={"center"}>Docs</Link>
-
-                        <Link href="/docs/about" underline="hover" color="inherit" align={"center"}>About</Link>
+                        <Link href="https://docs.statspro.io/" underline="hover" color="inherit" align={"center"}>Docs</Link>
+                        <Link href="https://docs.statspro.io/info/about" underline="hover" color="inherit" align={"center"}>About</Link>
                         <Link href="/terms" underline="hover" color="inherit" align={"center"}>Terms</Link>
                         <Link href="/privacy-policy" underline="hover" color="inherit" align={"center"}>Privacy Policy</Link>
                     </Stack>
