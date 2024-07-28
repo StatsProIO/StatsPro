@@ -13,7 +13,7 @@ export default function Dashboard(props) {
                 setEventStatus(response.data);
             })
             .catch(function (error) {
-                console.log(error);
+                axios.post(`/api/error`, {component: 'Error getting dashboard event status', message: error.toString()});
             });
 
     }, [props.domain]);

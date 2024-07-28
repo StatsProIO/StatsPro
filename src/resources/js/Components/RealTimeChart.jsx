@@ -38,7 +38,7 @@ export function RealTimeChart({ domain }) {
         spacing={2}
       >
         <Typography variant="h6">Real Time</Typography>
-        <div className="small-white-pulse"></div>
+        <div className="small-white-pulse rr-block"></div>
       </Stack>
 
       <Typography variant="body1" color="rgb(255 255 255 / 60%)">Active users in last 5 minutes</Typography>

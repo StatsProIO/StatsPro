@@ -68,52 +68,52 @@ export default function DashboardCharts({ domain }) {
         setTopBarLoading(true);
         setAboveTheFoldLoading(true);
         setBelowTheFoldLoading(true);
-        Promise.all([
-            axios.get(`/api/events/dashboard/top-bar/${domain}?range=${range}`)
-                .then(function (response) {
-                    setUniqueVisitorsCount(response.data.unique_visitors_count);
-                    setUniqueVisitorsCountDifferenceRate(response.data.unique_visitors_count_difference_rate);
 
-                    setPageviewsCount(response.data.pageviews_count);
-                    setPageviewsCountDifferenceRate(response.data.pageviews_count_difference_rate);
+        axios.get(`/api/events/dashboard/top-bar/${domain}?range=${range}`)
+            .then(function (response) {
+                setUniqueVisitorsCount(response.data.unique_visitors_count);
+                setUniqueVisitorsCountDifferenceRate(response.data.unique_visitors_count_difference_rate);
 
-                    setBounceRate(response.data.bounce_rate);
-                    setBounceRateDifferenceRate(response.data.bounce_rate_difference_rate);
+                setPageviewsCount(response.data.pageviews_count);
+                setPageviewsCountDifferenceRate(response.data.pageviews_count_difference_rate);
 
-                    setVisitDuration(response.data.visit_duration);
-                    setVisitDurationDifferenceRate(response.data.visit_duration_difference_rate);
+                setBounceRate(response.data.bounce_rate);
+                setBounceRateDifferenceRate(response.data.bounce_rate_difference_rate);
 
-                    setComparisonIntervalDescriptionSuffix(response.data.comparison_interval_description_suffix);
-                })
-                .finally(() => setTopBarLoading(false))
-                .catch(function (error) {
-                    axios.post(`/api/error`, {component: 'Charts top bar', message: error});
-                }),
+                setVisitDuration(response.data.visit_duration);
+                setVisitDurationDifferenceRate(response.data.visit_duration_difference_rate);
 
-            axios.get(`/api/events/dashboard/above-the-fold/${domain}?range=${range}`)
-                .then(function (response) {
-                    setDomains(response.data.domains);
-                    setPageviews(response.data.pageviews);
-                    setVisitors(response.data.visitors);
-                })
-                .catch(function (error) {
-                    axios.post(`/api/error`, {component: 'Charts above the fold', message: error});
-                })
-                .finally(function () {
-                    setAboveTheFoldLoading(false);
-                    axios.get(`/api/events/dashboard/below-the-fold/${domain}?range=${range}`)
-                        .then(function (response) {
-                            setTopSources(response.data.top_sources);
-                            setTopPages(response.data.top_pages);
-                            setDevices(response.data.devices);
-                            setLocations(response.data.locations);
-                        })
-                        .finally(() => setBelowTheFoldLoading(false))
-                        .catch(function (error) {
-                            axios.post(`/api/error`, {component: 'Charts below the fold', message: error});
-                        })
-                })
-            ]);
+                setComparisonIntervalDescriptionSuffix(response.data.comparison_interval_description_suffix);
+            })
+            .finally(() => setTopBarLoading(false))
+            .catch(function (error) {
+                axios.post(`/api/error`, {component: 'Charts top bar', message: error.toString()});
+            });
+
+        axios.get(`/api/events/dashboard/above-the-fold/${domain}?range=${range}`)
+            .then(function (response) {
+                setDomains(response.data.domains);
+                setPageviews(response.data.pageviews);
+                setVisitors(response.data.visitors);
+            })
+            .catch(function (error) {
+                axios.post(`/api/error`, {component: 'Charts above the fold', message: error.toString()});
+            })
+            .finally(function () {
+                setAboveTheFoldLoading(false);
+                axios.get(`/api/events/dashboard/below-the-fold/${domain}?range=${range}`)
+                    .then(function (response) {
+                        setTopSources(response.data.top_sources);
+                        setTopPages(response.data.top_pages);
+                        setDevices(response.data.devices);
+                        setLocations(response.data.locations);
+                    })
+                    .finally(() => setBelowTheFoldLoading(false))
+                    .catch(function (error) {
+                        axios.post(`/api/error`, {component: 'Charts below the fold', message: error.toString()});
+                    })
+            })
+
     }, [range, domain])
 
     return (
