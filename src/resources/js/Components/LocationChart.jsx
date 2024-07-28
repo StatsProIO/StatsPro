@@ -34,7 +34,6 @@ export function LocationChart({ inputData }) {
                   pressed: { outline: "none" },
                 }}
                 onMouseEnter={() => {
-                  console.log("Mouse enter" + geo.properties.name);
                   setContent(`${geo.properties.name} - ${d["count"]}`);
                 }}
                 onMouseLeave={() => {

@@ -112,11 +112,10 @@ export default function Home(props) {
                                 </AvatarGroup>
                             </Grid>
                             <Grid item xs={12} sx={{mt: 1}}>
-                                <Typography variant={'subtitle2'} >Rated 4.3 by over 80 users!</Typography>
+                                <Typography variant={'subtitle2'} >Rated 4.3 by over 250 users!</Typography>
                                 <Rating size="large"
                                     name="simple-controlled"
                                         color={'white'}
-                                        border
                                     defaultValue={4.3}
                                         value={4.3}
                                         emptyIcon={<StarBorderIcon sx={{color: 'white'}} fontSize={'30px'}/> }
@@ -162,7 +161,7 @@ export default function Home(props) {
                                             <source srcSet={asset("/images/sample-dashboard.webp")} media="(min-width: 800px)" />
                                             <img fetchpriority="high" className={'demo-image'} src={asset("/images/sample-dashboard-m.webp")} style={{borderRadius: '10px'}} width={"100%"} alt={'Shows a demo of statspro'}/>
                                         </picture>
-                                        <div class="demo-image-overlay">
+                                        <div className="demo-image-overlay">
                                             <Typography variant={'h4'} color={'white'} className={'live-demo-text'}>Click for Live Demo</Typography>
                                         </div>
                                     </div>
@@ -232,11 +231,11 @@ export default function Home(props) {
 
                         <Grid item sm={12} md={8} lg={6} >
                             {trackingFeatures.map((trackingFeature) => {
-                                    return <Chip label={trackingFeature} sx={{m: 1, fontSize: '18px'}} size={'large'} color={'primary'}  variant="outlined" />
+                                    return <Chip key={trackingFeature} label={trackingFeature} sx={{m: 1, fontSize: '18px'}} size={'large'} color={'primary'}  variant="outlined" />
                                 })}
 
                             {newTrackingFeatures.map((newTrackingFeature) => {
-                                return <Chip label={'[NEW!] ' + newTrackingFeature} sx={{m: 1, fontSize: '18px'}} size={'large'} color={'success'}  variant="outlined" />
+                                return <Chip key={newTrackingFeature} label={'[NEW!] ' + newTrackingFeature} sx={{m: 1, fontSize: '18px'}} size={'large'} color={'success'}  variant="outlined" />
                             })}
                         </Grid>
                         <Grid item sm={12} md={12} lg={12}>
@@ -384,7 +383,7 @@ export default function Home(props) {
                         <Grid item xs={12} sm={12} md={12} lg={10}>
                             <Grid container>
                                 {faqs.map((faq => (
-                                    <Grid item sm={12} sm={6} md={4} >
+                                    <Grid key={faq.title} item sm={12} sm={6} md={4} >
                                         <Paper elevation={1} sx={{ m: 2}} style={{boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px'}}>
                                             <Box sx={{ borderRadius: '5px', p: 3 }}>
                                                 <Stack direction="column" alignItems="center" justifyContent="center" gap={1}>

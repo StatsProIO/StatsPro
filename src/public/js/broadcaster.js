@@ -5,18 +5,41 @@ var endpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/ap
 var timeOnPageEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/event/time-on-page";
 var errorEndpoint = parsedScriptUrl.protocol + "//" + parsedScriptUrl.hostname + "/api/error";
 
-var isShortLinkRedirect = scriptEl.getAttribute('data-short-link-id') != null;
-var shortLinkId = scriptEl.getAttribute('data-short-link-id');
-var shortLinkUrl = scriptEl.getAttribute('data-short-link-url');
+/**
+ * Fetch, retrying on any failures
+ * On any response (100-599), returns the response
+ * On exceptions, retries
+ */
+const fetchPlus = (url, body, options = {}, retries) => {
+    let req = new Request(url, {
+        method: 'post',
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
+
+    return fetch(req, options)
+        .then((response) => {
+            //TODO: in the future, retry based on status code errors?
+            return response;
+        })
+        .catch((error) => {
+            if (retries > 0) {
+                return fetchPlus(url, body, options, retries - 1)
+            } else {
+                throw error;
+            }
+        });
+}
 
 function buildPageviewPayload() {
     var payload = {};
-    payload.event_name = isShortLinkRedirect ? 'short-link-open' : 'pageview';
+    payload.event_name = 'pageview';
     payload.location_href = location.href;
     payload.location_host = window.location.host;
     payload.location_pathname = window.location.pathname;
     payload.domain = scriptEl.getAttribute('data-domain');
-    payload.short_link_id = shortLinkId;
     payload.referrer = document.referrer || null;
     payload.inner_width = window.innerWidth;
     payload.lang = window.navigator.language || '';
@@ -62,16 +85,7 @@ function queryParams() {
 }
 
 function sendRequest(url, body, next) {
-
-    let req = new Request(url, {
-        method: 'post',
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(body)
-    });
-
-    fetch(req)
+    fetchPlus(url, body, {}, 5)
         .then(function (response) {
             if (response.status >= 200 && response.status < 300) {
                 return response.json();
@@ -82,20 +96,12 @@ function sendRequest(url, body, next) {
             }
         })
         .then(function (responseJson) {
-            if (responseJson) {
-                if (isShortLinkRedirect) {
-                    window.location.href = shortLinkUrl;
-                } else if (typeof next === 'function') {
-                    next(responseJson)
-                }
+            if (responseJson && typeof next === 'function') {
+                next(responseJson)
             }
         }).catch(function (err) {
-        recordError({ message: 'Broadcaster request failed: ' + err.toString(), url, body });
-
-        if (isShortLinkRedirect) {
-            window.location.href = shortLinkUrl;
-        }
-    });
+            recordError({ message: 'Broadcaster request failed: ' + err.toString(), url, body });
+        });
 }
 
 function scheduleReoccringRequests(initialRequestJsonResponse) {
