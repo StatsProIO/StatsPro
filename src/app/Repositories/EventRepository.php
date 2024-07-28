@@ -393,6 +393,7 @@ class EventRepository
                                                  LIMIT 100)
                 AND domain_id = :domain
                 GROUP BY visitor_id
+                ORDER BY MAX(id) DESC
                 ")->getValue(DB::connection()->getQueryGrammar()),
             array('domain' => $domain->id)
         );
