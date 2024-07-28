@@ -18,6 +18,7 @@ class AdminController extends Controller
 
         $latestErrors = DB::table('errors')
             ->select('message', 'created_at')
+            ->orderBy(DB::raw('created_at'), 'DESC')
             ->limit(10)
             ->get();
 
