@@ -103,9 +103,9 @@ jobs:
             docker context use ${{ secrets.STACKHERO_DOCKER_HOST }}
 
             # do a deploy
-            docker-compose ps
-            docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
-            docker-compose ps
+            docker compose ps
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+            docker compose ps
 
             #clean up
             docker system prune --all -f
@@ -113,17 +113,17 @@ jobs:
           shell: bash
           run: |
             set -x
-            docker-compose exec -T app service cron start
+            docker compose exec -T app service cron start
 
         - name: Run migrations
           shell: bash
           run: |
             set -x
             #create database migrations table
-            docker-compose exec -T app php artisan migrate:install || true
+            docker compose exec -T app php artisan migrate:install || true
 
             #check for migrations
-            docker-compose exec -T app php artisan migrate:status
+            docker compose exec -T app php artisan migrate:status
 
             #run migrations
-            docker-compose exec -T app php artisan migrate --force
+            docker compose exec -T app php artisan migrate --force
