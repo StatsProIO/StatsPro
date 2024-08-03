@@ -25,9 +25,11 @@
         "whichbrowser/parser": "^2.1"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
         "laravel/breeze": "^1.10",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
+        "php-ffmpeg/php-ffmpeg": "^1.2",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
@@ -65,7 +67,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
