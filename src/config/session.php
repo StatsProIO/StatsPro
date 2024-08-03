@@ -59,7 +59,7 @@ return [
     |
     */
 
-    'files' => storage_path('framework/sessions'),
+    'files' => env('FILE_SESSION_DRIVER_LOCATION', '/var/session'),
 
     /*
     |--------------------------------------------------------------------------

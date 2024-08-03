@@ -22,6 +22,8 @@ RUN npm cache clean -f
 RUN npm install -g n
 RUN n stable
 
+RUN mkdir /var/session
+RUN chown www-data:www-data /var/session
 COPY cron/generate-demo-data /etc/cron.d/generate-demo-data-cron
 COPY app/local.ini /usr/local/etc/php/conf.d/local.ini
 RUN chmod 0644 /etc/cron.d/generate-demo-data-cron

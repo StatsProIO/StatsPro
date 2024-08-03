@@ -19,6 +19,9 @@ RUN npm cache clean -f
 RUN npm install -g n
 RUN n stable
 
+RUN mkdir /var/session
+RUN chown www-data:www-data /var/session
+
 COPY --chown=www-data src /var/www/
 
 WORKDIR /var/www/

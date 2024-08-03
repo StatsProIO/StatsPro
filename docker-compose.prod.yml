@@ -5,6 +5,8 @@ services:
   app:
       build:
           dockerfile: app.prod.dockerfile
+      volumes:
+        - session-data:/var/session #store session data in a volume so it's persisted
       
   # Web Server
   webnginx:
@@ -19,3 +21,6 @@ services:
         - "traefik.enable=true" # Enable Traefik to route traffic to this container
         - "traefik.http.routers.webnginx.rule=Host(`APP_HOST`)" # Defined host
         - "traefik.http.routers.webnginx.tls.certresolver=letsencrypt" # Use "letsencrypt" as TLS cert resolver
+volumes:
+  session-data:
+    driver: local

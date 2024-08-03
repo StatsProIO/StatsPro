@@ -9,6 +9,7 @@ services:
         - 3000:3000 #for vite
       volumes:
         - ./src:/var/www
+        - session-data:/var/session #store session data in a volume so it's persisted
   # Web Server
   webnginx:
       build:
@@ -38,4 +39,6 @@ volumes:
   db:
     driver: local
   stripe:
+    driver: local
+  session-data:
     driver: local
