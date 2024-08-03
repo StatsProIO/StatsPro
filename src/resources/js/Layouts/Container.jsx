@@ -82,6 +82,7 @@ export default function Container({ children, showDrawer, showNavLinks, auth, do
         if (!window.location.pathname.includes('replay')) {
             rrweb.record({
                 emit(event) {
+                    //console.log("pushing an event");
                     events.current.push(event)
                 },
             })
@@ -91,7 +92,7 @@ export default function Container({ children, showDrawer, showNavLinks, auth, do
         const intervalId = setInterval(save, 3 * 1000);
         return () => clearInterval(intervalId);
 
-    })
+    }, []);
 
     return (
         <>

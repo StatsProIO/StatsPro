@@ -18,6 +18,7 @@ import {
     languageCodeToName,
     osToIcon
 } from "@/Components/common/SessionUtils";
+import 'rrweb/dist/rrweb.min.css';
 
 export default function Replay(props) {
     const [loading, setLoading] = useState(false);
