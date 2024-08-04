@@ -3,6 +3,7 @@ import {Box, Button, Grid, Typography} from '@mui/material';
 import ScriptAndInstructions from '@/Components/ScriptAndInstructions';
 import Authenticated from '@/Layouts/Authenticated';
 import {Head} from "@inertiajs/inertia-react";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 export default function DomainScript(props) {
     return (
@@ -24,7 +25,14 @@ export default function DomainScript(props) {
                     <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
                         <Typography sx={{ py: 2 }} variant="h5"><b>Add this script to your website ({props.domain.domain_name})</b></Typography>
                         <ScriptAndInstructions domain={props.domain.domain_name}/>
-                        <Button variant="contained" onClick={() => { Inertia.visit('/dashboard?domain=' + props.domain.domain_name); }} fullWidth size='large'>Start Collecting Data</Button>
+                        <Button
+                            startIcon={<NavigateNextIcon />}
+                            variant="contained"
+                            onClick={() => { Inertia.visit('/dashboard?domain=' + props.domain.domain_name); }}
+                            fullWidth
+                            size='large'>
+                            Start Collecting Data!
+                        </Button>
                     </Box>
                 </Grid>
             </Grid>
