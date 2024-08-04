@@ -17,40 +17,54 @@ import { useTheme } from '@mui/material/styles';
 import {Inertia} from '@inertiajs/inertia'
 import {Menu, MenuItem} from '@mui/material';
 import {asset} from "@/helpers/asset";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import PaymentIcon from '@mui/icons-material/Payment';
+import LoginIcon from '@mui/icons-material/Login';
 
 const links = [
     {
-        label: 'Docs',
+        label: 'Documentation',
         color: "primary",
+        variant: "text",
         onClick: function () {
             location.href = 'https://docs.statspro.io/';
-        }
+        },
+        icon: <LibraryBooksIcon fontSize="small" />
     },
     {
         label: 'Blog',
         color: "primary",
+        variant: "text",
         onClick: function () {
             Inertia.get('/blog')
-        }
+        },
+        icon: <NewspaperIcon fontSize="small" />
     },
     {
         label: 'Pricing',
         color: "primary",
+        variant: "text",
         onClick: function () {
             Inertia.get('/#pricing')
-        }
-    }
+        },
+        icon: <PaymentIcon fontSize="small" />
+    },
+    {
+        label: 'Login',
+        color: "primary",
+        variant: "outlined",
+        onClick: function () {
+            Inertia.get('/login')
+        },
+        icon: <LoginIcon fontSize="small" />
+    },
 ];
 
 const pages = [
-    {
-        label: 'Login',
-        variant: "outlined",
-        color: "primary",
-        onClick: function () {
-            Inertia.get('/login')
-        }
-    },
+
     {
         label: 'Get Started',
         variant: "contained",
@@ -64,8 +78,11 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
     const theme = useTheme();
 
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [linksMenuAnchorEl, setLinksMenuAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    const linksMenuOpen = Boolean(linksMenuAnchorEl);
     const handleAvartarMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -73,13 +90,21 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
         setAnchorEl(null);
     };
 
+    const handleLinksMenuOpen = (event) => {
+        setLinksMenuAnchorEl(event.currentTarget)
+    };
+
+    const handleLinksMenuClose = () => {
+        setLinksMenuAnchorEl(null);
+    };
+
     const handleClickDashboard = () => {
         Inertia.get('/dashboard')
-    }
+    };
 
     const handleClickLogout = () => {
         Inertia.post('/logout')
-    }
+    };
 
     return (
         <AppBar position="fixed" sx={{ bgcolor: "#243044", zIndex: (theme) => theme.zIndex.drawer + 1 }}>
@@ -114,13 +139,52 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
                     </Box>}
 
                     <Box sx={{ flexGrow: 1, display: 'flex' }} justifyContent="right">
-                        {(auth === undefined || auth.user === null) && links.map((link) => (
+
+                        {(auth === undefined || auth.user === null) && isMediumScreen &&
+                        <Box sx={{ flexGrow: 0 }}>
+
+                            <IconButton
+                                onClick={handleLinksMenuOpen}
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                                sx={{ mr: 2, my: 2 }}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={linksMenuAnchorEl}
+                                open={linksMenuOpen}
+                                onClose={handleLinksMenuClose}
+                                transformOrigin={{
+                                    vertical: "top",
+                                    horizontal: "right",
+                                }}
+                            >
+                                {
+                                    links.map((link) => <MenuItem onClick={link.onClick} key={link.label}>
+
+                                        <ListItemIcon>
+                                            {link.icon}
+                                        </ListItemIcon>
+                                        <ListItemText>{link.label}</ListItemText>
+
+                                    </MenuItem>)
+                                }
+                            </Menu>
+                        </Box>}
+
+
+                        {(auth === undefined || auth.user === null) && !isMediumScreen && links.map((link) => (
                             <Button
                                 key={link.label}
                                 sx={{ mx: {xs: 0, sm: .25, md: .5}, my: 2, px: {xs: 0, sm: .5, md: 1}, py: 1, color: 'white', display: 'block', fontWeight: 'bold', fontSize: {xs: '0.7rem', sm: '0.9rem'} }}
                                 onClick={link.onClick}
                                 size={'small'}
-                                variant={"text"}
+                                variant={link.variant}
                             >
                                 {link.label}
                             </Button>
@@ -129,7 +193,7 @@ const NavBar = ({ toggleIsDrawerOpen, showDrawer, auth }) => {
                         {(auth === undefined || auth.user === null) && pages.map((page) => (
                             <Button
                                 key={page.label}
-                                sx={{ mx: .5, my: 2, px: {xs: .75, sm: .5, md: 1}, py: 1, color: 'white', display: 'block', fontWeight: 'bold', fontSize: {xs: '0.7rem', sm: '0.9rem'} }}
+                                sx={{ mx: .5, my: 2, px: {xs: 1.5}, py: 1, color: 'white', display: 'block', fontWeight: 'bold', fontSize: {xs: '0.7rem', sm: '0.9rem'} }}
                                 onClick={page.onClick}
                                 size={'small'}
 
