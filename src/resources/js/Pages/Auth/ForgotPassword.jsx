@@ -1,12 +1,13 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import {Box, Grid, Paper, TextField, Typography} from '@mui/material';
 import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
 import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, useForm } from '@inertiajs/inertia-react';
+import {Head, useForm} from '@inertiajs/inertia-react';
+import {LoadingButton} from "@mui/lab";
+import SuccessBanner from "@/Components/SuccessBanner";
 
 export default function ForgotPassword({ status }) {
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, wasSuccessful } = useForm({
         email: '',
     });
 
@@ -21,34 +22,56 @@ export default function ForgotPassword({ status }) {
     };
 
     return (
+
         <Guest>
-            <Head title="Forgot Password" />
-
-            <div className="mb-4 text-sm text-gray-500 leading-normal">
-                Forgot your password? No problem. Just let us know your email address and we will email you a password
-                reset link that will allow you to choose a new one.
-            </div>
-
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            <Head title="Login" />
 
             <ValidationErrors errors={errors} />
 
-            <form onSubmit={submit}>
-                <Input
-                    type="text"
-                    name="email"
-                    value={data.email}
-                    className="mt-1 block w-full"
-                    isFocused={true}
-                    handleChange={onHandleChange}
-                />
+            <Grid container justifyContent="center" sx={{ mt: 4 }}>
+                <Grid item md={5}>
+                    <Paper sx={{ p: 2, my: 1, mx: 2 }} elevation={0}>
+                        <Box style={{ backgroundColor: '#fff' }} sx={{ p: 4 }}>
 
-                <div className="flex items-center justify-end mt-4">
-                    <Button className="ml-4" processing={processing}>
-                        Email Password Reset Link
-                    </Button>
-                </div>
-            </form>
+                            {wasSuccessful && <SuccessBanner message="Email sent! Check your email inbox for next steps."/>}
+
+                            <Typography sx={{ py: 2 }} variant="h5"><b>Forgot Password</b></Typography>
+
+                            <Typography sx={{ py: 2 }} variant="body1">Forgot your password? No problem. Just let us know your email address and we will email you a password
+                                reset link that will allow you to choose a new one.</Typography>
+
+                            <form onSubmit={submit}>
+
+                                <TextField
+                                    label="Email"
+                                    variant="standard"
+                                    type="text"
+                                    name="email"
+                                    value={data.email}
+                                    autoComplete="email"
+                                    fullWidth
+                                    size="large"
+                                    onChange={onHandleChange}
+                                    sx={{ mt: 4 }}
+                                    required
+                                />
+
+                                <LoadingButton
+                                    loading={processing}
+                                    fullWidth
+                                    size='large'
+                                    variant="contained"
+                                    type='submit'
+                                    sx={{ my: 3 }}
+                                >
+                                    Email Password Reset Link
+                                </LoadingButton>
+
+                            </form>
+                        </Box>
+                    </Paper>
+                </Grid>
+            </Grid>
         </Guest>
     );
 }
