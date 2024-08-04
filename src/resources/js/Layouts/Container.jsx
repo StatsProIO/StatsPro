@@ -97,9 +97,7 @@ export default function Container({ children, showDrawer, showNavLinks, auth, do
     return (
         <>
             <CssBaseline />
-            <Head>
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.css"/>
-            </Head>
+
 
             <ThemeProvider theme={theme}>
                 <NavBar toggleIsDrawerOpen={toggleIsDrawerOpen} showDrawer={showDrawer} showNavLinks={showNavLinks} auth={auth} />

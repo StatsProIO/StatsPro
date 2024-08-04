@@ -34,7 +34,7 @@ export function LocationChart({ inputData }) {
                   pressed: { outline: "none" },
                 }}
                 onMouseEnter={() => {
-                  setContent(`${geo.properties.name} - ${d["count"]}`);
+                  setContent(`${geo.properties.name} - ${d ? d["count"] : '0'}`);
                 }}
                 onMouseLeave={() => {
                   setContent("");
