@@ -52,7 +52,6 @@ export default function Replay(props) {
 
         axios.get(`/api/events/latest/${props.domainName}/${props.visitorId}`)
             .then(function (response) {
-                console.log("latest", {data: response.data.event});
                 setSessionLatestEvent(response.data.event)
             })
             .catch(function (error) {
@@ -74,12 +73,12 @@ export default function Replay(props) {
             if(!skipSettingLastEvent) {
                 setPlayerEvent(event);
             }
-            console.log("resizing");
+            // console.log("resizing");
 
             let ratioVideo = event.data.width/event.data.height;
             let ratioPage = window.innerWidth/window.innerHeight;
 
-            console.log("ratios", {ratioVideo, ratioPage});
+            // console.log("ratios", {ratioVideo, ratioPage});
             if(ratioVideo > ratioPage) { //aspect ratio of the video is > than the page
                 ratioVideo = event.data.height/event.data.width;
 
